@@ -456,17 +456,17 @@
               <div class="col-lg-9 d-lg-flex pt-3 pt-lg-0 ps-lg-0">
                 <ul class="navbar-nav position-relative">
                   <li class="nav-item dropdown me-lg-n1 me-xl-0">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Trang chu</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Trang chủ</a>
                   </li>
                   <li class="nav-item dropdown position-static me-lg-n1 me-xl-0">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Shop</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Mua sắm</a>
                     <div class="dropdown-menu rounded-4 p-4">
                       <div class="d-flex flex-column flex-lg-row gap-4">
                         <div style="min-width: 190px">
-                          <div class="h6 mb-2">San Pham</div>
+                          <div class="h6 mb-2">Sản phẩm</div>
                           <ul class="nav flex-column gap-2 mt-0">
                             <li class="d-flex w-100 pt-1">
-                              <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-categories-electronics.html">Doan nay do theo danh muc</a>
+                              <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="{{ route('product') }}">Đoạn này để theo danh mục</a>
                             </li>
 
                           </ul>
@@ -479,37 +479,48 @@
                     </div>
                   </li>
                   <li class="nav-item dropdown me-lg-n1 me-xl-0 ">
-                            @guest
-                                @if (Route::has('login'))
-                                    <li class="">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
+                    <ul class="navbar-nav position-relative m-0">
+                        @if(Auth::check() && Auth::user()->role === 'admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                            </li>
+                        @endif
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                                @if (Route::has('register'))
-                                    <li class="">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">
-                                        {{ Auth::user()->name }}
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard (tạm thời)</a>
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
 
                     </li>
                 </ul>
