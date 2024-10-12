@@ -20,6 +20,10 @@
             <label for="name">Color Name</label>
             <input type="text" name="name" class="form-control" value="{{ $color->name }}" required>
         </div>
+        <div class="form-group">
+            <label for="value" class="form-label">Color picker</label>
+            <input type="color" class="form-control form-control-color col-1" name="value" value="{{ $color->value }}">
+        </div>
         <button type="submit" class="btn btn-primary">Update Color</button>
     </form>
 @endsection
