@@ -7,74 +7,58 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BabelShop') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Preloaded local web font (Inter) -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="{{ asset('assets/fonts/inter-variable-latin.woff2') }}">
+    <!-- Font icons -->
+    <link rel="preload" href="{{ asset('assets/icons/cartzilla-icons.woff2') }}" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="{{ asset('assets/icons/cartzilla-icons.min.css') }}">
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}">
+
+    <!-- Bootstrap + Theme styles -->
+    <link rel="preload" href="{{ asset('assets/css/theme.min.css') }}" as="style">
+    <link rel="preload" href="{{ asset('assets/css/theme.rtl.min.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}" id="theme-styles">
+
+    <!-- Customizer -->
+    <script src="{{ asset('assets/js/customizer.min.js') }}"></script>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+
+
+
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @include('partials.header')
 
         <main class="py-4">
             @yield('content')
         </main>
+
+
+        @include('partials.footer')
     </div>
+
+
+
+    <!-- Vendor scripts -->
+    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/timezz/timezz.js') }}"></script>
+
+    <!-- Bootstrap + Theme scripts -->
+    <script src="{{ asset('assets/js/theme.min.js') }}"></script>
+
 </body>
 </html>
