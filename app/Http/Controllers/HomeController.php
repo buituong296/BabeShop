@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -24,13 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = Product::with('variants', 'category')->latest('id')->paginate(4);
+        $page = 2;
+        $products_2 = Product::with('variants', 'category')
+            ->latest('id')
+            ->paginate(4, ['*'], 'page', $page);
+
+        return view('home',compact('products','products_2','page'));
     }
     public function product()
     {
         $products = Product::all();
         return view('user.product', compact('products'));
-        // return view('user.product');
-
     }
 }
