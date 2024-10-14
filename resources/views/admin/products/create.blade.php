@@ -136,11 +136,7 @@
     // Xóa biến thể
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('remove-variant')) {
-            // Chỉ cho phép xóa nếu không phải biến thể đầu tiên
-            const variantRows = document.querySelectorAll('.variant-row');
-            if (variantRows.length > 1) {
-                event.target.closest('.variant-row').remove();
-            }
+            event.target.closest('.variant-row').remove();
         }
     });
 </script>
