@@ -217,20 +217,6 @@
                 </div>
               </div>
 
-              <!-- SSD size (checkboxes) -->
-              <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
-                <h4 class="h6">SSD size</h4>
-                <div class="d-flex flex-column gap-1">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="tb-2">
-                      <label for="tb-2" class="form-check-label text-body-emphasis">2 TB</label>
-                    </div>
-                    <span class="text-body-secondary fs-xs">13</span>
-                  </div>
-                </div>
-              </div>
-
               <!-- Color -->
               <div class="w-100 border rounded p-3 p-xl-4">
                 <h4 class="h6">Color</h4>
@@ -307,7 +293,7 @@
                                 {{-- @if($product->discount > 0)
                                     <span class="badge bg-danger position-absolute top-0 start-0 mt-2 ms-2 mt-lg-3 ms-lg-3">-{{ $product->discount }}%</span>
                                 @endif --}}
-                                <div 
+                                <div
                                 class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)"
                                 >
                                     <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}">

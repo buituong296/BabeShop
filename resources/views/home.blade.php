@@ -179,7 +179,7 @@
             <h3 class="display-4 mb-2">Metal Pin Set</h3>
             <p class="text fw-medium mb-4">Texas the Omertosa & Lunacub</p>
             <a class="btn btn-sm btn-secondary" href="{{ route('product') }}" >
-              More
+              Xem thêm
               <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
             </a>
           </div>
@@ -210,14 +210,14 @@
                   <span class="animate-target">{{$product -> name}}</span>
                 </a>
               </h4>
-              <div class="h5 mb-0">{{$product -> price}}</div>
+              <div class="h5 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
             </div>
           </div>
           @endforeach
-          
+
 
           <!-- Item -->
-          
+
 
 
         </div>
@@ -247,13 +247,13 @@
                   <span class="animate-target">{{$product -> name}}</span>
                 </a>
               </h4>
-              <div class="h5 mb-0">{{$product -> price}}</div>
+              <div class="h5 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
             </div>
           </div>
           @endforeach
 
           <!-- Item -->
-          
+
 
 
         </div>
