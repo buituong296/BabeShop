@@ -19,7 +19,7 @@
                     <td>{{ $color->id }}</td>
                     <td>{{ $color->name }}</td>
                     <td>{{ $color->value }}</td>
-                    <td><input type="color" class="row-3" value="{{ $color->value }}"></td>
+                    <td><input type="color" class="row-3" value="{{ $color->value }}" disabled></td>
                     <td>
                         <a href="{{ route('colors.edit', $color->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('colors.destroy', $color->id) }}" method="POST" style="display:inline-block;">

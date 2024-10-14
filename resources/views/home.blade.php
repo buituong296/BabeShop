@@ -178,7 +178,7 @@
             </div>
             <h3 class="display-4 mb-2">Metal Pin Set</h3>
             <p class="text fw-medium mb-4">Texas the Omertosa & Lunacub</p>
-            <a class="btn btn-sm btn-secondary" href="#!" >
+            <a class="btn btn-sm btn-secondary" href="{{ route('product') }}" >
               More
               <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
             </a>
@@ -192,7 +192,7 @@
           @foreach ($products as $product)
           <div class="position-relative animate-underline d-flex align-items-center ps-xl-3">
             <div class="ratio ratio-1x1 flex-shrink-0" style="width: 110px">
-              <img src="{{ asset('storage/' . $product->image) }}" alt="Smart Watch">
+              <img src="{{ asset('storage/' . $product->image) }}" alt="Smart Watch" href="{{ route('productdetail', $product->id) }}">
             </div>
             <div class="w-100 min-w-0 ps-2 ps-sm-3">
               <div class="d-flex align-items-center gap-2 mb-2">
@@ -206,7 +206,7 @@
                 <span class="text-body-tertiary fs-xs">45</span>
               </div>
               <h4 class="mb-2">
-                <a class="stretched-link d-block fs-sm fw-medium text-truncate" href="shop-product-general-electronics.html">
+                <a class="stretched-link d-block fs-sm fw-medium text-truncate" href="{{ route('productdetail', $product->id) }}">
                   <span class="animate-target">{{$product -> name}}</span>
                 </a>
               </h4>
@@ -229,7 +229,7 @@
           @foreach ($products_2 as $product)
           <div class="position-relative animate-underline d-flex align-items-center ps-xl-3">
             <div class="ratio ratio-1x1 flex-shrink-0" style="width: 110px">
-              <img src="{{ asset('storage/' . $product->image) }}" alt="Smart Watch">
+              <img src="{{ asset('storage/' . $product->image) }}" alt="Smart Watch" href="{{ route('productdetail', $product->id) }}">
             </div>
             <div class="w-100 min-w-0 ps-2 ps-sm-3">
               <div class="d-flex align-items-center gap-2 mb-2">
@@ -243,7 +243,7 @@
                 <span class="text-body-tertiary fs-xs">45</span>
               </div>
               <h4 class="mb-2">
-                <a class="stretched-link d-block fs-sm fw-medium text-truncate" href="shop-product-general-electronics.html">
+                <a class="stretched-link d-block fs-sm fw-medium text-truncate" href="{{ route('productdetail', $product->id) }}">
                   <span class="animate-target">{{$product -> name}}</span>
                 </a>
               </h4>
