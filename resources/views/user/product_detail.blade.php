@@ -416,7 +416,7 @@
 
                             <div class="d-flex flex-wrap gap-2" data-binded-label="#colorOption">
                                 @foreach ($colors as $color)
-                                
+
                                 <input type="radio" class="btn-check" name="color-options" id="{{$color->name}}" value="">
                                 {{-- <label for="{{$color->name}}" class="btn btn-sm btn-outline-secondary">{{$color->name}}</label> --}}
                                 <label for="{{ $color->name }}" class="btn btn-sm btn-outline-secondary"
@@ -433,7 +433,7 @@
                         <!-- Price -->
                         <div class="d-flex flex-wrap align-items-center mb-3">
                             <div class="h3 mb-0 me-3">Giá: </div>
-                            <div class="h4 mb-0 me-3">{{ $product->price }} Vnđ</div>
+                            <div class="h4 mb-0 me-3">{{ number_format($product->price, 0, ',', '.') }} VND</div>
                             <div class="d-flex align-items-center text-success fs-sm ms-auto">
                                 @if ($product->quantity > 0)
                                 <i class="ci-check-circle fs-base me-2"></i>
@@ -712,7 +712,7 @@
                                     <span class="text-body-tertiary fs-xs">68</span>
                                 </div>
                                 <h4 class="fs-sm fw-medium mb-2">{{ $product->name }}</h4>
-                                <div class="h5 mb-0">{{ $product->price }}</div>
+                                <div class="h5 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
                             </div>
                         </div>
                         <div class="d-flex gap-2 gap-lg-3">
@@ -841,7 +841,7 @@
                                     </a>
                                 </h3>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="h5 lh-1 mb-0">{{$item->price}} Vnđ</div>
+                                    <div class="h5 lh-1 mb-0">{{ number_format($item->price, 0, ',', '.') }} VND</div>
                                     <button type="button"
                                         class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                                         aria-label="Add to Cart">
@@ -881,10 +881,10 @@
             <!-- Trending products (Carousel) -->
             <section class="container pb-4 pb-md-5 mb-2 mb-sm-0 mb-lg-2 mb-xl-4">
                 <h2 class="h3 border-bottom pb-4 mb-0">Sản phẩm mới</h2>
-    
+
                 <!-- Product carousel -->
                 <div class="position-relative mx-md-1">
-    
+
                     <!-- External slider prev/next buttons visible on screens > 500px wide (sm breakpoint) -->
                     <button type="button"
                         class="trending-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
@@ -896,7 +896,7 @@
                         aria-label="Next">
                         <i class="ci-chevron-right fs-lg animate-target"></i>
                     </button>
-    
+
                     <!-- Slider -->
                     <div class="swiper py-4 px-sm-3"
                         data-swiper="{
@@ -917,7 +917,7 @@
                         }
                       }">
                         <div class="swiper-wrapper">
-    
+
                             <!-- Item -->
                             @foreach ($productNewest as $item)
                             <div class="swiper-slide">
@@ -981,7 +981,7 @@
                                             </a>
                                         </h3>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div class="h5 lh-1 mb-0">{{$item->price}} Vnđ</div>
+                                            <div class="h5 lh-1 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
                                             <button type="button"
                                                 class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                                                 aria-label="Add to Cart">
@@ -992,11 +992,11 @@
                                 </div>
                             </div>
                             @endforeach
-        
+
 
                         </div>
                     </div>
-    
+
                     <!-- External slider prev/next buttons visible on screens < 500px wide (sm breakpoint) -->
                     <div class="d-flex justify-content-center gap-2 mt-n2 mb-3 pb-1 d-sm-none">
                         <button type="button"
@@ -1012,7 +1012,7 @@
                     </div>
                 </div>
             </section>
-    
+
 <!-- Vendor scripts -->
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="assets/vendor/drift-zoom/Drift.min.js"></script>

@@ -289,18 +289,18 @@
                     <!-- Buttton visible on screens > 991px wide (lg breakpoint) -->
                     <div class="cursor-pointer d-none d-lg-block" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-theme="dark">
                       <a class="position-absolute top-0 start-0 w-100 h-100" href="shop-categories-electronics.html">
-                        <span class="visually-hidden">Categories</span>
+                        <span class="visually-hidden">Thể loại sản phẩm</span>
                       </a>
                       <button type="button" class="btn btn-lg btn-secondary dropdown-toggle w-100 rounded-bottom-0 justify-content-start pe-none">
                         <i class="ci-grid fs-lg"></i>
-                        <span class="ms-2 me-auto">Categories</span>
+                        <span class="ms-2 me-auto">Thể loại sản phẩm</span>
                       </button>
                     </div>
 
                     <!-- Buttton visible on screens < 992px wide (lg breakpoint) -->
                     <button type="button" class="btn btn-lg btn-secondary dropdown-toggle w-100 justify-content-start d-lg-none mb-2" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                       <i class="ci-grid fs-lg"></i>
-                      <span class="ms-2 me-auto">Categories</span>
+                      <span class="ms-2 me-auto">Thể loại sản phẩm</span>
                     </button>
 
                     <!-- Mega menu -->
@@ -316,14 +316,10 @@
                         <div class="position-relative rounded pt-2 pb-1 px-lg-2" data-bs-toggle="dropdown" data-bs-trigger="hover">
                           <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex" href="shop-catalog-electronics.html">
                             <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
-                            <span class="text-truncate">Computers &amp; Accessories</span>
+                            <span class="text-truncate">DMC5 (code danh mục tại đây)</span>
                             <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
                           </a>
-                          <div class="dropdown-item fw-medium text-wrap stretched-link d-lg-none">
-                            <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
-                            Computers &amp; Accessories
-                            <i class="ci-chevron-down fs-base ms-auto me-n1"></i>
-                          </div>
+
                         </div>
                         <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
                           <div class="d-flex flex-column flex-lg-row h-100 gap-4">
