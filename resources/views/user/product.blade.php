@@ -303,11 +303,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <a class="d-block rounded-top overflow-hidden p-3 p-sm-4" href="{{ route('products.show', $product->id) }}">
+                            <a class="d-block rounded-top overflow-hidden p-3 p-sm-4" href="{{ route('productdetail', $product->id) }}">
                                 {{-- @if($product->discount > 0)
                                     <span class="badge bg-danger position-absolute top-0 start-0 mt-2 ms-2 mt-lg-3 ms-lg-3">-{{ $product->discount }}%</span>
                                 @endif --}}
-                                <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
+                                <div 
+                                class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)"
+                                >
                                     <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}">
                                 </div>
                             </a>
@@ -324,7 +326,7 @@
                                 {{-- <span class="text-body-tertiary fs-xs">({{ $product->reviews_count }})</span> --}}
                             </div>
                             <h3 class="pb-1 mb-2">
-                                <a class="d-block fs-sm fw-medium text-truncate" href="{{ route('products.show', $product->id) }}">
+                                <a class="d-block fs-sm fw-medium text-truncate" href="{{ route('productdetail', $product->id) }}">
                                     <span class="animate-target">{{ $product->name }}</span>
                                 </a>
                             </h3>
