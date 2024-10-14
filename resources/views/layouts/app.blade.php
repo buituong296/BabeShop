@@ -16,6 +16,7 @@
     <!-- Theme switcher (color modes) -->
     <script src="assets/js/theme-switcher.js"></script>
 
+
     <!-- Preloaded local web font (Inter) -->
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="{{ asset('assets/fonts/inter-variable-latin.woff2') }}">
     <!-- Font icons -->
@@ -33,8 +34,17 @@
     <!-- Customizer -->
     <script src="{{ asset('assets/js/customizer.min.js') }}"></script>
 
+    <!-- App css -->
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ */
+        }
+
+    </style>
 </head>
 <body>
 

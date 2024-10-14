@@ -9,109 +9,109 @@
 <div class="offcanvas offcanvas-end pb-sm-2 px-sm-2" id="shoppingCart" tabindex="-1" aria-labelledby="shoppingCartLabel" style="width: 500px">
 
     <!-- Header -->
-    <div class="offcanvas-header flex-column align-items-start py-3 pt-lg-4">
-      <div class="d-flex align-items-center justify-content-between w-100 mb-3 mb-lg-4">
-        <h4 class="offcanvas-title" id="shoppingCartLabel">Shopping cart</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <p class="fs-sm">Buy <span class="text-dark-emphasis fw-semibold">$183</span> more to get <span class="text-dark-emphasis fw-semibold">Free Shipping</span></p>
-      <div class="progress w-100" role="progressbar" aria-label="Free shipping progress" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
-        <div class="progress-bar bg-warning rounded-pill" style="width: 75%"></div>
-      </div>
+<div class="offcanvas-header flex-column align-items-start py-3 pt-lg-4">
+    <div class="d-flex align-items-center justify-content-between w-100 mb-3 mb-lg-4">
+      <h4 class="offcanvas-title" id="shoppingCartLabel">Giỏ hàng</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Đóng"></button>
     </div>
+    <p class="fs-sm">Mua thêm <span class="text-dark-emphasis fw-semibold">$183</span> để được <span class="text-dark-emphasis fw-semibold">Miễn phí giao hàng</span></p>
+    <div class="progress w-100" role="progressbar" aria-label="Tiến độ giao hàng miễn phí" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
+      <div class="progress-bar bg-warning rounded-pill" style="width: 75%"></div>
+    </div>
+  </div>
 
-    <!-- Items -->
-    <div class="offcanvas-body d-flex flex-column gap-4 pt-2">
+  <!-- Items -->
+  <div class="offcanvas-body d-flex flex-column gap-4 pt-2">
 
-      <!-- Item -->
-      <div class="d-flex align-items-center">
-        <a class="flex-shrink-0" href="shop-product-general-electronics.html">
-          <img src="assets/img/shop/electronics/thumbs/08.png" width="110" alt="iPhone 14">
-        </a>
-        <div class="w-100 min-w-0 ps-2 ps-sm-3">
-          <h5 class="d-flex animate-underline mb-2">
-            <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Apple iPhone 14 128GB White</a>
-          </h5>
-          <div class="h6 pb-1 mb-2">$899.00</div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="count-input rounded-2">
-              <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Decrement quantity">
-                <i class="ci-minus"></i>
-              </button>
-              <input type="number" class="form-control form-control-sm" value="1" readonly="">
-              <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Increment quantity">
-                <i class="ci-plus"></i>
-              </button>
-            </div>
-            <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Remove" aria-label="Remove from cart"></button>
+    <!-- Item -->
+    <div class="d-flex align-items-center">
+      <a class="flex-shrink-0" href="shop-product-general-electronics.html">
+        <img src="assets/img/shop/electronics/thumbs/08.png" width="110" alt="iPhone 14">
+      </a>
+      <div class="w-100 min-w-0 ps-2 ps-sm-3">
+        <h5 class="d-flex animate-underline mb-2">
+          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Apple iPhone 14 128GB Trắng</a>
+        </h5>
+        <div class="h6 pb-1 mb-2">$899.00</div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="count-input rounded-2">
+            <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
+              <i class="ci-minus"></i>
+            </button>
+            <input type="number" class="form-control form-control-sm" value="1" readonly="">
+            <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
+              <i class="ci-plus"></i>
+            </button>
           </div>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="d-flex align-items-center">
-        <a class="position-relative flex-shrink-0" href="shop-product-general-electronics.html">
-          <span class="badge text-bg-danger position-absolute top-0 start-0">-10%</span>
-          <img src="assets/img/shop/electronics/thumbs/09.png" width="110" alt="iPad Pro">
-        </a>
-        <div class="w-100 min-w-0 ps-2 ps-sm-3">
-          <h5 class="d-flex animate-underline mb-2">
-            <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Tablet Apple iPad Pro M2</a>
-          </h5>
-          <div class="h6 pb-1 mb-2">$989.00 <del class="text-body-tertiary fs-xs fw-normal">$1,099.00</del></div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="count-input rounded-2">
-              <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Decrement quantity">
-                <i class="ci-minus"></i>
-              </button>
-              <input type="number" class="form-control form-control-sm" value="1" readonly="">
-              <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Increment quantity">
-                <i class="ci-plus"></i>
-              </button>
-            </div>
-            <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Remove" aria-label="Remove from cart"></button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="d-flex align-items-center">
-        <a class="flex-shrink-0" href="shop-product-general-electronics.html">
-          <img src="assets/img/shop/electronics/thumbs/01.png" width="110" alt="Smart Watch">
-        </a>
-        <div class="w-100 min-w-0 ps-2 ps-sm-3">
-          <h5 class="d-flex animate-underline mb-2">
-            <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Smart Watch Series 7, White</a>
-          </h5>
-          <div class="h6 pb-1 mb-2">$429.00</div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="count-input rounded-2">
-              <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Decrement quantity">
-                <i class="ci-minus"></i>
-              </button>
-              <input type="number" class="form-control form-control-sm" value="1" readonly="">
-              <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Increment quantity">
-                <i class="ci-plus"></i>
-              </button>
-            </div>
-            <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Remove" aria-label="Remove from cart"></button>
-          </div>
+          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="offcanvas-header flex-column align-items-start">
-      <div class="d-flex align-items-center justify-content-between w-100 mb-3 mb-md-4">
-        <span class="text-light-emphasis">Subtotal:</span>
-        <span class="h6 mb-0">$2,317.00</span>
+    <!-- Item -->
+    <div class="d-flex align-items-center">
+      <a class="position-relative flex-shrink-0" href="shop-product-general-electronics.html">
+        <span class="badge text-bg-danger position-absolute top-0 start-0">-10%</span>
+        <img src="assets/img/shop/electronics/thumbs/09.png" width="110" alt="iPad Pro">
+      </a>
+      <div class="w-100 min-w-0 ps-2 ps-sm-3">
+        <h5 class="d-flex animate-underline mb-2">
+          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Tablet Apple iPad Pro M2</a>
+        </h5>
+        <div class="h6 pb-1 mb-2">$989.00 <del class="text-body-tertiary fs-xs fw-normal">$1,099.00</del></div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="count-input rounded-2">
+            <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
+              <i class="ci-minus"></i>
+            </button>
+            <input type="number" class="form-control form-control-sm" value="1" readonly="">
+            <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
+              <i class="ci-plus"></i>
+            </button>
+          </div>
+          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
+        </div>
       </div>
-      <div class="d-flex w-100 gap-3">
-        <a class="btn btn-lg btn-secondary w-100" href="checkout-v1-cart.html">View cart</a>
-        <a class="btn btn-lg btn-primary w-100" href="checkout-v1-delivery-1.html">Checkout</a>
+    </div>
+
+    <!-- Item -->
+    <div class="d-flex align-items-center">
+      <a class="flex-shrink-0" href="shop-product-general-electronics.html">
+        <img src="assets/img/shop/electronics/thumbs/01.png" width="110" alt="Smart Watch">
+      </a>
+      <div class="w-100 min-w-0 ps-2 ps-sm-3">
+        <h5 class="d-flex animate-underline mb-2">
+          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Đồng hồ thông minh Series 7, Trắng</a>
+        </h5>
+        <div class="h6 pb-1 mb-2">$429.00</div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="count-input rounded-2">
+            <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
+              <i class="ci-minus"></i>
+            </button>
+            <input type="number" class="form-control form-control-sm" value="1" readonly="">
+            <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
+              <i class="ci-plus"></i>
+            </button>
+          </div>
+          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <div class="offcanvas-header flex-column align-items-start">
+    <div class="d-flex align-items-center justify-content-between w-100 mb-3 mb-md-4">
+      <span class="text-light-emphasis">Tổng phụ:</span>
+      <span class="h6 mb-0">$2,317.00</span>
+    </div>
+    <div class="d-flex w-100 gap-3">
+      <a class="btn btn-lg btn-secondary w-100" href="checkout-v1-cart.html">Xem giỏ hàng</a>
+      <a class="btn btn-lg btn-primary w-100" href="checkout-v1-delivery-1.html">Thanh toán</a>
+    </div>
+  </div>
+</div>
 
 
 
@@ -304,146 +304,45 @@
                     </button>
 
                     <!-- Mega menu -->
+                    @isset($categories)
                     <ul class="dropdown-menu dropdown-menu-static w-100 rounded-top-0 rounded-bottom-4 py-1 p-lg-1" style="--cz-dropdown-spacer: 0; --cz-dropdown-item-padding-y: .625rem; --cz-dropdown-item-spacer: 0">
-                      <li class="d-lg-none pt-2">
-                        <a class="dropdown-item fw-medium" href="shop-categories-electronics.html">
-                          <i class="ci-grid fs-xl opacity-60 pe-1 me-2"></i>
-                          All Categories
-                          <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
-                        </a>
-                      </li>
-                      <li class="dropend position-static">
-                        <div class="position-relative rounded pt-2 pb-1 px-lg-2" data-bs-toggle="dropdown" data-bs-trigger="hover">
-                          <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex" href="shop-catalog-electronics.html">
-                            <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
-                            <span class="text-truncate">DMC5 (code danh mục tại đây)</span>
-                            <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
-                          </a>
-
-                        </div>
-                        <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
-                          <div class="d-flex flex-column flex-lg-row h-100 gap-4">
-                            <div style="min-width: 194px">
-                              <div class="d-flex w-100">
-                                <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="shop-catalog-electronics.html">Computers</a>
-                              </div>
-                              <ul class="nav flex-column gap-2 mt-n2">
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Laptops &amp; Tablets</a>
-                                </li>
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Desktop Computers</a>
-                                </li>
-
-                              </ul>
-                            </div>
-                            <div style="min-width: 194px">
-                              <div class="d-flex w-100">
-                                <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="shop-catalog-electronics.html">Accessories</a>
-                              </div>
-                              <ul class="nav flex-column gap-2 mt-n2">
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Monitors</a>
-                                </li>
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Bags, Cases &amp; Sleeves</a>
-                                </li>
-
-
-                              </ul>
-                            </div>
-                            <div class="d-none d-lg-block">
-                              <div class="d-none d-xl-block" style="width: 284px"></div>
-                              <div class="d-xl-none" style="width: 240px"></div>
-                              <div class="position-relative d-flex flex-column justify-content-center h-100 bg-body-secondary rounded-5 py-4 px-3">
-                                <div class="text-center px-2">
-                                  <span class="badge bg-danger bg-opacity-10 text-danger fs-sm rounded-pill mb-2">Save up to $400</span>
-                                  <div class="fs-sm text-light-emphasis mb-2">Starts from <del>$1,599.00</del> $1,399.00</div>
-                                  <div class="h2 mb-4">Surface Laptop Studio</div>
+                        @foreach($categories as $category)
+                            <li class="dropend position-static">
+                                <div class="position-relative rounded pt-2 pb-1 px-lg-2" data-bs-toggle="dropdown" data-bs-trigger="hover">
+                                    <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex" href="#">
+                                        <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
+                                        <span class="text-truncate">{{ $category->name }}</span>
+                                        <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
+                                    </a>
                                 </div>
-                                <img src="assets/img/mega-menu/electronics/01.png" width="252" alt="Surface Laptop Studio">
-                                <div class="text-center mt-4">
-                                  <a class="btn btn-sm btn-primary stretched-link" href="shop-catalog-electronics.html">Shop now</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="dropend position-static">
-                        <div class="position-relative rounded pb-1 px-lg-2" tabindex="0" data-bs-toggle="dropdown" data-bs-trigger="hover">
-                          <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex" href="shop-catalog-electronics.html">
-                            <i class="ci-smartphone-2 fs-xl opacity-60 pe-1 me-2"></i>
-                            <span class="text-truncate">Smartphones &amp; Tablets</span>
-                            <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
-                          </a>
-                          <div class="dropdown-item fw-medium stretched-link d-lg-none">
-                            <i class="ci-smartphone-2 fs-xl opacity-60 pe-1 me-2"></i>
-                            Smartphones &amp; Tablets
-                            <i class="ci-chevron-down fs-base ms-auto me-n1"></i>
-                          </div>
-                        </div>
-                        <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
-                          <div class="d-flex flex-column flex-lg-row h-100 gap-4">
-                            <div style="min-width: 194px">
-                              <div class="d-flex w-100">
-                                <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="shop-catalog-electronics.html">Smartphones</a>
-                              </div>
-                              <ul class="nav flex-column gap-2 mt-n2">
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Apple iPhone</a>
-                                </li>
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Google Pixel</a>
-                                </li>
-
-                              </ul>
-                              <div class="d-flex w-100 pt-4">
-                                <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="shop-catalog-electronics.html">Tablets</a>
-                              </div>
-                              <ul class="nav flex-column gap-2 mt-n2">
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Apple iPad</a>
-                                </li>
-
-                              </ul>
-                            </div>
-                            <div style="min-width: 194px">
-                              <div class="d-flex w-100">
-                                <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="shop-catalog-electronics.html">Accessories</a>
-                              </div>
-                              <ul class="nav flex-column gap-2 mt-n2">
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Accessory Kits</a>
-                                </li>
-                                <li class="d-flex w-100 pt-1">
-                                  <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="shop-catalog-electronics.html">Batteries &amp; Battery Packs</a>
-                                </li>
-
-                              </ul>
-                            </div>
-                            <div class="d-none d-lg-block">
-                              <div class="d-none d-xl-block" style="width: 284px"></div>
-                              <div class="d-xl-none" style="width: 240px"></div>
-                              <div class="position-relative d-flex flex-column justify-content-center h-100 bg-body-secondary rounded-5 py-4 px-3">
-                                <div class="text-center px-2">
-                                  <i class="ci-apple fs-1 text-dark-emphasis mb-2"></i>
-                                  <div class="fs-sm text-light-emphasis mb-2">Deal of the week</div>
-                                  <div class="h2 mb-4">iPad Pro M1</div>
-                                </div>
-                                <img src="assets/img/mega-menu/electronics/02.png" width="252" alt="iPad Pro">
-                                <div class="text-center mt-4">
-                                  <a class="btn btn-sm btn-primary stretched-link" href="shop-catalog-electronics.html">Shop now</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-
-
-
+                                @if ($category->products->isNotEmpty())
+                                    <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
+                                        <div class="d-flex flex-column flex-lg-row h-100 gap-4">
+                                            <div style="min-width: 194px">
+                                                <div class="d-flex w-100">
+                                                    <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="#">
+                                                        {{ $category->name }}
+                                                    </a>
+                                                </div>
+                                                <ul class="nav flex-column gap-2 mt-n2">
+                                                    @foreach($category->products as $product)
+                                                        <li class="d-flex w-100 pt-1">
+                                                            <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="{{ route('productdetail', ['id' => $product->id]) }}">
+                                                                {{ $product->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </li>
+                        @endforeach
                     </ul>
+                    @endisset
+
+
                   </div>
                 </div>
               </div>
@@ -529,11 +428,11 @@
           <div class="nav nav-justified w-100">
             <a class="nav-link border-end" href="account-signin.html">
               <i class="ci-user fs-lg opacity-60 me-2"></i>
-              Account
+              Tài khoản
             </a>
             <a class="nav-link" href="account-wishlist.html">
               <i class="ci-heart fs-lg opacity-60 me-2"></i>
-              Wishlist
+              Yêu thích
             </a>
           </div>
         </div>
