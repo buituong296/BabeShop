@@ -18,4 +18,8 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class); // Mối quan hệ với model Category
     }
+    public function album()
+    {
+        return $this->hasMany(ProductAlbum::class);
+    }
 }

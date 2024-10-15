@@ -1,31 +1,36 @@
 @extends('adminlte::page')
 
 @section('content')
+@if($errors->has('variants'))
+    <div class="alert alert-danger">
+        {{ $errors->first('variants') }}
+    </div>
+@endif
 <div class="container">
     <h1>Tạo Sản Phẩm Mới</h1>
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="name" class="form-label">Tên Sản Phẩm</label>
             <input type="text" name="name" class="form-control" id="name" required>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="price" class="form-label">Giá</label>
             <input type="number" name="price" class="form-control" id="price" required>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="image" class="form-label">Hình Ảnh</label>
             <input type="file" name="image" class="form-control" id="image" required>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="description" class="form-label">Mô Tả</label>
             <textarea name="description" class="form-control" id="description"></textarea>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="category_id" class="form-label">Danh Mục</label>
             <select name="category_id" class="form-control" id="category_id" required>
                 @foreach($categories as $category)
@@ -34,9 +39,13 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group col-md-6">
             <label for="quantity" class="form-label">Số Lượng</label>
             <input type="number" name="quantity" class="form-control" id="quantity" required>
+        </div>
+        <div>
+            <label for="album">Album ảnh:</label>
+            <input type="file" name="album[]" multiple>
         </div>
 
         <h3>Biến Thể Sản Phẩm</h3>
@@ -83,8 +92,9 @@
         <button type="submit" class="btn btn-success">Tạo Sản Phẩm</button>
     </form>
 </div>
-
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
+    CKEDITOR.replace('description');
     let variantIndex = 1; // Đếm số lượng biến thể
     document.getElementById('add-variant').addEventListener('click', function() {
         const container = document.getElementById('variant-container');
