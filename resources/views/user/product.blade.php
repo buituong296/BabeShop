@@ -7,12 +7,12 @@
 <main class="content-wrapper">
 
     <!-- Breadcrumb -->
-<nav class="container pt-3 my-3 my-md-4" aria-label="breadcrumb">
+    <nav class="container pt-3 my-3 my-md-4" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="home-electronics.html">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
       <li class="breadcrumb-item active" aria-current="page">Danh mục với bộ lọc bên</li>
     </ol>
-  </nav>
+    </nav>
 
   <!-- Page title -->
   <h1 class="h3 container mb-4">Trang sản phẩm</h1>
