@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Theme switcher (color modes) -->
-    <script src="assets/js/theme-switcher.js"></script>
+    <script src="{{ asset('assets/js/theme-switcher.js') }}"></script>
 
 
     <!-- Preloaded local web font (Inter) -->
@@ -39,15 +39,15 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+
     <style>
         .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ thôi */
         }
 
     </style>
 </head>
 <body>
-
 
 
     <div id="app">
@@ -69,6 +69,11 @@
 
     <!-- Bootstrap + Theme scripts -->
     <script src="{{ asset('assets/js/theme.min.js') }}"></script>
+
+    <!-- Vendor scripts -->
+    <script src="{{ asset('assets/vendor/drift-zoom/Drift.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/choices.js/choices.min.js') }}"></script>
 
 </body>
 </html>
