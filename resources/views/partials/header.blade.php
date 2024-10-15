@@ -174,7 +174,7 @@
           <!-- Search visible on screens > 991px wide (lg breakpoint) -->
           <div class="position-relative flex-fill d-none d-lg-block pe-4 pe-xl-5">
             <i class="ci-search position-absolute top-50 translate-middle-y d-flex fs-lg text-white ms-3"></i>
-            <input type="search" class="form-control form-control-lg form-icon-start border-white rounded-pill" placeholder="Search the products">
+            <input type="search" class="form-control form-control-lg form-icon-start border-white rounded-pill" placeholder="Tìm kiếm sản phẩm">
           </div>
 
           <!-- Sale link visible on screens > 1200px wide (xl breakpoint) -->
@@ -183,8 +183,8 @@
               <i class="ci-percent animate-target"></i>
             </div>
             <div class="ps-2 text-nowrap">
-              <div class="fs-xs text-body">Only this month</div>
-              <div class="fw-medium text-white">Super Sale 20%</div>
+              <div class="fs-xs text-body">Chỉ trong tháng này</div>
+              <div class="fw-medium text-white">Đại hạ giá 20%</div>
             </div>
           </a>
 

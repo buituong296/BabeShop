@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-lg-9 offset-lg-3">
             <div class="position-relative">
-              <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none-dark rtl-flip" style="background: linear-gradient(90deg, #accbee 0%, #e7f0fd 100%)"></span>
+              <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none-dark rtl-flip" style="background-image: url('assets/img/home/electronics/hero-slider/bg4.png') "></span>
               <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none d-block-dark rtl-flip" style="background: linear-gradient(90deg, #1b273a 0%, #1f2632 100%)"></span>
               <div class="row justify-content-center position-relative z-2">
                 <div class="col-xl-5 col-xxl-4 offset-xxl-1 d-flex align-items-center mt-xl-n3">
@@ -74,7 +74,7 @@
                     <div class="swiper-wrapper">
                       <div class="swiper-slide d-flex justify-content-end">
                         <div class="ratio rtl-flip" style="max-width: 495px; --cz-aspect-ratio: calc(537 / 495 * 100%)">
-                          <img src="assets/img/home/electronics/hero-slider/01.png" alt="Hình ảnh">
+                          <img src="assets/img/home/electronics/hero-slider/bg1.png" alt="Hình ảnh">
                         </div>
                       </div>
                       <div class="swiper-slide d-flex justify-content-end">
@@ -179,7 +179,7 @@
               <div class="ratio animate-up-down position-relative z-2 me-lg-4" style="max-width: 320px; margin-bottom: -19%; --cz-aspect-ratio: calc(690 / 640 * 100%)">
                 <img src="assets/img/home/electronics/banner/productbabel.png" alt="Laptop">
               </div>
-              <h3 class="display-5 mb-2 text-shadow">Bộ ghim kim loại</h3>
+              <h3 class="display-6 mb-2 text-shadow">Bộ ghim kim loại</h3>
               <p class=" text text- fw-medium mb-4 text-shadow">Texas the Omertosa & Lunacub</p>
               <a class="btn btn-sm btn-secondary" href="{{ route('product') }}" >
                 Xem thêm
