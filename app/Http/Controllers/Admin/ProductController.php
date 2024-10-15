@@ -55,6 +55,15 @@ class ProductController extends Controller
     ]);
 
     $imagePath = $request->file('image')->store('products', 'public');
+    // Kiểm tra xem biến thể có bị trùng không
+    $variants = $request->input('variants');
+    $uniqueVariants = collect($variants)->unique(function ($item) {
+        return $item['color_id'] . '-' . $item['size_id'];
+    });
+
+    if (count($variants) != $uniqueVariants->count()) {
+        return back()->withErrors(['variants' => 'Có biến thể trùng nhau (cùng màu và kích thước).'])->withInput();
+    }
 
     $product = Product::create([
         'name' => $request->name,
@@ -70,6 +79,12 @@ class ProductController extends Controller
     foreach ($request->variants as $variantData) {
         $product->variants()->create($variantData);
     }
+    if ($request->hasFile('album')) {
+        foreach ($request->file('album') as $albumImage) {
+            $albumPath = $albumImage->store('public/albums');
+            $product->album()->create(['image' => basename($albumPath)]);
+        }
+    }
 
     return redirect()->route('products.index')->with('success', 'Sản phẩm đã được thêm thành công!');
 }
@@ -81,6 +96,7 @@ public function edit($id)
     $categories = Category::all();
     $colors = Color::all();
     $sizes = Size::all();
+    $product = Product::with('album')->findOrFail($id);
 
     return view('admin.products.edit', compact('product', 'categories', 'colors', 'sizes'));
 }
@@ -121,6 +137,16 @@ public function update(Request $request, $id)
         }
         $product->image = $request->file('image')->store('products', 'public');
     }
+    // Kiểm tra xem biến thể có bị trùng không
+    $variants = $request->input('variants');
+    $uniqueVariants = collect($variants)->unique(function ($item) {
+        return $item['color_id'] . '-' . $item['size_id'];
+    });
+
+    if (count($variants) != $uniqueVariants->count()) {
+        return back()->withErrors(['variants' => 'Có biến thể trùng nhau (cùng màu và kích thước).'])->withInput();
+    }
+
 
     $product->save();
 
@@ -129,6 +155,13 @@ public function update(Request $request, $id)
 
     foreach ($request->variants as $variantData) {
         $product->variants()->create($variantData);
+    }
+    // Xử lý album ảnh mới
+    if ($request->hasFile('album')) {
+        foreach ($request->file('album') as $albumImage) {
+            $albumPath = $albumImage->store('public/albums');
+            $product->album()->create(['image' => basename($albumPath)]);
+        }
     }
 
     return redirect()->route('products.index')->with('success', 'Sản phẩm đã được cập nhật thành công!');

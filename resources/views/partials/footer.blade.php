@@ -5,26 +5,26 @@
     <span class="position-absolute top-0 start-0 w-100 h-100 bg-body d-none d-block-dark"></span>
     <div class="container position-relative z-1 pt-sm-2 pt-md-3 pt-lg-4" data-bs-theme="dark">
 
-      <!-- Columns with links that are turned into accordion on screens < 500px wide (sm breakpoint) -->
+      <!-- Các cột chứa liên kết trở thành accordion trên màn hình < 500px (sm breakpoint) -->
       <div class="accordion py-5" id="footerLinks">
         <div class="row">
           <div class="col-md-4 d-sm-flex flex-md-column align-items-center align-items-md-start pb-3 mb-sm-4">
             <h4 class="mb-sm-0 mb-md-4 me-4">
               <a class="text-dark-emphasis text-decoration-none" href="index.html">Cartzilla</a>
             </h4>
-            <p class="text-body fs-sm text-sm-end text-md-start mb-sm-0 mb-md-3 ms-0 ms-sm-auto ms-md-0 me-4">Got questions? Contact us 24/7</p>
+            <p class="text-body fs-sm text-sm-end text-md-start mb-sm-0 mb-md-3 ms-0 ms-sm-auto ms-md-0 me-4">Có câu hỏi? Liên hệ với chúng tôi 24/7</p>
             <div class="dropdown" style="max-width: 250px">
               <button type="button" class="btn btn-light dropdown-toggle justify-content-between w-100 d-none-dark" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Help and consultation
+                Hỗ trợ và tư vấn
               </button>
               <button type="button" class="btn btn-secondary dropdown-toggle justify-content-between w-100 d-none d-flex-dark" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Help and consultation
+                Hỗ trợ và tư vấn
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#!">Help center &amp; FAQ</a></li>
-                <li><a class="dropdown-item" href="#!">Support chat</a></li>
-                <li><a class="dropdown-item" href="#!">Open support ticket</a></li>
-                <li><a class="dropdown-item" href="#!">Call center</a></li>
+                <li><a class="dropdown-item" href="#!">Trung tâm trợ giúp &amp; FAQ</a></li>
+                <li><a class="dropdown-item" href="#!">Trò chuyện hỗ trợ</a></li>
+                <li><a class="dropdown-item" href="#!">Mở phiếu hỗ trợ</a></li>
+                <li><a class="dropdown-item" href="#!">Trung tâm cuộc gọi</a></li>
               </ul>
             </div>
           </div>
@@ -32,54 +32,51 @@
             <div class="row row-cols-1 row-cols-sm-3 gx-3 gx-md-4">
               <div class="accordion-item col border-0">
                 <h6 class="accordion-header" id="companyHeading">
-                  <span class="text-dark-emphasis d-none d-sm-block">Company</span>
-                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#companyLinks" aria-expanded="false" aria-controls="companyLinks">Company</button>
+                  <span class="text-dark-emphasis d-none d-sm-block">Công ty</span>
+                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#companyLinks" aria-expanded="false" aria-controls="companyLinks">Công ty</button>
                 </h6>
                 <div class="accordion-collapse collapse d-sm-block" id="companyLinks" aria-labelledby="companyHeading" data-bs-parent="#footerLinks">
                   <ul class="nav flex-column gap-2 pt-sm-3 pb-3 mt-n1 mb-1">
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">About company</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Về công ty</a>
                     </li>
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Our team</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Đội ngũ của chúng tôi</a>
                     </li>
-
                   </ul>
                 </div>
                 <hr class="d-sm-none my-0">
               </div>
               <div class="accordion-item col border-0">
                 <h6 class="accordion-header" id="accountHeading">
-                  <span class="text-dark-emphasis d-none d-sm-block">Account</span>
-                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#accountLinks" aria-expanded="false" aria-controls="accountLinks">Account</button>
+                  <span class="text-dark-emphasis d-none d-sm-block">Tài khoản</span>
+                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#accountLinks" aria-expanded="false" aria-controls="accountLinks">Tài khoản</button>
                 </h6>
                 <div class="accordion-collapse collapse d-sm-block" id="accountLinks" aria-labelledby="accountHeading" data-bs-parent="#footerLinks">
                   <ul class="nav flex-column gap-2 pt-sm-3 pb-3 mt-n1 mb-1">
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Your account</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Tài khoản của bạn</a>
                     </li>
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Shipping rates &amp; policies</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Phí &amp; chính sách vận chuyển</a>
                     </li>
-
                   </ul>
                 </div>
                 <hr class="d-sm-none my-0">
               </div>
               <div class="accordion-item col border-0">
                 <h6 class="accordion-header" id="customerHeading">
-                  <span class="text-dark-emphasis d-none d-sm-block">Customer service</span>
-                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#customerLinks" aria-expanded="false" aria-controls="customerLinks">Customer service</button>
+                  <span class="text-dark-emphasis d-none d-sm-block">Dịch vụ khách hàng</span>
+                  <button type="button" class="accordion-button collapsed py-3 d-sm-none" data-bs-toggle="collapse" data-bs-target="#customerLinks" aria-expanded="false" aria-controls="customerLinks">Dịch vụ khách hàng</button>
                 </h6>
                 <div class="accordion-collapse collapse d-sm-block" id="customerLinks" aria-labelledby="customerHeading" data-bs-parent="#footerLinks">
                   <ul class="nav flex-column gap-2 pt-sm-3 pb-3 mt-n1 mb-1">
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Payment methods</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Phương thức thanh toán</a>
                     </li>
                     <li class="d-flex w-100 pt-1">
-                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Money back guarantee</a>
+                      <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="#!">Cam kết hoàn tiền</a>
                     </li>
-
                   </ul>
                 </div>
                 <hr class="d-sm-none my-0">
@@ -89,31 +86,29 @@
         </div>
       </div>
 
-      <!-- Category / tag links -->
+      <!-- Liên kết danh mục / nhãn -->
       <div class="d-flex flex-column gap-3 pb-3 pb-md-4 pb-lg-5 mt-n2 mt-sm-n4 mt-lg-0 mb-4">
         <ul class="nav align-items-center text-body-tertiary gap-2">
           <li class="animate-underline">
-            <a class="nav-link fw-normal p-0 animate-target" href="#!">Computers</a>
+            <a class="nav-link fw-normal p-0 animate-target" href="#!">Máy tính</a>
           </li>
           <li class="px-1">/</li>
           <li class="animate-underline">
-            <a class="nav-link fw-normal p-0 animate-target" href="#!">Smartphones</a>
+            <a class="nav-link fw-normal p-0 animate-target" href="#!">Điện thoại thông minh</a>
           </li>
-
         </ul>
         <ul class="nav align-items-center text-body-tertiary gap-2">
           <li class="animate-underline">
-            <a class="nav-link fw-normal p-0 animate-target" href="#!">Monitors</a>
+            <a class="nav-link fw-normal p-0 animate-target" href="#!">Màn hình</a>
           </li>
           <li class="px-1">/</li>
           <li class="animate-underline">
-            <a class="nav-link fw-normal p-0 animate-target" href="#!">Scanners</a>
+            <a class="nav-link fw-normal p-0 animate-target" href="#!">Máy quét</a>
           </li>
-
         </ul>
       </div>
 
-      <!-- Copyright + Payment methods -->
+      <!-- Bản quyền + Phương thức thanh toán -->
       <div class="d-md-flex align-items-center border-top py-4">
         <div class="d-flex gap-2 gap-sm-3 justify-content-center ms-md-auto mb-4 mb-md-0 order-md-2">
           <div>
@@ -132,10 +127,11 @@
             <img src="assets/img/payment-methods/apple-pay-dark-mode.svg" alt="Apple Pay">
           </div>
         </div>
-        <p class="text-body fs-xs text-center text-md-start mb-0 me-4 order-md-1">© All rights reserved. Made by <span class="animate-underline"><a class="animate-target text-dark-emphasis fw-medium text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Createx Studio</a></span></p>
+        <p class="text-body fs-xs text-center text-md-start mb-0 me-4 order-md-1">© Bản quyền thuộc về. Thiết kế bởi <span class="animate-underline"><a class="animate-target text-dark-emphasis fw-medium text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Createx Studio</a></span></p>
       </div>
     </div>
   </footer>
+
 
 
   <!-- Back to top button -->
