@@ -37,11 +37,11 @@
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark rtl-flip"
                                     style="background: linear-gradient(90deg, #accbee 0%, #e7f0fd 100%)"></span>
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark rtl-flip"
-                                    style="background: linear-gradient(90deg, #1b273a 0%, #1f2632 100%)"></span>
+                                    style="background: linear-gradient(90d  eg, #1b273a 0%, #1f2632 100%)"></span>
                                 <div
                                     class="position-relative z-1 text-center text-sm-start pt-4 pt-sm-0 ps-xl-4 mt-2 mt-sm-0 order-sm-2">
-                                    <h2 class="h3 mb-2">iPhone 14</h2>
-                                    <p class="fs-sm text-light-emphasis mb-sm-4">Apple iPhone 14 128GB Màu xanh</p>
+                                    <h2 class="h3 mb-2">Gấu bông Plushie</h2>
+                                    <p class="fs-sm text-light-emphasis mb-sm-4">Bộ 3 gấu bông Plushie Bunny</p>
                                     <a class="btn btn-primary" href="shop-product-general-electronics.html">
                                         Giá từ $899
                                         <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="position-relative z-1 w-100 align-self-end order-sm-1" style="max-width: 416px">
                                     <div class="ratio rtl-flip" style="--cz-aspect-ratio: calc(320 / 416 * 100%)">
-                                        <img src="assets/img/shop/electronics/banners/iphone-1.png" alt="iPhone 14">
+                                        <img src="assets/img/shop/electronics/banners/bunny.png" alt="iPhone 14">
                                     </div>
                                 </div>
                             </div>
@@ -62,13 +62,13 @@
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark rtl-flip"
                                     style="background: linear-gradient(90deg, #362131 0%, #322730 100%)"></span>
                                 <div class="position-relative z-1 text-center pt-3 mx-4">
-                                    <i class="ci-apple text-body-emphasis fs-3 mb-3"></i>
-                                    <p class="fs-sm text-light-emphasis mb-1">Ưu đãi trong tuần</p>
-                                    <h2 class="h3 mb-4">iPad Pro M1</h2>
+                                    
+                                    <p class="fs-sm text-light-emphasis mb-1">Phiên bản giới hạn</p>
+                                    <h2 class="h3 mb-4">Plushie Ceobe</h2>
                                 </div>
                                 <a class="position-relative z-1 d-block w-100" href="shop-product-general-electronics.html">
                                     <div class="ratio" style="--cz-aspect-ratio: calc(159 / 525 * 100%)">
-                                        <img src="assets/img/shop/electronics/banners/ipad.png" width="525"
+                                        <img src="assets/img/shop/electronics/banners/ceobe.png" width="525"
                                             alt="iPad">
                                     </div>
                                 </a>
@@ -382,9 +382,9 @@
                             </li>
                         </ul>
                     </nav> --}}
-                    <div class="d-flex justify-content-center mt-4">
+                
                         {{ $products->links() }}
-                    </div>
+                    
                 </div>
             </div>
 
