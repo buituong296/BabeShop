@@ -6,106 +6,91 @@
         {{ $errors->first('variants') }}
     </div>
 @endif
-<div class="container pt-5 pb-5">
+<div class="container">
     <h1>Tạo Sản Phẩm Mới</h1>
-    <div class="row p-3 bg-white rounded-3 shadow">
-        <div class="">
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="d-flex">
-                    <div class="col-8">
-                        <div class="form-group ">
-                            <label for="name" class="form-label">Tên Sản Phẩm</label>
-                            <input type="text" name="name" class="form-control" id="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="price" class="form-label">Giá</label>
-                            <input type="number" name="price" class="form-control" id="price" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="quantity" class="form-label">Số Lượng</label>
-                            <input type="number" name="quantity" class="form-control" id="quantity" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description" class="form-label">Mô Tả</label>
-                            <textarea name="description" class="form-control" id="description" ></textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="category_id" class="form-label">Danh Mục</label>
-                            <select name="category_id" class="form-control" id="category_id" required>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image" class="form-label">Hình Ảnh</label>
-                            <input type="file" name="image" class="form-control pt-4" id="image" style="height: 90px" required>
-                        </div>
-
-                        <div>
-                            <label for="album">Album ảnh:</label>
-                            <input type="file" class="form-control pt-4" style="height: 90px" name="album[]" multiple>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <h3>Biến Thể Sản Phẩm</h3>
-                <div id="variant-container">
-                    <div class="variant-row mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <label for="color_id" class="form-label">Màu Sắc</label>
-                                <select name="variants[0][color_id]" class="form-control" required>
-                                    @foreach($colors as $color)
-                                        <option value="{{ $color->id }}">{{ $color->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="size_id" class="form-label">Kích Thước</label>
-                                <select name="variants[0][size_id]" class="form-control" required>
-                                    @foreach($sizes as $size)
-                                        <option value="{{ $size->id }}">{{ $size->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="stock" class="form-label">Tồn Kho</label>
-                                <input type="number" name="variants[0][stock]" class="form-control" required>
-                            </div>
-                            <div class="col">
-                                <label for="list_price" class="form-label">Giá Niêm Yết</label>
-                                <input type="number" name="variants[0][list_price]" class="form-control" required>
-                            </div>
-                            <div class="col">
-                                <label for="sale_price" class="form-label">Giá Bán</label>
-                                <input type="number" name="variants[0][sale_price]" class="form-control" required>
-                            </div>
-                            <div class="col">
-                                <label for="import_price" class="form-label">Giá Nhập</label>
-                                <input type="number" name="variants[0][import_price]" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" id="add-variant" class="btn btn-primary">Thêm Biến Thể</button>
-                <button type="submit" class="btn btn-success">Tạo Sản Phẩm</button>
-            </form>
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group col-md-6">
+            <label for="name" class="form-label">Tên Sản Phẩm</label>
+            <input type="text" name="name" class="form-control" id="name" required>
         </div>
-    </div>
+
+        <div class="form-group col-md-6">
+            <label for="price" class="form-label">Giá</label>
+            <input type="number" name="price" class="form-control" id="price" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="image" class="form-label">Hình Ảnh</label>
+            <input type="file" name="image" class="form-control" id="image" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="description" class="form-label">Mô Tả</label>
+            <textarea name="description" class="form-control" id="description"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="category_id" class="form-label">Danh Mục</label>
+            <select name="category_id" class="form-control" id="category_id" required>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="quantity" class="form-label">Số Lượng</label>
+            <input type="number" name="quantity" class="form-control" id="quantity" required>
+        </div>
+        <div>
+            <label for="album">Album ảnh:</label>
+            <input type="file" name="album[]" multiple>
+        </div>
+
+        <h3>Biến Thể Sản Phẩm</h3>
+        <div id="variant-container">
+            <div class="variant-row mb-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="color_id" class="form-label">Màu Sắc</label>
+                        <select name="variants[0][color_id]" class="form-control" required>
+                            @foreach($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="size_id" class="form-label">Kích Thước</label>
+                        <select name="variants[0][size_id]" class="form-control" required>
+                            @foreach($sizes as $size)
+                                <option value="{{ $size->id }}">{{ $size->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="stock" class="form-label">Tồn Kho</label>
+                        <input type="number" name="variants[0][stock]" class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <label for="list_price" class="form-label">Giá Niêm Yết</label>
+                        <input type="number" name="variants[0][list_price]" class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <label for="sale_price" class="form-label">Giá Bán</label>
+                        <input type="number" name="variants[0][sale_price]" class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <label for="import_price" class="form-label">Giá Nhập</label>
+                        <input type="number" name="variants[0][import_price]" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="add-variant" class="btn btn-primary">Thêm Biến Thể</button>
+        <button type="submit" class="btn btn-success">Tạo Sản Phẩm</button>
+    </form>
 </div>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
