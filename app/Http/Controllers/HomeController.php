@@ -38,40 +38,49 @@ class HomeController extends Controller
         return view('home', compact('products', 'products_2', 'page'));
     }
     public function product(Request $request)
-    {
-        // dd($request->all());
-        $products = Product::query();
-        $categories = Category::all();
-        $sizes = Size::all();
-        $color = Color::all();
+{
+    $products = Product::query();
+    $categories = Category::all();
+    $sizes = Size::all();
+    $color = Color::all();
 
-        
-        if ($request->has('category')) {
-            $products->whereHas('category', function ($query) use ($request) {
-                $query->whereIn('id', $request->category);
-            });
-        }
-    
-        if ($request->has('size')) {
-            $products->whereHas('variants', function ($query) use ($request) {
-                $query->whereIn('size_id', $request->size);
-            });
-        }
-    
-        if ($request->has('color')) {
-            $products->whereHas('variants', function ($query) use ($request) {
-                $query->whereIn('color_id', $request->color);
-            });
-        }
-    
-        if ($request->has('min') && $request->has('max')) {
-            $products->whereBetween('price', [$request->min, $request->max]);
-        }
-    
-        $products = $products->paginate(9);
-       
-    
-        return view('user.product', compact('products', 'categories', 'sizes', 'color'));
+    // Danh mục đã chọn (nếu có)
+    $selectedCategories = collect(); // Tạo một collection rỗng nếu không có danh mục được chọn
+
+    if ($request->has('category')) {
+        // Lọc sản phẩm theo danh mục
+        $products->whereHas('category', function ($query) use ($request) {
+            $query->whereIn('id', $request->category);
+        });
+
+        // Lấy danh sách danh mục đã chọn từ ID trong request
+        $selectedCategories = Category::whereIn('id', $request->category)->get();
     }
+
+    // Lọc sản phẩm theo kích cỡ
+    if ($request->has('size')) {
+        $products->whereHas('variants', function ($query) use ($request) {
+            $query->whereIn('size_id', $request->size);
+        });
+    }
+
+    // Lọc sản phẩm theo màu sắc
+    if ($request->has('color')) {
+        $products->whereHas('variants', function ($query) use ($request) {
+            $query->whereIn('color_id', $request->color);
+        });
+    }
+
+    // Lọc theo khoảng giá
+    if ($request->has('min') && $request->has('max')) {
+        $products->whereBetween('price', [$request->min, $request->max]);
+    }
+
+    $products = $products->paginate(9);
+
+    // Truyền thêm danh sách danh mục đã chọn sang view
+    return view('user.product', compact('products', 'categories', 'sizes', 'color', 'selectedCategories'));
+}
+
 
 }

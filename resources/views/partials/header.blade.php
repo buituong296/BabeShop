@@ -299,6 +299,12 @@
                       </button>
                     </div>
 
+                    <!-- Buttton visible on screens < 992px wide (lg breakpoint) -->
+                    <button type="button" class="btn btn-lg btn-secondary dropdown-toggle w-100 justify-content-start d-lg-none mb-2" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                        <i class="ci-grid fs-lg"></i>
+                        <span class="ms-2 me-auto">Thể loại sản phẩm</span>
+                      </button>
+
                     <!-- Mega menu -->
                     @isset($categories)
                     <ul class="dropdown-menu w-100 rounded-top-0 rounded-bottom-4 py-1 p-lg-1" style="--cz-dropdown-spacer: 0; --cz-dropdown-item-padding-y: .625rem; --cz-dropdown-item-spacer: 0">
