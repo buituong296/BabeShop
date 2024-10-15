@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>Edit Size</h1>
+    <h1>SỬA KÍCH THƯỚC</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -17,9 +17,9 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="name">Size Name</label>
+            <label for="name">Tên kích thước</label>
             <input type="text" name="name" class="form-control" value="{{ $size->name }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update Size</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </form>
 @endsection
