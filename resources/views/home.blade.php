@@ -170,11 +170,16 @@
       <h2 class="h3 pb-2 pb-sm-3">New arrivals</h2>
       <div class="row">
 
+
         <!-- Banner -->
         <div class="col-lg-4" data-bs-theme="dark">
           <div class="d-flex flex-column align-items-center justify-content-end h-100 text-center overflow-hidden rounded-5 px-4 px-lg-3 pt-4 pb-5" style="background: #1d2c41 url(assets/img/home/electronics/banner/backgroundbabel.png) center/cover no-repeat">
             <div class="ratio animate-up-down position-relative z-2 me-lg-4" style="max-width: 320px; margin-bottom: -19%; --cz-aspect-ratio: calc(690 / 640 * 100%)">
               <img src="assets/img/home/electronics/banner/productbabel.png" alt="Laptop">
+
+          <!-- Banner -->
+         
+
             </div>
             <h3 class="display-4 mb-2">Metal Pin Set</h3>
             <p class="text fw-medium mb-4">Texas the Omertosa & Lunacub</p>
