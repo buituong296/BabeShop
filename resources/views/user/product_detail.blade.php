@@ -1008,15 +1008,6 @@
                         </div>
                     </section>
 
-        <!-- Vendor scripts -->
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="assets/vendor/drift-zoom/Drift.min.js"></script>
-        <script src="assets/vendor/simplebar/simplebar.min.js"></script>
-        <script src="assets/vendor/choices.js/choices.min.js"></script>
-
-        <!-- Bootstrap + Theme scripts -->
-        <script src="assets/js/theme.min.js"></script>
-
         </div>
 </main>
 
