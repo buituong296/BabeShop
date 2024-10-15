@@ -1,37 +1,64 @@
 @extends('adminlte::page')
 
 @section('content')
+@if($errors->has('variants'))
+    <div class="alert alert-danger">
+        {{ $errors->first('variants') }}
+    </div>
+@endif
 <div class="container">
-    <div class="row pt-5">
-        <h1 class="fw-bold">THÊM MỚI SẢN PHẨM</h1>
-        <div class="ok ">
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="w-50">
-                    <div class="d-flex ">
-                        <div class="mb-3 col-6">
-                            <label for="name" class="form-label">Tên Sản Phẩm</label>
-                            <input type="text" name="name" class="form-control" id="name" required>
-                        </div>
+    <h1>Tạo Sản Phẩm Mới</h1>
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group col-md-6">
+            <label for="name" class="form-label">Tên Sản Phẩm</label>
+            <input type="text" name="name" class="form-control" id="name" required>
+        </div>
 
-                        <div class="mb-3 col-6">
-                            <label for="category_id" class="form-label">Danh Mục</label>
-                            <select name="category_id" class="form-control" id="category_id" required>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+        <div class="form-group col-md-6">
+            <label for="price" class="form-label">Giá</label>
+            <input type="number" name="price" class="form-control" id="price" required>
+        </div>
 
-                        <div class="mb-3 col-6">
-                            <label for="price" class="form-label">Giá</label>
-                            <input type="number" name="price" class="form-control" id="price" required>
-                        </div>
+        <div class="form-group col-md-6">
+            <label for="image" class="form-label">Hình Ảnh</label>
+            <input type="file" name="image" class="form-control" id="image" required>
+        </div>
 
-                        <div class="mb-3 col-6">
-                            <label for="quantity" class="form-label">Số Lượng</label>
-                            <input type="number" name="quantity" class="form-control" id="quantity" required>
-                        </div>
+        <div class="form-group col-md-6">
+            <label for="description" class="form-label">Mô Tả</label>
+            <textarea name="description" class="form-control" id="description"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="category_id" class="form-label">Danh Mục</label>
+            <select name="category_id" class="form-control" id="category_id" required>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="quantity" class="form-label">Số Lượng</label>
+            <input type="number" name="quantity" class="form-control" id="quantity" required>
+        </div>
+        <div>
+            <label for="album">Album ảnh:</label>
+            <input type="file" name="album[]" multiple>
+        </div>
+
+        <h3>Biến Thể Sản Phẩm</h3>
+        <div id="variant-container">
+            <div class="variant-row mb-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="color_id" class="form-label">Màu Sắc</label>
+                        <select name="variants[0][color_id]" class="form-control" required>
+                            @foreach($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
@@ -96,8 +123,9 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
+    CKEDITOR.replace('description');
     let variantIndex = 1; // Đếm số lượng biến thể
     document.getElementById('add-variant').addEventListener('click', function() {
         const container = document.getElementById('variant-container');
