@@ -42,13 +42,12 @@
 
     <style>
         .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng nhẹ thôi */
         }
 
     </style>
 </head>
 <body>
-
 
 
     <div id="app">
