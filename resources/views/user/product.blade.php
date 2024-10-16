@@ -47,7 +47,7 @@
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark rtl-flip"
                                     style="background: linear-gradient(90deg, #accbee 0%, #e7f0fd 100%)"></span>
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark rtl-flip"
-                                    style="background: linear-gradient(90d  eg, #1b273a 0%, #1f2632 100%)"></span>
+                                    style="background: linear-gradient(90deg, #1b273a 0%, #1f2632 100%)"></span>
                                 <div
                                     class="position-relative z-1 text-center text-sm-start pt-4 pt-sm-0 ps-xl-4 mt-2 mt-sm-0 order-sm-2">
                                     <h2 class="h3 mb-2">Gấu bông Plushie</h2>

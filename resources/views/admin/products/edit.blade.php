@@ -57,11 +57,14 @@
                             @endif
                         </div>
 
-                        <div class="form-group ">
+                        
+                        <div class="form-group">
                             <label for="album">Album ảnh hiện tại:</label>
-                            <div class="d-flex">
+                            <div class="row">
                                 @foreach($product->album as $image)
-                                        <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%">
+                                    <div class="col-3 mb-3 d-flex justify-content-center">
+                                        <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="rounded-3 img-thumbnail" style="width: 100%;">
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
