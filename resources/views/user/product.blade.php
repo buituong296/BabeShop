@@ -16,7 +16,17 @@
         </nav>
 
         <!-- Page title -->
-        <h1 class="h3 container mb-4">Trang sản phẩm</h1>
+        @if ($selectedCategories->isNotEmpty())
+            <h1 class="h3 container mb-4">
+                @foreach($selectedCategories as $category)
+                    {{ $category->name }}@if(!$loop->last), @endif
+                @endforeach
+            </h1>
+        @else
+            <h1 class="h3 container mb-4">Tất cả sản phẩm</h1>
+        @endif
+
+
 
         <!-- Banners that are turned into collaspse on screens < 768px wide (sm breakpoint) -->
         <section class="accordion container pb-4 pb-md-5 mb-xl-3">
@@ -158,7 +168,7 @@
                             <div class="offcanvas-body flex-column pt-2 py-lg-0">
 
                             <!-- Status -->
-    
+
                             <!-- Categories -->
                             <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
                                 <h4 class="h6 mb-2">Danh mục</h4>
@@ -167,11 +177,11 @@
                                       @foreach ($categories as $item)
                                       <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="category{{$item->id}}" name="category[]" value="{{$item->id}}">
-                                        <label for="apple"
+                                        <label for="category{{ $item->id }}"
                                             class="form-check-label text-body-emphasis">{{$item->name}}</label>
                                     </div>
                                       @endforeach
-                                        
+
                                     </li>
                                 </ul>
                             </div>
@@ -184,12 +194,12 @@
                                   <li class="nav d-block pt-2 mt-1">
                                     @foreach ($sizes as $item)
                                     <div class="form-check">
-                                      <input type="checkbox" class="form-check-input" id="" name="size[]" value="{{$item->id}}"> 
+                                      <input type="checkbox" class="form-check-input" id="" name="size[]" value="{{$item->id}}">
                                       <label for="apple"
                                           class="form-check-label text-body-emphasis">{{$item->name}}</label>
                                     </div>
                                     @endforeach
-                                      
+
                                   </li>
                               </ul>
                           </div>
@@ -199,7 +209,7 @@
                               <h4 class="h6">Màu sắc</h4>
                               @foreach ($color as $item)
                                     <div class="form-check">
-                                      
+
                                       <button type="button"
                                       class="nav-link w-auto animate-underline fw-normal pt-2 pb-0 px-0 btn">
                                       <input  type="checkbox" class="form-check-input" id=""  style=" width: .875rem; height: .875rem; margin-top: .125rem;" name="color[]" value="{{$item->id}}">
@@ -208,10 +218,10 @@
                                           <label for="apple"
                                           class="form-check-label text-body-emphasis">{{$item->name}}</label>
                                   </button>
-                                      
+
                                     </div>
                                     @endforeach
-                                                     
+
                             </div>
 
                             <!-- Price range -->
@@ -356,9 +366,9 @@
 
                                 </div>
                             </div>
-                            
+
                         @endforeach
-                        
+
                     </div>
 
 
@@ -373,7 +383,7 @@
                                     <i class="ci-chevron-left mx-1"></i>
                                 </a>
                             </li>
-                            
+
                             <li class="page-item ms-auto">
                                 <a class="page-link d-flex align-items-center h-100 fs-lg px-2" href="#!"
                                     aria-label="Next page">

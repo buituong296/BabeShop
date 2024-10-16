@@ -173,54 +173,30 @@
             <h2 class="h3 pb-2 pb-sm-3">Hàng mới về</h2>
             <div class="row">
 
-                <!-- Banner -->
-                <div class="col-lg-4" data-bs-theme="dark">
-                    <div class="d-flex flex-column align-items-center justify-content-end h-100 text-center overflow-hidden rounded-5 px-4 px-lg-3 pt-4 pb-5"
-                        style="background: #1d2c41 url(assets/img/home/electronics/banner/backgroundbabel.png) center/cover no-repeat">
-                        <div class="ratio animate-up-down position-relative z-2 me-lg-4"
-                            style="max-width: 320px; margin-bottom: -19%; --cz-aspect-ratio: calc(690 / 640 * 100%)">
-                            <img src="assets/img/home/electronics/banner/productbabel.png" alt="Laptop">
-                        </div>
-                        <h3 class="display-6 mb-2 text-shadow">Bộ ghim kim loại</h3>
-                        <p class=" text text- fw-medium mb-4 text-shadow">Texas the Omertosa & Lunacub</p>
-                        <a class="btn btn-sm btn-secondary" href="{{ route('product') }}">
-                            Xem thêm
-                            <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <!-- Danh sách sản phẩm -->
-                <div class="col-sm-6 col-lg-4 d-flex flex-column gap-3 pt-4 py-lg-4">
+    <!-- New arrivals (List) -->
+    <section class="container pt-5 mt-1 mt-sm-2 mt-md-3 mt-lg-4">
 
-                    <!-- Mục sản phẩm -->
-                    @foreach ($products as $product)
-                        <div class="position-relative animate-underline d-flex align-items-center ps-xl-3">
-                            <div class="ratio ratio-1x1 flex-shrink-0" style="width: 110px">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="Đồng hồ thông minh"
-                                    href="{{ route('productdetail', $product->id) }}">
-                            </div>
-                            <div class="w-100 min-w-0 ps-2 ps-sm-3">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <div class="d-flex gap-1 fs-xs">
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                    </div>
-                                    <span class="text-body-tertiary fs-xs">45</span>
-                                </div>
-                                <h4 class="mb-2">
-                                    <a class="stretched-link d-block fs-sm fw-medium text-truncate"
-                                        href="{{ route('productdetail', $product->id) }}">
-                                        <span class="animate-target">{{ $product->name }}</span>
-                                    </a>
-                                </h4>
-                                <div class="h5 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
-                            </div>
-                        </div>
-                    @endforeach
+
+        <h2 class="h3 pb-2 pb-sm-3">Hàng mới về</h2>
+        <div class="row">
+
+          <!-- Banner -->
+          <div class="col-lg-4" data-bs-theme="dark">
+            <div class="d-flex flex-column align-items-center justify-content-end h-100 text-center overflow-hidden rounded-5 px-4 px-lg-3 pt-4 pb-5" style="background: #1d2c41 url(assets/img/home/electronics/banner/backgroundbabel.png) center/cover no-repeat">
+              <div class="ratio animate-up-down position-relative z-2 me-lg-4" style="max-width: 320px; margin-bottom: -19%; --cz-aspect-ratio: calc(690 / 640 * 100%)">
+                <img src="assets/img/home/electronics/banner/productbabel.png" alt="Laptop">
+              </div>
+              <h3 class="display-6 mb-2 text-shadow">Bộ ghim kim loại</h3>
+              <p class=" text fw-medium mb-4 text-shadow">Texas the Omertosa & Lunacub</p>
+              <a class="btn btn-sm btn-secondary" href="{{ route('product') }}" >
+                Xem thêm
+                <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
+              </a>
+
+            </div>
+          </div>
+
 
                 </div>
 

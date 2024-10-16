@@ -3,7 +3,7 @@
 @section('title', 'Products')
 
 @section('content_header')
-    <h1>Products</h1>
+    <h1 class="fw-bold">DANH SÁCH SẢN PHẨM</h1>
 @stop
 
 @section('content')
@@ -14,10 +14,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Actions</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +28,12 @@
                             <td>{{ number_format($product->price, 2) }} VND</td>
                             <td>{{ $product->quantity }}</td>
                             <td>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">Details</a>
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">Xem</a>
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Sửa</a>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</button>
                                 </form>
                             </td>
                         </tr>
