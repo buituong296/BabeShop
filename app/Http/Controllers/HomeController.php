@@ -34,8 +34,9 @@ class HomeController extends Controller
         $products_2 = Product::with('variants', 'category')
             ->latest('id')
             ->paginate(4, ['*'], 'page', $page);
-
-        return view('home', compact('products', 'products_2', 'page'));
+        
+        $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
+        return view('home', compact('products', 'products_2', 'page','products_3'));
     }
     public function product(Request $request)
 {
