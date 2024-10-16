@@ -467,7 +467,12 @@
                             <li class="d-flex align-items-center position-relative pe-4">
                                 <span>Kích thước:</span>
                                 <span class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                <span class="text-dark-emphasis fw-medium text-end">20cm</span>
+                                <span class="text-dark-emphasis fw-medium text-end">
+                                    @foreach ($sizes as $item)
+                                    {{ $item->width }} * {{ $item->height }}
+                                    @endforeach
+                                    cm
+                                </span>
                             </li>
                             <span>Mô tả:</span>
                             <li class="d-flex align-items-center position-relative pe-4">
