@@ -182,7 +182,7 @@
                             <img src="assets/img/home/electronics/banner/productbabel.png" alt="Laptop">
                         </div>
                         <h3 class="display-6 mb-2 text-shadow">Bộ ghim kim loại</h3>
-                        <p class=" text text- fw-medium mb-4 text-shadow">Texas the Omertosa & Lunacub</p>
+                        <p class=" text  fw-medium mb-4 text-shadow">Texas the Omertosa & Lunacub</p>
                         <a class="btn btn-sm btn-secondary" href="{{ route('product') }}">
                             Xem thêm
                             <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
