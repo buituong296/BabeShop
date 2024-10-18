@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'BabelShop',
+    'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Babel</b>Shop',
+    'logo' => '<b>Admin</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -294,128 +294,127 @@ return [
     */
 
     'menu' => [
-    // Navbar items:
-    [
-        'text' => 'Bảng điều khiển',
-        'url'  => 'admin/dashboard',
-        'icon' => 'fas fa-tachometer-alt',
-    ],
+        // Navbar items:
+        [
+            'text' => 'Dashboard',
+            'url'  => 'admin/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+        ],
 
-    ['header' => 'QUẢN LÝ'],
-    [
-        'text' => 'Danh mục',
-        'url'  => 'admin/categories',
-        'icon' => 'fas fa-list',
-    ],
-    [
-        'text' => 'Màu sắc',
-        'url'  => 'admin/colors',
-        'icon' => 'fas fa-paint-brush',
-    ],
-    [
-        'text' => 'Kích thước',
-        'url'  => 'admin/sizes',
-        'icon' => 'fas fa-ruler',
-    ],
-    [
-        'text' => 'Sản phẩm',
-        'url'  => 'admin/products',
-        'icon' => 'fas fa-ruler',
-    ],
-    [
-        'type' => 'navbar-search',
-        'text' => 'Tìm kiếm',
-        'topnav_right' => true,
-    ],
-    [
-        'type' => 'fullscreen-widget',
-        'topnav_right' => true,
-    ],
+        ['header' => 'MANAGE'],
+        [
+            'text' => 'Categories',
+            'url'  => 'admin/categories',
+            'icon' => 'fas fa-list',
+        ],
+        [
+            'text' => 'Colors',
+            'url'  => 'admin/colors',
+            'icon' => 'fas fa-paint-brush',
+        ],
+        [
+            'text' => 'Sizes',
+            'url'  => 'admin/sizes',
+            'icon' => 'fas fa-ruler',
+        ],
+        [
+            'text' => 'Products',
+            'url'  => 'admin/products',
+            'icon' => 'fas fa-ruler',
+        ],
+        [
+            'type' => 'navbar-search',
+            'text' => 'search',
+            'topnav_right' => true,
+        ],
+        [
+            'type' => 'fullscreen-widget',
+            'topnav_right' => true,
+        ],
 
-    // Sidebar items:
-    [
-        'type' => 'sidebar-menu-search',
-        'text' => 'Tìm kiếm',
-    ],
-    [
-        'text' => 'Blog',
-        'url' => 'admin/blog',
-        'can' => 'manage-blog',
-    ],
-    [
-        'text' => 'Trang',
-        'url' => 'admin/pages',
-        'icon' => 'far fa-fw fa-file',
-        'label' => 4,
-        'label_color' => 'success',
-    ],
-    ['header' => 'CÀI ĐẶT TÀI KHOẢN'],
-    [
-        'text' => 'Hồ sơ',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-user',
-    ],
-    [
-        'text' => 'Đổi mật khẩu',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-lock',
-    ],
-    [
-        'text' => 'Đa cấp',
-        'icon' => 'fas fa-fw fa-share',
-        'submenu' => [
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
-            ],
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
-                'submenu' => [
-                    [
-                        'text' => 'Cấp 2',
-                        'url' => '#',
-                    ],
-                    [
-                        'text' => 'Cấp 2',
-                        'url' => '#',
-                        'submenu' => [
-                            [
-                                'text' => 'Cấp 3',
-                                'url' => '#',
-                            ],
-                            [
-                                'text' => 'Cấp 3',
-                                'url' => '#',
+        // Sidebar items:
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',
+        ],
+        [
+            'text' => 'blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
+        ],
+        [
+            'text' => 'pages',
+            'url' => 'admin/pages',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'success',
+        ],
+        ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'change_password',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'multilevel',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                        ],
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
                             ],
                         ],
                     ],
                 ],
-            ],
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
             ],
         ],
+        ['header' => 'labels'],
+        [
+            'text' => 'important',
+            'icon_color' => 'red',
+            'url' => '#',
+        ],
+        [
+            'text' => 'warning',
+            'icon_color' => 'yellow',
+            'url' => '#',
+        ],
+        [
+            'text' => 'information',
+            'icon_color' => 'cyan',
+            'url' => '#',
+        ],
     ],
-    ['header' => 'Nhãn'],
-    [
-        'text' => 'Quan trọng',
-        'icon_color' => 'red',
-        'url' => '#',
-    ],
-    [
-        'text' => 'Cảnh báo',
-        'icon_color' => 'yellow',
-        'url' => '#',
-    ],
-    [
-        'text' => 'Thông tin',
-        'icon_color' => 'cyan',
-        'url' => '#',
-    ],
-],
-
 
     /*
     |--------------------------------------------------------------------------

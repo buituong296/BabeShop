@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>SỬA DANH MỤC</h1>
+    <h1>Edit Category</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -17,9 +17,9 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="name">Tên danh mục</label>
+            <label for="name">Category Name</label>
             <input type="text" name="name" class="form-control" value="{{ $category->name }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Cập nhật danh mục</button>
+        <button type="submit" class="btn btn-primary">Update Category</button>
     </form>
 @endsection

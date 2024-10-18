@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>THÊM KÍCH THƯỚC</h1>
+    <h1>Add Size</h1>
     <form action="{{ route('sizes.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="name">Tên kích thước</label>
+            <label for="name">Size Name</label>
             <input type="text" name="name" class="form-control" required>
         </div>
         <div class="form-group">
