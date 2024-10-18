@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>DANH SÁCH KÍCH THƯỚC</h1>
-    <a href="{{ route('sizes.create') }}" class="btn btn-primary">Thêm mới</a>
+    <h1>Sizes</h1>
+    <a href="{{ route('sizes.create') }}" class="btn btn-primary">Add Size</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -21,11 +21,11 @@
                     <td>{{ $size->width }}</td>
                     <td>{{ $size->height }}</td>
                     <td>
-                        <a href="{{ route('sizes.edit', $size->id) }}" class="btn btn-warning">Sửa</a>
+                        <a href="{{ route('sizes.edit', $size->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('sizes.destroy', $size->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -263,6 +263,7 @@
 
 
         <!-- Trending products (Grid) -->
+
         <section class="container pt-5 mt-2 mt-sm-3 mt-lg-4">
 
             <!-- Tiêu đề -->
@@ -393,6 +394,9 @@
 
             </div>
         </section>
+
+        @include('user.partials.trending_product')
+        
 
 
 
