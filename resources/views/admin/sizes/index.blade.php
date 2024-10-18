@@ -7,8 +7,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Tên kích thước</th>
+                <th>Chiều dài</th>
+                <th>Chiều rộng</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +18,8 @@
                 <tr>
                     <td>{{ $size->id }}</td>
                     <td>{{ $size->name }}</td>
+                    <td>{{ $size->width }}</td>
+                    <td>{{ $size->height }}</td>
                     <td>
                         <a href="{{ route('sizes.edit', $size->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('sizes.destroy', $size->id) }}" method="POST" style="display:inline-block;">

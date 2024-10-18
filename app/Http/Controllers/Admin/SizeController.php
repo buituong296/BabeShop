@@ -23,6 +23,8 @@ class SizeController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2',
+            'width' => 'required|min:1',
+            'height' => 'required|min:1',
         ]);
 
         Size::create($request->all());
@@ -40,6 +42,8 @@ class SizeController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2',
+            'width' => 'required|min:1',
+            'height' => 'required|min:1',
         ]);
 
         $size->update($request->all());

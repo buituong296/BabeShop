@@ -187,9 +187,11 @@
                                 </div>
 
 
-                                {{-- <div class="swiper-slide">
+                                @foreach ($productAlbum as $item)
+                                    
+                                <div class="swiper-slide">
                                     <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/02.png"
+                                        <img src="{{ asset('storage/albums/'.$item->image) }}" alt=""
                                             data-zoom="assets/img/shop/electronics/product/gallery/02.png"
                                             data-zoom-options="{
                                   &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
@@ -200,71 +202,9 @@
                                             alt="Preview">
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/03.png"
-                                            data-zoom="assets/img/shop/electronics/product/gallery/03.png"
-                                            data-zoom-options="{
-                                  &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
-                                  &quot;inlinePane&quot;: 768,
-                                  &quot;hoverDelay&quot;: 500,
-                                  &quot;touchDisable&quot;: true
-                                }"
-                                            alt="Preview">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/04.png"
-                                            data-zoom="assets/img/shop/electronics/product/gallery/04.png"
-                                            data-zoom-options="{
-                                  &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
-                                  &quot;inlinePane&quot;: 768,
-                                  &quot;hoverDelay&quot;: 500,
-                                  &quot;touchDisable&quot;: true
-                                }"
-                                            alt="Preview">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/05.png"
-                                            data-zoom="assets/img/shop/electronics/product/gallery/05.png"
-                                            data-zoom-options="{
-                                  &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
-                                  &quot;inlinePane&quot;: 768,
-                                  &quot;hoverDelay&quot;: 500,
-                                  &quot;touchDisable&quot;: true
-                                }"
-                                            alt="Preview">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/06.png"
-                                            data-zoom="assets/img/shop/electronics/product/gallery/06.png"
-                                            data-zoom-options="{
-                                  &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
-                                  &quot;inlinePane&quot;: 768,
-                                  &quot;hoverDelay&quot;: 500,
-                                  &quot;touchDisable&quot;: true
-                                }"
-                                            alt="Preview">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="ratio ratio-1x1">
-                                        <img src="assets/img/shop/electronics/product/gallery/07.png"
-                                            data-zoom="assets/img/shop/electronics/product/gallery/07.png"
-                                            data-zoom-options="{
-                                  &quot;paneSelector&quot;: &quot;#zoomPane&quot;,
-                                  &quot;inlinePane&quot;: 768,
-                                  &quot;hoverDelay&quot;: 500,
-                                  &quot;touchDisable&quot;: true
-                                }"
-                                            alt="Preview">
-                                    </div>
-                                </div> --}}
+                                @endforeach
+                                
+
                             </div>
 
                             <!-- Prev button -->
@@ -287,7 +227,7 @@
                         </div>
 
                         <!-- Thumbnails -->
-                        {{-- <div class="swiper swiper-load swiper-thumbs pt-2 mt-1" id="thumbs"
+                        <div class="swiper swiper-load swiper-thumbs pt-2 mt-1" id="thumbs"
                             data-swiper="{
                           &quot;loop&quot;: true,
                           &quot;spaceBetween&quot;: 12,
@@ -317,48 +257,23 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide swiper-thumb">
                                     <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th01.png"
+                                        <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}"
                                             class="swiper-thumb-img" alt="Thumbnail">
                                     </div>
                                 </div>
+                                @foreach ($productAlbum as $item)
                                 <div class="swiper-slide swiper-thumb">
                                     <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th02.png"
+                                        <img src="{{ asset('storage/albums/'.$item->image) }}"
                                             class="swiper-thumb-img" alt="Thumbnail">
                                     </div>
                                 </div>
-                                <div class="swiper-slide swiper-thumb">
-                                    <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th03.png"
-                                            class="swiper-thumb-img" alt="Thumbnail">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-thumb">
-                                    <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th04.png"
-                                            class="swiper-thumb-img" alt="Thumbnail">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-thumb">
-                                    <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th05.png"
-                                            class="swiper-thumb-img" alt="Thumbnail">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-thumb">
-                                    <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th06.png"
-                                            class="swiper-thumb-img" alt="Thumbnail">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-thumb">
-                                    <div class="ratio ratio-1x1" style="max-width: 94px">
-                                        <img src="assets/img/shop/electronics/product/gallery/th07.png"
-                                            class="swiper-thumb-img" alt="Thumbnail">
-                                    </div>
-                                </div>
+                                @endforeach
+
+   
+
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
 
 
@@ -552,11 +467,16 @@
                             <li class="d-flex align-items-center position-relative pe-4">
                                 <span>Kích thước:</span>
                                 <span class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                <span class="text-dark-emphasis fw-medium text-end">20cm</span>
+                                <span class="text-dark-emphasis fw-medium text-end">
+                                    @foreach ($sizes as $item)
+                                    {{ $item->width }} * {{ $item->height }}
+                                    @endforeach
+                                    cm
+                                </span>
                             </li>
                             <span>Mô tả:</span>
                             <li class="d-flex align-items-center position-relative pe-4">
-                                <span>{{ $product->description }}</span>
+                                <span>{!! $product->description !!}</span>
                             </li>
                         </ul>
 

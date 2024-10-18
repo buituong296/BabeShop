@@ -75,11 +75,22 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col">
-                            <label for="size_id" class="form-label">Kích Thước</label>
-                            <select name="variants[{{ $index }}][size_id]" class="form-control" required>
-                                @foreach($sizes as $size)
-                                    <option value="{{ $size->id }}" {{ $size->id == $variant->size_id ? 'selected' : '' }}>{{ $size->name }}</option>
+                        <div class="form-group ">
+                            <label for="image" class="form-label">Hình Ảnh</label>
+                            <input type="file" name="image" class="form-control pt-4" id="image" style="height: 90px">
+                            @if ($product->image)
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" class="img-thumbnail" style="width: 30%; height: auto;">
+                            @endif
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <label for="album">Album ảnh hiện tại:</label>
+                            <div class="row">
+                                @foreach($product->album as $image)
+                                    <div class="col-3 mb-3 d-flex justify-content-center">
+                                        <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="rounded-3 img-thumbnail" style="width: 100%;">
+                                    </div>
                                 @endforeach
                             </select>
                         </div>

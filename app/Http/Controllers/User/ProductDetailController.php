@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductAlbum;
 use App\Models\Size;
 use App\Models\Variant;
 use Illuminate\Http\Request;
@@ -20,13 +21,15 @@ class ProductDetailController extends Controller
         $sizes = Variant::join('sizes', 'sizes.id', '=', 'variants.size_id')->where('product_id', $id)->select('sizes.*')->distinct('sizes.id')->get();
         $productCategory = Product::where('category_id', $category->id)->where('id', '!=', $id)->get();
         $productNewest = Product::where('id', '!=', $id)->latest('id')->paginate(6);
+        $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
         return view('user.product_detail')->with([
             'product'   => $product,
             'category' => $category,
             'colors' => $colors,
             'sizes' => $sizes,
             'productCategory' => $productCategory,
-            'productNewest' => $productNewest
+            'productNewest' => $productNewest,
+            'productAlbum' => $productAlbum
         ]);
     }
 }
