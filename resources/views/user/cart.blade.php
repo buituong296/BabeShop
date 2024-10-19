@@ -123,7 +123,7 @@
                   <span class="fs-sm">Tổng thanh toán dự kiến:</span>
                   <span class="h5 mb-0">$2,390.40</span>
                 </div>
-                <a class="btn btn-lg btn-primary w-100" href="checkout-v1-delivery-1.html">
+                <a class="btn btn-lg btn-primary w-100" href=" {{route('checkout')}}">
                   Đi tới thanh toán
                   <i class="ci-chevron-right fs-lg ms-1 me-n1"></i>
                 </a>

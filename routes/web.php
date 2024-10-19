@@ -48,3 +48,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //
 Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
+
+Route::get('/checkout', [App\Http\Controllers\User\CheckOutController::class, 'checkout'])->name('checkout');
+Route::get('/checkout_payment', [App\Http\Controllers\User\CheckOutController::class, 'checkout_payment'])->name('checkout_payment');
+Route::get('/checkout_done', [App\Http\Controllers\User\CheckOutController::class, 'checkout_done'])->name('checkout_done');

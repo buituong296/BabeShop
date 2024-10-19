@@ -108,10 +108,7 @@
     </div>
     <div class="d-flex w-100 gap-3">
       <a class="btn btn-lg btn-secondary w-100" href="{{route('cart')}}">Xem giỏ hàng</a>
-      <a class="btn btn-lg btn-primary w-100" href="
-      {{-- {{route('payment')}} --}}
-      
-      ">Thanh toán</a>
+      <a class="btn btn-lg btn-primary w-100" href=" {{route('checkout')}}">Thanh toán</a>
     </div>
   </div>
 </div>
