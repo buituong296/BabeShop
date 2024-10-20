@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $products = Product::with('variants', 'category')->latest('id')->paginate(4);
         $page = 2;
         $products_2 = Product::with('variants', 'category')
@@ -36,7 +37,7 @@ class HomeController extends Controller
             ->paginate(4, ['*'], 'page', $page);
 
         $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
-        return view('home', compact('products', 'products_2', 'page','products_3'));
+        return view('home', compact( 'categories', 'products', 'products_2', 'page','products_3'));
     }
     public function product(Request $request)
     {
@@ -68,7 +69,7 @@ class HomeController extends Controller
             $products->whereBetween('price', [$request->min, $request->max]);
         }
 
-        $total=$products->count();  
+        $total=$products->count();
         $products = $products->paginate(9);
 
 
