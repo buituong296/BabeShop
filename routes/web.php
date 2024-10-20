@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VariantController;
+use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,6 +50,32 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //
 Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
 
+
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+// Route cập nhật số lượng sản phẩm trong gi�� hàng
+Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+// Route xóa sản phẩm khỏi giỏ hàng
+Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
 Route::get('/checkout', [App\Http\Controllers\User\CheckOutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout_payment', [App\Http\Controllers\User\CheckOutController::class, 'checkout_payment'])->name('checkout_payment');
 Route::get('/checkout_done', [App\Http\Controllers\User\CheckOutController::class, 'checkout_done'])->name('checkout_done');
+// routes/web.php
+Route::post('/checkout', [App\Http\Controllers\User\CheckOutController::class, 'processCheckout'])->name('checkout.process');
+// routes/web.php
+Route::get('/checkout/customer-info', [App\Http\Controllers\User\CheckOutController::class, 'showCustomerInfoForm'])->name('checkout.customer-info');
+Route::post('/checkout/customer-info', [App\Http\Controllers\User\CheckOutController::class, 'storeCustomerInfo'])->name('checkout.customer-info.store');
+// routes/web.php
+Route::get('/checkout/payment-method', [App\Http\Controllers\User\CheckOutController::class, 'showPaymentMethodForm'])->name('checkout.payment-method');
+Route::post('/checkout/payment-method', [App\Http\Controllers\User\CheckOutController::class, 'storePaymentMethod'])->name('checkout.payment-method.store');
+// routes/web.php
+Route::get('/checkout/bill-summary', [App\Http\Controllers\User\CheckOutController::class, 'showBillSummary'])->name('checkout.bill-summary');
+// routes/web.php
+Route::post('/checkout/save', [App\Http\Controllers\User\CheckOutController::class, 'storeBill'])->name('checkout.save');
+
+
+
+
+

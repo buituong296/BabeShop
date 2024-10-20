@@ -47,36 +47,6 @@
                 <label for="album">Album ảnh:</label>
                 <input type="file" name="album[]" multiple>
             </div>
-
-            <h3>Biến Thể Sản Phẩm</h3>
-            <div id="variant-container">
-                <div class="variant-row mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="color_id" class="form-label">Màu Sắc</label>
-                            <select name="variants[0][color_id]" class="form-control" required>
-                                @foreach ($colors as $color)
-                                    <option value="{{ $color->id }}">{{ $color->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                    </div>
-
-
-
-
-
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Hình Ảnh</label>
-                        <input type="file" name="image" class="form-control" id="image" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Mô Tả</label>
-                        <textarea name="description" class="form-control" id="description"></textarea>
-                    </div>
-
                     <h3>Biến Thể Sản Phẩm</h3>
                     <div id="variant-container">
                         <div class="variant-row mb-3">
