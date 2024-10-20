@@ -19,7 +19,7 @@
                 <h4 class="text-danger">{{ number_format($product->price, 0, ',', '.') }} VND</h4>
                 <p>{{ $product->description }}</p>
 
-                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                <form action="{{ route('cart.add') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="quantity">Số lượng</label>

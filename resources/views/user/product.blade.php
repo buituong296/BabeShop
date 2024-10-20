@@ -236,7 +236,7 @@
                             <!-- Color -->
                             <div class="w-100 border rounded p-3 p-xl-4">
                               <h4 class="h6">Màu sắc</h4>
-                              @foreach ($color as $item)
+                              @foreach ($colors as $item)
                                     <div class="form-check">
 
                                       <button type="button"
@@ -496,7 +496,7 @@
 
                         {{ $products->links() }}
 
-                    {{ $products->links() }}
+
 
 
                 </div>
