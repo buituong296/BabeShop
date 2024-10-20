@@ -42,7 +42,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+
 Route::get('/product-detail/{id}', [App\Http\Controllers\User\ProductDetailController::class, 'productdetail'])->name('productdetail');
+Route::get('/get-variant-quantity', [App\Http\Controllers\User\ProductDetailController::class, 'getVariantQuantity']);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -46,6 +46,9 @@
         }
 
     </style>
+
+        @stack('style')
+
 </head>
 <body>
 
@@ -75,5 +78,6 @@
     <script src="{{ asset('assets/vendor/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/choices.js/choices.min.js') }}"></script>
 
+    @stack('script')
 </body>
 </html>
