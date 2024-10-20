@@ -45,6 +45,9 @@ class HomeController extends Controller
         $categories = Category::all();
         $sizes = Size::all();
         $color = Color::all();
+        $colors = Color::all();
+
+
         
 
 
@@ -70,10 +73,19 @@ class HomeController extends Controller
             $products->whereBetween('price', [$request->min, $request->max]);
         }
 
+
         $products = $products->paginate(9);
 
 
         return view('user.product', compact('products', 'categories', 'sizes', 'color'));
+
+        $total = $products->count();
+        $products = $products->paginate(9);
+        
+        
+    
+        return view('user.product', compact('products', 'categories', 'sizes', 'colors','total'));
+
     }
 
 }
