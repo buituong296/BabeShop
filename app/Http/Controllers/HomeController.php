@@ -44,12 +44,7 @@ class HomeController extends Controller
         $products = Product::query();
         $categories = Category::all();
         $sizes = Size::all();
-        $color = Color::all();
         $colors = Color::all();
-
-
-        
-
 
         if ($request->has('category')) {
             $products->whereHas('category', function ($query) use ($request) {
@@ -73,19 +68,11 @@ class HomeController extends Controller
             $products->whereBetween('price', [$request->min, $request->max]);
         }
 
-
+        $total=$products->count();  
         $products = $products->paginate(9);
 
 
-        return view('user.product', compact('products', 'categories', 'sizes', 'color'));
-
-        $total = $products->count();
-        $products = $products->paginate(9);
-        
-        
-    
-        return view('user.product', compact('products', 'categories', 'sizes', 'colors','total'));
-
+        return view('user.product', compact('products', 'categories', 'sizes', 'colors', 'total'));
     }
 
 }
