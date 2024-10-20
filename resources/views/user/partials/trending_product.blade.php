@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center justify-content-between border-bottom pb-3 pb-md-4">
         <h2 class="h3 mb-0">Sản phẩm thịnh hành</h2>
         <div class="nav ms-3">
-            <a class="nav-link animate-underline px-0 py-2" href="shop-catalog-electronics.html">
+            <a class="nav-link animate-underline px-0 py-2" href="{{route('product')}}">
                 <span class="animate-target">Xem tất cả</span>
                 <i class="ci-chevron-right fs-base ms-1"></i>
             </a>

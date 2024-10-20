@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div class="nav ms-3">
-                    <a class="nav-link animate-underline px-0 py-2" href="shop-catalog-electronics.html">
+                    <a class="nav-link animate-underline px-0 py-2" href="{{route('product')}}">
                         <span class="animate-target text-nowrap">Xem tất cả</span>
                         <i class="ci-chevron-right fs-base ms-1"></i>
                     </a>
@@ -464,7 +464,7 @@
         {{-- <section class="container pt-4 pt-md-5 pb-5 mt-sm-2 mb-2 mb-sm-3 mb-md-4 mb-lg-5">
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 g-md-4 g-lg-3 g-xl-4">
                 <div class="col">
-                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="shop-catalog-electronics.html">
+                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="{{route('product')}}">
                         <img src="assets/img/shop/electronics/brands/apple-light-mode.svg" class="d-none-dark"
                             alt="Apple">
                         <img src="assets/img/shop/electronics/brands/apple-dark-mode.svg" class="d-none d-block-dark"
@@ -472,7 +472,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="shop-catalog-electronics.html">
+                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="{{route('product')}}">
                         <img src="assets/img/shop/electronics/brands/motorola-light-mode.svg" class="d-none-dark"
                             alt="Motorola">
                         <img src="assets/img/shop/electronics/brands/motorola-dark-mode.svg" class="d-none d-block-dark"
@@ -480,7 +480,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="shop-catalog-electronics.html">
+                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="{{route('product')}}">
                         <img src="assets/img/shop/electronics/brands/canon-light-mode.svg" class="d-none-dark"
                             alt="Canon">
                         <img src="assets/img/shop/electronics/brands/canon-dark-mode.svg" class="d-none d-block-dark"
@@ -488,7 +488,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="shop-catalog-electronics.html">
+                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="{{route('product')}}">
                         <img src="assets/img/shop/electronics/brands/samsung-light-mode.svg" class="d-none-dark"
                             alt="Samsung">
                         <img src="assets/img/shop/electronics/brands/samsung-dark-mode.svg" class="d-none d-block-dark"
@@ -496,7 +496,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="shop-catalog-electronics.html">
+                    <a class="btn btn-outline-secondary w-100 rounded-4 p-3" href="{{route('product')}}">
                         <img src="assets/img/shop/electronics/brands/sony-light-mode.svg" class="d-none-dark"
                             alt="Sony">
                         <img src="assets/img/shop/electronics/brands/sony-dark-mode.svg" class="d-none d-block-dark"

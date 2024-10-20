@@ -62,7 +62,7 @@
                                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark rtl-flip"
                                     style="background: linear-gradient(90deg, #362131 0%, #322730 100%)"></span>
                                 <div class="position-relative z-1 text-center pt-3 mx-4">
-                                    
+
                                     <p class="fs-sm text-light-emphasis mb-1">Phiên bản giới hạn</p>
                                     <h2 class="h3 mb-4">Plushie Ceobe</h2>
                                 </div>
@@ -87,29 +87,57 @@
                 <div class="col-lg-9">
                     <div class="d-md-flex align-items-start">
                         <div class="h6 fs-sm fw-normal text-nowrap translate-middle-y mt-3 mb-0 me-4">
-                            Tìm thấy <span class="fw-semibold">732</span> sản phẩm
+                            Tìm thấy <span class="fw-semibold">{{ $total }}</span> sản phẩm
                         </div>
                         <div class="d-flex flex-wrap gap-2">
-                            <button type="button" class="btn btn-sm btn-secondary">
-                                <i class="ci-close fs-sm ms-n1 me-1"></i>
-                                Giảm giá
-                            </button>
-                            <button type="button" class="btn btn-sm btn-secondary">
-                                <i class="ci-close fs-sm ms-n1 me-1"></i>
-                                Asus
-                            </button>
-                            <button type="button" class="btn btn-sm btn-secondary">
-                                <i class="ci-close fs-sm ms-n1 me-1"></i>
-                                1 TB
-                            </button>
-                            <button type="button" class="btn btn-sm btn-secondary">
-                                <i class="ci-close fs-sm ms-n1 me-1"></i>
-                                $340 - $1,250
-                            </button>
-                            <button type="button"
-                                class="btn btn-sm btn-secondary bg-transparent border-0 text-decoration-underline px-0 ms-2">
-                                Xóa tất cả
-                            </button>
+                            @if (request('category'))
+                                <button type="button" class="btn btn-sm btn-secondary">
+                                    @foreach (request('category') as $category)
+                                        <span class="tag">
+                                            {{ $categories->firstWhere('id', $category)->name }}
+                                            &nbsp;
+                                            <a  href="{{ route('product', array_merge(request()->except('category'), ['category' => array_diff(request('category'), [$category])])) }}"
+                                                style="color: white;">
+                                                <i class="ci-close fs-sm ms-n1 me-1"></i>
+                                            </a>
+                                        </span>
+                                    @endforeach
+                                </button>
+                            @endif
+                            @if (request('size'))
+                                <button type="button" class="btn btn-sm btn-secondary">
+                                    @foreach (request('size') as $size)
+                                        <span class="tag">
+                                            {{ $sizes->firstWhere('id', $size)->name }}
+                                            &nbsp;
+                                            <a  href="{{ route('product', array_merge(request()->except('size'), ['size' => array_diff(request('size'), [$size])])) }}"
+                                                style="color: white; ">
+                                                <i class="ci-close fs-sm ms-n1 me-1"></i>
+                                            </a>
+                                        </span>
+                                    @endforeach
+                                </button>
+                            @endif
+                            @if (request('color'))
+                                <button type="button" class="btn btn-sm btn-secondary">
+                                    @foreach (request('color') as $color)
+                                        <span class="tag">
+                                            {{ $colors->firstWhere('id', $color)->name }}
+                                            &nbsp;
+                                            <a  href="{{ route('product', array_merge(request()->except('color'), ['color' => array_diff(request('color'), [$color])])) }}"
+                                                style="color: white;">
+                                                <i class="ci-close fs-sm ms-n1 me-1"></i>
+                                            </a>
+                                        </span>
+                                    @endforeach
+                                </button>
+                            @endif
+
+                            <a href="{{ route('product') }}" class="clear-all"><button type="button"
+                                    class="btn btn-sm btn-secondary bg-transparent border-0 text-decoration-underline px-0 ms-2">
+                                    Xóa tất cả
+                                </button></a>
+
                         </div>
                     </div>
                 </div>
@@ -157,90 +185,95 @@
                         <form action="{{ route('product') }}" method="GET">
                             <div class="offcanvas-body flex-column pt-2 py-lg-0">
 
-                            <!-- Status -->
-    
-                            <!-- Categories -->
-                            <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
-                                <h4 class="h6 mb-2">Danh mục</h4>
-                                <ul class="list-unstyled d-block m-0">
-                                    <li class="nav d-block pt-2 mt-1">
-                                      @foreach ($categories as $item)
-                                      <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="category{{$item->id}}" name="category[]" value="{{$item->id}}">
-                                        <label for="apple"
-                                            class="form-check-label text-body-emphasis">{{$item->name}}</label>
-                                    </div>
-                                      @endforeach
-                                        
-                                    </li>
-                                </ul>
-                            </div>
+                                <!-- Status -->
 
+                                <!-- Categories -->
+                                <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
+                                    <h4 class="h6 mb-2">Danh mục</h4>
+                                    <ul class="list-unstyled d-block m-0">
+                                        <li class="nav d-block pt-2 mt-1">
+                                            @foreach ($categories as $item)
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="category{{ $item->id }}" name="category[]"
+                                                        value="{{ $item->id }}"
+                                                        {{ is_array(request('category')) && in_array($item->id, request('category')) ? 'checked' : '' }}>
+                                                    <label for="apple"
+                                                        class="form-check-label text-body-emphasis">{{ $item->name }}</label>
+                                                </div>
+                                            @endforeach
 
-                            <!-- Sizes (checkboxes) -->
-                            <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
-                              <h4 class="h6 mb-2">Kích cỡ</h4>
-                              <ul class="list-unstyled d-block m-0">
-                                  <li class="nav d-block pt-2 mt-1">
-                                    @foreach ($sizes as $item)
-                                    <div class="form-check">
-                                      <input type="checkbox" class="form-check-input" id="" name="size[]" value="{{$item->id}}"> 
-                                      <label for="apple"
-                                          class="form-check-label text-body-emphasis">{{$item->name}}</label>
-                                    </div>
-                                    @endforeach
-                                      
-                                  </li>
-                              </ul>
-                          </div>
-
-                            <!-- Color -->
-                            <div class="w-100 border rounded p-3 p-xl-4">
-                              <h4 class="h6">Màu sắc</h4>
-                              @foreach ($color as $item)
-                                    <div class="form-check">
-                                      
-                                      <button type="button"
-                                      class="nav-link w-auto animate-underline fw-normal pt-2 pb-0 px-0 btn">
-                                      <input  type="checkbox" class="form-check-input" id=""  style=" width: .875rem; height: .875rem; margin-top: .125rem;" name="color[]" value="{{$item->id}}">
-                                      <span class="rounded-circle me-2 ms-2 border border-black"
-                                          style=" width: .875rem; height: .875rem; margin-top: .125rem; background-color: {{$item->value}}"></span>
-                                          <label for="apple"
-                                          class="form-check-label text-body-emphasis">{{$item->name}}</label>
-                                  </button>
-                                      
-                                    </div>
-                                    @endforeach
-                                                     
-                            </div>
-
-                            <!-- Price range -->
-                            <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4 mt-5">
-                                <h4 class="h6 mb-2" id="slider-label">Giá</h4>
-                                <div class="range-slider"
-                                    data-range-slider="{&quot;startMin&quot;: 340, &quot;startMax&quot;: 1250, &quot;min&quot;: 0, &quot;max&quot;: 1600, &quot;step&quot;: 1, &quot;tooltipPrefix&quot;: &quot;$&quot;}"
-                                    aria-labelledby="slider-label">
-                                    <div class="range-slider-ui"></div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="position-relative w-50">
-
-                                            <input type="tax" class="form-control form-icon-start" min="0"
-                                                data-range-slider-min="" name="min" value="1000">
-                                            <i
-                                                class="ci-dollar-sign position-absolute top-50 end-0 translate-middle-y ms-3"></i>
-                                        </div>
-                                        <i class="ci-minus text-body-emphasis mx-2"></i>
-                                        <div class="position-relative w-50">
-                                            <i
-                                                class="ci-dollar-sign position-absolute top-50 end-0 translate-middle-y ms-3"></i>
-                                            <input type="tax" class="form-control" min="0"
-                                                data-range-slider-max=""  name="max"  value="10000000">
-                                        </div>
-
-                                    </div>
-                                    <button class="btn btn-danger mt-3" style="width: 255px">Tìm kiếm</button>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
+
+
+                                <!-- Sizes (checkboxes) -->
+                                <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
+                                    <h4 class="h6 mb-2">Kích cỡ</h4>
+                                    <ul class="list-unstyled d-block m-0">
+                                        <li class="nav d-block pt-2 mt-1">
+                                            @foreach ($sizes as $item)
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id=""
+                                                        name="size[]" value="{{ $item->id }}"
+                                                        {{ is_array(request('size')) && in_array($item->id, request('size')) ? 'checked' : '' }}>
+                                                    <label for="apple"
+                                                        class="form-check-label text-body-emphasis">{{ $item->name }}</label>
+                                                </div>
+                                            @endforeach
+
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Color -->
+                                <div class="w-100 border rounded p-3 p-xl-4">
+                                    <h4 class="h6">Màu sắc</h4>
+                                    @foreach ($colors as $item)
+                                        <div class="form-check">
+
+                                            <button type="button"
+                                                class="nav-link w-auto animate-underline fw-normal pt-2 pb-0 px-0 btn">
+                                                <input
+                                                    {{ is_array(request('color')) && in_array($item->id, request('color')) ? 'checked' : '' }}
+                                                    type="checkbox" class="form-check-input" id=""
+                                                    style=" width: .875rem; height: .875rem; margin-top: .125rem;"
+                                                    name="color[]" value="{{ $item->id }}">
+                                                <span class="rounded-circle me-2 ms-2 border border-black"
+                                                    style=" width: .875rem; height: .875rem; margin-top: .125rem; background-color: {{ $item->value }}"></span>
+                                                <label for="apple"
+                                                    class="form-check-label text-body-emphasis">{{ $item->name }}</label>
+                                            </button>
+
+                                        </div>
+                                    @endforeach
+
+                                </div>
+
+                                <!-- Price range -->
+                                <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4 mt-5">
+                                    <h4 class="h6 mb-2" id="slider-label">Giá</h4>
+                                    <div class="range-slider"
+                                        data-range-slider="{&quot;startMin&quot;: 340, &quot;startMax&quot;: 1250, &quot;min&quot;: 0, &quot;max&quot;: 1600, &quot;step&quot;: 1, &quot;tooltipPrefix&quot;: &quot;$&quot;}"
+                                        aria-labelledby="slider-label">
+                                        <div class="range-slider-ui"></div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="position-relative w-50">
+
+                                                <input type="text" class="form-control form-icon-start" min="0"
+                                                    name="min" value="{{ request('min', 1000) }}">
+                                            </div>
+                                            <i class="ci-minus text-body-emphasis mx-2"></i>
+                                            <div class="position-relative w-50">
+
+                                                <input type="text" class="form-control form-start" min="0"
+                                                    name="max" value="{{ request('max', 10000000) }}">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-danger mt-3" style="width: 255px">Tìm kiếm</button>
+                                    </div>
+                                </div>
 
                             </div>
                         </form>
@@ -356,9 +389,8 @@
 
                                 </div>
                             </div>
-                            
                         @endforeach
-                        
+
                     </div>
 
 
@@ -382,9 +414,9 @@
                             </li>
                         </ul>
                     </nav> --}}
-                
-                        {{ $products->links() }}
-                    
+
+                    {{ $products->links() }}
+
                 </div>
             </div>
 
