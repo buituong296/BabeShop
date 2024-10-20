@@ -141,7 +141,7 @@
     --cz-warning-rgb: 252, 146, 49;
     --cz-danger-rgb: 240, 61, 61;
     --cz-light-rgb: 255, 255, 255;
-    --cz-dark-rgb: 34, 41, 52;
+    --cz-dark-rgb: 255, 192, 203;
     --cz-primary-text-emphasis: #f2223b;
     --cz-secondary-text-emphasis: #333d4c;
     --cz-success-text-emphasis: #288b53;
@@ -18430,5 +18430,115 @@ span.flatpickr-weekday {
 .drift-inline {
     z-index: 10;
 }
+
+
+
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important; /* Darker color for better contrast */
+}
+.navbar-dark .navbar-brand {
+    color: #ffffff !important; /* Darker color for the brand name */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important; /* Subtle shadow */
+}
+.navbar-dark .navbar-brand {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important; /* Subtle shadow for brand */
+}
+
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand {
+    font-weight: bold !important; /* Make text bold */
+}
+
+
+.navbar-dark,
+.footer {
+    background-color: rgb(210 129 129) !important;  /* Slightly darker background with opacity */
+}
+
+
+/* Footer General Styling */
+.footer {
+    color: #ffffff; /* White text for contrast */
+}
+
+.footer .accordion-header button {
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.footer .accordion-header span {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.footer .accordion-button:not(.collapsed) {
+    background-color: rgba(225, 124, 100, 0.8); /* Lighter background when expanded */
+    color: #ffffff;
+}
+
+.footer a.nav-link {
+    color: #ffffff; /* White text for links */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for links */
+}
+
+.footer a.nav-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Adjust dropdown buttons */
+.footer .dropdown .btn-light,
+.footer .dropdown .btn-secondary {
+    font-weight: bold;
+    background-color: #ffffff; /* Light background for contrast */
+    border: none;
+}
+
+.footer .dropdown .btn-secondary {
+    background-color: #333d4c; /* Slightly darker background */
+
+}
+
+/* Payment icons */
+.footer img {
+    max-height: 32px; /* Restrict height of payment icons */
+    /* filter: invert(100%); Invert colors for dark mode */
+}
+
+/* Copyright section */
+.footer p.text-body {
+    color: #eaeaea !important; /* White text for copyright section */
+}
+
+.footer p.text-body a {
+    color: #e57c64; /* Lighter color for links */
+}
+
+.footer p.text-body a:hover {
+    color: #ffffff; /* White on hover */
+    text-decoration: underline;
+}
+
+
+
+
+body{
+    background-color: rgb(255 235 214 / 20%);
+}
+
+
+
+
+
+
+
+
+
 
 /*# sourceMappingURL=theme.min.css.map */
