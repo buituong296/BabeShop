@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductAlbum::class);
     }
+    public function variant()
+{
+    return $this->hasOne(Variant::class);
+}
+
 }

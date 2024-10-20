@@ -5,6 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Bill;
+use App\Models\BillHistory;
+use App\Models\BillItem;
 
 class CheckOutController extends Controller
 {
@@ -23,4 +28,117 @@ class CheckOutController extends Controller
         $products = Product::inRandomOrder()->paginate(2);
         return view('user.checkout.checkout_done', compact('products'));
     }
+    // app/Http/Controllers/CheckoutController.php
+
+public function showCustomerInfoForm()
+{
+    return view('user.checkout.checkout');
+}
+
+public function storeCustomerInfo(Request $request)
+{
+    // Validate request
+    $validatedData = $request->validate([
+        'user_name' => 'required|string|max:255',
+        'user_address' => 'required|string|max:255',
+        'user_tel' => 'required|string|max:20',
+    ]);
+
+    // Store customer information in session
+    session([
+        'checkout.customer_info' => $validatedData
+    ]);
+
+    // Redirect to payment method selection
+    return redirect()->route('checkout.payment-method');
+}
+public function showPaymentMethodForm()
+{
+    return view('user.checkout.checkout_payment');
+}
+
+public function storePaymentMethod(Request $request)
+{
+    // Validate payment method
+    $validatedData = $request->validate([
+        'method_id' => 'required|exists:bank_methods,id',
+    ]);
+
+    // Store payment method in session
+    session([
+        'checkout.payment_method' => $validatedData['method_id']
+    ]);
+
+    // Redirect to bill summary
+    return redirect()->route('checkout.bill-summary');
+}
+public function showBillSummary()
+{
+    // Retrieve stored session data
+    $customerInfo = session('checkout.customer_info');
+    $paymentMethod = session('checkout.payment_method');
+    $cartItems = Cart::where('user_id', Auth::id())->get(); // Lấy sản phẩm trong giỏ hàng
+    $total = $cartItems->sum(function($item) {
+        return $item->variant->sale_price * $item->quantity;
+    });
+
+    return view('user.checkout.checkout_done', compact('customerInfo', 'paymentMethod', 'cartItems', 'total'));
+}
+public function storeBill()
+{
+    // Lấy thông tin khách hàng và phương thức thanh toán từ session
+    $customerInfo = session('checkout.customer_info');
+    $paymentMethod = session('checkout.payment_method');
+    $cartItems = Cart::where('user_id', Auth::id())->get();
+    $total = $cartItems->sum(function($item) {
+        return $item->variant->sale_price * $item->quantity;
+    });
+
+    // Tạo hóa đơn mới
+    $bill = Bill::create([
+        'bill_code' => uniqid('BILL-'),
+        'bill_status' => 1, // Chờ xác nhận
+        'user_id' => Auth::id(),
+        'user_name' => $customerInfo['user_name'],
+        'user_address' => $customerInfo['user_address'],
+        'user_tel' => $customerInfo['user_tel'],
+        'total' => $total,
+        'payment_status' => 0, // Chưa thanh toán
+        'method_id' => $paymentMethod,
+    ]);
+
+    // Lưu các mục hóa đơn (bill items)
+    foreach ($cartItems as $item) {
+        BillItem::create([
+            'bill_id' => $bill->id,
+            'variant_list_price' => $item->variant->list_price,
+            'variant_sale_price' => $item->variant->sale_price,
+            'variant_import_price' => $item->variant->import_price,
+            'quantity' => $item->quantity,
+            'variant_id' => $item->variant_id,
+            'product_id' => $item->variant->product_id,
+            'product_name' => $item->variant->product->name,
+            'product_image' => $item->variant->product->image,
+        ]);
+    }
+
+    // Lưu lịch sử hóa đơn
+    BillHistory::create([
+        'bill_id' => $bill->id,
+        'from_status' => null,
+        'to_status' => 1, // Chờ xác nhận
+        'note' => 'Khách hàng đã tạo đơn hàng và chọn phương thức thanh toán.',
+        'by_user' => Auth::id(),
+        'at_datetime' => now(),
+    ]);
+
+    // Xóa giỏ hàng
+    Cart::where('user_id', Auth::id())->delete();
+
+    // Redirect hoặc thông báo thành công
+    return redirect()->back()->with('success', 'Thành công!');
+}
+
+
+
 }
