@@ -1,18 +1,18 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="container">
-        <h1>{{ $product->name }}</h1>
+    <div class="container pt-5 pb-5">
+        <h1 class="fw-bold">{{ $product->name }}</h1>
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Thông tin sản phẩm</h5>
+                <h5 class="card-title mb-1">Thông tin sản phẩm</h5>
                 <p class="card-text"><strong>Giá: </strong>{{ number_format($product->price, 0, ',', '.') }} VNĐ</p>
                 <p class="card-text"><strong>Mô tả: </strong>{{ $product->description }}</p>
                 <p class="card-text"><strong>Số lượng: </strong>{{ $product->quantity }}</p>
                 <p class="card-text"><strong>Danh mục: </strong>{{ $product->category->name }}</p>
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid mt-3"
-                    style="max-width: 300px; height: auto;">
+                    style="max-width: 200px; height: auto;">
             </div>
             <div class="card-footer">
                 <h3>Album ảnh sản phẩm:</h3>

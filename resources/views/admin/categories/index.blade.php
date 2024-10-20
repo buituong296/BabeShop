@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>Categories</h1>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
+    <h1>DANH SÁCH DANH MỤC</h1>
+    <a href="{{ route('categories.create') }}" class="btn btn-primary">Thêm danh mục</a>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Tên danh mục</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +17,11 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Sửa</a>
                         <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Xóa</button>
                         </form>
                     </td>
                 </tr>
