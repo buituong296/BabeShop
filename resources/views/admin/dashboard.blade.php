@@ -49,5 +49,18 @@
                 <a href="{{ route('sizes.index') }}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>44</h3>
+                    <p>Đơn hàng</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-ruler"></i>
+                </div>
+                <a href="{{ route('bills.index') }}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
     </div>
 @stop

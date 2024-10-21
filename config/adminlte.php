@@ -323,6 +323,11 @@ return [
         'icon' => 'fas fa-ruler',
     ],
     [
+        'text' => 'Đơn hàng',
+        'url'  => 'admin/bills',
+        'icon' => 'fas fa-fw fa-file',
+    ],
+    [
         'type' => 'navbar-search',
         'text' => 'Tìm kiếm',
         'topnav_right' => true,
