@@ -45,6 +45,8 @@ Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])-
 
 Route::get('/product-detail/{id}', [App\Http\Controllers\User\ProductDetailController::class, 'productdetail'])->name('productdetail');
 Route::get('/get-variant-quantity', [App\Http\Controllers\User\ProductDetailController::class, 'getVariantQuantity']);
+Route::post('/addtocart', [App\Http\Controllers\User\ProductDetailController::class, 'addToCart'])->name('productdetailcart');
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -300,7 +300,7 @@
 
                                     <!-- Model -->
                                     <div class="pb-3 mb-2 mb-lg-3">
-                                        <form action="{{ route('cart.add') }}" method="POST">
+                                        <form action="{{ route('productdetailcart') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
