@@ -433,6 +433,9 @@
                                                 @endif
                                             </div>
                                             <input type="hidden" name="variant_id" value="{{ $product->variant->id }}">
+
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            
                                             <input type="number" name="quantity" value="1" min="1" style="width: 100px; height: 30px;" required>
                                             <button type="submit"
                                                 class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
