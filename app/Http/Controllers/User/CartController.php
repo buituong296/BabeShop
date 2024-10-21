@@ -43,11 +43,11 @@ class CartController extends Controller
             ->where('size_id', $size)
             ->where('color_id', $color)
             ->where('stock', '>', '0')
-            ->select('id')->first();
+            ->select('id', 'stock')->first();
 
 
         if ($variant == null) {
-
+            
             return redirect()->back()->with('error', 'Sản phẩm đã hết hàng hoặc không tồn tại');
         } else {
 
