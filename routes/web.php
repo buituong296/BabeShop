@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
@@ -35,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('products', ProductController::class);
     Route::resource('variants', VariantController::class);
+    Route::resource('bills', BillController::class);
 });
 
 
