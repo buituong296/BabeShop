@@ -19,4 +19,8 @@ class BillItem extends Model
         'product_name',
         'product_image'
     ];
+
+    public function bills() {
+        return $this->belongsTo(Bill::class);
+    }
 }

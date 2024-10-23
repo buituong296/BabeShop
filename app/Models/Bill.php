@@ -19,4 +19,8 @@ class Bill extends Model
         'payment_status',
         'method_id'
     ];
+
+    public function billitems() {
+        return $this->hasMany(BillItem::class); 
+    }
 }

@@ -80,5 +80,6 @@ Route::post('/checkout/save', [App\Http\Controllers\User\CheckOutController::cla
 
 
 
-
+Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
+Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
 
