@@ -12,15 +12,8 @@
                         <h1>Chọn phương thức thanh toán</h1>
                         <form action="{{ route('checkout.payment-method.store') }}" method="POST">
                             @csrf
-                            <div>
-                                <label for="method_id">Phương thức thanh toán:</label>
-                                <select name="method_id" id="method_id" required>
-                                    <option value="1">Thanh toán COD</option>
-                                    <option value="2">Thanh toán Online</option>
-                                </select>
-                            </div>
-
-                            <button type="submit">Tiếp tục</button>
+                            <input type="hidden"  name="method_id" id="method_id" value="1">
+                            <button type="submit" class="btn btn-primary">Thanh Toán COD</button>
                         </form>
                         <div class="col-md-6">
                             <form action="{{ route('payment.vnpay') }}" method="GET">
