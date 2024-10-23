@@ -54,15 +54,21 @@ public function storeCustomerInfo(Request $request)
 }
 public function showPaymentMethodForm()
 {
-    return view('user.checkout.checkout_payment');
+    $bill = Bill::where('user_id', Auth::id())->latest()->first();
+    if (!$bill) {
+            return redirect()->back()->with('error', 'Không tìm thấy hóa đơn.');
+        }
+    return view('user.checkout.checkout_payment',compact('bill'));
 }
 
 public function storePaymentMethod(Request $request)
 {
+
     // Validate payment method
     $validatedData = $request->validate([
         'method_id' => 'required|exists:bank_methods,id',
     ]);
+
 
     // Store payment method in session
     session([
@@ -136,7 +142,7 @@ public function storeBill()
     Cart::where('user_id', Auth::id())->delete();
 
     // Redirect hoặc thông báo thành công
-    return redirect()->back()->with('success', 'Thành công!');
+    return redirect()->route('home')->with('success', 'Thành công!');
 }
 
 
