@@ -96,6 +96,7 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="d-md-flex align-items-start">
+                        @if (request('category') || request('size') || request('color'))
                         <div class="h6 fs-sm fw-normal text-nowrap translate-middle-y mt-3 mb-0 me-4">
                             Tìm thấy <span class="fw-semibold">{{ $total }}</span> sản phẩm
                         </div>
@@ -149,6 +150,7 @@
                                 </button></a>
 
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-3 mt-3 mt-lg-0">
@@ -256,70 +258,7 @@
                                 <!-- Status -->
 
                                 <!-- Categories -->
-                                <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
-                                    <h4 class="h6 mb-2">Danh mục</h4>
-                                    <ul class="list-unstyled d-block m-0">
-                                        <li class="nav d-block pt-2 mt-1">
-                                            @foreach ($categories as $item)
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        id="category{{ $item->id }}" name="category[]"
-                                                        value="{{ $item->id }}"
-                                                        {{ is_array(request('category')) && in_array($item->id, request('category')) ? 'checked' : '' }}>
-                                                    <label for="apple"
-                                                        class="form-check-label text-body-emphasis">{{ $item->name }}</label>
-                                                </div>
-                                            @endforeach
-
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                                <!-- Sizes (checkboxes) -->
-                                <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4">
-                                    <h4 class="h6 mb-2">Kích cỡ</h4>
-                                    <ul class="list-unstyled d-block m-0">
-                                        <li class="nav d-block pt-2 mt-1">
-                                            @foreach ($sizes as $item)
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id=""
-                                                        name="size[]" value="{{ $item->id }}"
-                                                        {{ is_array(request('size')) && in_array($item->id, request('size')) ? 'checked' : '' }}>
-                                                    <label for="apple"
-                                                        class="form-check-label text-body-emphasis">{{ $item->name }}</label>
-                                                </div>
-                                            @endforeach
-
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <!-- Color -->
-                                <div class="w-100 border rounded p-3 p-xl-4">
-                                    <h4 class="h6">Màu sắc</h4>
-                                    @foreach ($colors as $item)
-                                        <div class="form-check">
-
-                                            <button type="button"
-                                                class="nav-link w-auto animate-underline fw-normal pt-2 pb-0 px-0 btn">
-                                                <input
-                                                    {{ is_array(request('color')) && in_array($item->id, request('color')) ? 'checked' : '' }}
-                                                    type="checkbox" class="form-check-input" id=""
-                                                    style=" width: .875rem; height: .875rem; margin-top: .125rem;"
-                                                    name="color[]" value="{{ $item->id }}">
-                                                <span class="rounded-circle me-2 ms-2 border border-black"
-                                                    style=" width: .875rem; height: .875rem; margin-top: .125rem; background-color: {{ $item->value }}"></span>
-                                                <label for="apple"
-                                                    class="form-check-label text-body-emphasis">{{ $item->name }}</label>
-                                            </button>
-
-
-                                        </div>
-                                    @endforeach
-
-                                </div>
-
+                                
                                 <!-- Price range -->
                                 <div class="w-100 border rounded p-3 p-xl-4 mb-3 mb-xl-4 mt-5">
                                     <h4 class="h6 mb-2" id="slider-label">Giá</h4>

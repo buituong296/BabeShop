@@ -45,5 +45,6 @@
     <button type="submit" class="btn btn-primary mt-3">Lưu hóa đơn và xóa giỏ hàng</button>
 </form>
 </div>
+<a href="{{route('bill')}}"><button type="" class="btn btn-primary mt-3">Danh sách hóa đơn</button></a>
 
 @endsection

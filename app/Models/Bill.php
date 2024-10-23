@@ -20,6 +20,10 @@ class Bill extends Model
         'method_id'
     ];
 
+
+    public function billitems() {
+        return $this->hasMany(BillItem::class); 
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -19,6 +19,11 @@ class BillItem extends Model
         'product_name',
         'product_image'
     ];
+
+
+    public function bills() {
+        return $this->belongsTo(Bill::class);
+    }
     public function variants()
     {
         return $this->belongsTo(Variant::class,'variant_id');
