@@ -13,7 +13,6 @@ class BillController extends Controller
         $user_id = Auth::id();
         $bills = Bill::with(['billitems']) 
         ->where('user_id', $user_id)
-        
         ->get();
 
         return view('user.bill.bill',compact('bills','user_id'));
