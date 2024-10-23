@@ -22,6 +22,15 @@
 
                             <button type="submit">Tiếp tục</button>
                         </form>
+                        <div class="col-md-6">
+                            <form action="{{ route('payment.vnpay') }}" method="GET">
+                                @csrf
+                                <!-- Nút bấm thanh toán online -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Thanh toán VNPay</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

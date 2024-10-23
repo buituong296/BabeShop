@@ -82,6 +82,17 @@ Route::get('/checkout/bill-summary', [App\Http\Controllers\User\CheckOutControll
 // routes/web.php
 Route::post('/checkout/save', [App\Http\Controllers\User\CheckOutController::class, 'storeBill'])->name('checkout.save');
 
+use App\Http\Controllers\PaymentController;
+
+Route::post('/checkout/payment', [PaymentController::class, 'createPayment'])->name('payment.create');
+Route::get('/checkout/return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
+
+Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name('payment.vnpay');
+
+
+
+
+
 
 
 
