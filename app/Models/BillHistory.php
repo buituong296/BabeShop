@@ -16,4 +16,16 @@ class BillHistory extends Model
         'by_user',
         'at_datetime'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class,'by_user');
+    }
+    public function fromStatus()
+    {
+        return $this->belongsTo(BillStatus::class,'from_status');
+    }
+    public function toStatus()
+    {
+        return $this->belongsTo(BillStatus::class,'to_status');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
@@ -35,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('products', ProductController::class);
     Route::resource('variants', VariantController::class);
+    Route::resource('bills', BillController::class);
 });
 
 
@@ -45,6 +47,8 @@ Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])-
 
 Route::get('/product-detail/{id}', [App\Http\Controllers\User\ProductDetailController::class, 'productdetail'])->name('productdetail');
 Route::get('/get-variant-quantity', [App\Http\Controllers\User\ProductDetailController::class, 'getVariantQuantity']);
+Route::post('/addtocart', [App\Http\Controllers\User\ProductDetailController::class, 'addToCart'])->name('productdetailcart');
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
