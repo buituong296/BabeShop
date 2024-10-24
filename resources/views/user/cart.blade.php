@@ -105,7 +105,7 @@
                         <div class="border-top pt-4 mt-4">
                             <div class="d-flex justify-content-between mb-3">
                                 <span class="fs-sm">Tổng thanh toán dự kiến:</span>
-                                <span class="h5 mb-0">${{ number_format($totalAmount, 2) }}</span>
+                                <span class="h5 mb-0">{{ number_format($totalAmount, 2) }}VND</span>
                             </div>
                             <a class="btn btn-lg btn-primary w-100" href="{{ route('checkout') }}">
                                 Đi tới thanh toán

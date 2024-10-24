@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 use App\Models\Bill;
 
 class PaymentController extends Controller
@@ -14,16 +15,14 @@ class PaymentController extends Controller
     protected $vnp_ReturnUrl;
     public function showVNPayForm(Request $request)
     {
+        $cartItems = Cart::where('user_id', Auth::id())->get(); // Lấy sản phẩm trong giỏ hàng
         // Giả sử bạn lấy bill của người dùng hiện tại từ session hoặc từ cơ sở dữ liệu
-        $bill = Bill::where('user_id', auth()->id())->latest()->first(); // Lấy hóa đơn mới nhất của người dùng hiện tại
-
-        // Kiểm tra nếu không có bill nào thì trả về lỗi hoặc thông báo
-        if (!$bill) {
-            return redirect()->back()->with('error', 'Không tìm thấy hóa đơn nào.');
-        }
+        $total = $cartItems->sum(function($item) {
+            return $item->variant->sale_price * $item->quantity;
+        });
 
         // Trả về view và truyền bill vào
-        return view('user.checkout.checkout_online', compact('bill'));
+        return view('user.checkout.checkout_online', compact('total','cartItems'));
     }
 
     public function __construct()
