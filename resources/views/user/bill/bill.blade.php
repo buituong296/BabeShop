@@ -109,19 +109,19 @@
                   </td>
                   <td class="fw-medium py-3 d-none d-md-table-cell">
                     <span class="d-flex align-items-center">
-                      @if($bill->payment_status == 0)
+                      @if($bill->bill_status == 0)
                       Chưa thanh toán 
-                  @elseif($bill->payment_status == 1)
+                  @elseif($bill->bill_status == 1)
                       Chờ xác nhận
-                  @elseif($bill->payment_status == 2)
+                  @elseif($bill->bill_status == 2)
                     Đang xử lí
-                  @elseif($bill->payment_status == 3)
+                  @elseif($bill->bill_status == 3)
                     Đang giao hàng
-                  @elseif($bill->payment_status == 4)
+                  @elseif($bill->bill_status == 4)
                     Giao hàng thành công
-                  @elseif($bill->payment_status == 5)
+                  @elseif($bill->bill_status == 5)
                     Đã hủy
-                  @elseif($bill->payment_status == 6)
+                  @elseif($bill->bill_status == 6)
                     Hoàn trả
                   @else
                       Unknown

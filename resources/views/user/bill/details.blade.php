@@ -99,19 +99,19 @@
                 <strong>Mã hóa đơn:</strong> {{ $bill->bill_code }} <br> <!-- Assuming 'code' is the column for the bill code -->
                 <strong>Tên người mua:</strong> {{ $bill->user_name }} <br> <!-- Assuming 'name' is the column for the user name -->
                 <strong>Trạng thái đơn hàng:</strong>
-                @if($bill->payment_status == 0)
+                @if($bill->bill_status == 0)
                     Chưa thanh toán 
-                @elseif($bill->payment_status == 1)
+                @elseif($bill->bill_status == 1)
                     Chờ xác nhận
-                @elseif($bill->payment_status == 2)
+                @elseif($bill->bill_status == 2)
                   Đang xử lí
-                @elseif($bill->payment_status == 3)
+                @elseif($bill->bill_status == 3)
                   Đang giao hàng
-                @elseif($bill->payment_status == 4)
+                @elseif($bill->bill_status == 4)
                   Giao hàng thành công
-                @elseif($bill->payment_status == 5)
+                @elseif($bill->bill_status == 5)
                   Đã hủy
-                @elseif($bill->payment_status == 6)
+                @elseif($bill->bill_status == 6)
                   Hoàn trả
                 @else
                     Unknown
