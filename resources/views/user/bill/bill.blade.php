@@ -162,7 +162,7 @@
 
           <!-- Pagination -->
           <nav class="pt-3 pb-2 pb-sm-0 mt-2 mt-md-3" aria-label="Page navigation example">
-            <ul class="pagination">
+            {{-- <ul class="pagination">
               <li class="page-item active" aria-current="page">
                 <span class="page-link">
                   1
@@ -178,75 +178,19 @@
               <li class="page-item">
                 <a class="page-link" href="#">4</a>
               </li>
-            </ul>
+            </ul> --}}
+
+            {{ $bills->links() }}
+
           </nav>
         </div>
       </div>
     </div>
   </div>
-    {{-- <h1>Lịch sử mua hàng</h1>
    
-    <table class="table table-bordered" style="background-color:#fffbf6 ">
-        <thead>
-          <tr>
-            <th scope="col">Mã đơn hàng</th>
-            <th scope="col">Tên người mua</th>
-            <th scope="col">Sản phẩm</th>
-            <th scope="col">Trạng thái đơn hàng</th>
-            <th scope="col">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($bills as $bill)
-            <tr>
-                <th>{{$bill->bill_code}}</th>
-                <td>{{$bill->user_name}}</td>
-                <td>
-                  @php
-                      $itemsToShow = $bill->billitems->take(2);
-                  @endphp
-                  @foreach($itemsToShow as $billitem)
-                      {{ $billitem->product_name }}
-                      @if (!$loop->last), @endif 
-                  @endforeach
-              
-                  @if($bill->billitems->count() > 2)
-                      ,...
-                  @endif
-              </td>
-              <td>
-                @if($bill->payment_status == 0)
-                    Chưa thanh toán 
-                @elseif($bill->payment_status == 1)
-                    Chờ xác nhận
-                @elseif($bill->payment_status == 2)
-                  Đang xử lí
-                @elseif($bill->payment_status == 3)
-                  Đang giao hàng
-                @elseif($bill->payment_status == 4)
-                  Giao hàng thành công
-                @elseif($bill->payment_status == 5)
-                  Đã hủy
-                @elseif($bill->payment_status == 6)
-                  Hoàn trả
-                @else
-                    Unknown
-                @endif
-            </td>
-            <td>
-
-              <a href="{{route('bill-detail', ['id' => $bill->id] )}}"><button type="button" class="btn btn-warning">Chi tiết</button></a>
-              
-            </td>
-              </tr>
-            @endforeach
-         
-         
-        </tbody>
-      </table> --}}
-
-      <div class="offcanvas offcanvas-end pb-sm-2 px-sm-2" id="orderDetails" tabindex="-1" aria-labelledby="orderDetailsLabel" style="width: 500px">
-
+   {{-- Modal Info --}}
+      {{-- <div class="offcanvas offcanvas-end pb-sm-2 px-sm-2" id="orderDetails" tabindex="-1" aria-labelledby="orderDetailsLabel" style="width: 500px">
+     
         <!-- Header -->
         <div class="offcanvas-header align-items-start py-3 pt-lg-4">
           <div>
@@ -354,6 +298,6 @@
         <div class="offcanvas-header">
           <a class="btn btn-lg btn-secondary w-100" href="#!">Change the delivery time</a>
         </div>
-      </div>
+      </div> --}}
   
 @endsection

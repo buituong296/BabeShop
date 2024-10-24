@@ -157,7 +157,7 @@
       <h4 class="offcanvas-title" id="shoppingCartLabel">Giỏ hàng</h4>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Đóng"></button>
     </div>
-    <p class="fs-sm">Mua thêm <span class="text-dark-emphasis fw-semibold">$183</span> để được <span class="text-dark-emphasis fw-semibold">Miễn phí giao hàng</span></p>
+    {{-- <p class="fs-sm">Mua thêm <span class="text-dark-emphasis fw-semibold">$183</span> để được <span class="text-dark-emphasis fw-semibold">Miễn phí giao hàng</span></p> --}}
     <div class="progress w-100" role="progressbar" aria-label="Tiến độ giao hàng miễn phí" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
       <div class="progress-bar bg-warning rounded-pill" style="width: 75%"></div>
     </div>
@@ -167,15 +167,16 @@
   <div class="offcanvas-body d-flex flex-column gap-4 pt-2">
 
     <!-- Item -->
+    @foreach ($cartItems as $item)
     <div class="d-flex align-items-center">
       <a class="flex-shrink-0" href="shop-product-general-electronics.html">
-        <img src="assets/img/shop/electronics/thumbs/08.png" width="110" alt="iPhone 14">
+        <img src="{{ asset('storage/' . $item->variant->product->image) }}" width="110" alt="iPhone 14">
       </a>
       <div class="w-100 min-w-0 ps-2 ps-sm-3">
         <h5 class="d-flex animate-underline mb-2">
-          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Apple iPhone 14 128GB Trắng</a>
+          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">{{ $item->variant->product->name }}</a>
         </h5>
-        <div class="h6 pb-1 mb-2">$899.00</div>
+        <div class="h6 pb-1 mb-2">{{ number_format($item->variant->sale_price) }}VND</div>
         <div class="d-flex align-items-center justify-content-between">
           <div class="count-input rounded-2">
             <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
@@ -186,68 +187,24 @@
               <i class="ci-plus"></i>
             </button>
           </div>
-          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
+          <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
+        </form>
         </div>
       </div>
     </div>
+    @endforeach
 
-    <!-- Item -->
-    <div class="d-flex align-items-center">
-      <a class="position-relative flex-shrink-0" href="shop-product-general-electronics.html">
-        <span class="badge text-bg-danger position-absolute top-0 start-0">-10%</span>
-        <img src="assets/img/shop/electronics/thumbs/09.png" width="110" alt="iPad Pro">
-      </a>
-      <div class="w-100 min-w-0 ps-2 ps-sm-3">
-        <h5 class="d-flex animate-underline mb-2">
-          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Tablet Apple iPad Pro M2</a>
-        </h5>
-        <div class="h6 pb-1 mb-2">$989.00 <del class="text-body-tertiary fs-xs fw-normal">$1,099.00</del></div>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="count-input rounded-2">
-            <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
-              <i class="ci-minus"></i>
-            </button>
-            <input type="number" class="form-control form-control-sm" value="1" readonly="">
-            <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
-              <i class="ci-plus"></i>
-            </button>
-          </div>
-          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Item -->
-    <div class="d-flex align-items-center">
-      <a class="flex-shrink-0" href="shop-product-general-electronics.html">
-        <img src="assets/img/shop/electronics/thumbs/01.png" width="110" alt="Smart Watch">
-      </a>
-      <div class="w-100 min-w-0 ps-2 ps-sm-3">
-        <h5 class="d-flex animate-underline mb-2">
-          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">Đồng hồ thông minh Series 7, Trắng</a>
-        </h5>
-        <div class="h6 pb-1 mb-2">$429.00</div>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="count-input rounded-2">
-            <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
-              <i class="ci-minus"></i>
-            </button>
-            <input type="number" class="form-control form-control-sm" value="1" readonly="">
-            <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
-              <i class="ci-plus"></i>
-            </button>
-          </div>
-          <button type="button" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
-        </div>
-      </div>
-    </div>
+    
   </div>
 
   <!-- Footer -->
   <div class="offcanvas-header flex-column align-items-start">
     <div class="d-flex align-items-center justify-content-between w-100 mb-3 mb-md-4">
       <span class="text-light-emphasis">Tổng phụ:</span>
-      <span class="h6 mb-0">$2,317.00</span>
+      <span class="h6 mb-0">{{ number_format($totalAmount) }}VND</span>
     </div>
     <div class="d-flex w-100 gap-3">
       <a class="btn btn-lg btn-secondary w-100" href="{{route('cart')}}">Xem giỏ hàng</a>
@@ -389,10 +346,7 @@
             </a>
 
             <!-- Wishlist button visible on screens > 768px wide (md breakpoint) -->
-            <a class="btn btn-icon btn-lg fs-lg btn-outline-secondary border-0 rounded-circle animate-pulse d-none d-md-inline-flex" href="account-wishlist.html">
-              <i class="ci-heart animate-target"></i>
-              <span class="visually-hidden">Wishlist</span>
-            </a>
+         
 
             <!-- Cart button -->
             <button type="button" class="btn btn-icon btn-lg btn-secondary position-relative rounded-circle ms-2" data-bs-toggle="offcanvas" data-bs-target="#shoppingCart" aria-controls="shoppingCart" aria-label="Shopping cart">
@@ -532,16 +486,16 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    Tài khoản
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
+                                    <a class="dropdown-item" href="{{ route('bill') }}">Lịch sử mua hàng</a>
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard (tạm thời)</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getETlementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
