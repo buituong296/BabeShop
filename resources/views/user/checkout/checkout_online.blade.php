@@ -6,12 +6,12 @@
         <div class="table-responsive">
             <form action="{{ route('payment.create') }}" method="post">
                 @csrf
-                <input type="hidden" name="total_amount" value="{{ $bill->total }}">
+                <input type="hidden" name="total_amount" value="{{ $total }}">
 
                 <!-- Hiển thị tổng số tiền từ bill -->
                 <div class="form-group">
                     <label for="amount">Số tiền cần thanh toán</label>
-                    <input class="form-control" id="amount" name="amount" type="number" value="{{ $bill->total }}"
+                    <input class="form-control" id="amount" name="amount" type="number" value="{{ $total }}"
                         readonly />
                 </div>
                 <h4>Chọn phương thức thanh toán</h4>
