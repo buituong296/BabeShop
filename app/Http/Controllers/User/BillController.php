@@ -11,10 +11,10 @@ class BillController extends Controller
 {
     public function index(){
         $user_id = Auth::id();
-        $bills = Bill::with(['billitems']) 
+        $bills = Bill::with(['billitems'])
         ->where('user_id', $user_id)
-        
-        ->get();
+        ->paginate(5);
+
 
         return view('user.bill.bill',compact('bills','user_id'));
     }

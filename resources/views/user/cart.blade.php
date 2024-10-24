@@ -27,7 +27,7 @@
                             <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-md-table-cell"><span class="text-body">Tổng</span></th>
                             <th scope="col" class="py-0 px-0">
                                 <div class="nav justify-content-end">
-                                    <button type="button" class="nav-link d-inline-block text-decoration-underline text-nowrap py-3 px-0">Xóa sản phẩm</button>
+                                    <button type="button" class="nav-link d-inline-block text-decoration text-nowrap py-3 px-0">Xóa  &nbsp;</button>
                                 </div>
                             </th>
                         </tr>
@@ -36,10 +36,10 @@
                         @foreach ($cartItems as $item)
                         <tr>
                             <td>
-                                <img src="{{ asset('storage/' . $item->variant->image) }}" alt="{{ $item->variant->name }}" style="width: 50px; height: auto; margin-right: 10px;">
+                                <img src="{{ asset('storage/' . $item->variant->product->image) }}" alt="{{ $item->variant->name }}" style="width: 50px; height: auto; margin-right: 10px;">
                                 {{ $item->variant->product->name }}
                             </td>
-                            <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">${{ number_format($item->variant->sale_price, 2) }}</td>
+                            <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">{{ number_format($item->variant->sale_price,) }} VND</td>
                             <td class="d-none d-md-table-cell">
                                 <form action="{{ route('cart.update', $item->id) }}" method="POST">
                                     @csrf
@@ -56,12 +56,12 @@
                                     </div>
                                 </form>
                             </td>
-                            <td class="text-body fs-sm fw-normal d-none d-md-table-cell">${{ number_format($item->variant->sale_price * $item->quantity, 2) }}</td>
+                            <td class="text-body fs-sm fw-normal d-none d-md-table-cell">{{ number_format($item->variant->sale_price * $item->quantity) }} VND</td>
                             <td class="py-3">
                                 <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                    <button type="submit" class="btn-close fs-sm" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-sm" data-bs-title="Xóa" aria-label="Xóa khỏi giỏ hàng"></button>
                                 </form>
                             </td>
                         </tr>
@@ -87,7 +87,7 @@
                         <ul class="list-unstyled fs-sm gap-3 mb-0">
                             <li class="d-flex justify-content-between">
                                 Tổng số tiền ({{ count($cartItems) }} mặt hàng):
-                                <span class="text-dark-emphasis fw-medium">${{ number_format($totalAmount, 2) }}</span>
+                                <span class="text-dark-emphasis fw-medium">{{ number_format($totalAmount) }} VND</span>
                             </li>
                             <li class="d-flex justify-content-between">
                                 Tiết kiệm:
