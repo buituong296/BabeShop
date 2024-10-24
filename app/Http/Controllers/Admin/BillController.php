@@ -34,7 +34,24 @@ class BillController extends Controller
     }
     public function update(Request $req, $id){
         $req->validate([
-            'toStatus' => 'required|different:fromStatus',
+            'toStatus' => [
+                'required',
+                'different:fromStatus',
+                function ($attribute, $value, $fail) use ($req) {
+                    $fromStatus = $req->input('fromStatus');
+                    $invalidStatus = [
+                        1 => [3, 4, 5, 6],
+                        2 => [1, 4, 5, 6],
+                        3 => [1, 2],
+                        4 => [1, 2, 3],
+                        5 => [1, 2, 3],
+                        6 => [1, 2, 3],
+                    ];
+                    if (isset($invalidStatus[$fromStatus]) && in_array($value, $invalidStatus[$fromStatus])) {
+                        $fail('Thay đổi không hợp lệ.');
+                    }
+                },
+            ],
             'note' => 'max:50'
         ], [
             'toStatus.different' => 'Trạng thái mới phải khác với trạng thái hiện tại.',
