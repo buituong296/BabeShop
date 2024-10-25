@@ -98,3 +98,4 @@ Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name(
 Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
 Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
 
+// Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
