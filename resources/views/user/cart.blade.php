@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="fs-sm fw-normal py-3 ps-0"><span class="text-body">Sản phẩm</span></th>
+                            <th scope="col" class="fs-sm fw-normal py-3 ps-0"><span class="text-body">Loại hàng</span></th>
                             <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-xl-table-cell"><span class="text-body">Giá</span></th>
                             <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-md-table-cell"><span class="text-body">Số lượng</span></th>
                             <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-md-table-cell"><span class="text-body">Tổng</span></th>
@@ -38,6 +39,11 @@
                             <td>
                                 <img src="{{ asset('storage/' . $item->variant->product->image) }}" alt="{{ $item->variant->name }}" style="width: 50px; height: auto; margin-right: 10px;">
                                 {{ $item->variant->product->name }}
+                            </td>
+                            <td>
+                                <span class=" btn d-block bg-primary p-2"> {{ $item->variants->color->name }}</span>
+<span class="btn d-block bg-info p-2">{{ $item->variants->size->name }}</span>
+
                             </td>
                             <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">{{ number_format($item->variant->sale_price,) }} VND</td>
                             <td class="d-none d-md-table-cell">

@@ -13,6 +13,7 @@ class BillController extends Controller
         $user_id = Auth::id();
         $bills = Bill::with(['billitems'])
         ->where('user_id', $user_id)
+        ->latest('id')
         ->paginate(5);
 
 

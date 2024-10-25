@@ -157,10 +157,14 @@
       <h4 class="offcanvas-title" id="shoppingCartLabel">Giỏ hàng</h4>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Đóng"></button>
     </div>
-    {{-- <p class="fs-sm">Mua thêm <span class="text-dark-emphasis fw-semibold">$183</span> để được <span class="text-dark-emphasis fw-semibold">Miễn phí giao hàng</span></p> --}}
-    <div class="progress w-100" role="progressbar" aria-label="Tiến độ giao hàng miễn phí" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
+    @if (empty($cartItems) || $cartItems->count() == 0)
+    <p class="fs-sm">Bạn chưa có sản phẩm nào trong giỏ hàng</p>
+    @endif
+
+    
+    {{-- <div class="progress w-100" role="progressbar" aria-label="Tiến độ giao hàng miễn phí" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
       <div class="progress-bar bg-warning rounded-pill" style="width: 75%"></div>
-    </div>
+    </div> --}}
   </div>
 
   <!-- Items -->
@@ -178,7 +182,7 @@
         </h5>
         <div class="h6 pb-1 mb-2">{{ number_format($item->variant->sale_price) }}VND</div>
         <div class="d-flex align-items-center justify-content-between">
-          <div class="count-input rounded-2">
+          {{-- <div class="count-input rounded-2">
             <button type="button" class="btn btn-icon btn-sm" data-decrement="" aria-label="Giảm số lượng">
               <i class="ci-minus"></i>
             </button>
@@ -186,7 +190,14 @@
             <button type="button" class="btn btn-icon btn-sm" data-increment="" aria-label="Tăng số lượng">
               <i class="ci-plus"></i>
             </button>
+          </div> --}}
+          <div>
+            <span class="fw-bold">Loại hàng:</span>
+            <span class="d-block">Màu sắc: {{ $item->variant->color->name }}</span>
+            <span class="d-block">Kích thước: {{ $item->variant->size->name }}</span>
           </div>
+      
+
           <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline;">
             @csrf
             @method('DELETE')
@@ -350,7 +361,7 @@
 
             <!-- Cart button -->
             <button type="button" class="btn btn-icon btn-lg btn-secondary position-relative rounded-circle ms-2" data-bs-toggle="offcanvas" data-bs-target="#shoppingCart" aria-controls="shoppingCart" aria-label="Shopping cart">
-              <span class="position-absolute top-0 start-100 mt-n1 ms-n3 badge text-bg-success border border-3 border-dark rounded-pill" style="--cz-badge-padding-y: .25em; --cz-badge-padding-x: .42em">3</span>
+              <span class="position-absolute top-0 start-100 mt-n1 ms-n3 badge text-bg-success border border-3 border-dark rounded-pill" style="--cz-badge-padding-y: .25em; --cz-badge-padding-x: .42em">{{$cartItems->count()}}</span>
               <span class="position-absolute top-0 start-0 d-flex align-items-center justify-content-center w-100 h-100 rounded-circle animate-slide-end fs-lg">
                 <i class="ci-shopping-cart animate-target ms-n1"></i>
               </span>
@@ -496,7 +507,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getETlementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Đăng xuất') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

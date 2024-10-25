@@ -34,6 +34,23 @@ class ViewServiceProvider extends ServiceProvider
                 'totalAmount' => $totalAmount,
             ]);
         });
+        view()->composer('user.partials.order_summary', function ($view) {
+            $userId = auth()->id();
+            $cartItems = \App\Models\Cart::where('user_id', $userId)->with('variant')
+            ->take(3)
+            ->get();
+    
+            // Calculate the total amount
+            $totalAmount = $cartItems->sum(function ($item) {
+                return $item->variant->sale_price * $item->quantity;
+            });
+    
+            // Share both cart items and total amount with the view
+            $view->with([
+                'cartItems' => $cartItems,
+                'totalAmount' => $totalAmount,
+            ]);
+        });
     }
     
 }
