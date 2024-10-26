@@ -41,8 +41,8 @@
                                 {{ $item->variant->product->name }}
                             </td>
                             <td>
-                                <span class=" btn d-block bg-primary p-2"> {{ $item->variants->color->name }}</span>
-<span class="btn d-block bg-info p-2">{{ $item->variants->size->name }}</span>
+                                <span class=" btn d-block bg-primary p-2"> {{ $item->variant->color->name }}</span>
+<span class="btn d-block bg-info p-2">{{ $item->variant->size->name }}</span>
 
                             </td>
                             <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">{{ number_format($item->variant->sale_price,) }} VND</td>

@@ -22,10 +22,10 @@
     <!-- Nội dung (Điều hướng) -->
     <div class="offcanvas-body d-block pt-2 pt-lg-4 pb-lg-0">
       <nav class="list-group list-group-borderless">
-        <a class="list-group-item list-group-item-action d-flex align-items-center pe-none active" href="{{route('bill')}}">
+        
+        <a class="list-group-item list-group-item-action d-flex align-items-center" href=" {{ route('bill') }} ">
           <i class="ci-shopping-bag fs-base opacity-75 me-2"></i>
           Đơn hàng
-          {{-- <span class="badge bg-primary rounded-pill ms-auto"></span> --}}
         </a>
         <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-wishlist.html">
           <i class="ci-heart fs-base opacity-75 me-2"></i>
@@ -42,9 +42,7 @@
       </nav>
       <h6 class="pt-4 ps-2 ms-1">Quản lý tài khoản</h6>
       <nav class="list-group list-group-borderless">
-        <a class="list-group-item list-group-item-action d-flex align-items-center" 
-        {{-- href="{{route(account-info)}}" --}}
-        >
+        <a class="list-group-item list-group-item-action d-flex align-items-center"     href="{{route('user-info')}}">
           <i class="ci-user fs-base opacity-75 me-2"></i>
           Thông tin cá nhân
         </a>
