@@ -110,4 +110,4 @@ Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::clas
 Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
 Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
 Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
-// Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
+

@@ -27,6 +27,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+
 
                     <!-- Table of items -->
                     <table class="table position-relative z-2 mb-4">
