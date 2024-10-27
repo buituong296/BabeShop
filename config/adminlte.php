@@ -328,6 +328,11 @@ return [
         'icon' => 'fas fa-fw fa-file',
     ],
     [
+        'text' => 'Mã giảm giá',
+        'url'  => 'admin/vouchers',
+        'icon' => 'fas fa-fw fa-gift',
+    ],
+    [
         'type' => 'navbar-search',
         'text' => 'Tìm kiếm',
         'topnav_right' => true,
