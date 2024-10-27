@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VariantController;
+use App\Http\Controllers\Admin\AdminStatisticsController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function () {
     })->name('admin.dashboard');
 
     // Sử dụng namespace đầy đủ cho các controller
+    Route::get('/statistics', [AdminStatisticsController::class, 'index'])->name('admin.statistics');
     Route::resource('categories', CategoryController::class);
     Route::resource('colors', ColorController::class);
     Route::resource('sizes', SizeController::class);
