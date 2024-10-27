@@ -10,14 +10,14 @@
             <!-- Tổng quan thông tin giao hàng + Nút chỉnh sửa -->
 
             <!-- Form địa chỉ giao hàng -->
-            
+
             <div class="d-flex align-items-start">
               <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle fs-sm fw-semibold lh-1 flex-shrink-0" style="width: 2rem; height: 2rem; margin-top: -.125rem">1</div>
               <div class="w-100 ps-3 ps-md-4">
                 <h1 class="h5 mb-md-4">Địa chỉ giao hàng</h1>
                 <form class="needs-validation"  action="{{ route('checkout.customer-info.store') }}" method="POST">
                   @csrf
-               
+
                   <div class="row row-cols-1 row-cols-sm-2 g-3 g-sm-4 mb-4">
                     <div class="col">
                       <label for="user_name" class="form-label">Tên <span class="text-danger">*</span></label>

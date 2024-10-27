@@ -1,13 +1,13 @@
-
 <aside class="col-lg-4 offset-xl-1" style="margin-top: -100px">
-  <div class="position-sticky top-0" style="padding-top: 100px">
-    <div class="bg-body-tertiary rounded-5 p-4 mb-3">
-      <div class="p-sm-2 p-lg-0 p-xl-2">
-        <div class="border-bottom pb-4 mb-4">
-          <div class="d-flex align-items-center justify-content-between mb-4">
-            <h5 class="mb-0">Tóm tắt đơn hàng</h5>
-            <div class="nav">
-              <a class="nav-link text-decoration-underline p-0" href="{{route('cart')}}">Chỉnh sửa</a>
+    <div class="position-sticky top-0" style="padding-top: 100px">
+      <div class="bg-body-tertiary rounded-5 p-4 mb-3">
+        <div class="p-sm-2 p-lg-0 p-xl-2">
+          <div class="border-bottom pb-4 mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h5 class="mb-0">Order summary</h5>
+              <div class="nav">
+                <a class="nav-link text-decoration-underline p-0" href="{{route('cart')}}">Edit</a>
+              </div>
             </div>
           </div>
           <a class="d-flex align-items-center gap-2 text-decoration-none" href="#orderPreview" data-bs-toggle="offcanvas">
@@ -20,27 +20,29 @@
           </a>
         </div>
         <ul class="list-unstyled fs-sm gap-3 mb-0">
-          <li class="d-flex justify-content-between">
-            Tạm tính (3 sản phẩm):
-            <span class="text-dark-emphasis fw-medium">{{ number_format($totalAmount) }}VND</span>
-          </li>
-          <li class="d-flex justify-content-between">
-            Tiết kiệm:
-            <span class="text-danger fw-medium">-$110.00</span>
-          </li>
-          <li class="d-flex justify-content-between">
-            Thuế thu:
-            <span class="text-dark-emphasis fw-medium">$73.40</span>
-          </li>
-          <li class="d-flex justify-content-between">
-            Phí vận chuyển:
-            <span class="text-dark-emphasis fw-medium">$16.50</span>
-          </li>
-        </ul>
+            <li class="d-flex justify-content-between">
+              Tạm tính ({{ count($cartItems) }} sản phẩm):
+              <span class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
+            </li>
+            @foreach (session('applied_vouchers', []) as $code => $percentage)
+              <li class="d-flex justify-content-between">
+                Mã giảm giá {{ $code }} ({{ $percentage }}%):
+                <span class="text-danger fw-medium">-{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND</span>
+              </li>
+            @endforeach
+            <li class="d-flex justify-content-between">
+              Tổng giảm giá:
+              <span class="text-danger fw-medium">-{{ number_format(session('total_discount', 0)) }} VND</span>
+            </li>
+            <li class="d-flex justify-content-between">
+              Tổng thanh toán sau cùng:
+              <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
+            </li>
+          </ul>
         <div class="border-top pt-4 mt-4">
           <div class="d-flex justify-content-between mb-3">
             <span class="fs-sm">Tổng ước tính:</span>
-            <span class="h5 mb-0">{{ number_format($totalAmount) }}VND</span>
+            <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
           </div>
         </div>
       </div>

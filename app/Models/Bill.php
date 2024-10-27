@@ -22,7 +22,7 @@ class Bill extends Model
 
 
     public function billitems() {
-        return $this->hasMany(BillItem::class); 
+        return $this->hasMany(BillItem::class);
     }
     public function user()
     {
@@ -35,5 +35,9 @@ class Bill extends Model
     public function billStatus()
     {
         return $this->belongsTo(BillStatus::class, 'bill_status');
+    }
+    public function voucher()
+    {
+        return $this->belongsTo(Voucher::class, 'voucher_id');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VariantController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('variants', VariantController::class);
     Route::resource('bills', BillController::class);
+    Route::resource('vouchers', VoucherController::class);
 });
 
 
@@ -83,6 +85,7 @@ Route::get('/checkout/bill-summary', [App\Http\Controllers\User\CheckOutControll
 Route::post('/checkout/save', [App\Http\Controllers\User\CheckOutController::class, 'storeBill'])->name('checkout.save');
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\User\UserVoucherController;
 
 Route::post('/checkout/payment', [PaymentController::class, 'createPayment'])->name('payment.create');
 Route::get('/checkout/return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
@@ -92,7 +95,10 @@ Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name(
 
 
 
+Route::middleware(['auth'])->namespace('User')->group(function () {
 
+    Route::post('/cart/apply-voucher', [UserVoucherController::class, 'applyVoucher'])->name('vouchers.apply');
+});
 
 
 Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
@@ -104,3 +110,4 @@ Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::clas
 Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
 Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
 Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
+
