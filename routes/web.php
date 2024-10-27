@@ -98,4 +98,9 @@ Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name(
 Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
 Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
 
-// Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
+Route::get('/user-info', [App\Http\Controllers\User\InfoController::class, 'index'])->name('user-info');
+
+Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::class, 'update'])->name('user-info.update');
+Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
+Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
+Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');

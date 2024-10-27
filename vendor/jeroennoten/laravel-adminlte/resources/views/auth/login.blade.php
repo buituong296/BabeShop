@@ -20,7 +20,28 @@
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
+
 @section('auth_body')
+@if ($errors->any())
+    <div class="alert alert-danger" id="error-message">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<script>
+    // Hide the error message after 5 seconds
+    setTimeout(function() {
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 10000); // 5000 milliseconds = 5 seconds
+</script>
+
     <form action="{{ $login_url }}" method="post">
         @csrf
 
