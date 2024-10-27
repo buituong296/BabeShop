@@ -300,6 +300,11 @@ return [
         'url'  => 'admin/dashboard',
         'icon' => 'fas fa-tachometer-alt',
     ],
+    [
+        'text' => 'Thống Kê',
+        'url'  => 'admin/statistics',
+        'icon' => 'fa-chart-line',
+    ],
 
     ['header' => 'QUẢN LÝ'],
     [
