@@ -190,8 +190,40 @@
             <!-- Xóa tài khoản -->
             <div class="pt-3 mt-2 mt-sm-3">
                 <h2 class="h6">Xóa tài khoản</h2>
-                <p class="fs-sm">Khi bạn xóa tài khoản, hồ sơ công khai của bạn sẽ bị vô hiệu hóa ngay lập tức. Nếu bạn thay đổi ý định trước khi 14 ngày trôi qua, hãy đăng nhập bằng email và mật khẩu của bạn, và chúng tôi sẽ gửi cho bạn một liên kết để kích hoạt lại tài khoản của bạn.</p>
-                <a class="text-danger fs-sm fw-medium" href="#!">Xóa tài khoản</a>
+                <p class="fs-sm">
+                    Khi bạn xóa tài khoản, hồ sơ công khai của bạn sẽ bị vô hiệu hóa ngay lập tức. 
+                    Nếu bạn thay đổi ý định trước khi 14 ngày trôi qua, hãy đăng nhập bằng email và mật khẩu của bạn, 
+                    và chúng tôi sẽ gửi cho bạn một liên kết để kích hoạt lại tài khoản của bạn.
+                </p>
+                <a class="text-danger fs-sm fw-medium" href="#!" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Xóa tài khoản</a>
+                
+                <!-- Delete Account Modal -->
+                <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteAccountModalLabel">Xác nhận xóa tài khoản</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn xóa tài khoản không? Hành động này không thể hoàn tác.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-danger" onclick="document.getElementById('delete-account-form').submit();">
+                                    Xóa tài khoản
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="delete-account-form" action="{{ route('user-info.delete') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                
+                
+
             </div>
         </div>
     </div>

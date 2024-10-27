@@ -102,5 +102,5 @@ Route::get('/user-info', [App\Http\Controllers\User\InfoController::class, 'inde
 
 Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::class, 'update'])->name('user-info.update');
 Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
-
 Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
+Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');

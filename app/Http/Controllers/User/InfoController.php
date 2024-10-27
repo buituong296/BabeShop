@@ -21,8 +21,7 @@ class InfoController extends Controller
         $user = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'tel' => 'required|string|max:255',
+         
         ]);
         $user->update($request->all());
         return redirect()->route('user-info')->with('success', 'Tên đã được cập nhât');
@@ -54,5 +53,20 @@ class InfoController extends Controller
        
         return redirect()->route('user-info')->with('success', 'Mật khẩu mới đã được cập nhật');
 
+    }
+    public function delete()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+   
+            $user->is_locked = 2;
+            $user->save();
+            Auth::logout();
+
+            return redirect('/')->with('status', 'Account locked successfully.');
+        }
+
+        return redirect()->back()->with('error', 'User not found.');
     }
 }
