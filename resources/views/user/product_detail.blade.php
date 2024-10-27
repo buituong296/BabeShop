@@ -366,13 +366,6 @@
                                         <div id="priceDisplay" class="h4 mb-0 me-3">Giá:
                                             {{ number_format($product->price, 0, ',', '.') }} VND</div>
                                         <div class="d-flex align-items-center text-success fs-sm ms-auto">
-                                            {{-- @if ($product->quantity > 0)
-                                        <i class="ci-check-circle fs-base me-2"></i>
-                                        Còn hàng
-                                        @else
-                                        <i class="ci-close-circle fs-base me-2"></i>
-                                        Hết hàng
-                                        @endif --}}
                                             <div id="quantityDisplay">Số lượng: {{ $product->quantity}}</div>
                                         </div>
                                     </div>

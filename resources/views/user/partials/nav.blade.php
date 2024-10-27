@@ -35,7 +35,7 @@
           <i class="ci-credit-card fs-base opacity-75 me-2"></i>
           Phương thức thanh toán
         </a>
-        <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-reviews.html">
+        <a class="list-group-item list-group-item-action d-flex align-items-center" href="{{route('comment')}}">
           <i class="ci-star fs-base opacity-75 me-2"></i>
           Đánh giá của tôi
         </a>
