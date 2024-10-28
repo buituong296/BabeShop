@@ -111,3 +111,6 @@ Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoControlle
 Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
 Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
 
+Route::get('/address', [App\Http\Controllers\User\AddressController::class, 'address'])->name('address');
+Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
+Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
