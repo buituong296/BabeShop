@@ -22,6 +22,8 @@ class AddressController extends Controller
     // Validate request
     $request->validate([
         'city' => 'required|string|max:255',
+        'district' => 'required|string|max:255',
+        'commune' => 'required|string|max:255',
         'address' => 'required|string|max:255',
         'primary' => 'nullable|boolean', // Ensure this is a boolean
     ]);
@@ -29,6 +31,8 @@ class AddressController extends Controller
     // Update address
     $address = Address::where('user_id', $user_id)->findOrFail($id);
     $address->city = $request->city;
+    $address->district = $request->district;
+    $address->commune = $request->commune;
     $address->address = $request->address;
 
     // Check if the primary checkbox is checked
