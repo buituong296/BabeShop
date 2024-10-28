@@ -100,6 +100,8 @@ Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name(
 Route::middleware(['auth'])->namespace('User')->group(function () {
 
     Route::post('/cart/apply-voucher', [UserVoucherController::class, 'applyVoucher'])->name('vouchers.apply');
+    Route::post('/cart/remove-voucher', [UserVoucherController::class, 'removeVoucher'])->name('vouchers.remove');
+
 });
 
 

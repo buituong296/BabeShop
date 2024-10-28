@@ -9,56 +9,94 @@ use Illuminate\Http\Request;
 
 class UserVoucherController extends Controller
 {
-    public function applyVoucher(Request $request)
+        public function applyVoucher(Request $request)
     {
         $request->validate([
             'voucher_code' => 'required|string|max:10',
         ]);
 
-        // Kiểm tra xem mã giảm giá có tồn tại và hợp lệ hay không
+        // Kiểm tra mã giảm giá hợp lệ
         $voucher = Voucher::where('code', $request->input('voucher_code'))
-                          ->where('start', '<=', now())
-                          ->where('end', '>=', now())
-                          ->first();
+                        ->where('start', '<=', now())
+                        ->where('end', '>=', now())
+                        ->first();
 
-        if (!$voucher) {
-            return redirect()->back()->with('error', 'Mã giảm giá không hợp lệ hoặc đã hết hạn.');
+        if (!$voucher || $voucher->quantity <= 0) {
+            return redirect()->back()->with('error', 'Mã giảm giá không hợp lệ, đã hết hạn, hoặc đã hết số lượt sử dụng.');
         }
 
-        // Lấy danh sách các mã giảm giá đã áp dụng từ session
+        // Lấy danh sách mã giảm giá từ session
         $appliedVouchers = session()->get('applied_vouchers', []);
 
-        // Kiểm tra xem mã giảm giá đã được áp dụng chưa
+        // Kiểm tra mã giảm giá đã áp dụng chưa
         if (array_key_exists($voucher->code, $appliedVouchers)) {
-            return redirect()->route('cart')->with('error', 'Mã giảm giá không hợp lệ hoặc đã được áp dụng.');
+            return redirect()->route('cart')->with('error', 'Mã giảm giá đã được áp dụng.');
         }
 
         // Thêm mã giảm giá vào session
         $appliedVouchers[$voucher->code] = $voucher->percentage;
         session()->put('applied_vouchers', $appliedVouchers);
 
-        // Tính tổng tiền giỏ hàng
+        // Tính toán tổng tiền và giảm giá
         $userId = auth()->id();
         $cartItems = Cart::where('user_id', $userId)->with('variant')->get();
         $totalAmount = $cartItems->sum(function ($item) {
             return $item->variant->sale_price * $item->quantity;
         });
 
-        // Tính tổng mức giảm giá từ tất cả các mã đã áp dụng
+        // Tính tổng giảm giá và giới hạn không vượt quá tổng giá trị đơn hàng
         $totalDiscount = 0;
         foreach ($appliedVouchers as $percentage) {
             $totalDiscount += $totalAmount * ($percentage / 100);
         }
+        $totalDiscount = min($totalDiscount, $totalAmount);
         $totalAfterDiscount = $totalAmount - $totalDiscount;
 
-
-        // Store cart and voucher info in session for checkout view
+        // Cập nhật session
         session()->put('total_amount', $totalAmount);
         session()->put('total_after_discount', $totalAfterDiscount);
         session()->put('total_discount', $totalDiscount);
 
+        // Giảm `quantity` và tăng `used_quantity` cho voucher
+        $voucher->decrement('quantity', 1);
+        $voucher->increment('used_quantity', 1);
 
         return view('user.cart', compact('cartItems', 'totalAmount', 'totalAfterDiscount', 'totalDiscount'))
             ->with('success', 'Áp dụng mã giảm giá thành công.');
     }
+
+
+    public function removeVoucher(Request $request)
+{
+    $voucherCode = $request->input('voucher_code');
+    $appliedVouchers = session()->get('applied_vouchers', []);
+
+    // Kiểm tra và xóa mã giảm giá khỏi session
+    if (isset($appliedVouchers[$voucherCode])) {
+        unset($appliedVouchers[$voucherCode]);
+        session()->put('applied_vouchers', $appliedVouchers);
+
+        // Tính lại tổng giảm giá và tổng thanh toán sau khi xóa mã
+        $totalAmount = session('total_amount', 0);
+        $totalDiscount = 0;
+        foreach ($appliedVouchers as $percentage) {
+            $totalDiscount += $totalAmount * ($percentage / 100);
+        }
+        $totalDiscount = min($totalDiscount, $totalAmount);
+        $totalAfterDiscount = $totalAmount - $totalDiscount;
+
+        // Cập nhật lại session với các giá trị mới
+        session()->put('total_discount', $totalDiscount);
+        session()->put('total_after_discount', $totalAfterDiscount);
+
+        return redirect()->route('cart')->with('success', 'Đã xóa mã giảm giá thành công.');
+    }
+
+    return redirect()->route('cart')->with('error', 'Mã giảm giá không hợp lệ.');
+}
+
+
+
+
+
 }

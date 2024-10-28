@@ -12,6 +12,10 @@
             @if (session('error'))
                 <div class="alert alert-danger mt-3">{{ session('error') }}</div>
             @endif
+            @if (session('success'))
+                <div class="alert alert-success mt-3">{{ session('success') }}</div>
+            @endif
+
             <!-- Items list -->
             <div class="col-lg-8">
                 <div class="pe-lg-2 pe-xl-3 me-xl-3">
@@ -27,7 +31,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+
+
 
 
 
@@ -124,29 +131,38 @@
                             <ul class="list-unstyled fs-sm gap-3 mb-0">
                                 <li class="d-flex justify-content-between">
                                     Tổng số tiền ({{ count($cartItems) }} mặt hàng):
-                                    <span class="text-dark-emphasis fw-medium">{{ number_format($totalAmount) }} VND</span>
+                                    <span class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
                                 </li>
-                                @if (isset($totalDiscount) && $totalDiscount > 0)
-                                    <li class="d-flex justify-content-between">
-                                        Mã giảm giá:
-                                        <span class="text-danger fw-medium">-{{ number_format($totalDiscount) }} VND</span>
-                                    </li>
+                                @if (session('total_discount', 0) > 0)
+                                    @foreach (session('applied_vouchers', []) as $code => $percentage)
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            Mã giảm giá {{ $code }} ({{ $percentage }}%):
+                                            <span class="text-danger fw-medium">
+                                                -{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND
+                                                <form action="{{ route('vouchers.remove') }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="voucher_code" value="{{ $code }}">
+                                                    <button type="submit" class="btn btn-link p-0 ms-2" style="color: #ff0000;">
+                                                        <i class="ci-close-circle"></i>
+                                                    </button>
+                                                </form>
+                                            </span>
+                                        </li>
+                                    @endforeach
                                 @endif
                             </ul>
 
                             <div class="border-top pt-4 mt-4">
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="fs-sm">Tổng thanh toán sau cùng:</span>
-                                    <span class="h5 mb-0">{{ number_format($totalAfterDiscount ?? $totalAmount) }}
-                                        VND</span>
+                                    <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
                                 </div>
                                 <a class="btn btn-lg btn-primary w-100" href="{{ route('checkout') }}">
                                     Đi tới thanh toán
                                     <i class="ci-chevron-right fs-lg ms-1 me-n1"></i>
                                 </a>
                                 <div class="nav justify-content-center fs-sm mt-3">
-                                    <a class="nav-link text-decoration-underline p-0 me-1" href="#authForm"
-                                        data-bs-toggle="offcanvas" role="button">Tạo tài khoản mới</a>
+                                    <a class="nav-link text-decoration-underline p-0 me-1" href="#authForm" data-bs-toggle="offcanvas" role="button">Tạo tài khoản mới</a>
                                     và nhận
                                     <span class="text-dark-emphasis fw-medium ms-1">239 điểm thưởng</span>
                                 </div>
