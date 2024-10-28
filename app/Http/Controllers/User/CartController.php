@@ -12,22 +12,27 @@ class CartController extends Controller
 {
     public function index()
     {
-        $userId = auth()->id(); // Get the currently authenticated user's ID
-        $cartItems = Cart::where('user_id', $userId)->with('variant')->get(); // Fetch cart items
-        $userId = auth()->id();
-        $cartItems = Cart::where('user_id', $userId)->with('variant')->get();
-        $products = Product::with('variants', 'category')->latest('id')->paginate(4);
-        $page = 2;
-        $products_2 = Product::with('variants', 'category')
-            ->latest('id')
-            ->paginate(4, ['*'], 'page', $page);
+    $userId = auth()->id();
+    $cartItems = Cart::where('user_id', $userId)->with('variant')->get();
+    $products = Product::with('variants', 'category')->latest('id')->paginate(4);
+    $page = 2;
+    $products_2 = Product::with('variants', 'category')
+        ->latest('id')
+        ->paginate(4, ['*'], 'page', $page);
 
-        $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
-        $totalAmount = $cartItems->sum(function ($item) {
-            return $item->variant->sale_price * $item->quantity;
-        });
-        return view('user.cart', compact('products', 'products_2', 'page', 'products_3', 'cartItems', 'totalAmount'));
+    $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
+
+    // Tính tổng tiền giỏ hàng
+    $totalAmount = $cartItems->sum(function ($item) {
+        return $item->variant->sale_price * $item->quantity;
+    });
+
+    // Lưu tổng tiền giỏ hàng vào session cho `order_summary.blade.php` sử dụng
+    session()->put('total_amount', $totalAmount);
+
+    return view('user.cart', compact('products', 'products_2', 'page', 'products_3', 'cartItems', 'totalAmount'));
     }
+
     public function addToCart(Request $request)
     {
         $request->validate([

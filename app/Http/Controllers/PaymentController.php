@@ -15,15 +15,15 @@ class PaymentController extends Controller
     protected $vnp_ReturnUrl;
     public function showVNPayForm(Request $request)
     {
-        $cartItems = Cart::where('user_id', Auth::id())->get(); // Lấy sản phẩm trong giỏ hàng
-        // Giả sử bạn lấy bill của người dùng hiện tại từ session hoặc từ cơ sở dữ liệu
-        $total = $cartItems->sum(function($item) {
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+        // Check if there's a discount applied and use it; otherwise, use the regular total.
+        $total = session()->has('total_after_discount') ? session('total_after_discount') : $cartItems->sum(function($item) {
             return $item->variant->sale_price * $item->quantity;
         });
 
-        // Trả về view và truyền bill vào
-        return view('user.checkout.checkout_online', compact('total','cartItems'));
+        return view('user.checkout.checkout_online', compact('total', 'cartItems'));
     }
+
 
     public function __construct()
     {

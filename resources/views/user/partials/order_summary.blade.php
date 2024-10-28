@@ -9,15 +9,16 @@
                 <a class="nav-link text-decoration-underline p-0" href="{{route('cart')}}">Edit</a>
               </div>
             </div>
+            <a class="d-flex align-items-center gap-2 text-decoration-none" href="#orderPreview" data-bs-toggle="offcanvas">
+                @foreach ($cartItems as $item)
+                <div class="ratio ratio-1x1" style="max-width: 64px">
+                  <img src="{{ asset('storage/' . $item->variant->product->image) }}" class="d-block p-1" alt="">
+                </div>
+                @endforeach
+                <i class="ci-chevron-right text-body fs-xl p-0 ms-auto"></i>
+              </a>
           </div>
-          <a class="d-flex align-items-center gap-2 text-decoration-none" href="#orderPreview" data-bs-toggle="offcanvas">
-            @foreach ($cartItems as $item)
-            <div class="ratio ratio-1x1" style="max-width: 64px">
-              <img src="{{ asset('storage/' . $item->variant->product->image) }}" class="d-block p-1" alt="">
-            </div>
-            @endforeach
-            <i class="ci-chevron-right text-body fs-xl p-0 ms-auto"></i>
-          </a>
+
         </div>
         <ul class="list-unstyled fs-sm gap-3 mb-0">
             <li class="d-flex justify-content-between">
