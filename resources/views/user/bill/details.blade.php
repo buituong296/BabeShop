@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-{{-- @section('content') --}}    {{-- Layout bị duplicate --}}
-    {{-- <div class="container">
+{{-- @section('content') --}} {{-- Layout bị duplicate --}}
+{{-- <div class="container">
         <h2>Bill Details</h2>
 
         <div class="card mb-3">
@@ -63,7 +63,7 @@
 
         <a href="{{ route('bill') }}" class="btn btn-primary">Quay lại lịch sử mua hàng</a>
     </div> --}}
-    {{-- @extends('layouts.app') --}}    {{-- Layout bị duplicate --}}
+{{-- @extends('layouts.app') --}} {{-- Layout bị duplicate --}}
 
 
 @section('content')
@@ -87,7 +87,20 @@
 
                     </div>
 
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                     <!-- Sortable orders table -->
                     <div
                         data-filter-list="{&quot;listClass&quot;: &quot;orders-list&quot;, &quot;sortClass&quot;: &quot;orders-sort&quot;, &quot;valueNames&quot;: [&quot;date&quot;, &quot;total&quot;]}">
@@ -105,20 +118,25 @@
                                         Chưa thanh toán
                                     @elseif($bill->bill_status == 1)
                                         Chờ xác nhận
-                                        <a href="{{ route('bill-cancel', $bill->id) }}" class="btn btn-primary w-25"> Hủy đơn hàng </a>
+                                        <a href="{{ route('bill-cancel', $bill->id) }}" class="btn btn-primary w-25"> Hủy
+                                            đơn hàng </a>
                                     @elseif($bill->bill_status == 2)
                                         Đã xác nhận
                                     @elseif($bill->bill_status == 3)
-                                        Đang giao hàng                                 
+                                        Đang giao hàng
                                     @elseif($bill->bill_status == 4)
                                         Giao hàng thành công
-                                        <a href="{{ route('bill-success', $bill->id) }}" class="btn btn-primary w-25"> Xác nhận nhận hàng </a>   
+                                        <a href="{{ route('bill-success', $bill->id) }}" class="btn btn-primary w-25"> Xác
+                                            nhận nhận hàng </a>
+                                        <a href="{{ route('bill-return', $bill->id) }}" class="btn btn-primary w-25"> Hoàn trả </a>
                                     @elseif($bill->bill_status == 5)
                                         Đã hủy
                                     @elseif($bill->bill_status == 6)
                                         Hoàn trả
                                     @elseif($bill->bill_status == 7)
                                         Hoàn thành
+                                    @elseif($bill->bill_status == 8)
+                                        Hoàn trả thành công
                                     @else
                                         Unknown
                                     @endif
@@ -253,4 +271,4 @@
       </table> --}}
 @endsection
 
-{{-- @endsection --}}    {{-- Layout bị duplicate --}}
+{{-- @endsection --}} {{-- Layout bị duplicate --}}

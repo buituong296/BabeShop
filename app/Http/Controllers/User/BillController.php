@@ -33,24 +33,27 @@ class BillController extends Controller
 
     public function billCancel($id)
     {
-        $billData = [
-            'bill_status' => 5,
-
-        ];
-        $billHistoryData = [
-            'bill_id' => $id,
-            'from_status' => 1,
-            'to_status' => 5,
-            'note' => 'Khách hàng xác nhận hủy đơn hàng',
-            'by_user' => Auth::id(),
-            'at_datetime' => now()
-        ];
-        Bill::where('id', $id)->update($billData);
-        BillHistory::create($billHistoryData);
-        return redirect()->route('bill-detail', ['id' => $id])->with([
-            'message' => 'Hủy đơn hàng thành công'
-        ]);
-        ;
+        $oldStatus = Bill::where('id', $id)->select('bill_status')->first();
+        if ($oldStatus == '1') {
+            $billData = [
+                'bill_status' => 5,
+            ];
+            $billHistoryData = [
+                'bill_id' => $id,
+                'from_status' => 1,
+                'to_status' => 5,
+                'note' => 'Khách hàng xác nhận hủy đơn hàng',
+                'by_user' => Auth::id(),
+                'at_datetime' => now()
+            ];
+            Bill::where('id', $id)->update($billData);
+            BillHistory::create($billHistoryData);
+            return redirect()->route('bill-detail', ['id' => $id])->with([
+                'message' => 'Hủy đơn hàng thành công'
+            ]);
+        } else {
+            return redirect()->route('bill-detail', ['id' => $id])->withErrors(['bill_status' => 'Không thể hủy do đơn hàng đã được xác nhận'])->withInput();
+        }
     }
     public function billSuccess($id)
     {
@@ -79,7 +82,8 @@ class BillController extends Controller
                 CommentUser::create($commentUser);
             }
 
-        };
+        }
+        ;
         Bill::where('id', $id)->update($billData);
         BillHistory::create($billHistoryData);
 
@@ -88,4 +92,25 @@ class BillController extends Controller
         ]);
         ;
     }
+    public function billReturn($id)
+    {
+        $billData = [
+            'bill_status' => 6,
+        ];
+        $billHistoryData = [
+            'bill_id' => $id,
+            'from_status' => 4,
+            'to_status' => 6,
+            'note' => 'Khách hàng xác nhận hoàn trả hàng',
+            'by_user' => Auth::id(),
+            'at_datetime' => now()
+        ];
+        Bill::where('id', $id)->update($billData);
+        BillHistory::create($billHistoryData);
+        return redirect()->route('bill-detail', ['id' => $id])->with([
+            'message' => 'Xác nhận trả hàng thành công'
+        ]);
+    }
+
+
 }

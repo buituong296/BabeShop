@@ -134,7 +134,20 @@
                         <div class="col-md-4 col-xl-6 mb-3 mb-md-0">
                             <h1 class="h2 me-3 mb-0">Đánh giá</h1>
                         </div>
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                         @foreach ($products as $item)
                             <!-- Item -->
                             <div class="d-md-flex align-items-center justify-content-between gap-4 border-bottom py-3">

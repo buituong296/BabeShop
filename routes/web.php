@@ -109,6 +109,7 @@ Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])-
 Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
 Route::get('/bill-cancel/{id}', [App\Http\Controllers\User\BillController::class, 'billCancel'])->name('bill-cancel');
 Route::get('/bill-success/{id}', [App\Http\Controllers\User\BillController::class, 'billSuccess'])->name('bill-success');
+Route::get('/bill-return/{id}', [App\Http\Controllers\User\BillController::class, 'billReturn'])->name('bill-return');
 
 
 Route::get('/user-comment', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comment');

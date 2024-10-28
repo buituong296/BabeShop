@@ -1,53 +1,6 @@
 @extends('layouts.app')
 @push('style')
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .rate {
-            float: left;
-            height: 46px;
-            padding: 0 10px;
-        }
-
-        .rate:not(:checked)>input {
-            position: absolute;
-            top: -9999px;
-        }
-
-        .rate:not(:checked)>label {
-            float: right;
-            width: 1em;
-            overflow: hidden;
-            white-space: nowrap;
-            cursor: pointer;
-            font-size: 30px;
-            color: #ccc;
-        }
-
-        .rate:not(:checked)>label:before {
-            content: '★ ';
-        }
-
-        .rate>input:checked~label {
-            color: #ffc700;
-        }
-
-        .rate:not(:checked)>label:hover,
-        .rate:not(:checked)>label:hover~label {
-            color: #deb217;
-        }
-
-        .rate>input:checked+label:hover,
-        .rate>input:checked+label:hover~label,
-        .rate>input:checked~label:hover,
-        .rate>input:checked~label:hover~label,
-        .rate>label:hover~input:checked~label {
-            color: #c59b08;
-        }
-    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endpush
 @section('content')
     <div class="container py-5 mt-n2 mt-sm-0">
@@ -100,38 +53,54 @@
                             </div>
                             <label class="form-label" for="review-text">Đánh giá <span class="text-danger">*</span></label>
                             <div class="mb-3">
-                                <div class="rate">
-                                    <input type="radio" id="star5" name="rating" value="5" />
-                                    <label for="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" name="rating" value="4" />
-                                    <label for="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" name="rating" value="3" />
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rating" value="2" />
-                                    <label for="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" name="rating" value="1" />
-                                    <label for="star1" title="text">1 star</label>
-                                </div>
+                                <div class="d-flex gap-1 fs-sm me-2 me-sm-3">
+                                    @if ($comment->rating >= '0')
+                                    <i class="ci-star-filled text-warning"></i>
+                                    @else
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endif
+                                    @if ($comment->rating >= '2')
+                                    <i class="ci-star-filled text-warning"></i>
+                                    @else
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endif
+                                    @if ($comment->rating >= '3')
+                                    <i class="ci-star-filled text-warning"></i>
+                                    @else
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endif
+                                    @if ($comment->rating >= '4')
+                                    <i class="ci-star-filled text-warning"></i>
+                                    @else
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endif
+                                    @if ($comment->rating >= '5')
+                                    <i class="ci-star-filled text-warning"></i>
+                                    @else
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endif
+
+
+                                  </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="review-text">Biến thể<span
                                         class="text-danger">*</span></label>
-                                <select class="form-control" name="variant_id">
-                                    @foreach ($variants as $item)
-                                        <option value="{{ $item->id }}">{{ $item->color->name }},
-                                            {{ $item->size->name }}</option>
-                                    @endforeach
-                                </select>
+                                <input class="form-control" name="variant_id" value="{{ $variant->color->name }}, {{ $variant->size->name }}" disabled>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="review-text">Bình luận <span
                                         class="text-danger">*</span></label>
-                                <textarea class="form-control" rows="4" id="review-text" required="" name="comment"></textarea>
-                                <small class="form-text">Bình luận không vượt quá 100 kí tự</small>
+                                <textarea class="form-control" rows="4" id="review-text"  required="" name="comment" disabled >{{$comment->comment}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Ảnh sản phẩm</label>
-                                <input class="form-control" type="file" id="formFile" name="album[]" multiple>
+                                <div class="d-flex">
+                                    @foreach($comment->album as $key => $image)
+                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%" 
+                                         data-bs-toggle="modal" data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
+                                @endforeach
+                                </div>
                             </div>
                             <div class="modal-footer flex-nowrap gap-3 border-0 px-4">
                                 <a href="{{route('comment')}}" class="btn btn-secondary w-100 m-0">Quay lại</a>
@@ -140,8 +109,20 @@
                         </form>
                     </div>
 
-
-
+                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="imageModalLabel">Xem ảnh</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img id="modalImage" src="" class="d-block w-100" alt="Ảnh lớn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
 
 
                 </div>
@@ -149,3 +130,15 @@
         </div>
     </div>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function() {
+        $('img[data-bs-toggle="modal"]').on('click', function() {
+            let imageUrl = $(this).data('image');
+            console.log(imageUrl); // Kiểm tra URL ảnh trong console
+
+            $('#modalImage').attr('src', imageUrl);
+        });
+    });
+</script>
+@endpush
