@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\ProductAlbum;
 use App\Models\Size;
@@ -23,6 +24,10 @@ class ProductDetailController extends Controller
         $productCategory = Product::where('category_id', $category->id)->where('id', '!=', $id)->get();
         $productNewest = Product::where('id', '!=', $id)->latest('id')->paginate(6);
         $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
+
+        $comments = Comment::where('product_id', $id)->get();
+
+
         return view('user.product_detail')->with([
             'product'   => $product,
             'category' => $category,
@@ -30,7 +35,8 @@ class ProductDetailController extends Controller
             'sizes' => $sizes,
             'productCategory' => $productCategory,
             'productNewest' => $productNewest,
-            'productAlbum' => $productAlbum
+            'productAlbum' => $productAlbum,
+            'comments' => $comments
         ]);
     }
     public function getVariantQuantity(Request $request)

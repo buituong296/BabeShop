@@ -127,7 +127,7 @@
                                 <label class="form-label" for="review-text">Bình luận <span
                                         class="text-danger">*</span></label>
                                 <textarea class="form-control" rows="4" id="review-text" required="" name="comment"></textarea>
-                                <small class="form-text">Bình luận không vượt quá 100 kí tự</small>
+                                <small class="form-text">Bình luận không vượt quá 300 kí tự</small>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Ảnh sản phẩm</label>

@@ -3,20 +3,19 @@
 @extends('layouts.app')
 
 @push('style')
-
 @endpush
 @section('content')
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <main class="content-wrapper">
         <div class="container mt-5">
 
@@ -155,12 +154,24 @@
                         <a class="d-none d-md-flex align-items-center gap-2 text-decoration-none ms-auto mb-1"
                             href="#reviews">
                             <div class="d-flex gap-1 fs-sm">
-                                <i class="ci-star-filled text-warning"></i>
-                                <i class="ci-star-filled text-warning"></i>
-                                <i class="ci-star-filled text-warning"></i>
-                                <i class="ci-star-filled text-warning"></i>
-                                <i class="ci-star-half text-warning"></i>
+                                {{-- Hiển thị sao --}}
+                                @php
+                                    $fullStars = floor($product->rating);
+                                    $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                    $emptyStars = 5 - $fullStars - $halfStar;
+                                @endphp
+                                @for ($i = 0; $i < $fullStars; $i++)
+                                    <i class="ci-star-filled text-warning"></i>
+                                @endfor
+                                @if ($halfStar)
+                                    <i class="ci-star-half text-warning"></i>
+                                @endif
+                                @for ($i = 0; $i < $emptyStars; $i++)
+                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                @endfor
                             </div>
+                            {{-- Hiển thị sao --}}
+
                             <span class="text-body-tertiary fs-xs">68 đánh giá</span>
                         </a>
                     </div>
@@ -190,7 +201,8 @@
 
                                     <div class="swiper-slide">
                                         <div class="ratio ratio-1x1">
-                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                alt="{{ $product->name }}"
                                                 data-zoom="{{ asset('storage/' . $product->image) }}"
                                                 alt="{{ $product->name }}"
                                                 data-zoom-options="{
@@ -304,17 +316,17 @@
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                                        <label class="form-label fw-semibold pb-1 mb-2">Kích thước</label>
+                                            <label class="form-label fw-semibold pb-1 mb-2">Kích thước</label>
 
-                                        <div class="d-flex flex-wrap gap-2">
-                                            @foreach ($sizes as $size)
-                                                <input type="radio" class="btn-check" name="size_id"
-                                                    id="{{ $size->name }}" value="{{ $size->id }}">
-                                                <label for="{{ $size->name }}"
-                                                    class="btn btn-sm btn-outline-secondary">{{ $size->name }}</label>
-                                            @endforeach
+                                            <div class="d-flex flex-wrap gap-2">
+                                                @foreach ($sizes as $size)
+                                                    <input type="radio" class="btn-check" name="size_id"
+                                                        id="{{ $size->name }}" value="{{ $size->id }}">
+                                                    <label for="{{ $size->name }}"
+                                                        class="btn btn-sm btn-outline-secondary">{{ $size->name }}</label>
+                                                @endforeach
 
-                                        </div>
+                                            </div>
 
                                     </div>
 
@@ -366,7 +378,7 @@
                                         <div id="priceDisplay" class="h4 mb-0 me-3">Giá:
                                             {{ number_format($product->price, 0, ',', '.') }} VND</div>
                                         <div class="d-flex align-items-center text-success fs-sm ms-auto">
-                                            <div id="quantityDisplay">Số lượng: {{ $product->quantity}}</div>
+                                            <div id="quantityDisplay">Số lượng: {{ $product->quantity }}</div>
                                         </div>
                                     </div>
 
@@ -378,8 +390,8 @@
                                                 aria-label="Decrement quantity">
                                                 <i class="ci-minus"></i>
                                             </button>
-                                            <input type="number" class="form-control form-control-lg" name="quantity" value="1"
-                                                min="1" max="10" readonly="">
+                                            <input type="number" class="form-control form-control-lg" name="quantity"
+                                                value="1" min="1" max="10" readonly="">
                                             <button type="button" class="btn btn-icon btn-lg" data-increment=""
                                                 aria-label="Increment quantity">
                                                 <i class="ci-plus"></i>
@@ -405,7 +417,7 @@
                                             Thêm vào giỏ hàng
                                         </button>
                                     </div>
-                                </form>
+                                    </form>
 
                                     <!-- Features -->
                                     <div class="d-flex flex-wrap gap-3 gap-xl-4 pb-4 pb-lg-5 mb-2 mb-lg-0 mb-xl-2">
@@ -454,7 +466,7 @@
                                             <div class="text-body-emphasis text-nowrap">Pay by installments</div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -520,139 +532,77 @@
                             </div>
 
                             <!-- Review -->
-                            <div class="border-bottom py-3 mb-3">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="text-nowrap me-3">
-                                        <span class="h6 mb-0">Rafael Marquez</span>
-                                        <i class="ci-check-circle text-success align-middle ms-1" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" data-bs-custom-class="tooltip-sm"
-                                            data-bs-title="Verified customer"></i>
+                            @foreach ($comments as $comment)
+                                <div class="border-bottom py-3 mb-3">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="text-nowrap me-3">
+                                            <span class="h6 mb-0">{{ $comment->user->name }}</span>
+                                            <i class="ci-check-circle text-success align-middle ms-1"
+                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                data-bs-custom-class="tooltip-sm" data-bs-title="Verified customer"></i>
+                                        </div>
+                                        <span
+                                            class="text-body-secondary fs-sm ms-auto">{{ $comment->created_at->format('d-m-Y') }}</span>
                                     </div>
-                                    <span class="text-body-secondary fs-sm ms-auto">28/4/2024</span>
-                                </div>
-                                <div class="d-flex gap-1 fs-sm pb-2 mb-1">
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
+                                    <div class="d-flex gap-1 fs-sm pb-2 mb-1">
+                                        {{-- Hiển thị sao --}}
+                                        @php
+                                            $fullStars = floor($comment->rating);
+                                            $halfStar = $comment->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $emptyStars = 5 - $comment->rating - $halfStar;
+                                        @endphp
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="ci-star-filled text-warning"></i>
+                                        @endfor
+                                        @if ($halfStar)
+                                            <i class="ci-star-half text-warning"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                                        @endfor
+                                    </div>
+                                    {{-- Hiển thị sao --}}
                                 </div>
                                 <ul class="list-inline gap-2 pb-2 mb-1">
-                                    <li class="fs-sm me-4"><span class="text-dark-emphasis fw-medium">Màu sắc:</span> Blue
+                                    <li class="fs-sm me-4"><span class="text-dark-emphasis fw-medium">Màu sắc:</span>
+                                        Blue
                                     </li>
-                                    <li class="fs-sm"><span class="text-dark-emphasis fw-medium">Kích thước:</span> 128GB
-                                    </li>
-                                </ul>
-                                <p class="fs-sm">The phone has a new A15 Bionic chip, which makes it lightning-fast and
-                                    responsive. The camera system has also been upgraded, and it now includes a 12-megapixel
-                                    ultra-wide lens and a 12-megapixel wide lens.</p>
-                                {{-- <ul class="list-unstyled fs-sm pb-2 mb-1">
-                                <li><span class="text-dark-emphasis fw-medium">Pros:</span> Powerful A15 Bionic chip,
-                                    improved camera</li>
-                                <li><span class="text-dark-emphasis fw-medium">Cons:</span> High price tag</li>
-                            </ul> --}}
-                                {{-- <div class="nav align-items-center">
-                                <button type="button" class="nav-link animate-underline px-0">
-                                    <i class="ci-corner-down-right fs-base ms-1 me-1"></i>
-                                    <span class="animate-target">Reply</span>
-                                </button>
-                                <button type="button"
-                                    class="nav-link text-body-secondary animate-scale px-0 ms-auto me-n1">
-                                    <i class="ci-thumbs-up fs-base animate-target me-1"></i>
-                                    0
-                                </button>
-                                <hr class="vr my-2 mx-3">
-                                <button type="button" class="nav-link text-body-secondary animate-scale px-0 ms-n1">
-                                    <i class="ci-thumbs-down fs-base animate-target me-1"></i>
-                                    0
-                                </button>
-                            </div> --}}
-                            </div>
-                            <!-- Review -->
-                            <div class="border-bottom py-3 mb-3">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="text-nowrap me-3">
-                                        <span class="h6 mb-0">Rafael Marquez</span>
-                                        <i class="ci-check-circle text-success align-middle ms-1" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" data-bs-custom-class="tooltip-sm"
-                                            data-bs-title="Verified customer"></i>
-                                    </div>
-                                    <span class="text-body-secondary fs-sm ms-auto">28/4/2024</span>
-                                </div>
-                                <div class="d-flex gap-1 fs-sm pb-2 mb-1">
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                    <i class="ci-star-filled text-warning"></i>
-                                </div>
-                                <ul class="list-inline gap-2 pb-2 mb-1">
-                                    <li class="fs-sm me-4"><span class="text-dark-emphasis fw-medium">Màu sắc:</span> Blue
-                                    </li>
-                                    <li class="fs-sm"><span class="text-dark-emphasis fw-medium">Kích thước:</span> 128GB
+                                    <li class="fs-sm"><span class="text-dark-emphasis fw-medium">Kích thước:</span>
+                                        128GB
                                     </li>
                                 </ul>
-                                <p class="fs-sm">The phone has a new A15 Bionic chip, which makes it lightning-fast and
-                                    responsive. The camera system has also been upgraded, and it now includes a 12-megapixel
-                                    ultra-wide lens and a 12-megapixel wide lens.</p>
-                                {{-- <ul class="list-unstyled fs-sm pb-2 mb-1">
-                                <li><span class="text-dark-emphasis fw-medium">Pros:</span> Powerful A15 Bionic chip,
-                                    improved camera</li>
-                                <li><span class="text-dark-emphasis fw-medium">Cons:</span> High price tag</li>
-                            </ul> --}}
-                                {{-- <div class="nav align-items-center">
-                                <button type="button" class="nav-link animate-underline px-0">
-                                    <i class="ci-corner-down-right fs-base ms-1 me-1"></i>
-                                    <span class="animate-target">Reply</span>
-                                </button>
-                                <button type="button"
-                                    class="nav-link text-body-secondary animate-scale px-0 ms-auto me-n1">
-                                    <i class="ci-thumbs-up fs-base animate-target me-1"></i>
-                                    0
-                                </button>
-                                <hr class="vr my-2 mx-3">
-                                <button type="button" class="nav-link text-body-secondary animate-scale px-0 ms-n1">
-                                    <i class="ci-thumbs-down fs-base animate-target me-1"></i>
-                                    0
-                                </button>
-                            </div> --}}
-                            </div>
-                            {{-- <div class="nav">
-                            <a class="nav-link text-primary animate-underline px-0"
-                                href="shop-product-reviews-electronics.html">
-                                <span class="animate-target">Toàn </span>
-                                <i class="ci-chevron-right fs-base ms-1"></i>
-                            </a>
-                        </div> --}}
+                                <p class="fs-sm">{{ $comment->comment }}.</p>
                         </div>
-
-
+                        @endforeach
                     </div>
-                </section>
 
 
-                <!-- Viewed products (Carousel) -->
-                <section class="container pb-4 pb-md-5 mb-2 mb-sm-0 mb-lg-2 mb-xl-4">
-                    <h2 class="h3 border-bottom pb-4 mb-0">Sản phẩm có liên quan</h2>
+        </div>
+        </section>
 
-                    <!-- Product carousel -->
-                    <div class="position-relative mx-md-1">
 
-                        <!-- External slider prev/next buttons visible on screens > 500px wide (sm breakpoint) -->
-                        <button type="button"
-                            class="viewed-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
-                            aria-label="Prev">
-                            <i class="ci-chevron-left fs-lg animate-target"></i>
-                        </button>
-                        <button type="button"
-                            class="viewed-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
-                            aria-label="Next">
-                            <i class="ci-chevron-right fs-lg animate-target"></i>
-                        </button>
+        <!-- Viewed products (Carousel) -->
+        <section class="container pb-4 pb-md-5 mb-2 mb-sm-0 mb-lg-2 mb-xl-4">
+            <h2 class="h3 border-bottom pb-4 mb-0">Sản phẩm có liên quan</h2>
 
-                        <!-- Slider -->
-                        <div class="swiper py-4 px-sm-3"
-                            data-swiper="{
+            <!-- Product carousel -->
+            <div class="position-relative mx-md-1">
+
+                <!-- External slider prev/next buttons visible on screens > 500px wide (sm breakpoint) -->
+                <button type="button"
+                    class="viewed-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
+                    aria-label="Prev">
+                    <i class="ci-chevron-left fs-lg animate-target"></i>
+                </button>
+                <button type="button"
+                    class="viewed-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
+                    aria-label="Next">
+                    <i class="ci-chevron-right fs-lg animate-target"></i>
+                </button>
+
+                <!-- Slider -->
+                <div class="swiper py-4 px-sm-3"
+                    data-swiper="{
                         &quot;slidesPerView&quot;: 2,
                         &quot;spaceBetween&quot;: 24,
                         &quot;loop&quot;: true,
@@ -669,138 +619,135 @@
                           }
                         }
                       }">
-                            <div class="swiper-wrapper">
+                    <div class="swiper-wrapper">
 
-                                <!-- Item -->
-                                @foreach ($productCategory as $item)
-                                    <div class="swiper-slide">
-                                        <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
-                                            <div class="position-relative">
-                                                <div
-                                                    class="position-absolute top-0 end-0 z-2 hover-effect-target opacity-0 mt-3 me-3">
-                                                    <div class="d-flex flex-column gap-2">
-                                                        <button type="button"
-                                                            class="btn btn-icon btn-secondary animate-pulse d-none d-lg-inline-flex"
-                                                            aria-label="Add to Wishlist">
-                                                            <i class="ci-heart fs-base animate-target"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-icon btn-secondary animate-rotate d-none d-lg-inline-flex"
-                                                            aria-label="Compare">
-                                                            <i class="ci-refresh-cw fs-base animate-target"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="dropdown d-lg-none position-absolute top-0 end-0 z-2 mt-2 me-2">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-sm btn-secondary bg-body"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"
-                                                        aria-label="More actions">
-                                                        <i class="ci-more-vertical fs-lg"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end fs-xs p-2"
-                                                        style="min-width: auto">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#!">
-                                                                <i class="ci-heart fs-sm ms-n1 me-2"></i>
-                                                                Add to Wishlist
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#!">
-                                                                <i class="ci-refresh-cw fs-sm ms-n1 me-2"></i>
-                                                                Compare
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <a class="d-block rounded-top overflow-hidden p-3 p-sm-4"
-                                                    href="{{ route('productdetail', $item->id) }}">
-                                                    <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
-                                                        <img src="{{ asset('storage/' . $item->image) }}"
-                                                            alt="{{ $item->name }}">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
-                                                <div class="d-flex align-items-center gap-2 mb-2">
-                                                    <div class="d-flex gap-1 fs-xs">
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                    </div>
-                                                    <span class="text-body-tertiary fs-xs">(187)</span>
-                                                </div>
-                                                <h3 class="pb-1 mb-2">
-                                                    <a class="d-block fs-sm fw-medium text-truncate"
-                                                        href="{{ route('productdetail', $item->id) }}">
-                                                        <span class="animate-target">{{ $item->name }}</span>
-                                                    </a>
-                                                </h3>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div class="h5 lh-1 mb-0">
-                                                        {{ number_format($item->price, 0, ',', '.') }} VND</div>
-                                                    <button type="button"
-                                                        class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
-                                                        aria-label="Add to Cart">
-                                                        <i class="ci-shopping-cart fs-base animate-target"></i>
-                                                    </button>
-                                                </div>
+                        <!-- Item -->
+                        @foreach ($productCategory as $item)
+                            <div class="swiper-slide">
+                                <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
+                                    <div class="position-relative">
+                                        <div
+                                            class="position-absolute top-0 end-0 z-2 hover-effect-target opacity-0 mt-3 me-3">
+                                            <div class="d-flex flex-column gap-2">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-pulse d-none d-lg-inline-flex"
+                                                    aria-label="Add to Wishlist">
+                                                    <i class="ci-heart fs-base animate-target"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-rotate d-none d-lg-inline-flex"
+                                                    aria-label="Compare">
+                                                    <i class="ci-refresh-cw fs-base animate-target"></i>
+                                                </button>
                                             </div>
                                         </div>
+                                        <div class="dropdown d-lg-none position-absolute top-0 end-0 z-2 mt-2 me-2">
+                                            <button type="button" class="btn btn-icon btn-sm btn-secondary bg-body"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                aria-label="More actions">
+                                                <i class="ci-more-vertical fs-lg"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end fs-xs p-2" style="min-width: auto">
+                                                <li>
+                                                    <a class="dropdown-item" href="#!">
+                                                        <i class="ci-heart fs-sm ms-n1 me-2"></i>
+                                                        Add to Wishlist
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#!">
+                                                        <i class="ci-refresh-cw fs-sm ms-n1 me-2"></i>
+                                                        Compare
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <a class="d-block rounded-top overflow-hidden p-3 p-sm-4"
+                                            href="{{ route('productdetail', $item->id) }}">
+                                            <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
+                                                <img src="{{ asset('storage/' . $item->image) }}"
+                                                    alt="{{ $item->name }}">
+                                            </div>
+                                        </a>
                                     </div>
-                                @endforeach
-
-
+                                    <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <div class="d-flex gap-1 fs-xs">
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                            </div>
+                                            <span class="text-body-tertiary fs-xs">(187)</span>
+                                        </div>
+                                        <h3 class="pb-1 mb-2">
+                                            <a class="d-block fs-sm fw-medium text-truncate"
+                                                href="{{ route('productdetail', $item->id) }}">
+                                                <span class="animate-target">{{ $item->name }}</span>
+                                            </a>
+                                        </h3>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="h5 lh-1 mb-0">
+                                                {{ number_format($item->price, 0, ',', '.') }} VND</div>
+                                            <button type="button"
+                                                class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
+                                                aria-label="Add to Cart">
+                                                <i class="ci-shopping-cart fs-base animate-target"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
 
 
-
-
-                        <!-- External slider prev/next buttons visible on screens < 500px wide (sm breakpoint) -->
-                        <div class="d-flex justify-content-center gap-2 mt-n2 mb-3 pb-1 d-sm-none">
-                            <button type="button"
-                                class="viewed-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start me-1"
-                                aria-label="Prev">
-                                <i class="ci-chevron-left fs-lg animate-target"></i>
-                            </button>
-                            <button type="button"
-                                class="viewed-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end"
-                                aria-label="Next">
-                                <i class="ci-chevron-right fs-lg animate-target"></i>
-                            </button>
-                        </div>
                     </div>
-                </section>
+                </div>
 
 
 
-                <!-- Trending products (Carousel) -->
-                <section class="container pb-4 pb-md-5 mb-2 mb-sm-0 mb-lg-2 mb-xl-4">
-                    <h2 class="h3 border-bottom pb-4 mb-0">Sản phẩm mới</h2>
 
-                    <!-- Product carousel -->
-                    <div class="position-relative mx-md-1">
+                <!-- External slider prev/next buttons visible on screens < 500px wide (sm breakpoint) -->
+                <div class="d-flex justify-content-center gap-2 mt-n2 mb-3 pb-1 d-sm-none">
+                    <button type="button"
+                        class="viewed-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start me-1"
+                        aria-label="Prev">
+                        <i class="ci-chevron-left fs-lg animate-target"></i>
+                    </button>
+                    <button type="button"
+                        class="viewed-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end"
+                        aria-label="Next">
+                        <i class="ci-chevron-right fs-lg animate-target"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
 
-                        <!-- External slider prev/next buttons visible on screens > 500px wide (sm breakpoint) -->
-                        <button type="button"
-                            class="trending-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
-                            aria-label="Prev">
-                            <i class="ci-chevron-left fs-lg animate-target"></i>
-                        </button>
-                        <button type="button"
-                            class="trending-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
-                            aria-label="Next">
-                            <i class="ci-chevron-right fs-lg animate-target"></i>
-                        </button>
 
-                        <!-- Slider -->
-                        <div class="swiper py-4 px-sm-3"
-                            data-swiper="{
+
+        <!-- Trending products (Carousel) -->
+        <section class="container pb-4 pb-md-5 mb-2 mb-sm-0 mb-lg-2 mb-xl-4">
+            <h2 class="h3 border-bottom pb-4 mb-0">Sản phẩm mới</h2>
+
+            <!-- Product carousel -->
+            <div class="position-relative mx-md-1">
+
+                <!-- External slider prev/next buttons visible on screens > 500px wide (sm breakpoint) -->
+                <button type="button"
+                    class="trending-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
+                    aria-label="Prev">
+                    <i class="ci-chevron-left fs-lg animate-target"></i>
+                </button>
+                <button type="button"
+                    class="trending-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
+                    aria-label="Next">
+                    <i class="ci-chevron-right fs-lg animate-target"></i>
+                </button>
+
+                <!-- Slider -->
+                <div class="swiper py-4 px-sm-3"
+                    data-swiper="{
                                 &quot;slidesPerView&quot;: 2,
                                 &quot;spaceBetween&quot;: 24,
                                 &quot;loop&quot;: true,
@@ -817,110 +764,107 @@
                                   }
                                 }
                               }">
-                            <div class="swiper-wrapper">
+                    <div class="swiper-wrapper">
 
-                                <!-- Item -->
-                                @foreach ($productNewest as $item)
-                                    <div class="swiper-slide">
-                                        <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
-                                            <div class="position-relative">
-                                                <div
-                                                    class="position-absolute top-0 end-0 z-2 hover-effect-target opacity-0 mt-3 me-3">
-                                                    <div class="d-flex flex-column gap-2">
-                                                        <button type="button"
-                                                            class="btn btn-icon btn-secondary animate-pulse d-none d-lg-inline-flex"
-                                                            aria-label="Add to Wishlist">
-                                                            <i class="ci-heart fs-base animate-target"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-icon btn-secondary animate-rotate d-none d-lg-inline-flex"
-                                                            aria-label="Compare">
-                                                            <i class="ci-refresh-cw fs-base animate-target"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="dropdown d-lg-none position-absolute top-0 end-0 z-2 mt-2 me-2">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-sm btn-secondary bg-body"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"
-                                                        aria-label="More actions">
-                                                        <i class="ci-more-vertical fs-lg"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end fs-xs p-2"
-                                                        style="min-width: auto">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#!">
-                                                                <i class="ci-heart fs-sm ms-n1 me-2"></i>
-                                                                Add to Wishlist
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#!">
-                                                                <i class="ci-refresh-cw fs-sm ms-n1 me-2"></i>
-                                                                Compare
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <a class="d-block rounded-top overflow-hidden p-3 p-sm-4"
-                                                    href="{{ route('productdetail', $item->id) }}">
-                                                    <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
-                                                        <img src="{{ asset('storage/' . $item->image) }}"
-                                                            alt="{{ $item->name }}">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
-                                                <div class="d-flex align-items-center gap-2 mb-2">
-                                                    <div class="d-flex gap-1 fs-xs">
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                        <i class="ci-star-filled text-warning"></i>
-                                                    </div>
-                                                    <span class="text-body-tertiary fs-xs">(187)</span>
-                                                </div>
-                                                <h3 class="pb-1 mb-2">
-                                                    <a class="d-block fs-sm fw-medium text-truncate"
-                                                        href="{{ route('productdetail', $item->id) }}">
-                                                        <span class="animate-target">{{ $item->name }}</span>
-                                                    </a>
-                                                </h3>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div class="h5 lh-1 mb-0">
-                                                        {{ number_format($product->price, 0, ',', '.') }} VND</div>
-                                                    <button type="button"
-                                                        class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
-                                                        aria-label="Add to Cart">
-                                                        <i class="ci-shopping-cart fs-base animate-target"></i>
-                                                    </button>
-                                                </div>
+                        <!-- Item -->
+                        @foreach ($productNewest as $item)
+                            <div class="swiper-slide">
+                                <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
+                                    <div class="position-relative">
+                                        <div
+                                            class="position-absolute top-0 end-0 z-2 hover-effect-target opacity-0 mt-3 me-3">
+                                            <div class="d-flex flex-column gap-2">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-pulse d-none d-lg-inline-flex"
+                                                    aria-label="Add to Wishlist">
+                                                    <i class="ci-heart fs-base animate-target"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-rotate d-none d-lg-inline-flex"
+                                                    aria-label="Compare">
+                                                    <i class="ci-refresh-cw fs-base animate-target"></i>
+                                                </button>
                                             </div>
                                         </div>
+                                        <div class="dropdown d-lg-none position-absolute top-0 end-0 z-2 mt-2 me-2">
+                                            <button type="button" class="btn btn-icon btn-sm btn-secondary bg-body"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                aria-label="More actions">
+                                                <i class="ci-more-vertical fs-lg"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end fs-xs p-2" style="min-width: auto">
+                                                <li>
+                                                    <a class="dropdown-item" href="#!">
+                                                        <i class="ci-heart fs-sm ms-n1 me-2"></i>
+                                                        Add to Wishlist
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#!">
+                                                        <i class="ci-refresh-cw fs-sm ms-n1 me-2"></i>
+                                                        Compare
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <a class="d-block rounded-top overflow-hidden p-3 p-sm-4"
+                                            href="{{ route('productdetail', $item->id) }}">
+                                            <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
+                                                <img src="{{ asset('storage/' . $item->image) }}"
+                                                    alt="{{ $item->name }}">
+                                            </div>
+                                        </a>
                                     </div>
-                                @endforeach
-
-
+                                    <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <div class="d-flex gap-1 fs-xs">
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                                <i class="ci-star-filled text-warning"></i>
+                                            </div>
+                                            <span class="text-body-tertiary fs-xs">(187)</span>
+                                        </div>
+                                        <h3 class="pb-1 mb-2">
+                                            <a class="d-block fs-sm fw-medium text-truncate"
+                                                href="{{ route('productdetail', $item->id) }}">
+                                                <span class="animate-target">{{ $item->name }}</span>
+                                            </a>
+                                        </h3>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="h5 lh-1 mb-0">
+                                                {{ number_format($product->price, 0, ',', '.') }} VND</div>
+                                            <button type="button"
+                                                class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
+                                                aria-label="Add to Cart">
+                                                <i class="ci-shopping-cart fs-base animate-target"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
 
-                        <!-- External slider prev/next buttons visible on screens < 500px wide (sm breakpoint) -->
-                        <div class="d-flex justify-content-center gap-2 mt-n2 mb-3 pb-1 d-sm-none">
-                            <button type="button"
-                                class="trending-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start me-1"
-                                aria-label="Prev">
-                                <i class="ci-chevron-left fs-lg animate-target"></i>
-                            </button>
-                            <button type="button"
-                                class="trending-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end"
-                                aria-label="Next">
-                                <i class="ci-chevron-right fs-lg animate-target"></i>
-                            </button>
-                        </div>
+
                     </div>
-                </section>
+                </div>
+
+                <!-- External slider prev/next buttons visible on screens < 500px wide (sm breakpoint) -->
+                <div class="d-flex justify-content-center gap-2 mt-n2 mb-3 pb-1 d-sm-none">
+                    <button type="button"
+                        class="trending-prev btn btn-prev btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start me-1"
+                        aria-label="Prev">
+                        <i class="ci-chevron-left fs-lg animate-target"></i>
+                    </button>
+                    <button type="button"
+                        class="trending-next btn btn-next btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end"
+                        aria-label="Next">
+                        <i class="ci-chevron-right fs-lg animate-target"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         </div>
 
@@ -928,41 +872,39 @@
     </main>
 @endsection
 @push('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Lắng nghe sự thay đổi của radio button cho color và size
+            $('input[name="color_id"], input[name="size_id"]').change(function() {
+                var colorId = $('input[name="color_id"]:checked').val();
+                var sizeId = $('input[name="size_id"]:checked').val();
+                var productId = {{ $product->id }}; // Thay bằng ID của sản phẩm
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Lắng nghe sự thay đổi của radio button cho color và size
-        $('input[name="color_id"], input[name="size_id"]').change(function() {
-            var colorId = $('input[name="color_id"]:checked').val();
-            var sizeId = $('input[name="size_id"]:checked').val();
-            var productId = {{ $product->id }}; // Thay bằng ID của sản phẩm
+                // Kiểm tra xem color và size đã được chọn chưa
+                if (colorId && sizeId) {
+                    $.ajax({
+                        url: '/get-variant-quantity',
+                        method: 'GET',
+                        data: {
+                            product_id: productId,
+                            color_id: colorId,
+                            size_id: sizeId,
 
-            // Kiểm tra xem color và size đã được chọn chưa
-            if (colorId && sizeId) {
-                $.ajax({
-                    url: '/get-variant-quantity',
-                    method: 'GET',
-                    data: {
-                        product_id: productId,
-                        color_id: colorId,
-                        size_id: sizeId,
-
-                    },
-                    success: function(response) {
-                        // Hiển thị số lượng
-                        $('#quantityDisplay').text('Số lượng: ' + response.quantity);
-                        if (response.price!=0) {
-                        $('#priceDisplay').text('Giá: ' + Number(response.price)
-                            .toLocaleString('vi-VN') + ' VND');
-                        }else{
-                            $('#priceDisplay').text('Biến thể không tồn tại');
-                        }
-                    },
-                });
-            }
+                        },
+                        success: function(response) {
+                            // Hiển thị số lượng
+                            $('#quantityDisplay').text('Số lượng: ' + response.quantity);
+                            if (response.price != 0) {
+                                $('#priceDisplay').text('Giá: ' + Number(response.price)
+                                    .toLocaleString('vi-VN') + ' VND');
+                            } else {
+                                $('#priceDisplay').text('Biến thể không tồn tại');
+                            }
+                        },
+                    });
+                }
+            });
         });
-    });
-</script>
-
+    </script>
 @endpush

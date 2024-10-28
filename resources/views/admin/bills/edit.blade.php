@@ -73,6 +73,9 @@
                             <select class="form-control" name="toStatus">
 
                                 @foreach ($billStatuses as $billStatus)
+                                    @if (in_array($billStatus->id, $blockedOptions))
+                                        @continue
+                                    @endif
                                     <option value="{{ $billStatus->id }}"
                                         @if ($billStatus->id == $bill->bill_status) selected @endif>{{ $billStatus->name }}</option>
                                 @endforeach
@@ -89,7 +92,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card mb-4">
             <div class="card-body">
                 <h5>Thông Tin Sản Phẩm</h5>
