@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Cart;
@@ -10,13 +11,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Bill;
 use App\Models\BillHistory;
 use App\Models\BillItem;
+use App\Models\User;
 
 class CheckOutController extends Controller
 {
     public function checkout()
     {
         $products = Product::with('variants', 'category')->latest('id')->paginate(4);
-        return view('user.checkout.checkout', compact('products'));
+        $user_info = Auth::user();
+        $address = Auth::user()->addresses()->where('status', 1)->first();
+        
+        
+        return view('user.checkout.checkout', compact('products','user_info','address'));
     }
     public function checkout_payment()
     {
@@ -40,15 +46,18 @@ public function storeCustomerInfo(Request $request)
     // Validate request
     $validatedData = $request->validate([
         'user_name' => 'required|string|max:255',
-        'user_address' => 'required|string|max:255',
-        'user_tel' => 'required|string|max:20',
+        'tel' => 'required|string|max:15',
+        'city' => 'required|string|max:255',
+        'district' => 'required|string|max:255',
+        'commune' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
     ]);
 
     // Store customer information in session
     session([
         'checkout.customer_info' => $validatedData
     ]);
-
+    // dd($request->all());
     // Redirect to payment method selection
     return redirect()->route('checkout.payment-method');
 }

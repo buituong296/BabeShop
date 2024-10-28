@@ -52,6 +52,8 @@
             <div class="collapse primary-address show" id="primaryAddressPreview">
               <ul class="list-unstyled fs-sm m-0">
                 <li>{{ $item->city }}, Việt Nam</li>
+                <li>{{ $item->district }} </li>
+                <li>{{ $item->commune }} </li>
                 <li>{{$item->address}}</li>
               </ul>
             </div>
@@ -66,7 +68,20 @@
                     <div class="invalid-feedback">Vui lòng nhập tên thành phố của bạn!</div>
                   </div>
                 </div>
-               
+                <div class="col-sm-8">
+                  <div class="position-relative">
+                    <label for="psa-address" class="form-label">Quận/Huyện</label>
+                    <input type="text" class="form-control" id="district" name='district' value="{{ $item->district }}" required="">
+                    <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn!</div>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="position-relative">
+                    <label for="psa-address" class="form-label">Xã/Phường</label>
+                    <input type="text" class="form-control" id="commune" name='commune' value="{{ $item->commune }}" required="">
+                    <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn!</div>
+                  </div>
+                </div>
                 <div class="col-sm-8">
                   <div class="position-relative">
                     <label for="psa-address" class="form-label">Địa chỉ</label>
@@ -83,6 +98,7 @@
                       name="primary" 
                       value="1" 
                       {{ $item->status == 1 ? 'checked' : '' }} 
+                      checked
                       
                   >
                   <label for="set-primary-{{ $item->id }}" class="form-check-label">
