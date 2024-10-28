@@ -20,8 +20,8 @@ class CheckOutController extends Controller
         $products = Product::with('variants', 'category')->latest('id')->paginate(4);
         $user_info = Auth::user();
         $address = Auth::user()->addresses()->where('status', 1)->first();
-        
-        
+
+
         return view('user.checkout.checkout', compact('products','user_info','address'));
     }
     public function checkout_payment()
@@ -108,6 +108,16 @@ public function storeBill()
     $total = $cartItems->sum(function($item) {
         return $item->variant->sale_price * $item->quantity;
     });
+    $userAddressArray = [
+        'address'=>$customerInfo['address'],
+            'commune'=>$customerInfo['commune'],
+            'district'=>$customerInfo['district'],
+            'city'=>$customerInfo['city'],
+    ];
+    $userAddressString = implode(', ', $userAddressArray);
+    $totalDiscount = session()->get('total_discount');
+    $totalAll= $total - $totalDiscount;
+
 
     // Tạo hóa đơn mới
     $bill = Bill::create([
@@ -115,9 +125,9 @@ public function storeBill()
         'bill_status' => 1, // Chờ xác nhận
         'user_id' => Auth::id(),
         'user_name' => $customerInfo['user_name'],
-        'user_address' => $customerInfo['user_address'],
-        'user_tel' => $customerInfo['user_tel'],
-        'total' => $total,
+        'user_address' => $userAddressString,
+        'user_tel' => $customerInfo['tel'],
+        'total' => $totalAll,
         'payment_status' => 0, // Chưa thanh toán
         'method_id' => $paymentMethod,
     ]);
@@ -149,7 +159,7 @@ public function storeBill()
 
     // Xóa giỏ hàng
     Cart::where('user_id', Auth::id())->delete();
-    
+
     // Xóa session mã giảm giá và tổng giảm giá
     session()->forget(['applied_vouchers', 'total_discount', 'total_after_discount', 'total_amount']);
 

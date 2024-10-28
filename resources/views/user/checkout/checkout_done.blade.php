@@ -15,8 +15,8 @@
                         <h4 class="mt-3">Thông tin khách hàng</h4>
                         <ul class="list-unstyled">
                             <li><strong>Tên:</strong> {{ $customerInfo['user_name'] }}</li>
-                            <li><strong>Địa chỉ:</strong> {{ $customerInfo['user_address'] }}</li>
-                            <li><strong>Số điện thoại:</strong> {{ $customerInfo['user_tel'] }}</li>
+                            <li><strong>Địa chỉ:</strong> {{ $customerInfo['address'] }}, {{ $customerInfo['commune'] }}, {{ $customerInfo['district'] }},{{ $customerInfo['city'] }}</li>
+                            <li><strong>Số điện thoại:</strong> {{ $customerInfo['tel'] }}</li>
                         </ul>
 
                         <!-- Payment Method -->
