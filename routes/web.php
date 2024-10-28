@@ -105,6 +105,16 @@ Route::middleware(['auth'])->namespace('User')->group(function () {
 
 Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
 Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
+Route::get('/bill-cancel/{id}', [App\Http\Controllers\User\BillController::class, 'billCancel'])->name('bill-cancel');
+Route::get('/bill-success/{id}', [App\Http\Controllers\User\BillController::class, 'billSuccess'])->name('bill-success');
+
+
+Route::get('/user-comment', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comment');
+Route::get('/user-comment/rating/{id}', [App\Http\Controllers\User\CommentController::class, 'addComment'])->name('comment.add');
+Route::post('/user-comment/rating', [App\Http\Controllers\User\CommentController::class, 'addPostComment'])->name('comment.addPost');
+Route::get('/user-comment/detail/{id}', [App\Http\Controllers\User\CommentController::class, 'detailComment'])->name('comment.detail');
+
+
 
 Route::get('/user-info', [App\Http\Controllers\User\InfoController::class, 'index'])->name('user-info');
 

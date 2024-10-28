@@ -123,6 +123,8 @@
                     Đã hủy
                   @elseif($bill->bill_status == 6)
                     Hoàn trả
+                  @elseif($bill->bill_status == 7)
+                    Hoàn thành
                   @else
                       Unknown
                   @endif

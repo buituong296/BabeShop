@@ -7,6 +7,7 @@ use App\Models\Bill;
 use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\BillStatus;
+use App\Models\CommentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,7 @@ class BillController extends Controller
             'billHistories' => $billHistories,
             'billStatuses' => $billStatuses,
             'total' => $total
-        ]);;
+        ]);
     }
     public function update(Request $req, $id){
         $req->validate([
@@ -40,12 +41,12 @@ class BillController extends Controller
                 function ($attribute, $value, $fail) use ($req) {
                     $fromStatus = $req->input('fromStatus');
                     $invalidStatus = [
-                        1 => [3, 4, 5, 6],
-                        2 => [1, 4, 5, 6],
-                        3 => [1, 2],
-                        4 => [1, 2, 3],
-                        5 => [1, 2, 3],
-                        6 => [1, 2, 3],
+                        1 => [3, 4, 6, 7],
+                        2 => [1, 4, 5, 6, 7],
+                        3 => [1, 2, 5, 6, 7],
+                        4 => [1, 2, 3, 7],
+                        5 => [1, 2, 3, 7],
+                        6 => [1, 2, 3, 7],
                     ];
                     if (isset($invalidStatus[$fromStatus]) && in_array($value, $invalidStatus[$fromStatus])) {
                         $fail('Thay đổi không hợp lệ.');
@@ -67,7 +68,22 @@ class BillController extends Controller
         if ($req->toStatus == 4 && $req->methodId == 1) {
             $billData['payment_status'] = '1';
         }
-
+        if ($req->toStatus == 7) {
+            $billItemIds = BillItem::where('bill_id', $id)->select('product_id')->get();
+            foreach ($billItemIds as $item) {
+                $exists = CommentUser::where('user_id', Auth::id())
+                    ->where('product_id', $item->product_id)
+                    ->exists();
+                if (!$exists) {
+                    $commentUser = [
+                        'user_id' => Auth::id(),
+                        'product_id' => $item->product_id
+                    ];
+                    CommentUser::create($commentUser);
+                }
+    
+            };
+        }
         $billHistoryData = [
             'bill_id' => $id,
             'from_status' => $req->fromStatus,
@@ -102,4 +118,5 @@ class BillController extends Controller
             'total' => $total
         ]);;
     }
+
 }

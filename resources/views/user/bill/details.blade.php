@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+{{-- @section('content') --}}    {{-- Layout bị duplicate --}}
     {{-- <div class="container">
         <h2>Bill Details</h2>
 
@@ -63,7 +63,8 @@
 
         <a href="{{ route('bill') }}" class="btn btn-primary">Quay lại lịch sử mua hàng</a>
     </div> --}}
-    @extends('layouts.app')
+    {{-- @extends('layouts.app') --}}    {{-- Layout bị duplicate --}}
+
 
 @section('content')
     <div class="container py-5 mt-n2 mt-sm-0">
@@ -104,20 +105,27 @@
                                         Chưa thanh toán
                                     @elseif($bill->bill_status == 1)
                                         Chờ xác nhận
+                                        <a href="{{ route('bill-cancel', $bill->id) }}" class="btn btn-primary w-25"> Hủy đơn hàng </a>
                                     @elseif($bill->bill_status == 2)
-                                        Đang xử lí
+                                        Đã xác nhận
                                     @elseif($bill->bill_status == 3)
-                                        Đang giao hàng
+                                        Đang giao hàng                                 
                                     @elseif($bill->bill_status == 4)
                                         Giao hàng thành công
+                                        <a href="{{ route('bill-success', $bill->id) }}" class="btn btn-primary w-25"> Xác nhận nhận hàng </a>   
                                     @elseif($bill->bill_status == 5)
                                         Đã hủy
                                     @elseif($bill->bill_status == 6)
                                         Hoàn trả
+                                    @elseif($bill->bill_status == 7)
+                                        Hoàn thành
                                     @else
                                         Unknown
                                     @endif
+
+
                                 </div>
+
 
                                 <div class="card-body">
                                     <h5>Sản phẩm đã mua:</h5>
@@ -245,4 +253,4 @@
       </table> --}}
 @endsection
 
-@endsection
+{{-- @endsection --}}    {{-- Layout bị duplicate --}}
