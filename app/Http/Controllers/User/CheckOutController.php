@@ -149,6 +149,9 @@ public function storeBill()
 
     // Xóa giỏ hàng
     Cart::where('user_id', Auth::id())->delete();
+    
+    // Xóa session mã giảm giá và tổng giảm giá
+    session()->forget(['applied_vouchers', 'total_discount', 'total_after_discount', 'total_amount']);
 
     // Redirect hoặc thông báo thành công
     return redirect()->route('home')->with('success', 'Thành công!');
