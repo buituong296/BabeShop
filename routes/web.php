@@ -91,7 +91,6 @@ use App\Http\Controllers\User\UserVoucherController;
 
 Route::post('/checkout/payment', [PaymentController::class, 'createPayment'])->name('payment.create');
 Route::get('/checkout/return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
-
 Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name('payment.vnpay');
 
 
@@ -127,5 +126,6 @@ Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoControll
 Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
 
 Route::get('/address', [App\Http\Controllers\User\AddressController::class, 'address'])->name('address');
+Route::post('/address/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('address.add');
 Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
 Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
