@@ -22,16 +22,17 @@
                           </button>
                         </h2>
                         <div class="nav ms-auto">
-                          <a class="nav-link text-decoration-underline p-0" href="checkout-v1-shipping.html">Chỉnh sửa</a>
+                          <a class="nav-link text-decoration-underline p-0" href="{{route('checkout')}}">Chỉnh sửa</a>
                         </div>
                       </div>
                       <div class="accordion-collapse collapse d-lg-block" id="shippingAddress" aria-labelledby="shippingAddressHeading" data-bs-parent="#checkout">
                         <ul class="accordion-body list-unstyled fs-sm p-0 pt-3 pt-md-4 mb-0">
-                          <li>Jane Cooper</li>
-                          <li>jane.cooper@email.com</li>
-                          <li>(215) 555-1234</li>
-                          <li>Pennsylvania 15006</li>
-                          <li>567 Cherry Lane Apt B12 Harrisburg</li>
+                          <li> {{ $customerInfo['user_name'] }}</li>
+                          <li> {{ $customerInfo['tel'] }}</li>
+                          <li> {{ $customerInfo['city'] }}</li>
+                          <li> {{ $customerInfo['district'] }}</li>
+                          <li> {{ $customerInfo['commune'] }}</li>
+                          <li> {{ $customerInfo['address'] }}</li>
                         </ul>
                       </div>
                     </div>

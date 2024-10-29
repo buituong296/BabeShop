@@ -67,7 +67,8 @@ public function showPaymentMethodForm()
     if (!$bill) {
             return redirect()->back()->with('error', 'Không tìm thấy hóa đơn.');
         }
-    return view('user.checkout.checkout_payment',compact('bill'));
+    $customerInfo = session('checkout.customer_info');
+    return view('user.checkout.checkout_payment',compact('bill','customerInfo'));
 }
 
 public function storePaymentMethod(Request $request)
