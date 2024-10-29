@@ -63,11 +63,7 @@ public function storeCustomerInfo(Request $request)
 }
 public function showPaymentMethodForm()
 {
-    $bill = Bill::where('user_id', Auth::id())->latest()->first();
-    if (!$bill) {
-            return redirect()->back()->with('error', 'Không tìm thấy hóa đơn.');
-        }
-    return view('user.checkout.checkout_payment',compact('bill'));
+    return view('user.checkout.checkout_payment');
 }
 
 public function storePaymentMethod(Request $request)
