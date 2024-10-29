@@ -15,6 +15,42 @@ class AddressController extends Controller
     
         return view('user.info.address', compact('addresses'));
     }
+
+    public function add(Request $request)
+{
+    $user_id = Auth::id();
+
+    // Validate request
+    $request->validate([
+        'city' => 'required|string|max:255',
+        'district' => 'required|string|max:255',
+        'commune' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'primary' => 'nullable|boolean', // Ensure this is a boolean
+    ]);
+
+    // Create new address instance
+    $address = new Address();
+    $address->user_id = $user_id;
+    $address->city = $request->city;
+    $address->district = $request->district;
+    $address->commune = $request->commune;
+    $address->address = $request->address;
+
+    // Check if the primary checkbox is checked
+    if ($request->has('primary') && $request->primary == '1') {
+        // Set all other addresses to not primary
+        Address::where('user_id', $user_id)->update(['status' => 0]);
+        $address->status = 1; // Set current address as primary
+    } else {
+        $address->status = 0; // If unchecked, ensure it's not primary
+    }
+
+    $address->save();
+
+    return redirect()->back()->with('success', 'Địa chỉ đã được thêm.');
+}
+
     public function update(Request $request, $id)
 {
     $user_id = Auth::id();

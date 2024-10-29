@@ -63,7 +63,8 @@ public function storeCustomerInfo(Request $request)
 }
 public function showPaymentMethodForm()
 {
-    return view('user.checkout.checkout_payment');
+    $customerInfo = session('checkout.customer_info');
+    return view('user.checkout.checkout_payment',compact('customerInfo'));
 }
 
 public function storePaymentMethod(Request $request)
