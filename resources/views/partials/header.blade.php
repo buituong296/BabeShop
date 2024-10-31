@@ -284,9 +284,12 @@
 
           <!-- Search visible on screens > 991px wide (lg breakpoint) -->
           <div class="position-relative flex-fill d-none d-lg-block pe-4 pe-xl-5">
-            <i class="ci-search position-absolute top-50 translate-middle-y d-flex fs-lg text-white ms-3"></i>
-            <input type="search" class="form-control form-control-lg form-icon-start border-white rounded-pill" placeholder="Tìm kiếm sản phẩm">
-          </div>
+            <form action="{{ route('search') }}" method="GET">
+                <i class="ci-search position-absolute top-50 translate-middle-y d-flex fs-lg text-white ms-3"></i>
+                <input type="search" name="query" class="form-control form-control-lg form-icon-start border-white rounded-pill" placeholder="Tìm kiếm sản phẩm">
+            </form>
+        </div>
+        
 
           <!-- Sale link visible on screens > 1200px wide (xl breakpoint) -->
           <a class="d-none d-xl-flex align-items-center text-decoration-none animate-shake navbar-stuck-hide me-3 me-xl-4 me-xxl-5" href="shop-catalog-electronics.html">
@@ -351,7 +354,7 @@
             </button>
 
             <!-- Account button visible on screens > 768px wide (md breakpoint) -->
-            <a class="btn btn-icon btn-lg fs-lg btn-outline-secondary border-0 rounded-circle animate-shake d-none d-md-inline-flex" href="account-signin.html">
+            <a class="btn btn-icon btn-lg fs-lg btn-outline-secondary border-0 rounded-circle animate-shake d-none d-md-inline-flex" href="{{route('user-info')}}">
               <i class="ci-user animate-target"></i>
               <span class="visually-hidden">Account</span>
             </a>
@@ -502,17 +505,20 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('bill') }}">Lịch sử mua hàng</a>
+                                    <a class="dropdown-item" href="{{ route('user-info') }}">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="{{ route('address') }}">Địa chỉ</a>
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard (tạm thời)</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getETlementById('logout-form').submit();">
+                                      onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
                                         {{ __('Đăng xuất') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
                         @endguest

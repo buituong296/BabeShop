@@ -39,6 +39,23 @@ class HomeController extends Controller
         $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
         return view('home', compact( 'categories', 'products', 'products_2', 'page','products_3'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::all();
+        $sizes = Size::all();
+        $colors = Color::all();
+    
+        $products = Product::where('name', 'LIKE', "%{$query}%");
+
+        $total = $products->count();
+
+        $products = $products->paginate(9);
+
+        return view('user.product', compact('products', 'query', 'categories', 'sizes', 'colors', 'total'));
+    }
+    
     public function product(Request $request)
     {
         // dd($request->all());
