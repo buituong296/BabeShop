@@ -50,10 +50,7 @@
           <i class="ci-map-pin fs-base opacity-75 me-2"></i>
           Địa chỉ
         </a>
-        <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-notifications.html">
-          <i class="ci-bell fs-base opacity-75 mt-1 me-2"></i>
-          Thông báo
-        </a>
+    
       </nav>
       <h6 class="pt-4 ps-2 ms-1">Dịch vụ khách hàng</h6>
       <nav class="list-group list-group-borderless">

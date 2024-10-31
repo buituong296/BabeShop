@@ -57,6 +57,8 @@ Route::post('/addtocart', [App\Http\Controllers\User\ProductDetailController::cl
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
+
 
 //
 Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
