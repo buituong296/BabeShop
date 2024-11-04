@@ -22,11 +22,12 @@ class ProductDetailController extends Controller
         $colors = Variant::join('colors', 'colors.id', '=', 'variants.color_id')->where('product_id', $id)->select('colors.*')->distinct('colors.id')->get();
         $sizes = Variant::join('sizes', 'sizes.id', '=', 'variants.size_id')->where('product_id', $id)->select('sizes.*')->distinct('sizes.id')->get();
         $productCategory = Product::where('category_id', $category->id)->where('id', '!=', $id)->get();
+        $productCategoryTotal = $productCategory->count();
         $productNewest = Product::where('id', '!=', $id)->latest('id')->paginate(6);
+        $productNewestTotal = $productNewest->count();
         $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
-
         $comments = Comment::where('product_id', $id)->get();
-
+        $commentTotal = $comments->count();
 
         return view('user.product_detail')->with([
             'product'   => $product,
@@ -34,9 +35,12 @@ class ProductDetailController extends Controller
             'colors' => $colors,
             'sizes' => $sizes,
             'productCategory' => $productCategory,
+            'productCategoryTotal' => $productCategoryTotal,
             'productNewest' => $productNewest,
+            'productNewestTotal' => $productNewestTotal,
             'productAlbum' => $productAlbum,
-            'comments' => $comments
+            'comments' => $comments,
+            'commentTotal' => $commentTotal
         ]);
     }
     public function getVariantQuantity(Request $request)

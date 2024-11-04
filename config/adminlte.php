@@ -338,6 +338,11 @@ return [
         'icon' => 'fas fa-fw fa-gift',
     ],
     [
+        'text' => 'Bình luận',
+        'url'  => 'admin/comments',
+        'icon' => 'fas fa-fw fa-file',
+    ],
+    [
         'type' => 'navbar-search',
         'text' => 'Tìm kiếm',
         'topnav_right' => true,

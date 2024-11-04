@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VariantController;
 use App\Http\Controllers\Admin\AdminStatisticsController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('variants', VariantController::class);
     Route::resource('bills', BillController::class);
     Route::resource('vouchers', VoucherController::class);
+    Route::resource('comments', CommentController::class);    
 });
 
 
