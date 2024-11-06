@@ -203,11 +203,21 @@
                             <div class="w-100 min-w-0 ps-2 ps-sm-3">
                                 <div class="d-flex align-items-center gap-2 mb-2">
                                     <div class="d-flex gap-1 fs-xs">
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
+
+                                            @php
+                                            $fullStars = floor($product->rating);
+                                            $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $emptyStars = 5 - $product->rating - $halfStar;
+                                        @endphp
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="ci-star-filled text-warning"></i>
+                                        @endfor
+                                        @if ($halfStar)
+                                            <i class="ci-star-half text-warning"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                                        @endfor
                                     </div>
                                     <span class="text-body-tertiary fs-xs">45</span>
                                 </div>
@@ -237,12 +247,22 @@
                             <div class="w-100 min-w-0 ps-2 ps-sm-3">
                                 <div class="d-flex align-items-center gap-2 mb-2">
                                     <div class="d-flex gap-1 fs-xs">
+
+                                        @php
+                                        $fullStars = floor($product->rating);
+                                        $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                        $emptyStars = 5 - $product->rating - $halfStar;
+                                    @endphp
+                                    @for ($i = 0; $i < $fullStars; $i++)
                                         <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                        <i class="ci-star-filled text-warning"></i>
-                                    </div>
+                                    @endfor
+                                    @if ($halfStar)
+                                        <i class="ci-star-half text-warning"></i>
+                                    @endif
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <i class="ci-star text-body-tertiary opacity-75"></i>
+                                    @endfor
+                                </div>
                                     <span class="text-body-tertiary fs-xs">45</span>
                                 </div>
                                 <h4 class="mb-2">
@@ -427,11 +447,20 @@
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                                         <div class="d-flex align-items-center gap-2 mb-2">
                                             <div class="d-flex gap-1 fs-xs">
-                                                <i class="star-rating-icon ci-star-filled active"></i>
-                                                <i class="star-rating-icon ci-star-filled active"></i>
-                                                <i class="star-rating-icon ci-star-filled active"></i>
-                                                <i class="star-rating-icon ci-star-filled active"></i>
-                                                <i class="star-rating-icon ci-star"></i>
+                                                    @php
+                                                    $fullStars = floor($product->rating);
+                                                    $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                                    $emptyStars = 5 - $product->rating - $halfStar;
+                                                @endphp
+                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                    <i class="ci-star-filled text-warning"></i>
+                                                @endfor
+                                                @if ($halfStar)
+                                                    <i class="ci-star-half text-warning"></i>
+                                                @endif
+                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                                @endfor         
                                             </div>
                                             <span class="text-body-tertiary fs-sm">46 đánh giá</span>
                                         </div>

@@ -3,6 +3,7 @@
 @extends('layouts.app')
 
 @push('style')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endpush
 @section('content')
     @if (session('success'))
@@ -172,7 +173,7 @@
                             </div>
                             {{-- Hiển thị sao --}}
 
-                            <span class="text-body-tertiary fs-xs">68 đánh giá</span>
+                            <span class="text-body-tertiary fs-xs">{{ $commentTotal}} đánh giá</span>
                         </a>
                     </div>
                 </section>
@@ -299,6 +300,7 @@
                                     @endforeach
 
 
+                            
 
                                 </div>
                             </div>
@@ -517,11 +519,11 @@
                             <div class="d-flex align-items-center pt-5 mb-4 mt-2 mt-md-3 mt-lg-4" id="reviews"
                                 style="scroll-margin-top: 80px">
                                 <h2 class="h3 mb-0">Đánh giá</h2>
-                                <button type="button" class="btn btn-secondary ms-auto" data-bs-toggle="modal"
+                                {{-- <button type="button" class="btn btn-secondary ms-auto" data-bs-toggle="modal"
                                     data-bs-target="#reviewForm">
                                     <i class="ci-edit-3 fs-base ms-n1 me-2"></i>
                                     Để lại đánh giá
-                                </button>
+                                </button> --}}
                             </div>
 
                             <!-- Reviews stats -->
@@ -565,15 +567,21 @@
                                 </div>
                                 <ul class="list-inline gap-2 pb-2 mb-1">
                                     <li class="fs-sm me-4"><span class="text-dark-emphasis fw-medium">Màu sắc:</span>
-                                        Blue
+                                        {{ $comment->variant->color->name}}
                                     </li>
                                     <li class="fs-sm"><span class="text-dark-emphasis fw-medium">Kích thước:</span>
-                                        128GB
+                                        {{ $comment->variant->size->name}}
                                     </li>
                                 </ul>
                                 <p class="fs-sm">{{ $comment->comment }}.</p>
-                        </div>
+                                <div class="d-flex">
+                                    @foreach($comment->album as $key => $image)
+                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%" 
+                                         data-bs-toggle="modal" data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
+                                @endforeach
+                                </div>
                         @endforeach
+                    </div>
                     </div>
 
 
@@ -672,14 +680,21 @@
                                     </div>
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                                         <div class="d-flex align-items-center gap-2 mb-2">
-                                            <div class="d-flex gap-1 fs-xs">
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                            </div>
-                                            <span class="text-body-tertiary fs-xs">(187)</span>
+                                            @php
+                                            $fullStars = floor($item->rating);
+                                            $halfStar = $item->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $emptyStars = 5 - $item->rating - $halfStar;
+                                        @endphp
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="ci-star-filled text-warning"></i>
+                                        @endfor
+                                        @if ($halfStar)
+                                            <i class="ci-star-half text-warning"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                                        @endfor
+                                            {{-- <span class="text-body-tertiary fs-xs">({{$productCategoryTotal}})</span> --}}
                                         </div>
                                         <h3 class="pb-1 mb-2">
                                             <a class="d-block fs-sm fw-medium text-truncate"
@@ -817,14 +832,21 @@
                                     </div>
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                                         <div class="d-flex align-items-center gap-2 mb-2">
-                                            <div class="d-flex gap-1 fs-xs">
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                            </div>
-                                            <span class="text-body-tertiary fs-xs">(187)</span>
+                                            @php
+                                            $fullStars = floor($item->rating);
+                                            $halfStar = $item->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $emptyStars = 5 - $item->rating - $halfStar;
+                                        @endphp
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="ci-star-filled text-warning"></i>
+                                        @endfor
+                                        @if ($halfStar)
+                                            <i class="ci-star-half text-warning"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                                        @endfor
+                                            {{-- <span class="text-body-tertiary fs-xs">({{$productCategoryTotal}})</span> --}}
                                         </div>
                                         <h3 class="pb-1 mb-2">
                                             <a class="d-block fs-sm fw-medium text-truncate"
@@ -868,7 +890,19 @@
 
         </div>
 
-
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Xem ảnh</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="modalImage" src="" class="d-block w-100" alt="Ảnh lớn">
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 @endsection
 @push('script')
@@ -904,6 +938,16 @@
                         },
                     });
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('img[data-bs-toggle="modal"]').on('click', function() {
+                let imageUrl = $(this).data('image');
+                console.log(imageUrl); // Kiểm tra URL ảnh trong console
+    
+                $('#modalImage').attr('src', imageUrl);
             });
         });
     </script>
