@@ -3,7 +3,7 @@
 @section('title', 'Products')
 
 @section('content_header')
-    <h1 class="fw-bold">DANH SÁCH ĐƠN HÀNG</h1>
+    <h1 class="fw-bold">DANH SÁCH BÌNH LUẬN</h1>
 @stop
 
 @section('content')
@@ -21,6 +21,7 @@
                         <th>ID</th>
                         <th>Tên tài khoản</th>
                         <th>Sản phẩm</th>
+                        <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -30,6 +31,14 @@
                             <td>{{ $comment->id }}</td>
                             <td>{{ $comment->user->name }}</td>
                             <td>{{ $comment->product->name}}</td>
+                            <td>
+                                @if($comment->status == 0)
+                                    Hợp lệ
+                                @elseif($comment->status == 1)
+                                    Đã xóa
+                                @endif
+                            </td>
+                            
                             <td>
                                 <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-info btn-sm">Xem</a>
                             </td>
