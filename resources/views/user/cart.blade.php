@@ -26,15 +26,14 @@
                     <table class="table position-relative z-2 mb-4">
                         <thead>
                             <tr>
-                                <th scope="col" class="fs-sm fw-normal py-3 ps-0"><span class="text-body">Sản phẩm</span>
+                                <th scope="col" class="text-body"><span class="text-body">Sản phẩm</span>
                                 </th>
-                                <th scope="col" class="fs-sm fw-normal py-3 ps-0"><span class="text-body">Loại
-                                        hàng</span></th>
-                                <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-xl-table-cell"><span
+                                <th></th>
+                                <th scope="col" class="text-body"><span
                                         class="text-body">Giá</span></th>
-                                <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-md-table-cell"><span
+                                <th scope="col" class="text-body"><span
                                         class="text-body">Số lượng</span></th>
-                                <th scope="col" class="text-body fs-sm fw-normal py-3 d-none d-md-table-cell"><span
+                                <th scope="col" class="text-body"><span
                                         class="text-body">Tổng</span></th>
                                 <th scope="col" class="py-0 px-0">
                                     <div class="nav justify-content-end">
@@ -52,12 +51,10 @@
                                         <img src="{{ asset('storage/' . $item->variant->product->image) }}"
                                             alt="{{ $item->variant->name }}"
                                             style="width: 50px; height: auto; margin-right: 10px;">
-                                        {{ $item->variant->product->name }}
                                     </td>
                                     <td>
-                                        <span class=" btn d-block bg-primary p-2"> {{ $item->variant->color->name }}</span>
-                                        <span class="btn d-block bg-info p-2">{{ $item->variant->size->name }}</span>
-
+                                        <h6>{{ $item->variant->product->name }}</h6>
+                                        <p>Màu sắc:{{ $item->variant->color->name }}, Kích thước:{{ $item->variant->size->name }}</p>
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">
                                         {{ number_format($item->variant->sale_price) }} VND</td>

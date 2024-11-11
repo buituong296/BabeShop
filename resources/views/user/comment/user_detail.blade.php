@@ -38,14 +38,14 @@
                             <input type="hidden" value="{{ $product->id }}" name="product_id">
                             <div class="modal-header d-block pb-3">
                                 <div class="d-flex align-items-center">
-                                    <a class="flex-shrink-0" href="shop-product-general-electronics.html">
+                                    <a class="flex-shrink-0" href="{{ route('productdetail', $product->id) }}">
                                         <img src="{{ asset('storage/' . $product->image) }}" width="110"
                                             alt="{{ $product->name }}">
                                     </a>
                                     <div class="w-100 min-w-0 ps-2 ps-sm-3">
                                         <h5 class="d-flex animate-underline mb-2">
                                             <a class="d-block fs-sm fw-medium text-truncate animate-target"
-                                                href="shop-product-general-electronics.html">{{ $product->name }}</a>
+                                                href="{{ route('productdetail', $product->id) }}">{{ $product->name }}</a>
                                         </h5>
                                         <div class="h6 mb-0">{{ number_format($product->price, 0, ',', '.') }} VND</div>
                                     </div>
@@ -83,11 +83,11 @@
 
                                   </div>
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label class="form-label" for="review-text">Biến thể<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" name="variant_id" value="{{ $variant->color->name }}, {{ $variant->size->name }}" disabled>
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label class="form-label" for="review-text">Bình luận <span
                                         class="text-danger">*</span></label>
@@ -104,7 +104,6 @@
                             </div>
                             <div class="modal-footer flex-nowrap gap-3 border-0 px-4">
                                 <a href="{{route('comment')}}" class="btn btn-secondary w-100 m-0">Quay lại</a>
-                                <button type="submit" class="btn btn-primary w-100 m-0">Xác nhận</button>
                             </div>
                         </form>
                     </div>

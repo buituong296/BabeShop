@@ -565,14 +565,14 @@
                                     </div>
                                     {{-- Hiển thị sao --}}
                                 </div>
-                                <ul class="list-inline gap-2 pb-2 mb-1">
+                                {{-- <ul class="list-inline gap-2 pb-2 mb-1">
                                     <li class="fs-sm me-4"><span class="text-dark-emphasis fw-medium">Màu sắc:</span>
                                         {{ $comment->variant->color->name}}
                                     </li>
                                     <li class="fs-sm"><span class="text-dark-emphasis fw-medium">Kích thước:</span>
                                         {{ $comment->variant->size->name}}
                                     </li>
-                                </ul>
+                                </ul> --}}
                                 <p class="fs-sm">{{ $comment->comment }}.</p>
                                 <div class="d-flex">
                                     @foreach($comment->album as $key => $image)
@@ -705,11 +705,11 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="h5 lh-1 mb-0">
                                                 {{ number_format($item->price, 0, ',', '.') }} VND</div>
-                                            <button type="button"
+                                            {{-- <button type="button"
                                                 class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                                                 aria-label="Add to Cart">
                                                 <i class="ci-shopping-cart fs-base animate-target"></i>
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -857,11 +857,11 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="h5 lh-1 mb-0">
                                                 {{ number_format($product->price, 0, ',', '.') }} VND</div>
-                                            <button type="button"
+                                            {{-- <button type="button"
                                                 class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                                                 aria-label="Add to Cart">
                                                 <i class="ci-shopping-cart fs-base animate-target"></i>
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
                                 </div>

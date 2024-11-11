@@ -128,7 +128,7 @@
                                         Giao hàng thành công
                                         <a href="{{ route('bill-success', $bill->id) }}" class="btn btn-primary w-25"> Xác
                                             nhận nhận hàng </a>
-                                        <a href="{{ route('bill-return', $bill->id) }}" class="btn btn-primary w-25"> Hoàn trả </a>
+                                        {{-- <a href="{{ route('bill-return', $bill->id) }}" class="btn btn-primary w-25"> Hoàn trả </a> --}}
                                     @elseif($bill->bill_status == 5)
                                         Đã hủy
                                     @elseif($bill->bill_status == 6)
@@ -151,7 +151,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Tên sản phẩm</th>
-                                                <th>Loại</th>
+                                                {{-- <th>Loại</th> --}}
                                                 <th>Giá</th>
                                                 <th>
                                                     Hình ảnh
@@ -163,14 +163,17 @@
                                         <tbody>
                                             @foreach ($bill->billitems as $billitem)
                                                 <tr>
-                                                    <td>{{ $billitem->product_name }}</td>
+                                                    <td><h6>{{ $billitem->product_name }}</h6>                                         
+                                                        <p>Màu sắc: {{ $billitem->variants->color->name }}, Kích thước: {{ $billitem->variants->size->name }}</p>
+                                                    </td>
+                                                    {{-- <td>{{ $billitem->product_name }}</td>
                                                     <td>
                                                         <span class=" btn d-block bg-primary p-2">
                                                             {{ $billitem->variants->color->name }}</span>
                                                         <span
                                                             class="btn d-block bg-info p-2">{{ $billitem->variants->size->name }}</span>
 
-                                                    </td>
+                                                    </td> --}}
                                                     <td>{{ number_format($billitem->variant_sale_price, 0, ',', '.') }} VND
                                                     </td>
                                                     <td>
