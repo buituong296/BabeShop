@@ -112,7 +112,7 @@
                       @if($bill->bill_status == 0)
                       Chưa thanh toán 
                   @elseif($bill->bill_status == 1)
-                      Chờ xác nhận
+                  Đã xác nhận
                   @elseif($bill->bill_status == 2)
                     Đang xử lí
                   @elseif($bill->bill_status == 3)
@@ -125,12 +125,14 @@
                     Hoàn trả
                   @elseif($bill->bill_status == 7)
                     Hoàn thành
+                    @elseif($bill->bill_status == 8)
+                    Hoàn trả thành công 
                   @else
                       Unknown
                   @endif
-                    </span>
+                    </span> 
                   </td>
-                  <td class="fw-medium py-3 d-none d-md-table-cell">
+                  <td class="fw-medium py-3 d-none d-md-table-cell">    
                     {{ number_format($bill->billitems->sum(function($billitem) {
                       return $billitem->variant_sale_price * $billitem->quantity;
                   })) }} VND

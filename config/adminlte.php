@@ -343,6 +343,11 @@ return [
         'icon' => 'fas fa-fw fa-file',
     ],
     [
+        'text' => 'Thông báo',
+        'url'  => 'admin/notifications',
+        'icon' => 'fas fa-fw fa-bell',
+    ],
+    [
         'type' => 'navbar-search',
         'text' => 'Tìm kiếm',
         'topnav_right' => true,
