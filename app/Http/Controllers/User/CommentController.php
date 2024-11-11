@@ -16,7 +16,7 @@ class CommentController extends Controller
 {
     public function index(){
         $products = Product::join('comment_users','products.id','=','comment_users.product_id')
-        ->select('products.image','products.name','products.id','comment_users.is_comment')->get();
+        ->where('user_id', Auth::id())->select('products.image','products.name','products.id','comment_users.is_comment')->get();
         return view('user.comment.user_index')->with([
             'products' => $products
         ]);

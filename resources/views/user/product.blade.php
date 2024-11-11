@@ -350,11 +350,21 @@
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                                         <div class="d-flex align-items-center gap-2 mb-2">
                                             <div class="d-flex gap-1 fs-xs">
+                                                @php
+                                                $fullStars = floor($product->rating);
+                                                $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                                $emptyStars = 5 - $product->rating - $halfStar;
+                                            @endphp
+                                            @for ($i = 0; $i < $fullStars; $i++)
                                                 <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
-                                                <i class="ci-star-filled text-warning"></i>
+                                            @endfor
+                                            @if ($halfStar)
+                                                <i class="ci-star-half text-warning"></i>
+                                            @endif
+                                            @for ($i = 0; $i < $emptyStars; $i++)
                                                 <i class="ci-star text-body-tertiary opacity-75"></i>
+                                            @endfor
+                                                {{-- <span class="text-body-tertiary fs-xs">({{$productCategoryTotal}})</span> --}}
                                             </div>
                                             {{-- <span class="text-body-tertiary fs-xs">({{ $product->reviews_count }})</span> --}}
                                         </div>
@@ -371,7 +381,7 @@
                                                         VND</del>
                                                 @endif
                                             </div>
-                                            <input type="hidden" name="variant_id" value="{{ $product->variant->id }}">
+                                            {{-- <input type="hidden" name="variant_id" value="{{ $product->variant->id }}">
 
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             
@@ -380,7 +390,7 @@
                                                 class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                                                 aria-label="Add to Cart">
                                                 <i class="ci-shopping-cart fs-base animate-target"></i>
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
 

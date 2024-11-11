@@ -33,7 +33,7 @@ class BillController extends Controller
 
     public function billCancel($id)
     {
-        $oldStatus = Bill::where('id', $id)->select('bill_status')->first();
+        $oldStatus = Bill::where('id', $id)->select('bill_status')->first()->bill_status;
         if ($oldStatus == '1') {
             $billData = [
                 'bill_status' => 5,
@@ -51,8 +51,8 @@ class BillController extends Controller
             return redirect()->route('bill-detail', ['id' => $id])->with([
                 'message' => 'Hủy đơn hàng thành công'
             ]);
-        } else {
-            return redirect()->route('bill-detail', ['id' => $id])->withErrors(['bill_status' => 'Không thể hủy do đơn hàng đã được xác nhận'])->withInput();
+        } else if($oldStatus != '1') {
+            return redirect()->route('bill-detail', ['id' => $id])->withErrors(['bill_status' => 'Hủy đơn hàng không thành công do đơn hàng đã xử lí'])->withInput();
         }
     }
     public function billSuccess($id)
