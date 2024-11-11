@@ -34,9 +34,48 @@ public function index()
         $revenueData[$i] = $monthlyRevenue[$i] ?? 0;
     }
     $latestOrders = Bill::with('user')->latest()->take(10)->get();
+     // Số lượng đơn hàng chưa xử lý (Chờ Xác Nhận, Đã Xác Nhận, Đang giao hàng)
+     $pendingOrdersCount = Bill::whereIn('bill_status', ['1', '2', '3'])->count();
+
+     // Số lượng đơn hàng đã xử lý (Giao Hàng thành công)
+     $completedOrdersCount = Bill::where('bill_status', '4')->count();
 
     return view('admin.statistics.index', compact(
-        'totalOrders', 'totalRevenue', 'totalProducts', 'totalUsers', 'revenueData','latestOrders','billStatuses'
+        'totalOrders', 'totalRevenue', 'totalProducts', 'totalUsers', 'revenueData','latestOrders','billStatuses','pendingOrdersCount','completedOrdersCount'
     ));
 }
+public function revenue(Request $request)
+{
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+
+    // Truy vấn doanh thu trong khoảng thời gian đã chọn
+    $revenueData = Bill::whereBetween('created_at', [$startDate, $endDate])
+        ->selectRaw('DATE(created_at) as date, SUM(total) as daily_revenue')
+        ->groupBy('date')
+        ->orderBy('date', 'asc')
+        ->get();
+
+    // Chuyển thành Collection để sử dụng pluck
+    $revenueData = collect($revenueData);
+
+    return view('admin.statistics.index', compact('revenueData', 'startDate', 'endDate'));
+}
+public function orderinfo(Request $request)
+{
+    $status = $request->query('status');
+
+    if ($status === 'pending') {
+        $orders = Bill::whereIn('bill_status', ['1', '2', '3'])->get();
+    } elseif ($status === 'completed') {
+        $orders = Bill::where('bill_status', '4')->get();
+    } else {
+        $orders = Bill::all();
+    }
+    $billStatus = BillStatus::get();
+
+    return view('admin.statistics.orderinfo', compact('orders','billStatus'));
+}
+
+
 }
