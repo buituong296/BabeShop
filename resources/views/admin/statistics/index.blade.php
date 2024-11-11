@@ -37,17 +37,21 @@
                 </div>
             </div>
         </form>
+        <div>
+            <h3>Tổng doanh thu: {{ number_format($totalRevenue, 0, ',', '.') }} VND</h3>
+        </div>
+
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <canvas id="revenueChart"></canvas>
 
         <script>
-            const labels = @json($revenueData->pluck('date')->toArray());
-            const data = @json($revenueData->pluck('daily_revenue')->toArray());
+            const labels = @json(collect($revenueData)->pluck('date')->toArray());
+            const data = @json(collect($revenueData)->pluck('daily_revenue')->toArray());
 
+            const totalRevenue = {{ $totalRevenue }};
             const ctx = document.getElementById('revenueChart').getContext('2d');
-
             const revenueChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -59,12 +63,20 @@
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1,
                     }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Ngày' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Doanh thu (VND)' },
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
         </script>
-
-
-
 
 
 

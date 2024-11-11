@@ -67,14 +67,21 @@ class AdminStatisticsController extends Controller
 
         // Chuyển thành Collection để sử dụng pluck
         $revenueData = collect($revenueData);
+        $totalRevenue = $revenueData->sum('daily_revenue');
         // Số lượng đơn hàng chưa xử lý (Chờ Xác Nhận, Đã Xác Nhận, Đang giao hàng)
         $pendingOrdersCount = Bill::whereIn('bill_status', ['1', '2', '3'])->count();
 
         // Số lượng đơn hàng đã xử lý (Giao Hàng thành công)
         $completedOrdersCount = Bill::where('bill_status', '4')->count();
 
-        return view('admin.statistics.index', compact('revenueData', 'startDate', 'endDate', 'pendingOrdersCount',
-        'completedOrdersCount'));
+        return view('admin.statistics.index', compact(
+            'revenueData',
+            'startDate',
+            'endDate',
+            'pendingOrdersCount',
+            'completedOrdersCount',
+            'totalRevenue'
+        ));
     }
     public function orderinfo(Request $request)
     {
