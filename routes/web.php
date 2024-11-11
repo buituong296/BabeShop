@@ -68,7 +68,7 @@ Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->n
 Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
 
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('check.cart');;
 
 // Route cập nhật số lượng sản phẩm trong gi�� hàng
 Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
@@ -136,4 +136,10 @@ Route::post('/address/add', [App\Http\Controllers\User\AddressController::class,
 Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
 Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
 
+
 Route::get('/notification', [App\Http\Controllers\User\NotificationController::class, 'notification'])->name('notification');
+
+Route::get('/admin/revenue', [AdminStatisticsController::class, 'revenue'])->name('admin.revenue');
+Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->name('admin.orderinfos.index');
+
+
