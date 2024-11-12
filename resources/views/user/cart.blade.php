@@ -60,28 +60,24 @@
 
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">
-                                        {{ number_format($item->variant->sale_price) }} VND</td>
-                                    <td class="d-none d-md-table-cell">
-                                        <form action="{{ route('cart.update', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
+                                        {{ number_format($item->variant->sale_price) }} VND
+                                        <td class="d-none d-md-table-cell">
                                             <div class="input-group">
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                    <span class="icon-minus"></span>
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', -1)">
+                                                    <span class="icon-minus">-</span>
                                                 </button>
-                                                <input type="number" name="quantity" value="{{ $item->quantity }}"
-                                                    min="1" class="form-control" style="width: 60px;">
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                    <span class="icon-plus"></span>
+                                                <input type="number" name="quantity" id="quantity-{{ $item->id }}" value="{{ $item->quantity }}" min="1" class="form-control" style="width: 60px;" onchange="updateQuantity('{{ $item->id }}')">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', 1)">
+                                                    <span class="icon-plus">+</span>
                                                 </button>
-                                                <button type="submit" class="btn btn-primary ms-2">Cập nhật</button>
                                             </div>
-                                        </form>
+                                        </td>
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-md-table-cell">
-                                        {{ number_format($item->variant->sale_price * $item->quantity) }} VND</td>
+                                        <span id="total-price-{{ $item->id }}">
+                                            {{ number_format($item->variant->sale_price * $item->quantity) }} VND
+                                        </span>
+                                    </td>
                                     <td class="py-3">
                                         <form action="{{ route('cart.destroy', $item->id) }}" method="POST"
                                             style="display:inline;">
@@ -104,7 +100,7 @@
                         </a>
                     </div>
                 </div>
-           
+
 
             <!-- Order summary (sticky sidebar) -->
             <aside class="col-lg-4" style="margin-top: -100px">
@@ -115,31 +111,35 @@
                             <ul class="list-unstyled fs-sm gap-3 mb-0">
                                 <li class="d-flex justify-content-between">
                                     Tổng số tiền ({{ count($cartItems) }} mặt hàng):
-                                    <span class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
+                                    <span id="order-summary-total" class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
                                 </li>
                                 @if (session('total_discount', 0) > 0)
                                     @foreach (session('applied_vouchers', []) as $code => $percentage)
-                                        <li class="d-flex justify-content-between align-items-center">
-                                            Mã giảm giá {{ $code }} ({{ $percentage }}%):
-                                            <span class="text-danger fw-medium">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        Mã giảm giá {{ $code }} ({{ $percentage }}%):
+                                        <div>
+                                            <span id="discount-{{ $code }}" data-percentage="{{ $percentage }}" class="text-danger fw-medium">
                                                 -{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND
-                                                <form action="{{ route('vouchers.remove') }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    <input type="hidden" name="voucher_code" value="{{ $code }}">
-                                                    <button type="submit" class="btn btn-link p-0 ms-2" style="color: #ff0000;">
-                                                        <i class="ci-close-circle"></i>
-                                                    </button>
-                                                </form>
                                             </span>
-                                        </li>
+                                            <form action="{{ route('vouchers.remove') }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                <input type="hidden" name="voucher_code" value="{{ $code }}">
+                                                <button type="submit" class="btn btn-link p-0 ms-2" style="color: #ff0000;">
+                                                    <i class="ci-close-circle"></i> <!-- hoặc × -->
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+
                                     @endforeach
+
                                 @endif
                             </ul>
 
                             <div class="border-top pt-4 mt-4">
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="fs-sm">Tổng thanh toán sau cùng:</span>
-                                    <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
+                                    <span id="order-summary-final-total" class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
                                 </div>
                                 <a class="btn btn-lg btn-primary w-100" href="{{ route('checkout') }}">
                                     Đi tới thanh toán
@@ -184,5 +184,70 @@
                 </div>
             </aside>
         </div>
+
+        <script>
+            function updateQuantity(itemId, change = 0) {
+    let input = document.getElementById(`quantity-${itemId}`);
+    let newQuantity = parseInt(input.value) + change;
+    if (newQuantity < 1) newQuantity = 1;
+
+    input.value = newQuantity;
+
+    fetch(`/cart/update-ajax/${itemId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ quantity: newQuantity })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById(`total-price-${itemId}`).innerText = data.totalPrice + ' VND';
+            document.querySelector('#order-summary-total').innerText = data.totalAmount + ' VND'; // Cập nhật tổng số tiền
+            document.querySelector('#order-summary-final-total').innerText = data.totalAfterDiscount + ' VND'; // Cập nhật tổng thanh toán sau cùng
+
+            // Cập nhật giảm giá
+            const discountElements = document.querySelectorAll("[id^='discount-']");
+            discountElements.forEach(discountElement => {
+                discountElement.innerText = `-${data.totalDiscount} VND`;
+            });
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const totalAmountElement = document.getElementById("order-summary-total");
+    const finalTotalElement = document.getElementById("order-summary-final-total");
+    const discountElements = document.querySelectorAll("[id^='discount-']");
+
+    function updateDiscounts() {
+        const totalAmount = parseFloat(totalAmountElement.textContent.replace(/,/g, '')) || 0;
+        let totalDiscount = 0;
+
+        discountElements.forEach((discountElement) => {
+            const percentage = parseFloat(discountElement.getAttribute("data-percentage")) || 0;
+            const discountAmount = totalAmount * (percentage / 100);
+            discountElement.textContent = `-${discountAmount.toLocaleString()} VND`;
+            totalDiscount += discountAmount;
+        });
+
+        const finalTotal = totalAmount - totalDiscount;
+        finalTotalElement.textContent = `${finalTotal.toLocaleString()} VND`;
+    }
+
+    updateDiscounts(); // Gọi hàm này ban đầu khi trang load
+});
+
+
+        </script>
+
     </section>
 @endsection

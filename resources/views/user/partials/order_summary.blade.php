@@ -22,24 +22,25 @@
         </div>
         <ul class="list-unstyled fs-sm gap-3 mb-0">
             <li class="d-flex justify-content-between">
-              Tạm tính ({{ count($cartItems) }} sản phẩm):
-              <span class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
+                Tạm tính ({{ count($cartItems) }} sản phẩm):
+                <span class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
             </li>
             @foreach (session('applied_vouchers', []) as $code => $percentage)
-              <li class="d-flex justify-content-between">
-                Mã giảm giá {{ $code }} ({{ $percentage }}%):
-                <span class="text-danger fw-medium">-{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND</span>
-              </li>
+                <li class="d-flex justify-content-between">
+                    Mã giảm giá {{ $code }} ({{ $percentage }}%):
+                    <span class="text-danger fw-medium">-{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND</span>
+                </li>
             @endforeach
             <li class="d-flex justify-content-between">
-              Tổng giảm giá:
-              <span class="text-danger fw-medium">-{{ number_format(session('total_discount', 0)) }} VND</span>
+                Tổng giảm giá:
+                <span class="text-danger fw-medium">-{{ number_format(session('total_discount', 0)) }} VND</span>
             </li>
             <li class="d-flex justify-content-between">
-              Tổng thanh toán sau cùng:
-              <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
+                Tổng thanh toán sau cùng:
+                <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
             </li>
-          </ul>
+        </ul>
+
         <div class="border-top pt-4 mt-4">
           <div class="d-flex justify-content-between mb-3">
             <span class="fs-sm">Tổng ước tính:</span>

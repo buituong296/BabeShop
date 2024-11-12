@@ -84,4 +84,50 @@ class CartController extends Controller
 
 
 
+    public function updateAjax(Request $request, $id)
+{
+    $cartItem = Cart::find($id);
+    if ($cartItem) {
+        $cartItem->quantity = $request->input('quantity');
+        $cartItem->save();
+
+        // Tính tổng tiền của sản phẩm hiện tại
+        $updatedTotalPrice = $cartItem->variant->sale_price * $cartItem->quantity;
+
+        // Tính tổng tiền giỏ hàng
+        $userId = auth()->id();
+        $cartItems = Cart::where('user_id', $userId)->with('variant')->get();
+        $totalAmount = $cartItems->sum(function ($item) {
+            return $item->variant->sale_price * $item->quantity;
+        });
+
+        // Tính tổng giảm giá
+        $totalDiscount = 0;
+        if (session()->has('applied_vouchers')) {
+            foreach (session('applied_vouchers') as $percentage) {
+                $totalDiscount += $totalAmount * ($percentage / 100);
+            }
+        }
+
+        // Tính tổng thanh toán sau khi giảm giá
+        $totalAfterDiscount = $totalAmount - $totalDiscount;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật số lượng thành công',
+            'totalPrice' => number_format($updatedTotalPrice),
+            'totalAmount' => number_format($totalAmount),
+            'totalDiscount' => number_format($totalDiscount),
+            'totalAfterDiscount' => number_format($totalAfterDiscount),
+        ]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'Không tìm thấy sản phẩm']);
+}
+
+
+
+
+
+
 }

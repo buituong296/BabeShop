@@ -55,7 +55,7 @@
                       <button class="btn btn-lg btn-primary w-100 d-none d-lg-flex" type="submit">Tiếp tục <i class="ci-chevron-right fs-lg ms-1 me-n1"></i></button>
                   </div>
               </form>
-              
+
               </div>
             </div>
 
@@ -68,7 +68,7 @@
         </div>
 
         <!-- Tóm tắt đơn hàng (sidebar cố định) -->
-       @include('user/partials/order_summary')
+        @include('user/partials/order_summary', ['cartItems' => $cartItems])
       </div>
     </div>
 </main>

@@ -139,3 +139,5 @@ Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->na
 
 
 
+Route::patch('/cart/update-ajax/{id}', [CartController::class, 'updateAjax'])->name('cart.updateAjax');
+Route::get('/order-summary', [CartController::class, 'getOrderSummary'])->name('order.summary');
