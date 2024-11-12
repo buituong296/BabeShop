@@ -84,11 +84,11 @@
                       <div class="h5 lh-1 mb-0">{{$product->price}} VND 
                         {{-- <del class="text-body-tertiary fs-sm fw-normal">430.00 USD</del> --}}
                       </div>
-                      <button type="button"
+                      {{-- <button type="button"
                           class="product-card-button btn btn-icon btn-secondary animate-slide-end ms-2"
                           aria-label="Thêm vào giỏ hàng">
                           <i class="ci-shopping-cart fs-base animate-target"></i>
-                      </button>
+                      </button> --}}
                   </div>
               </div>
               <div

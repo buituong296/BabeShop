@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BillController;
+use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
@@ -43,6 +44,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('bills', BillController::class);
     Route::resource('vouchers', VoucherController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('notifications', NotificationController::class);
 });
 
 
@@ -133,6 +135,9 @@ Route::get('/address', [App\Http\Controllers\User\AddressController::class, 'add
 Route::post('/address/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('address.add');
 Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
 Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
+
+
+Route::get('/notification', [App\Http\Controllers\User\NotificationController::class, 'notification'])->name('notification');
 
 Route::get('/admin/revenue', [AdminStatisticsController::class, 'revenue'])->name('admin.revenue');
 Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->name('admin.orderinfos.index');

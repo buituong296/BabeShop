@@ -155,13 +155,14 @@
                                     <img src="{{ asset('storage/' . $item->image) }}" class="d-block my-xl-1"
                                         width="64" alt="{{$item->image}}">
                                     <a class="nav-link stretched-link hover-effect-underline ps-3 p-0"
-                                        href="shop-product-general-electronics.html">{{$item->name}}</a>
+                                        href="{{ route('productdetail', $item->id) }}">{{$item->name}}</a>
                                 </div>
                                 <div class="d-flex pt-2 pt-md-0 ps-3 ps-md-0 mb-2 mb-md-0">
                                     <div class="d-md-none" style="width: 64px"></div>
                                     @if ($item->is_comment ==0)
-                                    <a href="{{route('comment.add', $item->id)}}" class="btn btn-secondary">Đánh giá</a>
+                                    <a href="{{route('comment.add', $item->id)}}" class="btn btn-primary">Đánh giá</a>
                                     @else
+                                    
                                     <a href="{{route('comment.detail', $item->id)}}" class="btn btn-secondary">Chi tiết</a>
                                     @endif                                
                                 </div>
