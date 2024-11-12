@@ -43,8 +43,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('variants', VariantController::class);
     Route::resource('bills', BillController::class);
     Route::resource('vouchers', VoucherController::class);
-    Route::resource('comments', CommentController::class);    
-    Route::resource('notifications', NotificationController::class);    
+    Route::resource('comments', CommentController::class);
+    Route::resource('notifications', NotificationController::class);
 });
 
 
@@ -143,3 +143,6 @@ Route::get('/admin/revenue', [AdminStatisticsController::class, 'revenue'])->nam
 Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->name('admin.orderinfos.index');
 
 
+
+Route::patch('/cart/update-ajax/{id}', [CartController::class, 'updateAjax'])->name('cart.updateAjax');
+Route::get('/order-summary', [CartController::class, 'getOrderSummary'])->name('order.summary');

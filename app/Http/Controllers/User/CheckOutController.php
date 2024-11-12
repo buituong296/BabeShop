@@ -16,14 +16,27 @@ use App\Models\User;
 class CheckOutController extends Controller
 {
     public function checkout()
-    {
-        $products = Product::with('variants', 'category')->latest('id')->paginate(4);
-        $user_info = Auth::user();
-        $address = Auth::user()->addresses()->where('status', 1)->first();
+{
+    $user_info = Auth::user();
+    $address = $user_info->addresses()->where('status', 1)->first();
+    $cartItems = Cart::where('user_id', Auth::id())->get();
 
+    // Tính toán tổng giá trị giỏ hàng
+    $totalAmount = $cartItems->sum(fn($item) => $item->variant->sale_price * $item->quantity);
+    $appliedVouchers = session('applied_vouchers', []);
+    $totalDiscount = collect($appliedVouchers)->sum(fn($percentage) => $totalAmount * ($percentage / 100));
+    $totalAfterDiscount = $totalAmount - $totalDiscount;
 
-        return view('user.checkout.checkout', compact('products','user_info','address'));
-    }
+    // Lưu vào session
+    session([
+        'total_amount' => $totalAmount,
+        'total_discount' => $totalDiscount,
+        'total_after_discount' => $totalAfterDiscount,
+    ]);
+
+    return view('user.checkout.checkout', compact('user_info', 'address', 'cartItems'));
+}
+
     public function checkout_payment()
     {
         $products = Product::with('variants', 'category')->latest('id')->paginate(4);
