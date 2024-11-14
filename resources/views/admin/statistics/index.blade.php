@@ -55,10 +55,10 @@
             const revenueChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: labels.length > 0 ? labels : ['Tất cả doanh thu'],
                     datasets: [{
-                        label: 'Doanh thu hàng ngày',
-                        data: data,
+                        label: labels.length > 0 ? 'Doanh thu hàng ngày' : 'Doanh thu tổng',
+                        data: labels.length > 0 ? data : [totalRevenue], // If no data, show total revenue
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1,
@@ -67,10 +67,16 @@
                 options: {
                     scales: {
                         x: {
-                            title: { display: true, text: 'Ngày' }
+                            title: {
+                                display: true,
+                                text: 'Ngày'
+                            }
                         },
                         y: {
-                            title: { display: true, text: 'Doanh thu (VND)' },
+                            title: {
+                                display: true,
+                                text: 'Doanh thu (VND)'
+                            },
                             beginAtZero: true
                         }
                     }
