@@ -88,14 +88,14 @@ class AdminStatisticsController extends Controller
         $status = $request->query('status');
 
         if ($status === 'pending') {
-            $orders = Bill::whereIn('bill_status', ['1', '2', '3'])->get();
+            $bills = Bill::whereIn('bill_status', ['1', '2', '3'])->get();
         } elseif ($status === 'completed') {
-            $orders = Bill::where('bill_status', '4')->get();
+            $bills = Bill::where('bill_status', '4')->get();
         } else {
-            $orders = Bill::all();
+            $bills = Bill::all();
         }
         $billStatus = BillStatus::get();
 
-        return view('admin.statistics.orderinfo', compact('orders', 'billStatus'));
+        return view('admin.bills.index', compact('bills', 'billStatus'));
     }
 }
