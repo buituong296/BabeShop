@@ -7,6 +7,39 @@
 @stop
 
 @section('content')
+<div class="container mt-4">
+    <h4>Lọc sản phẩm</h4>
+    <form action="{{ route('products.filter') }}" method="get" class="row g-3">
+        <!-- Lọc theo Giá -->
+        <div class="col-md-4">
+            <label for="price_from" class="form-label">Giá từ:</label>
+            <input type="number" name="price_from" id="price_from" class="form-control" value="{{ request('price_from') }}" placeholder="Nhập giá từ">
+        </div>
+
+        <div class="col-md-4">
+            <label for="price_to" class="form-label">Giá đến:</label>
+            <input type="number" name="price_to" id="price_to" class="form-control" value="{{ request('price_to') }}" placeholder="Nhập giá đến">
+        </div>
+
+        <!-- Lọc theo Danh mục -->
+        <div class="col-md-4">
+            <label for="category_id" class="form-label">Danh mục:</label>
+            <select name="category_id" id="category_id" class="form-select">
+                <option value="">Chọn danh mục</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+        </div>
+    </form>
+</div>
+
     <div class="card">
         <div class="card-body">
             <a href="{{ route('products.create') }}" class="btn btn-success mb-3">Add New Product</a>

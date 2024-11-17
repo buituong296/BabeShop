@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use App\Traits\Searchable;
 
 class SizeController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $sizes = Size::all();
-        return view('admin.sizes.index', compact('sizes'));
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $sizes = $this->search(Size::class, $query, ['name']); // Dùng trait
+
+        return view('admin.sizes.index', compact('sizes','query'));
     }
 
     public function create()

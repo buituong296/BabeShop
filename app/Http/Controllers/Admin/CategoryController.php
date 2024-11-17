@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Traits\Searchable;
 
 class CategoryController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $categories = $this->search(Category::class, $query, ['name']); // Dùng trait
+        return view('admin.categories.index', compact('categories',"query"));
     }
 
     public function create()

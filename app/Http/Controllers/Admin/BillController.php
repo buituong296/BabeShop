@@ -10,14 +10,17 @@ use App\Models\BillStatus;
 use App\Models\CommentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\Searchable;
 
 class BillController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $bills = Bill::orderBy('created_at', 'desc')->get();
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $bills = $this->search(Bill::class, $query, ['bill_code','user_name','user_tel']); // Dùng trait
         return view('admin.bills.index')->with([
-            'bills' => $bills
+            'bills' => $bills,'query'
         ]);
     }
     public function edit($id)
@@ -141,5 +144,24 @@ class BillController extends Controller
         ]);
         ;
     }
+    public function filterBills(Request $request)
+{
+    $query = Bill::query();  // Tạo query builder cho model Bill
+
+    // Lọc theo giá
+    if ($request->has('price_from') && $request->has('price_to')) {
+        $query->whereBetween('total', [$request->input('price_from'), $request->input('price_to')]);
+    }
+
+    // Lọc theo trạng thái
+    if ($request->has('status') && in_array($request->input('status'), [1, 2, 3, 4])) {
+        $query->where('bill_status', $request->input('status'));
+    }
+
+    // Lấy các đơn hàng đã lọc
+    $bills = $query->get();
+
+    return view('admin.bills.index', compact('bills'));
+}
 
 }

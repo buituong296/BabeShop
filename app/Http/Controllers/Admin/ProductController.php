@@ -10,13 +10,19 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Category;
+use App\Traits\Searchable;
 
 class ProductController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $products = Product::with('variants')->get();
-        return view('admin.products.index', compact('products'));
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $products = $this->search(Product::class, $query, ['name']); // Dùng trait
+        // Lấy tất cả danh mục
+        $categories = Category::all();
+
+        return view('admin.products.index', compact('products', 'query', 'categories'));
     }
 
     public function show($id)
@@ -178,5 +184,26 @@ public function update(Request $request, $id)
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
     }
+    public function filterProducts(Request $request)
+{
+    // Khởi tạo query để lọc sản phẩm
+    $query = Product::query();
+
+    // Lọc theo giá
+    if ($request->has('price_from') && $request->has('price_to')) {
+        $query->whereBetween('price', [$request->input('price_from'), $request->input('price_to')]);
+    }
+
+    // Lọc theo danh mục
+    if ($request->has('category_id') && $request->input('category_id') != '') {
+        $query->where('category_id', $request->input('category_id'));
+    }
+
+    // Lấy danh sách sản phẩm đã lọc
+    $products = $query->get();
+
+    // Truyền cả sản phẩm và danh mục vào view
+    return view('products.index', compact('products'));
+}
 
 }

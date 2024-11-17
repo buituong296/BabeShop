@@ -14,6 +14,38 @@
 @stop
 
 @section('content')
+<div class="container mt-4">
+    <h4>Lọc Voucher</h4>
+    <form action="{{ route('vouchers.filter') }}" method="get" class="row g-3">
+        <!-- Lọc theo phần trăm giảm giá -->
+        <div class="col-md-6">
+            <label for="discount_from" class="form-label">Giảm giá từ (%):</label>
+            <input type="number" name="discount_from" id="discount_from" class="form-control" value="{{ request('discount_from') }}" placeholder="Nhập phần trăm giảm giá từ">
+        </div>
+
+        <div class="col-md-6">
+            <label for="discount_to" class="form-label">Giảm giá đến (%):</label>
+            <input type="number" name="discount_to" id="discount_to" class="form-control" value="{{ request('discount_to') }}" placeholder="Nhập phần trăm giảm giá đến">
+        </div>
+
+        <!-- Lọc theo ngày bắt đầu -->
+        <div class="col-md-6">
+            <label for="start_date" class="form-label">Ngày bắt đầu:</label>
+            <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
+        </div>
+
+        <!-- Lọc theo ngày kết thúc -->
+        <div class="col-md-6">
+            <label for="end_date" class="form-label">Ngày kết thúc:</label>
+            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
+        </div>
+
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+        </div>
+    </form>
+</div>
+
     <div class="card">
         <div class="card-body">
             <a href="{{ route('vouchers.create') }}" class="btn btn-primary mb-3">Thêm mã giảm giá mới</a>

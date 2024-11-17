@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\VariantController;
 use App\Http\Controllers\Admin\AdminStatisticsController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\VoucherController;
@@ -40,7 +39,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('colors', ColorController::class);
     Route::resource('sizes', SizeController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('variants', VariantController::class);
     Route::resource('bills', BillController::class);
     Route::resource('vouchers', VoucherController::class);
     Route::resource('comments', CommentController::class);
@@ -146,3 +144,7 @@ Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->na
 
 Route::patch('/cart/update-ajax/{id}', [CartController::class, 'updateAjax'])->name('cart.updateAjax');
 Route::get('/order-summary', [CartController::class, 'getOrderSummary'])->name('order.summary');
+
+Route::get('/bills/filter', [BillController::class, 'filterBills'])->name('bills.filter');
+Route::get('/products/filter', [ProductController::class, 'filterProducts'])->name('products.filter');
+Route::get('/vouchers/filter', [VoucherController::class, 'filterVouchers'])->name('vouchers.filter');

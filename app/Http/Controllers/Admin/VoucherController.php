@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use App\Traits\Searchable;
 
 class VoucherController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $vouchers = Voucher::all(); // Lấy tất cả vouchers
-        return view('admin.vouchers.index', compact('vouchers'));
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $vouchers = $this->search(Voucher::class, $query, ['code']); // Dùng trait
+        return view('admin.vouchers.index', compact('vouchers','query'));
     }
 
         public function create()
@@ -82,4 +85,31 @@ class VoucherController extends Controller
 
         return redirect()->route('vouchers.index')->with('success', 'Xóa mã giảm giá thành công.');
     }
+    public function filterVouchers(Request $request)
+{
+    // Khởi tạo query để lọc voucher
+    $query = Voucher::query();
+
+    // Lọc theo phần trăm giảm giá
+    if ($request->has('discount_from') && $request->has('discount_to')) {
+        $query->whereBetween('percentage', [
+            $request->input('discount_from'),
+            $request->input('discount_to')
+        ]);
+    }
+
+    // Lọc theo ngày bắt đầu và ngày kết thúc
+    if ($request->has('start_date') && $request->has('end_date')) {
+        $query->whereBetween('start', [
+            $request->input('start_date'),
+            $request->input('end_date')
+        ]);
+    }
+
+    // Lấy danh sách voucher đã lọc
+    $vouchers = $query->get();
+
+    // Truyền danh sách voucher vào view
+    return view('admin.vouchers.index', compact('vouchers'));
+}
 }
