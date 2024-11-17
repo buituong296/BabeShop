@@ -12,6 +12,35 @@
         {{ session('message') }}
     </div>
 @endif
+<div class="container mt-4">
+    <h4>Lọc đơn hàng</h4>
+    <form action="{{ route('bills.filter') }}" method="get" class="row g-3">
+        <div class="col-md-4">
+            <label for="price_from" class="form-label">Giá từ:</label>
+            <input type="number" name="price_from" id="price_from" class="form-control" value="{{ request('price_from') }}" placeholder="Nhập giá từ">
+        </div>
+
+        <div class="col-md-4">
+            <label for="price_to" class="form-label">Giá đến:</label>
+            <input type="number" name="price_to" id="price_to" class="form-control" value="{{ request('price_to') }}" placeholder="Nhập giá đến">
+        </div>
+
+        <div class="col-md-4">
+            <label for="status" class="form-label">Trạng thái:</label>
+            <select name="status" id="status" class="form-select">
+                <option value="">Chọn trạng thái</option>
+                <option value="1" {{ request('status') == 1 ? 'selected' : '' }}>Chờ xác nhận</option>
+                <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>Đã xác nhận</option>
+                <option value="3" {{ request('status') == 3 ? 'selected' : '' }}>Đang giao hàng</option>
+                <option value="4" {{ request('status') == 4 ? 'selected' : '' }}>Giao hàng thành công</option>
+            </select>
+        </div>
+
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+        </div>
+    </form>
+</div>
 
     <div class="card">
         <div class="card-body">

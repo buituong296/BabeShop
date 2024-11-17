@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Color;
 use Illuminate\Http\Request;
+use App\Traits\Searchable;
 
 class ColorController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $colors = Color::all();
-        return view('admin.colors.index', compact('colors'));
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $colors = $this->search(Color::class, $query, ['name','value']); // Dùng trait
+        return view('admin.colors.index', compact('colors','query'));
     }
 
     public function create()

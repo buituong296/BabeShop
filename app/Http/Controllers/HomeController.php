@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -46,7 +46,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $sizes = Size::all();
         $colors = Color::all();
-    
+
         $products = Product::where('name', 'LIKE', "%{$query}%");
 
         $total = $products->count();
@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         return view('user.product', compact('products', 'query', 'categories', 'sizes', 'colors', 'total'));
     }
-    
+
     public function product(Request $request)
     {
         // dd($request->all());

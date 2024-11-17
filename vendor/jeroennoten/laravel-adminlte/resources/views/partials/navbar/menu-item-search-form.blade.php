@@ -1,5 +1,4 @@
 <li class="nav-item">
-
     {{-- Search toggle button --}}
     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
         <i class="fas fa-search"></i>
@@ -7,17 +6,15 @@
 
     {{-- Search bar --}}
     <div class="navbar-search-block">
-        <form class="form-inline" action="{{ $item['href'] }}" method="{{ $item['method'] }}">
-            {{ csrf_field() }}
-
+        <form class="form-inline" action="{{ url()->current() }}" method="GET">
             <div class="input-group">
-
                 {{-- Search input --}}
-                <input class="form-control form-control-navbar" type="search"
-                    @isset($item['id']) id="{{ $item['id'] }}" @endisset
-                    name="{{ $item['input_name'] }}"
-                    placeholder="{{ $item['text'] }}"
-                    aria-label="{{ $item['text'] }}">
+                <input class="form-control form-control-navbar"
+                    type="search"
+                    name="query"
+                    placeholder="Tìm kiếm..."
+                    aria-label="Search"
+                    value="{{ request()->query('query') }}">
 
                 {{-- Search buttons --}}
                 <div class="input-group-append">
@@ -28,9 +25,7 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-
             </div>
         </form>
     </div>
-
 </li>
