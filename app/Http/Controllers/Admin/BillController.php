@@ -18,9 +18,10 @@ class BillController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
-        $bills = $this->search(Bill::class, $query, ['bill_code','user_name','user_tel']); // Dùng trait
+        $bills = $this->search(Bill::class, $query, ['bill_code', 'user_name', 'user_tel']); // Dùng trait
         return view('admin.bills.index')->with([
-            'bills' => $bills,'query'
+            'bills' => $bills,
+            'query'
         ]);
     }
     public function edit($id)
@@ -33,12 +34,12 @@ class BillController extends Controller
         $restrictedStatuses = [
             1 => [3, 4, 6, 7, 8],
             2 => [1, 4, 5, 6, 7, 8],
-            3 => [1, 2, 6, 7],
+            3 => [1, 2, 6, 7, 8],
             4 => [1, 2, 3, 5, 8],
             5 => [1, 2, 3, 4, 6, 7, 8],
-            6 => [1, 2, 3, 4, 5],
+            6 => [1, 2, 3, 4, 5, 8],
             7 => [1, 2, 3, 4, 5, 6, 8],
-            8 => [1, 2, 3, 4, 5, 6, 7]
+            8 => [1, 2, 3, 4, 5, 6, 7, 8]
         ];
         $blockedOptions = $restrictedStatuses[$bill->bill_status] ?? [];
         return view('admin.bills.edit')->with([
@@ -50,6 +51,7 @@ class BillController extends Controller
             'blockedOptions' => $blockedOptions
         ]);
     }
+
     public function update(Request $req, $id)
     {
         $req->validate([
@@ -61,12 +63,12 @@ class BillController extends Controller
                     $invalidStatus = [
                         1 => [3, 4, 6, 7, 8],
                         2 => [1, 4, 5, 6, 7, 8],
-                        3 => [1, 2, 6, 7],
+                        3 => [1, 2, 6, 7, 8],
                         4 => [1, 2, 3, 5, 8],
                         5 => [1, 2, 3, 4, 6, 7, 8],
-                        6 => [1, 2, 3, 4, 5],
+                        6 => [1, 2, 3, 4, 5, 8],
                         7 => [1, 2, 3, 4, 5, 6, 8],
-                        8 => [1, 2, 3, 4, 5, 6, 7]
+                        8 => [1, 2, 3, 4, 5, 6, 7, 8]
                     ];
                     if (isset($invalidStatus[$fromStatus]) && in_array($value, $invalidStatus[$fromStatus])) {
                         $fail('Thay đổi không hợp lệ.');
@@ -113,11 +115,18 @@ class BillController extends Controller
             'by_user' => Auth::id(),
             'at_datetime' => now()
         ];
-        Bill::where('id', $id)->update($billData);
-        BillHistory::create($billHistoryData);
-        return redirect()->route('bills.index')->with([
-            'message' => 'Sửa thành công'
-        ]);
+        if ($req->toStatus == '5' && $req->note == null) {
+            return back()->withErrors(
+
+'Sửa thất bại do thiếu ghi chú'
+            );
+        } else {
+            Bill::where('id', $id)->update($billData);
+            BillHistory::create($billHistoryData);
+            return redirect()->route('bills.index')->with([
+                'message' => 'Sửa thành công'
+            ]);
+        }
         ;
 
     }
@@ -145,23 +154,29 @@ class BillController extends Controller
         ;
     }
     public function filterBills(Request $request)
-{
-    $query = Bill::query();  // Tạo query builder cho model Bill
+    {
+        $query = Bill::query();  // Tạo query builder cho model Bill
 
-    // Lọc theo giá
-    if ($request->has('price_from') && $request->has('price_to')) {
-        $query->whereBetween('total', [$request->input('price_from'), $request->input('price_to')]);
+        // Lọc theo giá
+        if ($request->has('price_from') && $request->has('price_to')) {
+            $query->whereBetween('total', [$request->input('price_from'), $request->input('price_to')]);
+        }
+
+        // Lọc theo trạng thái
+        if ($request->has('status') && in_array($request->input('status'), [1, 2, 3, 4])) {
+            $query->where('bill_status', $request->input('status'));
+        }
+        if ($request->has('start_date') && in_array($request->input('end_date'), [1, 2, 3, 4])) {
+            $query->whereBetween('updated_at', [
+                $request->input('start_date'),
+                $request->input('end_date')
+            ]);
+        }
+
+        // Lấy các đơn hàng đã lọc
+        $bills = $query->get();
+
+        return view('admin.bills.index', compact('bills'));
     }
-
-    // Lọc theo trạng thái
-    if ($request->has('status') && in_array($request->input('status'), [1, 2, 3, 4])) {
-        $query->where('bill_status', $request->input('status'));
-    }
-
-    // Lấy các đơn hàng đã lọc
-    $bills = $query->get();
-
-    return view('admin.bills.index', compact('bills'));
-}
 
 }

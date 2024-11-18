@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4 pb-4">
     <h4>Lọc sản phẩm</h4>
     <form action="{{ route('products.filter') }}" method="get" class="row g-3">
         <!-- Lọc theo Giá -->
@@ -24,7 +24,7 @@
         <!-- Lọc theo Danh mục -->
         <div class="col-md-4">
             <label for="category_id" class="form-label">Danh mục:</label>
-            <select name="category_id" id="category_id" class="form-select">
+            <select name="category_id" id="category_id" class="form-control">
                 <option value="">Chọn danh mục</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
@@ -34,8 +34,8 @@
             </select>
         </div>
 
-        <div class="col-1">
-            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+        <div class="col-1 pt-2">
+            <button type="submit" class="btn btn-primary w-100 ">Lọc</button>
         </div>
     </form>
 </div>
