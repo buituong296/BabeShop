@@ -12,7 +12,7 @@ trait Searchable
      * @param array $fields Fields to search in the model.
      * @return \Illuminate\Pagination\LengthAwarePaginator The paginated result.
      */
-    public function search($model, $query, $fields = ['name'])
+    public function search($model, $query, $fields = ['name','user->name'])
     {
         if ($query) {
             $queryBuilder = $model::query();
