@@ -29,5 +29,9 @@ class Product extends Model
 {
     return $this->hasOne(Variant::class);
 }
+public function comments()
+{
+    return $this->hasMany(Comment::class, 'product_id');
+}
 
 }

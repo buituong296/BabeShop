@@ -8,19 +8,25 @@ use App\Models\Notification;
 use App\Models\Product;
 use App\Models\Variant;
 use Illuminate\Http\Request;
+use App\Traits\Searchable;
+use App\Models\User;
 
 class CommentController extends Controller
 {
-    public function index()
+    use Searchable;
+    public function index(Request $request)
     {
-        $comments = Comment::with('product')->get();
-        
-        $products = Product::get();
-        $product_id = Product::get('id');
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
+        $comments = $this->search(Comment::class, $query, ['product_id']); // Dùng trait
+
+        $products = $this->search(Product::class, $query, ['name']); // Dùng trait
         // $commentTotal = $comments->count();
         return view('admin.comments.index')->with([
             'comments' => $comments,
             'products' => $products,
+            'query'
+            // 'ratings' => $ratings,
+            // 'commentTotal' => $commentTotal,
             // 'ratings' => $ratings,
             // 'commentTotal' => $commentTotal,
         ]);
@@ -49,13 +55,13 @@ class CommentController extends Controller
     public function destroy(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
-    
+
         // Capture the reason from the request
         $message = $request->input('message');
-    
+
         $comment->status = 1;
         $comment->save();
-        
+
         Notification::create([
             'type' => 'Bình luận của bạn đã bị xóa',
             'message' => "Bình luận ' {$comment->comment} ' đã bị xóa. Lí do: {$message}",
@@ -65,5 +71,5 @@ class CommentController extends Controller
 
         return redirect()->route('comments.index')->with('status', "Comment status changed successfully. Reason:");
     }
-    
+
 }
