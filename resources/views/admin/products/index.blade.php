@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     @foreach($products as $product)
-                        <tr>
+                        <tr>    
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ number_format($product->price, 2) }} VND</td>

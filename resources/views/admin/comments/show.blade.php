@@ -96,6 +96,8 @@
             
         </div>
         <br>
+
+        @if($comment->status != 1) 
         <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" >
             @csrf
             @method('DELETE')
@@ -108,8 +110,8 @@
                 
                 <button type="submit" class="btn btn-danger">Xóa bình luận</button>
             </div>
-
         </form>
+        @endif
 
         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">

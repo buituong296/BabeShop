@@ -338,9 +338,9 @@ return [
         'icon' => 'fas fa-fw fa-gift',
     ],
     [
-        'text' => 'Bình luận',
+        'text' => 'Đánh giá',
         'url'  => 'admin/comments',
-        'icon' => 'fas fa-fw fa-file',
+        'icon' => 'fas fa-fw fa-star',
     ],
     [
         'text' => 'Thông báo',

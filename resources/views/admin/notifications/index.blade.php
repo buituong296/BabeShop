@@ -21,12 +21,57 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label class="form-label" for="code">Loại thông báo</label>
-                            <input type="text" class="form-control" id="code" name="code" >
+                            <select name="code" id="code" class="form-control" onchange="updateSecondDropdown()">
+                                <option value="ma_giam_gia" selected>Mã giảm giá</option>
+                                <option value="san_pham">Sản phẩm</option>
+                                <option value="binh_luan">Bình luận</option>
+                            </select>
                             @error('code')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="details">Tiêu đề</label>
+                            <select name="details" id="details" class="form-control">
+                               
+                            </select>
+                        </div>
+                        
+                        <script>
+                             window.onload = function() {
+                                updateSecondDropdown(); // Populate second dropdown on page load
+                            };
+                            function updateSecondDropdown() {
+                                const code = document.getElementById('code').value;
+                                const details = document.getElementById('details');
+                                
+                                // Clear existing options
+                                details.innerHTML = '';
+                        
+                                // Populate options based on the selected value of the first dropdown
+                                if (code === 'ma_giam_gia') {
+                                    details.innerHTML = `
+                                        <option value="discount_1">Mã giảm giá mới đến đây!</option>
+                                        <option value="discount_2">Mã giảm giá của bạn sắp hết hạn</option>
+                                    `;
+                                } else if (code === 'san_pham') {
+                                    details.innerHTML = `
+                                        <option value="order_1">Sản phẩm trong giỏ hàng của bạn mới được giảm giá</option>
+                                        <option value="order_2">Order Type 2</option>
+                                    `;
+                                } else if (code === 'binh_luan') {
+                                    details.innerHTML = `
+                                        <option value="comment_1">Comment Type 1</option>
+                                        <option value="comment_2">Comment Type 2</option>
+                                    `;
+                                }
+                            }
+                        </script>
+                        
 
+
+                        
                         <div class="form-group">
                             <label class="form-label" for="percentage">Đối tượng</label>
                             <input type="number" class="form-control" id="percentage" name="percentage" >

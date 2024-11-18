@@ -13,9 +13,26 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::get();
+        $comments = Comment::with('product')->get();
+        
+        $products = Product::get();
+        $product_id = Product::get('id');
+        // $commentTotal = $comments->count();
         return view('admin.comments.index')->with([
-            'comments' => $comments
+            'comments' => $comments,
+            'products' => $products,
+            // 'ratings' => $ratings,
+            // 'commentTotal' => $commentTotal,
+        ]);
+    }
+
+    public function list($id)
+    {
+        $comments = Comment::where('product_id', $id)->with('product')->get();
+        $name = Product::where('id', $id)->pluck('name')->first();
+        return view('admin.comments.list')->with([
+            'comments' => $comments,
+            'name' => $name,
         ]);
     }
     public function show($id)
@@ -49,7 +66,4 @@ class CommentController extends Controller
         return redirect()->route('comments.index')->with('status', "Comment status changed successfully. Reason:");
     }
     
-
-
-
 }
