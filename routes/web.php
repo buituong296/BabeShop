@@ -44,7 +44,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('comments', CommentController::class);
     Route::resource('notifications', NotificationController::class);
 });
-
+Route::get('/comments/{id}', [CommentController::class, 'list'])->name('comment.list');
 
 Auth::routes();
 

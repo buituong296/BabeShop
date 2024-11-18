@@ -3,7 +3,7 @@
 @section('title', 'Products')
 
 @section('content_header')
-    <h1 class="fw-bold">TỔNG QUAN ĐÁNH GIÁ</h1>
+    <h1 class="fw-bold">ĐÁNH GIÁ CỦA SẢN PHẨM : {{$name}} </h1>
 @stop
 
 @section('content')
@@ -19,28 +19,25 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Sản phẩm</th>
-                        <th>Ảnh sản phẩm</th>
+                        <th>Tên tài khoản</th>
+                        <th>Nội dung đánh giá</th>
                         <th>Đánh giá</th>
-                        {{-- <th>Lượt đánh giá</th> --}}
+                        <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product)
+                    @foreach($comments as $comment)
                         <tr>
-                            <td>{{ $product->id }}</td>
-                            <td>{{ $product->name}}</td>
+                            <td>{{ $comment->id }}</td>
+                            <td>{{ $comment->user->name }}</td>
+                            <td>{{ $comment->comment}}</td>
                             <td>
-                                <span><img src="{{ asset('storage/' . $product->image) }}" width="100" alt=""></span>
-                            </td>
-                            <td>
-                               
                                 <div class="d-flex gap-1 fs-sm">
-                                    @if (isset($product->rating) && $product->rating > 0)
+                                    @if (isset($comment->rating) && $comment->rating > 0)
                                         @php
-                                            $fullStars = floor($product->rating);
-                                            $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $fullStars = floor($comment->rating);
+                                            $halfStar = $comment->rating - $fullStars >= 0.5 ? 1 : 0;
                                             $emptyStars = 5 - $fullStars - $halfStar;
                                         @endphp
                                         @for ($i = 0; $i < $fullStars; $i++)
@@ -56,13 +53,18 @@
                                         <span>Chưa có đánh giá</span>
                                     @endif
                                 </div>
-                                
+
                             </td>
-                            {{-- <td>
-                                {{ $commentTotal}} đánh giá
-                            </td> --}}
-                            <td>    
-                                <a href="{{route('comment.list',$product->id)}}" class="btn btn-info btn-sm">Xem</a>
+                            <td>
+                                @if($comment->status == 0)
+                                    Hợp lệ
+                                @elseif($comment->status == 1)
+                                    Đã xóa
+                                @endif
+                            </td>
+                            
+                            <td>
+                                <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-info btn-sm">Xem</a>
                             </td>
                         </tr>
                     @endforeach

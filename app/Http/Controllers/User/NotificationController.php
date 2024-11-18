@@ -11,7 +11,7 @@ class NotificationController extends Controller
 {
     public function notification() {
         $user_id = Auth::id();
-        $noti = Notification::where('user_id', $user_id)->get();
+        $noti = Notification::where('user_id', $user_id)->latest('id')->get();
     
         return view('user.info.notification', compact('noti'));
     }
