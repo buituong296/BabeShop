@@ -161,7 +161,7 @@
     <p class="fs-sm">Bạn chưa có sản phẩm nào trong giỏ hàng</p>
     @endif
 
-    
+
     {{-- <div class="progress w-100" role="progressbar" aria-label="Tiến độ giao hàng miễn phí" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
       <div class="progress-bar bg-warning rounded-pill" style="width: 75%"></div>
     </div> --}}
@@ -196,7 +196,7 @@
             <span class="d-block">Màu sắc: {{ $item->variant->color->name }}</span>
             <span class="d-block">Kích thước: {{ $item->variant->size->name }}</span>
           </div>
-      
+
 
           <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display:inline;">
             @csrf
@@ -208,7 +208,7 @@
     </div>
     @endforeach
 
-    
+
   </div>
 
   <!-- Footer -->
@@ -289,7 +289,7 @@
                 <input type="search" name="query" class="form-control form-control-lg form-icon-start border-white rounded-pill" placeholder="Tìm kiếm sản phẩm">
             </form>
         </div>
-        
+
 
           <!-- Sale link visible on screens > 1200px wide (xl breakpoint) -->
           <a class="d-none d-xl-flex align-items-center text-decoration-none animate-shake navbar-stuck-hide me-3 me-xl-4 me-xxl-5" href="shop-catalog-electronics.html">
@@ -360,7 +360,7 @@
             </a>
 
             <!-- Wishlist button visible on screens > 768px wide (md breakpoint) -->
-         
+
 
             <!-- Cart button -->
             <button type="button" class="btn btn-icon btn-lg btn-secondary position-relative rounded-circle ms-2" data-bs-toggle="offcanvas" data-bs-target="#shoppingCart" aria-controls="shoppingCart" aria-label="Shopping cart">
@@ -507,7 +507,9 @@
                                     <a class="dropdown-item" href="{{ route('bill') }}">Lịch sử mua hàng</a>
                                     <a class="dropdown-item" href="{{ route('user-info') }}">Thông tin cá nhân</a>
                                     <a class="dropdown-item" href="{{ route('address') }}">Địa chỉ</a>
+                                    @if(Auth::check() && Auth::user()->role_id == 1)
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard (tạm thời)</a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                       onclick="event.preventDefault();

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminStatisticsController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -27,13 +28,15 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::middleware(['auth', 'check.admin'])->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
     // Sử dụng namespace đầy đủ cho các controller
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::post('/users/{id}/lock', [UserController::class, 'lock'])->name('admin.users.lock');
     Route::get('/statistics', [AdminStatisticsController::class, 'index'])->name('admin.statistics');
     Route::resource('categories', CategoryController::class);
     Route::resource('colors', ColorController::class);
@@ -43,6 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('vouchers', VoucherController::class);
     Route::resource('comments', CommentController::class);
     Route::resource('notifications', NotificationController::class);
+});
 });
 Route::get('/comments/{id}', [CommentController::class, 'list'])->name('comment.list');
 
