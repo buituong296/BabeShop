@@ -348,6 +348,11 @@ return [
         'icon' => 'fas fa-fw fa-bell',
     ],
     [
+        'text' => 'Người dùng',
+        'url'  => 'admin/users',
+        'icon' => 'fas fa-users',
+    ],
+    [
         'type' => 'navbar-search',
         'text' => 'Tìm kiếm',
         'topnav_right' => true,

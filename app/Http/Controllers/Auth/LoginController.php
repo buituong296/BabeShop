@@ -49,9 +49,9 @@ class LoginController extends Controller
             $user = Auth::user();
 
             // Check if the user account is locked
-            if ($user->is_locked == 2) {
+            if ($user->is_locked == 1) {
                 Auth::logout();
-                return redirect()->back()->withErrors(['error' => 'Tài khoản này đã bị xóa.']);
+                return redirect()->back()->withErrors(['error' => 'Tài khoản này đã bị khóa.']);
             }
 
             // Redirect the user to their intended location
