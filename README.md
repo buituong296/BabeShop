@@ -1,4 +1,4 @@
-<p align="center"><a href="#" target="_blank"><img src="https://via.placeholder.com/400x100?text=Babel+Shop+Logo" width="400" alt="Babel Shop Logo"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="{{ asset('assets/app-icons/Babel.png') }}" width="400" alt="Babel Shop Logo"></a></p>
 
 <p align="center">
 <a href="#"><img src="https://img.shields.io/badge/Version-1.0-brightgreen" alt="Project Version"></a>
