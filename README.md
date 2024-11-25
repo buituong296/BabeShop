@@ -21,7 +21,7 @@
 
 Dự án được thực hiện bởi nhóm gồm 4 thành viên:
 
-1. **Nguyễn Hữu Thắng** - PH31670  
+1. **Nguyễn Hữu Thắng**  
 2. **Đỗ Hữu Trọng**  
 3. **Bùi Cát Tường**  
 4. **Vũ Văn Trường**  
