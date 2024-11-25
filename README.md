@@ -1,66 +1,46 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="https://via.placeholder.com/400x100?text=Babel+Shop+Logo" width="400" alt="Babel Shop Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="#"><img src="https://img.shields.io/badge/Version-1.0-brightgreen" alt="Project Version"></a>
+<a href="#"><img src="https://img.shields.io/badge/License-MIT-blue" alt="License"></a>
 </p>
 
-## About Laravel
+## About Babel Shop
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Babel Shop** là một website bán hàng chuyên cung cấp các sản phẩm merch độc quyền liên quan đến tựa game **Arknights**. Dự án này được thực hiện nhằm mục tiêu tạo ra một nền tảng thân thiện, hiện đại, hỗ trợ các fan hâm mộ dễ dàng tìm kiếm và sở hữu các sản phẩm chất lượng cao từ thương hiệu mà họ yêu thích.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Các tính năng chính:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Danh mục sản phẩm đa dạng:** Bao gồm các vật phẩm như áo thun, poster, mô hình, v.v.
+- **Hệ thống giỏ hàng và thanh toán trực tuyến:** Nhanh chóng và an toàn.
+- **Giao diện thân thiện với người dùng:** Hỗ trợ cả trên desktop và mobile.
+- **Tính năng tìm kiếm và lọc sản phẩm:** Giúp khách hàng tìm đúng sản phẩm mình mong muốn.
+- **Quản lý đơn hàng:** Theo dõi tình trạng đơn hàng một cách dễ dàng.
 
-## Learning Laravel
+## Team Members
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Dự án được thực hiện bởi nhóm gồm 4 thành viên:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Nguyễn Hữu Thắng** - PH31670  
+2. **Đỗ Hữu Trọng**  
+3. **Bùi Cát Tường**  
+4. **Vũ Văn Trường**  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technology Stack
 
-## Laravel Sponsors
+Babel Shop được xây dựng trên các công nghệ hiện đại:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Back-end:** Laravel Framework (PHP)  
+- **Front-end:** HTML, CSS, JavaScript (Bootstrap, Vue.js)  
+- **Cơ sở dữ liệu:** MySQL  
+- **Hosting:** Nền tảng hỗ trợ triển khai website (VD: Heroku, AWS).  
 
-### Premium Partners
+## Project Objectives
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
+- Tạo một nền tảng mua sắm online phục vụ cộng đồng yêu thích Arknights.
+- Phát triển website với hiệu năng cao, tối ưu hóa cho trải nghiệm người dùng.
+- Đảm bảo tính bảo mật và bảo vệ thông tin người dùng.
+  
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Dự án Babel Shop được cấp phép theo giấy phép MIT license.
