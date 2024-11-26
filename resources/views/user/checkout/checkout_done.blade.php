@@ -67,7 +67,7 @@
                             @csrf
                             <button type="submit" class="btn btn-primary">Lưu hóa đơn và xóa giỏ hàng</button>
                         </form>
-                        <a href="{{ route('bill') }}" class="btn btn-outline-primary ms-2">Danh sách hóa đơn</a>
+                       
                     </div>
                 </div>
             </div>

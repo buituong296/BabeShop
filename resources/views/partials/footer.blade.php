@@ -154,7 +154,7 @@
 
         <!-- Bản quyền + Phương thức thanh toán -->
         <div class="d-md-flex align-items-center border-top py-4">
-            <div class="d-flex gap-2 gap-sm-3 justify-content-center ms-md-auto mb-4 mb-md-0 order-md-2">
+            {{-- <div class="d-flex gap-2 gap-sm-3 justify-content-center ms-md-auto mb-4 mb-md-0 order-md-2">
                 <div>
                     <img src="assets/img/payment-methods/visa-dark-mode.svg" alt="Visa">
                 </div>
@@ -170,7 +170,7 @@
                 <div>
                     <img src="assets/img/payment-methods/apple-pay-dark-mode.svg" alt="Apple Pay">
                 </div>
-            </div>
+            </div> --}}
             <p class="text-body fs-xs text-center text-md-start mb-0 me-4 order-md-1">© Bản quyền thuộc về. Thiết kế
                 bởi <span class="animate-underline"><a
                         class="animate-target text-dark-emphasis fw-medium text-decoration-none"

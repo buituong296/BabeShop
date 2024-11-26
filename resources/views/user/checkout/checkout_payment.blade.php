@@ -40,30 +40,37 @@
 
                 <!-- Form địa chỉ giao hàng -->
 
-                <div class="d-flex align-items-start">
-                    <div class="d-flex align-items-start">
-                        <div class="d-flex align-items-center justify-content-center bg-body-secondary text-body-secondary rounded-circle fs-sm fw-semibold lh-1 flex-shrink-0" style="width: 2rem; height: 2rem; margin-top: -.125rem">2</div>
-                        <h2 class="h5 text-body-secondary ps-3 ps-md-4 mb-0">Thanh toán</h2>
+                <div class="container py-4">
+                  <!-- Section Title -->
+                  <div class="d-flex align-items-center mb-4">
+                      <div class="d-flex align-items-center justify-content-center bg-body-secondary text-body-secondary rounded-circle fs-sm fw-semibold lh-1 flex-shrink-0" 
+                           style="width: 2rem; height: 2rem; margin-top: -.125rem;">
+                          2
                       </div>
-
-                <div>
-                    <form action="{{ route('checkout.payment-method.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden"  name="method_id" id="method_id" value="1">
-                        <button type="submit" class="btn btn-primary">Thanh Toán COD</button>
-                    </form>
-
-                    <div class="col-md-6">
-                        <form action="{{ route('payment.vnpay') }}" method="GET">
-                            @csrf
-                            <!-- Nút bấm thanh toán online -->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Thanh toán VNPay</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                </div>
+                      <h2 class="h5 text-body-secondary ps-3 ps-md-4 mb-0">Thanh toán</h2>
+                  </div>
+              
+                  <!-- Payment Options -->
+                  <div class="row g-4">
+                      <!-- COD Payment -->
+                      <div class="col-md-6">
+                          <form action="{{ route('checkout.payment-method.store') }}" method="POST">
+                              @csrf
+                              <input type="hidden" name="method_id" id="method_id" value="1">
+                              <button type="submit" class="btn btn-primary w-100">Thanh Toán COD</button>
+                          </form>
+                      </div>
+              
+                      <!-- VNPay Payment -->
+                      <div class="col-md-6">
+                          <form action="{{ route('payment.vnpay') }}" method="GET">
+                              @csrf
+                              <button type="submit" class="btn btn-primary w-100">Thanh toán VNPay</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+              
 
                 <!-- Phương thức thanh toán -->
 

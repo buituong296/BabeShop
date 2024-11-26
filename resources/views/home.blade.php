@@ -108,68 +108,15 @@
 
 
         <!-- Features -->
-        <section class="container pt-5 mt-1 mt-sm-3 mt-lg-4">
-            <div class="row row-cols-2 row-cols-md-4 g-4">
-
-                <!-- Mục -->
-                <div class="col">
-                    <div class="d-flex flex-column flex-xxl-row align-items-center">
-                        <div class="d-flex text-dark-emphasis bg-body-tertiary rounded-circle p-4 mb-3 mb-xxl-0">
-                            <i class="ci-delivery fs-2 m-xxl-1"></i>
-                        </div>
-                        <div class="text-center text-xxl-start ps-xxl-3">
-                            <h3 class="h6 mb-1">Miễn Phí Giao & Đổi Trả</h3>
-                            <p class="fs-sm mb-0">Cho đơn > 3.000.000 VNĐ</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mục -->
-                <div class="col">
-                    <div class="d-flex flex-column flex-xxl-row align-items-center">
-                        <div class="d-flex text-dark-emphasis bg-body-tertiary rounded-circle p-4 mb-3 mb-xxl-0">
-                            <i class="ci-credit-card fs-2 m-xxl-1"></i>
-                        </div>
-                        <div class="text-center text-xxl-start ps-xxl-3">
-                            <h3 class="h6 mb-1">Thanh Toán An Toàn</h3>
-                            <p class="fs-sm mb-0">Đảm bảo thanh toán an toàn</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mục -->
-                <div class="col">
-                    <div class="d-flex flex-column flex-xxl-row align-items-center">
-                        <div class="d-flex text-dark-emphasis bg-body-tertiary rounded-circle p-4 mb-3 mb-xxl-0">
-                            <i class="ci-refresh-cw fs-2 m-xxl-1"></i>
-                        </div>
-                        <div class="text-center text-xxl-start ps-xxl-3">
-                            <h3 class="h6 mb-1">Đảm Bảo Hoàn Tiền</h3>
-                            <p class="fs-sm mb-0">Hoàn tiền trong 30 ngày</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mục -->
-                <div class="col">
-                    <div class="d-flex flex-column flex-xxl-row align-items-center">
-                        <div class="d-flex text-dark-emphasis bg-body-tertiary rounded-circle p-4 mb-3 mb-xxl-0">
-                            <i class="ci-chat fs-2 m-xxl-1"></i>
-                        </div>
-                        <div class="text-center text-xxl-start ps-xxl-3">
-                            <h3 class="h6 mb-1">Hỗ Trợ Khách Hàng 24/7</h3>
-                            <p class="fs-sm mb-0">Dịch vụ hỗ trợ thân thiện</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
+            
 
 
 
         <!-- New arrivals (List) -->
         <section class="container pt-5 mt-1 mt-sm-2 mt-md-3 mt-lg-4">
+
+            <br>
+            <hr>
             <h2 class="h3 pb-2 pb-sm-3">Hàng mới về</h2>
             <div class="row">
 
@@ -485,6 +432,8 @@
                     </div>
                 </div>
             </div>
+
+            <br>
         </section>
 
 
@@ -543,7 +492,7 @@
         </section> --}}
 
         <!-- Biểu mẫu đăng ký + Vlog -->
-        <section class="bg-body-tertiary py-5">
+        {{-- <section class="bg-body-tertiary py-5">
             <div class="container pt-sm-2 pt-md-3 pt-lg-4 pt-xl-5">
                 <div class="row">
                     <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
@@ -610,7 +559,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
     </main>
 @endsection
