@@ -58,6 +58,7 @@ class LoginController extends Controller
             return redirect()->intended($this->redirectTo);
         }
 
-        return redirect()->back()->withErrors(['error' => 'Thông tin không đúng.']);
+
+        return redirect()->back()->withErrors(['error' => 'Thông tin tài khoản không đúng.']);
     }
 }

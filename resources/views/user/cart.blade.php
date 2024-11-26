@@ -20,21 +20,18 @@
             <div class="col-lg-8">
 
 
-
-
-                    <!-- Table of items -->
+                @if (empty($cartItems) || $cartItems->count() == 0)
+                    <p class="fs-m">Bạn chưa có sản phẩm nào trong giỏ hàng</p>
+                @else
                     <table class="table position-relative z-2 mb-4">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-body"><span class="text-body">Sản phẩm</span>
                                 </th>
                                 <th></th>
-                                <th scope="col" class="text-body"><span
-                                        class="text-body">Giá</span></th>
-                                <th scope="col" class="text-body"><span
-                                        class="text-body">Số lượng</span></th>
-                                <th scope="col" class="text-body"><span
-                                        class="text-body">Tổng</span></th>
+                                <th scope="col" class="text-body"><span class="text-body">Giá</span></th>
+                                <th scope="col" class="text-body"><span class="text-body">Số lượng</span></th>
+                                <th scope="col" class="text-body"><span class="text-body">Tổng</span></th>
                                 <th scope="col" class="py-0 px-0">
                                     <div class="nav justify-content-end">
                                         <button type="button"
@@ -54,21 +51,26 @@
                                     </td>
                                     <td>
                                         <h6>{{ $item->variant->product->name }}</h6>
-                                        <p>Màu sắc:{{ $item->variant->color->name }}, Kích thước:{{ $item->variant->size->name }}</p>
+                                        <p>Màu sắc:{{ $item->variant->color->name }}, Kích
+                                            thước:{{ $item->variant->size->name }}</p>
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">
                                         {{ number_format($item->variant->sale_price) }} VND
-                                        <td class="d-none d-md-table-cell">
-                                            <div class="input-group">
-                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', -1)">
-                                                    <span class="icon-minus">-</span>
-                                                </button>
-                                                <input type="number" name="quantity" id="quantity-{{ $item->id }}" value="{{ $item->quantity }}" min="1" class="form-control" style="width: 60px;" onchange="updateQuantity('{{ $item->id }}')">
-                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', 1)">
-                                                    <span class="icon-plus">+</span>
-                                                </button>
-                                            </div>
-                                        </td>
+                                    <td class="d-none d-md-table-cell">
+                                        <div class="input-group">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                onclick="updateQuantity('{{ $item->id }}', -1)">
+                                                <span class="icon-minus">-</span>
+                                            </button>
+                                            <input type="number" name="quantity" id="quantity-{{ $item->id }}"
+                                                value="{{ $item->quantity }}" min="1" class="form-control"
+                                                style="width: 60px;" onchange="updateQuantity('{{ $item->id }}')">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                onclick="updateQuantity('{{ $item->id }}', 1)">
+                                                <span class="icon-plus">+</span>
+                                            </button>
+                                        </div>
+                                    </td>
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-md-table-cell">
                                         <span id="total-price-{{ $item->id }}">
@@ -89,162 +91,183 @@
                             @endforeach
                         </tbody>
                     </table>
+                @endif
 
-                    <div class="nav position-relative z-2 mb-4 mb-lg-0">
-                        <a class="nav-link animate-underline px-0" href="{{ route('home') }}">
-                            <i class="ci-chevron-left fs-lg me-1"></i>
-                            <span class="animate-target">Tiếp tục mua sắm</span>
-                        </a>
-                    </div>
+                <!-- Table of items -->
+
+
+                <div class="nav position-relative z-2 mb-4 mb-lg-0">
+                    <a class="nav-link animate-underline px-0" href="{{ route('home') }}">
+                        <i class="ci-chevron-left fs-lg me-1"></i>
+                        <span class="animate-target">Tiếp tục mua sắm</span>
+                    </a>
                 </div>
-
+            </div>
+           
 
             <!-- Order summary (sticky sidebar) -->
-            <aside class="col-lg-4" style="margin-top: -100px">
-                <div class="position-sticky top-0" style="padding-top: 100px">
-                    <div class="bg-body-tertiary rounded-5 p-4 mb-3">
-                        <div class="p-sm-2 p-lg-0 p-xl-2">
-                            <h5 class="border-bottom pb-4 mb-4">Tổng hóa đơn</h5>
-                            <ul class="list-unstyled fs-sm gap-3 mb-0">
-                                <li class="d-flex justify-content-between">
-                                    Tổng số tiền ({{ count($cartItems) }} mặt hàng):
-                                    <span id="order-summary-total" class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }} VND</span>
-                                </li>
-                                @if (session('total_discount', 0) > 0)
-                                    @foreach (session('applied_vouchers', []) as $code => $percentage)
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        Mã giảm giá {{ $code }} ({{ $percentage }}%):
-                                        <div>
-                                            <span id="discount-{{ $code }}" data-percentage="{{ $percentage }}" class="text-danger fw-medium">
-                                                -{{ number_format(session('total_amount', 0) * ($percentage / 100)) }} VND
-                                            </span>
-                                            <form action="{{ route('vouchers.remove') }}" method="POST" style="display: inline-block;">
-                                                @csrf
-                                                <input type="hidden" name="voucher_code" value="{{ $code }}">
-                                                <button type="submit" class="btn btn-link p-0 ms-2" style="color: #ff0000;">
-                                                    <i class="ci-close-circle"></i> <!-- hoặc × -->
-                                                </button>
-                                            </form>
-                                        </div>
+            @if (empty($cartItems) || $cartItems->count() == 0)
+                <p class="fs-m"></p>
+            @else
+                <aside class="col-lg-4" style="margin-top: -100px">
+                    <div class="position-sticky top-0" style="padding-top: 100px">
+                        <div class="bg-body-tertiary rounded-5 p-4 mb-3">
+                            <div class="p-sm-2 p-lg-0 p-xl-2">
+                                <h5 class="border-bottom pb-4 mb-4">Tổng hóa đơn</h5>
+                                <ul class="list-unstyled fs-sm gap-3 mb-0">
+                                    <li class="d-flex justify-content-between">
+                                        Tổng số tiền ({{ count($cartItems) }} mặt hàng):
+                                        <span id="order-summary-total"
+                                            class="text-dark-emphasis fw-medium">{{ number_format(session('total_amount', 0)) }}
+                                            VND</span>
                                     </li>
+                                    @if (session('total_discount', 0) > 0)
+                                        @foreach (session('applied_vouchers', []) as $code => $percentage)
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                Mã giảm giá {{ $code }} ({{ $percentage }}%):
+                                                <div>
+                                                    <span id="discount-{{ $code }}"
+                                                        data-percentage="{{ $percentage }}"
+                                                        class="text-danger fw-medium">
+                                                        -{{ number_format(session('total_amount', 0) * ($percentage / 100)) }}
+                                                        VND
+                                                    </span>
+                                                    <form action="{{ route('vouchers.remove') }}" method="POST"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        <input type="hidden" name="voucher_code"
+                                                            value="{{ $code }}">
+                                                        <button type="submit" class="btn btn-link p-0 ms-2"
+                                                            style="color: #ff0000;">
+                                                            <i class="ci-close-circle"></i> <!-- hoặc × -->
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
 
-                                    @endforeach
-
-                                @endif
-                            </ul>
-
-                            <div class="border-top pt-4 mt-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <span class="fs-sm">Tổng thanh toán sau cùng:</span>
-                                    <span id="order-summary-final-total" class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
-                                </div>
-                                <a class="btn btn-lg btn-primary w-100" href="{{ route('checkout') }}">
-                                    Đi tới thanh toán
-                                    <i class="ci-chevron-right fs-lg ms-1 me-n1"></i>
-                                </a>
-                                <div class="nav justify-content-center fs-sm mt-3">
-                                    <a class="nav-link text-decoration-underline p-0 me-1" href="#authForm" data-bs-toggle="offcanvas" role="button">Tạo tài khoản mới</a>
-                                    và nhận
-                                    <span class="text-dark-emphasis fw-medium ms-1">239 điểm thưởng</span>
+                                <div class="border-top pt-4 mt-4">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="fs-sm">Tổng thanh toán sau cùng:</span>
+                                        <span id="order-summary-final-total"
+                                            class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }}
+                                            VND</span>
+                                    </div>
+                                    <a class="btn btn-lg btn-primary w-100" href="{{ route('checkout') }}">
+                                        Đi tới thanh toán
+                                        <i class="ci-chevron-right fs-lg ms-1 me-n1"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion bg-body-tertiary rounded-5 p-4">
-                        <div class="accordion-item border-0">
-                            <h3 class="accordion-header" id="promoCodeHeading">
-                                <button type="button"
-                                    class="accordion-button animate-underline collapsed py-0 ps-sm-2 ps-lg-0 ps-xl-2"
-                                    data-bs-toggle="collapse" data-bs-target="#promoCode" aria-expanded="false"
-                                    aria-controls="promoCode">
-                                    <i class="ci-percent fs-xl me-2"></i>
-                                    <span class="animate-target me-2">Áp dụng mã giảm giá</span>
-                                </button>
-                            </h3>
-                            <div class="accordion-collapse collapse" id="promoCode" aria-labelledby="promoCodeHeading">
-                                <div class="accordion-body pt-3 pb-2 ps-sm-2 px-lg-0 px-xl-2">
-                                    <form action="{{ route('vouchers.apply') }}" method="POST"
-                                        class="needs-validation d-flex gap-2" novalidate="">
-                                        @csrf
-                                        <div class="position-relative w-100">
-                                            <input type="text" class="form-control" name="voucher_code"
-                                                placeholder="Nhập mã giảm giá" required>
-                                            <div class="invalid-tooltip bg-transparent py-0">Hãy nhập mã giảm giá hợp lệ!
+                        <div class="accordion bg-body-tertiary rounded-5 p-4">
+                            <div class="accordion-item border-0">
+                                <h3 class="accordion-header" id="promoCodeHeading">
+                                    <button type="button"
+                                        class="accordion-button animate-underline collapsed py-0 ps-sm-2 ps-lg-0 ps-xl-2"
+                                        data-bs-toggle="collapse" data-bs-target="#promoCode" aria-expanded="false"
+                                        aria-controls="promoCode">
+                                        <i class="ci-percent fs-xl me-2"></i>
+                                        <span class="animate-target me-2">Áp dụng mã giảm giá</span>
+                                    </button>
+                                </h3>
+                                <div class="accordion-collapse collapse" id="promoCode"
+                                    aria-labelledby="promoCodeHeading">
+                                    <div class="accordion-body pt-3 pb-2 ps-sm-2 px-lg-0 px-xl-2">
+                                        <form action="{{ route('vouchers.apply') }}" method="POST"
+                                            class="needs-validation d-flex gap-2" novalidate="">
+                                            @csrf
+                                            <div class="position-relative w-100">
+                                                <input type="text" class="form-control" name="voucher_code"
+                                                    placeholder="Nhập mã giảm giá" required>
+                                                <div class="invalid-tooltip bg-transparent py-0">Hãy nhập mã giảm giá hợp
+                                                    lệ!
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-dark">Xác nhận</button>
-                                    </form>
+                                            <button type="submit" class="btn btn-dark">Xác nhận</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </aside>
+                </aside>
+            @endif
+           
+            @include('user.partials.trending_product')
         </div>
 
-        <script>
-            function updateQuantity(itemId, change = 0) {
-    let input = document.getElementById(`quantity-${itemId}`);
-    let newQuantity = parseInt(input.value) + change;
-    if (newQuantity < 1) newQuantity = 1;
-
-    input.value = newQuantity;
-
-    fetch(`/cart/update-ajax/${itemId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({ quantity: newQuantity })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById(`total-price-${itemId}`).innerText = data.totalPrice + ' VND';
-            document.querySelector('#order-summary-total').innerText = data.totalAmount + ' VND'; // Cập nhật tổng số tiền
-            document.querySelector('#order-summary-final-total').innerText = data.totalAfterDiscount + ' VND'; // Cập nhật tổng thanh toán sau cùng
-
-            // Cập nhật giảm giá
-            const discountElements = document.querySelectorAll("[id^='discount-']");
-            discountElements.forEach(discountElement => {
-                discountElement.innerText = `-${data.totalDiscount} VND`;
-            });
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
 
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const totalAmountElement = document.getElementById("order-summary-total");
-    const finalTotalElement = document.getElementById("order-summary-final-total");
-    const discountElements = document.querySelectorAll("[id^='discount-']");
-
-    function updateDiscounts() {
-        const totalAmount = parseFloat(totalAmountElement.textContent.replace(/,/g, '')) || 0;
-        let totalDiscount = 0;
-
-        discountElements.forEach((discountElement) => {
-            const percentage = parseFloat(discountElement.getAttribute("data-percentage")) || 0;
-            const discountAmount = totalAmount * (percentage / 100);
-            discountElement.textContent = `-${discountAmount.toLocaleString()} VND`;
-            totalDiscount += discountAmount;
-        });
-
-        const finalTotal = totalAmount - totalDiscount;
-        finalTotalElement.textContent = `${finalTotal.toLocaleString()} VND`;
-    }
-
-    updateDiscounts(); // Gọi hàm này ban đầu khi trang load
-});
-
-
-        </script>
-
+        
     </section>
+
+    <script>
+        function updateQuantity(itemId, change = 0) {
+            let input = document.getElementById(`quantity-${itemId}`);
+            let newQuantity = parseInt(input.value) + change;
+            if (newQuantity < 1) newQuantity = 1;
+
+            input.value = newQuantity;
+
+            fetch(`/cart/update-ajax/${itemId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        quantity: newQuantity
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`total-price-${itemId}`).innerText = data.totalPrice + ' VND';
+                        document.querySelector('#order-summary-total').innerText = data.totalAmount +
+                        ' VND'; // Cập nhật tổng số tiền
+                        document.querySelector('#order-summary-final-total').innerText = data.totalAfterDiscount +
+                            ' VND'; // Cập nhật tổng thanh toán sau cùng
+
+                        // Cập nhật giảm giá
+                        const discountElements = document.querySelectorAll("[id^='discount-']");
+                        discountElements.forEach(discountElement => {
+                            discountElement.innerText = `-${data.totalDiscount} VND`;
+                        });
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const totalAmountElement = document.getElementById("order-summary-total");
+            const finalTotalElement = document.getElementById("order-summary-final-total");
+            const discountElements = document.querySelectorAll("[id^='discount-']");
+
+            function updateDiscounts() {
+                const totalAmount = parseFloat(totalAmountElement.textContent.replace(/,/g, '')) || 0;
+                let totalDiscount = 0;
+
+                discountElements.forEach((discountElement) => {
+                    const percentage = parseFloat(discountElement.getAttribute("data-percentage")) || 0;
+                    const discountAmount = totalAmount * (percentage / 100);
+                    discountElement.textContent = `-${discountAmount.toLocaleString()} VND`;
+                    totalDiscount += discountAmount;
+                });
+
+                const finalTotal = totalAmount - totalDiscount;
+                finalTotalElement.textContent = `${finalTotal.toLocaleString()} VND`;
+            }
+
+            updateDiscounts(); // Gọi hàm này ban đầu khi trang load
+        });
+    </script>
+
 @endsection
