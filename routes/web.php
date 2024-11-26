@@ -25,9 +25,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::middleware(['auth', 'check.admin'])->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', function () {
