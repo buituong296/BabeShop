@@ -56,7 +56,6 @@ Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])-
 
 Route::get('/product-detail/{id}', [App\Http\Controllers\User\ProductDetailController::class, 'productdetail'])->name('productdetail');
 Route::get('/get-variant-quantity', [App\Http\Controllers\User\ProductDetailController::class, 'getVariantQuantity']);
-Route::post('/addtocart', [App\Http\Controllers\User\ProductDetailController::class, 'addToCart'])->name('productdetailcart');
 
 
 
@@ -66,10 +65,70 @@ Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->n
 
 
 //
-Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
 
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('check.cart');;
+
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\User\UserVoucherController;
+
+
+Route::middleware(['auth'])->namespace('User')->group(function () {
+
+    Route::post('/cart/apply-voucher', [UserVoucherController::class, 'applyVoucher'])->name('vouchers.apply');
+    Route::post('/cart/remove-voucher', [UserVoucherController::class, 'removeVoucher'])->name('vouchers.remove');
+
+});
+
+Route::middleware(['auth.redirect'])->group(function () {
+    Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
+    Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
+    Route::get('/bill-cancel/{id}', [App\Http\Controllers\User\BillController::class, 'billCancel'])->name('bill-cancel');
+    Route::get('/bill-success/{id}', [App\Http\Controllers\User\BillController::class, 'billSuccess'])->name('bill-success');
+    Route::get('/bill-return/{id}', [App\Http\Controllers\User\BillController::class, 'billReturn'])->name('bill-return');
+    
+    
+    Route::get('/user-comment', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comment');
+    Route::get('/user-comment/rating/{id}', [App\Http\Controllers\User\CommentController::class, 'addComment'])->name('comment.add');
+    Route::post('/user-comment/rating', [App\Http\Controllers\User\CommentController::class, 'addPostComment'])->name('comment.addPost');
+    Route::get('/user-comment/detail/{id}', [App\Http\Controllers\User\CommentController::class, 'detailComment'])->name('comment.detail');
+    
+    
+    
+    Route::get('/user-info', [App\Http\Controllers\User\InfoController::class, 'index'])->name('user-info');
+    
+    Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::class, 'update'])->name('user-info.update');
+    Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
+    Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
+    Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
+    
+    Route::get('/address', [App\Http\Controllers\User\AddressController::class, 'address'])->name('address');
+    Route::post('/address/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('address.add');
+    Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
+    Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
+    
+    
+    Route::get('/notification', [App\Http\Controllers\User\NotificationController::class, 'notification'])->name('notification');
+    
+    Route::get('/admin/revenue', [AdminStatisticsController::class, 'revenue'])->name('admin.revenue');
+    Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->name('admin.orderinfos.index');
+    
+    
+    
+    Route::patch('/cart/update-ajax/{id}', [CartController::class, 'updateAjax'])->name('cart.updateAjax');
+    Route::get('/order-summary', [CartController::class, 'getOrderSummary'])->name('order.summary');
+    
+    Route::get('/bills/filter', [BillController::class, 'filterBills'])->name('bills.filter');
+    Route::get('/products/filter', [ProductController::class, 'filterProducts'])->name('products.filter');
+    Route::get('/vouchers/filter', [VoucherController::class, 'filterVouchers'])->name('vouchers.filter');
+
+
+    Route::get('/cart', [App\Http\Controllers\User\CartController::class, 'index'])->name('cart');
+
+
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('check.cart');;
+
+
+    Route::post('/addtocart', [App\Http\Controllers\User\ProductDetailController::class, 'addToCart'])->name('productdetailcart');
 
 // Route cập nhật số lượng sản phẩm trong gi�� hàng
 Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
@@ -93,61 +152,10 @@ Route::get('/checkout/bill-summary', [App\Http\Controllers\User\CheckOutControll
 // routes/web.php
 Route::post('/checkout/save', [App\Http\Controllers\User\CheckOutController::class, 'storeBill'])->name('checkout.save');
 
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\User\UserVoucherController;
+
 
 Route::post('/checkout/payment', [PaymentController::class, 'createPayment'])->name('payment.create');
 Route::get('/checkout/return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
 Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name('payment.vnpay');
 
-
-
-
-Route::middleware(['auth'])->namespace('User')->group(function () {
-
-    Route::post('/cart/apply-voucher', [UserVoucherController::class, 'applyVoucher'])->name('vouchers.apply');
-    Route::post('/cart/remove-voucher', [UserVoucherController::class, 'removeVoucher'])->name('vouchers.remove');
-
 });
-
-
-Route::get('/bill', [App\Http\Controllers\User\BillController::class, 'index'])->name('bill');
-Route::get('/bill-detail/{id}', [App\Http\Controllers\User\BillController::class, 'details'])->name('bill-detail');
-Route::get('/bill-cancel/{id}', [App\Http\Controllers\User\BillController::class, 'billCancel'])->name('bill-cancel');
-Route::get('/bill-success/{id}', [App\Http\Controllers\User\BillController::class, 'billSuccess'])->name('bill-success');
-Route::get('/bill-return/{id}', [App\Http\Controllers\User\BillController::class, 'billReturn'])->name('bill-return');
-
-
-Route::get('/user-comment', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comment');
-Route::get('/user-comment/rating/{id}', [App\Http\Controllers\User\CommentController::class, 'addComment'])->name('comment.add');
-Route::post('/user-comment/rating', [App\Http\Controllers\User\CommentController::class, 'addPostComment'])->name('comment.addPost');
-Route::get('/user-comment/detail/{id}', [App\Http\Controllers\User\CommentController::class, 'detailComment'])->name('comment.detail');
-
-
-
-Route::get('/user-info', [App\Http\Controllers\User\InfoController::class, 'index'])->name('user-info');
-
-Route::post('/user-info/update', [App\Http\Controllers\User\InfoController::class, 'update'])->name('user-info.update');
-Route::post('/user-info/updateContact', [App\Http\Controllers\User\InfoController::class, 'updateContact'])->name('user-info.updateContact');
-Route::post('/user-info/updatePassword', [App\Http\Controllers\User\InfoController::class, 'updatePassword'])->name('user-info.updatePassword');
-Route::post('/user-info/delete', [App\Http\Controllers\User\InfoController::class, 'delete'])->name('user-info.delete');
-
-Route::get('/address', [App\Http\Controllers\User\AddressController::class, 'address'])->name('address');
-Route::post('/address/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('address.add');
-Route::post('/address/update/{id}', [App\Http\Controllers\User\AddressController::class, 'update'])->name('address.update');
-Route::put('/address/{id}/set-primary', [App\Http\Controllers\User\AddressController::class, 'setPrimary'])->name('address.setPrimary');
-
-
-Route::get('/notification', [App\Http\Controllers\User\NotificationController::class, 'notification'])->name('notification');
-
-Route::get('/admin/revenue', [AdminStatisticsController::class, 'revenue'])->name('admin.revenue');
-Route::get('/admin/orders', [AdminStatisticsController::class, 'orderinfo'])->name('admin.orderinfos.index');
-
-
-
-Route::patch('/cart/update-ajax/{id}', [CartController::class, 'updateAjax'])->name('cart.updateAjax');
-Route::get('/order-summary', [CartController::class, 'getOrderSummary'])->name('order.summary');
-
-Route::get('/bills/filter', [BillController::class, 'filterBills'])->name('bills.filter');
-Route::get('/products/filter', [ProductController::class, 'filterProducts'])->name('products.filter');
-Route::get('/vouchers/filter', [VoucherController::class, 'filterVouchers'])->name('vouchers.filter');
