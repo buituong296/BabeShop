@@ -521,6 +521,28 @@
                     </ul>
 
                     </li>
+                    <li class="nav-item dropdown me-lg-n1 me-xl-0 ">
+                      <ul class="navbar-nav position-relative m-0">
+                        
+                          <!-- Authentication Links -->
+                      
+                              <li class="nav-item dropdown">
+                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                      Trang
+                                  </a>
+  
+                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{{ route('terms') }}">Điều khoản sử dụng</a>
+                                      <a class="dropdown-item" href="{{ route('support') }}">Hỗ trợ khách hàng</a>
+                             
+                                      <a class="dropdown-item" href="{{ route('contact') }}">Liên lạc</a>
+                                      {{-- <a class="dropdown-item" href="{{ route('about') }}">Về chúng tôi</a> --}}
+                                  </div>
+                              </li>
+                   
+                      </ul>
+  
+                      </li>
                 </ul>
                 <hr class="d-lg-none my-3">
               </div>

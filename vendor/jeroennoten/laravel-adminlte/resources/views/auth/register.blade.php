@@ -289,11 +289,11 @@
             <div class="d-flex flex-column gap-2 mb-4">
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="save-pass">
-                <label for="save-pass" class="form-check-label">Save the password</label>
+                <label for="save-pass" class="form-check-label">Lưu mật khẩu</label>
               </div>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="privacy" required="">
-                <label for="privacy" class="form-check-label">I have read and accept the <a class="text-dark-emphasis" href="#!">Privacy Policy</a></label>
+                <label for="privacy" class="form-check-label">Tôi đã đồng ý với <a class="text-dark-emphasis" href="#!">Điều khoản sử dụng PRTS</a></label>
               </div>
             </div>
             
@@ -306,126 +306,24 @@
     
 
           <!-- Footer -->
-          <footer class="mt-auto">
+          <footer class="mt-auto py-2">
             <div class="nav mb-4">
-              <a class="nav-link text-decoration-underline p-0" href="help-topics-v1.html">Need help?</a>
+              <a class="nav-link text-decoration-underline p-0" href="help-topics-v1.html">Ngài cần hỗ trợ?</a>
             </div>
-            <p class="fs-xs mb-0">
-              © All rights reserved. Made by <span class="animate-underline"><a class="animate-target text-dark-emphasis text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Createx Studio</a></span>
+            <p class="fs-xs mb-0 ">
+              © Bản quyền thuộc về <span class="animate-underline"><a class="animate-target text-dark-emphasis text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Babel Studio</a></span>
             </p>
           </footer>
         </div>
 
 
         <!-- Benefits section that turns into offcanvas on screens < 992px wide (lg breakpoint) -->
-        <div class="offcanvas-lg offcanvas-end w-100 py-lg-4 ms-auto" id="benefits" style="max-width: 1034px">
-          <div class="offcanvas-header justify-content-end position-relative z-2 p-3">
-            <button type="button" class="btn btn-icon btn-outline-dark text-dark border-dark bg-transparent rounded-circle d-none-dark" data-bs-dismiss="offcanvas" data-bs-target="#benefits" aria-label="Close">
-              <i class="ci-close fs-lg"></i>
-            </button>
-            <button type="button" class="btn btn-icon btn-outline-dark text-light border-light bg-transparent rounded-circle d-none d-inline-flex-dark" data-bs-dismiss="offcanvas" data-bs-target="#benefits" aria-label="Close">
-              <i class="ci-close fs-lg"></i>
-            </button>
-          </div>
-          <div class="position-absolute top-0 start-0 w-100 h-100 d-lg-none">
+        <div class="d-none d-lg-block w-100 py-4 ms-auto" style="max-width: 1034px">
+          <div class="d-flex flex-column justify-content-end h-100 rounded-5 overflow-hidden">
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
-          </div>
-          <div class="offcanvas-body position-relative z-2 d-lg-flex flex-column align-items-center justify-content-center h-100 pt-2 px-3 p-lg-0">
-            <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-lg-block">
-              <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
-              <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
-            </div>
-            <div class="position-relative z-2 w-100 text-center px-md-2 p-lg-5">
-              <h2 class="h4 pb-3">BabelShop account benefits</h2>
-              <div class="mx-auto" style="max-width: 790px">
-                <div class="row row-cols-1 row-cols-sm-2 g-3 g-md-4 g-lg-3 g-xl-4">
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-mail position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">Subscribe to your favorite products</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-settings position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">View and manage your orders and wishlist</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-gift position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">Earn rewards for future purchases</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-percent position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">Receive exclusive offers and discounts</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-heart position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">Create multiple wishlists</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card h-100 bg-transparent border-0">
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-25 border border-white border-opacity-50 rounded-4 d-none-dark"></span>
-                      <span class="position-absolute top-0 start-0 w-100 h-100 bg-white border rounded-4 d-none d-block-dark" style="--cz-bg-opacity: .05"></span>
-                      <div class="card-body position-relative z-2">
-                        <div class="d-inline-flex position-relative text-info p-3">
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-pill d-none-dark"></span>
-                          <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded-pill d-none d-block-dark"></span>
-                          <i class="ci-pie-chart position-relative z-2 fs-4 m-1"></i>
-                        </div>
-                        <h3 class="h6 pt-2 my-2">Pay for purchases by installments</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="ratio position-relative z-2" style="--cz-aspect-ratio: calc(1030 / 1032 * 100%)">
+              <img src="assets/img/bean.png" alt="Girl">
             </div>
           </div>
         </div>
