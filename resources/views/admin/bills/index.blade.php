@@ -64,8 +64,8 @@
                         <th>ID</th>
                         <th>Mã đơn hàng</th>
                         <th>Tên người nhận</th>
+                        <th>Ngày đặt hàng</th>
                         <th>Trạng thái đơn hàng</th>
-                        <th>Ngày chỉnh sửa</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -75,7 +75,7 @@
                             <td>{{ $bill->id }}</td>
                             <td>{{ $bill->bill_code }}</td>
                             <td>{{ $bill->user_name}}</td>
-                            <td>{{ $bill->updated_at}}</td>
+                            <td>{{ $bill->created_at}}</td>
                             <td>{{ $bill->billStatus->name}}</td>
                             <td>
                                 <a href="{{ route('bills.show', $bill->id) }}" class="btn btn-info btn-sm">Xem</a>

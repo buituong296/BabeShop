@@ -64,7 +64,8 @@ return [
     */
 
     'logo' => '<b>Babel</b>Shop',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    // 'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'assets/app-icons/Babel.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +87,8 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            // 'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'assets/app-icons/Babel.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,11 +115,12 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            // 'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'assets/app-icons/Babel.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 120,
+            'height' => 120,
         ],
     ],
 
@@ -352,98 +355,98 @@ return [
         'url'  => 'admin/users',
         'icon' => 'fas fa-users',
     ],
-    [
-        'type' => 'navbar-search',
-        'text' => 'Tìm kiếm',
-        'topnav_right' => true,
-    ],
-    [
-        'type' => 'fullscreen-widget',
-        'topnav_right' => true,
-    ],
+    // [
+    //     'type' => 'navbar-search',
+    //     'text' => 'Tìm kiếm',
+    //     'topnav_right' => true,
+    // ],
+    // [
+    //     'type' => 'fullscreen-widget',
+    //     'topnav_right' => true,
+    // ],
 
-    // Sidebar items:
-    [
-        'type' => 'sidebar-menu-search',
-        'text' => 'Tìm kiếm',
-    ],
-    [
-        'text' => 'Blog',
-        'url' => 'admin/blog',
-        'can' => 'manage-blog',
-    ],
-    [
-        'text' => 'Trang',
-        'url' => 'admin/pages',
-        'icon' => 'far fa-fw fa-file',
-        'label' => 4,
-        'label_color' => 'success',
-    ],
-    ['header' => 'CÀI ĐẶT TÀI KHOẢN'],
-    [
-        'text' => 'Hồ sơ',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-user',
-    ],
-    [
-        'text' => 'Đổi mật khẩu',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-fw fa-lock',
-    ],
-    [
-        'text' => 'Đa cấp',
-        'icon' => 'fas fa-fw fa-share',
-        'submenu' => [
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
-            ],
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
-                'submenu' => [
-                    [
-                        'text' => 'Cấp 2',
-                        'url' => '#',
-                    ],
-                    [
-                        'text' => 'Cấp 2',
-                        'url' => '#',
-                        'submenu' => [
-                            [
-                                'text' => 'Cấp 3',
-                                'url' => '#',
-                            ],
-                            [
-                                'text' => 'Cấp 3',
-                                'url' => '#',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'text' => 'Cấp 1',
-                'url' => '#',
-            ],
-        ],
-    ],
-    ['header' => 'Nhãn'],
-    [
-        'text' => 'Quan trọng',
-        'icon_color' => 'red',
-        'url' => '#',
-    ],
-    [
-        'text' => 'Cảnh báo',
-        'icon_color' => 'yellow',
-        'url' => '#',
-    ],
-    [
-        'text' => 'Thông tin',
-        'icon_color' => 'cyan',
-        'url' => '#',
-    ],
+    // // Sidebar items:
+    // [
+    //     'type' => 'sidebar-menu-search',
+    //     'text' => 'Tìm kiếm',
+    // ],
+    // [
+    //     'text' => 'Blog',
+    //     'url' => 'admin/blog',
+    //     'can' => 'manage-blog',
+    // ],
+    // [
+    //     'text' => 'Trang',
+    //     'url' => 'admin/pages',
+    //     'icon' => 'far fa-fw fa-file',
+    //     'label' => 4,
+    //     'label_color' => 'success',
+    // ],
+    // ['header' => 'CÀI ĐẶT TÀI KHOẢN'],
+    // [
+    //     'text' => 'Hồ sơ',
+    //     'url' => 'admin/settings',
+    //     'icon' => 'fas fa-fw fa-user',
+    // ],
+    // [
+    //     'text' => 'Đổi mật khẩu',
+    //     'url' => 'admin/settings',
+    //     'icon' => 'fas fa-fw fa-lock',
+    // ],
+    // [
+    //     'text' => 'Đa cấp',
+    //     'icon' => 'fas fa-fw fa-share',
+    //     'submenu' => [
+    //         [
+    //             'text' => 'Cấp 1',
+    //             'url' => '#',
+    //         ],
+    //         [
+    //             'text' => 'Cấp 1',
+    //             'url' => '#',
+    //             'submenu' => [
+    //                 [
+    //                     'text' => 'Cấp 2',
+    //                     'url' => '#',
+    //                 ],
+    //                 [
+    //                     'text' => 'Cấp 2',
+    //                     'url' => '#',
+    //                     'submenu' => [
+    //                         [
+    //                             'text' => 'Cấp 3',
+    //                             'url' => '#',
+    //                         ],
+    //                         [
+    //                             'text' => 'Cấp 3',
+    //                             'url' => '#',
+    //                         ],
+    //                     ],
+    //                 ],
+    //             ],
+    //         ],
+    //         [
+    //             'text' => 'Cấp 1',
+    //             'url' => '#',
+    //         ],
+    //     ],
+    // ],
+    // ['header' => 'Nhãn'],
+    // [
+    //     'text' => 'Quan trọng',
+    //     'icon_color' => 'red',
+    //     'url' => '#',
+    // ],
+    // [
+    //     'text' => 'Cảnh báo',
+    //     'icon_color' => 'yellow',
+    //     'url' => '#',
+    // ],
+    // [
+    //     'text' => 'Thông tin',
+    //     'icon_color' => 'cyan',
+    //     'url' => '#',
+    // ],
 ],
 
 

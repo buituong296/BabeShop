@@ -20,7 +20,7 @@ class ProductController extends Controller
         $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
         $products = $this->search(Product::class, $query, ['name']); // Dùng trait
         // Lấy tất cả danh mục
-
+        $categories = Category::all();
         return view('admin.products.index', compact('products', 'query', 'categories'));
     }
 
@@ -189,12 +189,12 @@ public function update(Request $request, $id)
     $query = Product::query();
 
     // Lọc theo giá
-    if ($request->has('price_from') && $request->has('price_to')) {
+    if ($request->filled('price_from') && $request->filled('price_to')) {
         $query->whereBetween('price', [$request->input('price_from'), $request->input('price_to')]);
     }
 
     // Lọc theo danh mục
-    if ($request->has('category_id') && $request->input('category_id') != '') {
+    if ($request->filled('category_id') && $request->input('category_id') != '') {
         $query->where('category_id', $request->input('category_id'));
     }
 

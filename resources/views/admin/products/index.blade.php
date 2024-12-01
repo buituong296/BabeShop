@@ -42,7 +42,7 @@
 
     <div class="card">
         <div class="card-body">
-            <a href="{{ route('products.create') }}" class="btn btn-success mb-3">Add New Product</a>
+            <a href="{{ route('products.create') }}" class="btn btn-success mb-3">Thêm sản phẩm mới</a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
