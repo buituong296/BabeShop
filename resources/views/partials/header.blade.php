@@ -218,8 +218,12 @@
       <span class="h6 mb-0">{{ number_format($totalAmount) }}VND</span>
     </div>
     <div class="d-flex w-100 gap-3">
-      <a class="btn btn-lg btn-secondary w-100" href="{{route('cart')}}">Xem giỏ hàng</a>
-      <a class="btn btn-lg btn-primary w-100" href=" {{route('checkout')}}">Thanh toán</a>
+      <a class="btn btn-lg btn-primary rounded-pill shadow px-5 py-3 w-100" href="{{ route('cart') }}">
+        <i class="bi bi-cart"></i> Xem giỏ hàng
+    </a>
+    
+    
+      {{-- <a class="btn btn-lg btn-primary w-100" href=" {{route('checkout')}}">Thanh toán</a> --}}
     </div>
   </div>
 </div>
@@ -387,7 +391,7 @@
     <div class="collapse navbar-stuck-hide" id="stuckNav">
       <nav class="offcanvas offcanvas-start" id="navbarNav" tabindex="-1" aria-labelledby="navbarNavLabel">
         <div class="offcanvas-header py-3">
-          <h5 class="offcanvas-title" id="navbarNavLabel">Browse Cartzilla</h5>
+          <h5 class="offcanvas-title" id="navbarNavLabel">Xem thêm BabelShop</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body py-3 py-lg-0">

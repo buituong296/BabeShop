@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\BillItem;
 use App\Models\Category;
 use App\Models\Color;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Size;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -36,7 +38,15 @@ class HomeController extends Controller
             ->latest('id')
             ->paginate(4, ['*'], 'page', $page);
 
-        $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
+        // $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
+
+        $topProductIds = BillItem::select('product_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('product_id')
+            ->orderByDesc('count')
+            ->take(4)
+            ->pluck('product_id'); 
+        $products_3 = Product::whereIn('id', $topProductIds)->get();
+      
         return view('home', compact( 'categories', 'products', 'products_2', 'page','products_3'));
     }
 

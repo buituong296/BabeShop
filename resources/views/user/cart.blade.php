@@ -26,20 +26,20 @@
                     <table class="table position-relative z-2 mb-4">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-body"><span class="text-body">Sản phẩm</span>
-                                </th>
-                                <th></th>
-                                <th scope="col" class="text-body"><span class="text-body">Giá</span></th>
-                                <th scope="col" class="text-body"><span class="text-body">Số lượng</span></th>
-                                <th scope="col" class="text-body"><span class="text-body">Tổng</span></th>
-                                <th scope="col" class="py-0 px-0">
+                                <th scope="col" class="text-body" style="width: 10%;"><span class="text-body">Ảnh</span></th>
+                                <th scope="col" class="text-body" style="width: 25%;"><span class="text-body">Tên sản phẩm</span></th>
+                                <th scope="col" class="text-body" style="width: 20%;"><span class="text-body">Giá</span></th>
+                                <th scope="col" class="text-body" style="width: 20%;"><span class="text-body">Số lượng</span></th>
+                                <th scope="col" class="text-body" style="width: 20%;"><span class="text-body">Tổng</span></th>
+                                <th scope="col" class="py-0 px-0" style="width: 5%;">
                                     <div class="nav justify-content-end">
-                                        <button type="button"
-                                            class="nav-link d-inline-block text-decoration text-nowrap py-3 px-0">Xóa
-                                            &nbsp;</button>
+                                        <button type="button" class="nav-link d-inline-block text-decoration text-nowrap py-3 px-0">
+                                            Xóa &nbsp;
+                                        </button>
                                     </div>
                                 </th>
                             </tr>
+                            
                         </thead>
                         <tbody class="align-middle">
                             @foreach ($cartItems as $item)
@@ -62,9 +62,10 @@
                                                 onclick="updateQuantity('{{ $item->id }}', -1)">
                                                 <span class="icon-minus">-</span>
                                             </button>
-                                            <input type="number" name="quantity" id="quantity-{{ $item->id }}"
-                                                value="{{ $item->quantity }}" min="1" class="form-control"
-                                                style="width: 60px;" onchange="updateQuantity('{{ $item->id }}')">
+                                            <input type="tel" name="quantity" id="quantity-{{ $item->id }}"
+                                            value="{{ $item->quantity }}" min="1" class="form-control"
+                                            style="width: 50px;" onchange="updateQuantity('{{ $item->id }}')">
+                                     
                                             <button class="btn btn-outline-secondary" type="button"
                                                 onclick="updateQuantity('{{ $item->id }}', 1)">
                                                 <span class="icon-plus">+</span>
