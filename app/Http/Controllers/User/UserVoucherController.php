@@ -3,14 +3,25 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\BillItem;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserVoucherController extends Controller
 {
         public function applyVoucher(Request $request)
     {
+
+
+        $topProductIds = BillItem::select('product_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('product_id')
+        ->orderByDesc('count')
+        ->take(4)
+        ->pluck('product_id'); 
+        $products_3 = Product::whereIn('id', $topProductIds)->get();
         $request->validate([
             'voucher_code' => 'required|string|max:10',
         ]);
@@ -61,7 +72,9 @@ class UserVoucherController extends Controller
         $voucher->decrement('quantity', 1);
         $voucher->increment('used_quantity', 1);
 
-        return view('user.cart', compact('cartItems', 'totalAmount', 'totalAfterDiscount', 'totalDiscount'))
+
+       
+        return view('user.cart', compact('cartItems', 'totalAmount', 'totalAfterDiscount', 'products_3','totalDiscount'))
             ->with('success', 'Áp dụng mã giảm giá thành công.');
     }
 

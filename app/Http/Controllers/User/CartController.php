@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\BillItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Variant;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -20,7 +22,12 @@ class CartController extends Controller
         ->latest('id')
         ->paginate(4, ['*'], 'page', $page);
 
-    $products_3 = Product::inRandomOrder()->paginate(4, ['*'], 'page', $page);
+    $topProductIds = BillItem::select('product_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('product_id')
+        ->orderByDesc('count')
+        ->take(4)
+        ->pluck('product_id'); 
+    $products_3 = Product::whereIn('id', $topProductIds)->get();
 
     // Tính tổng tiền giỏ hàng
     $totalAmount = $cartItems->sum(function ($item) {
