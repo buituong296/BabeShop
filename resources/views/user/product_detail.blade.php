@@ -321,12 +321,12 @@
                                             <label class="form-label fw-semibold pb-1 mb-2">Kích thước</label>
 
                                             <div class="d-flex flex-wrap gap-2">
-                                                @foreach ($sizes as $size)
-                                                    <input type="radio" class="btn-check" name="size_id"
-                                                        id="{{ $size->name }}" value="{{ $size->id }}">
-                                                    <label for="{{ $size->name }}"
-                                                        class="btn btn-sm btn-outline-secondary">{{ $size->name }}</label>
-                                                @endforeach
+                                                @foreach ($sizes as $index => $size)
+                                                <input type="radio" class="btn-check" name="size_id" id="{{ $size->name }}" value="{{ $size->id }}" 
+                                                       {{ $index == 0 ? 'checked' : '' }}>
+                                                <label for="{{ $size->name }}" class="btn btn-sm btn-outline-secondary">{{ $size->name }}</label>
+                                            @endforeach
+                                            
 
                                             </div>
 
@@ -361,15 +361,14 @@
                                     </div> --}}
 
                                         <div class="d-flex flex-wrap gap-2" data-binded-label="#colorOption">
-                                            @foreach ($colors as $color)
-                                                <input type="radio" class="btn-check" name="color_id"
-                                                    id="{{ $color->name }}" value="{{ $color->id }}">
-                                                {{-- <label for="{{$color->name}}" class="btn btn-sm btn-outline-secondary">{{$color->name}}</label> --}}
-                                                <label for="{{ $color->name }}" class="btn btn-sm btn-outline-secondary"
-                                                    style="background-color: {{ $color->value }};">
-                                                    {{ $color->name }}
-                                                </label>
-                                            @endforeach
+                                            @foreach ($colors as $index => $color)
+                                            <input type="radio" class="btn-check" name="color_id" id="{{ $color->name }}" value="{{ $color->id }}"
+                                                   {{ $index == 0 ? 'checked' : '' }}>
+                                            <label for="{{ $color->name }}" class="btn btn-sm btn-outline-secondary" style="background-color: {{ $color->value }};">
+                                                {{ $color->name }}
+                                            </label>
+                                        @endforeach
+                                        
 
                                         </div>
 
