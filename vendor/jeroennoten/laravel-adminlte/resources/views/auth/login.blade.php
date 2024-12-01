@@ -231,9 +231,9 @@
             </a>
           </header>
 
-          <h1 class="h2 mt-auto">Chào mừng quay lại</h1>
+          <h1 class="h2 mt-auto">Chào mừng quay lại,Doctor!</h1>
           <div class="nav fs-sm mb-4">
-            Bạn chưa có tài khoản?
+            Ngài chưa có tài khoản?
             {{-- <a  href="account-signup.html">Create an account</a> --}}
 
             @if($register_url)
@@ -305,7 +305,7 @@
           <!-- Footer -->
           <footer class="mt-auto">
             <div class="nav mb-4">
-              <a class="nav-link text-decoration-underline p-0" href="help-topics-v1.html">Bạn cần hỗ trợ?</a>
+              <a class="nav-link text-decoration-underline p-0" href="help-topics-v1.html">Ngài cần hỗ trợ?</a>
             </div>
             <p class="fs-xs mb-0">
               © Bản quyền thuộc về <span class="animate-underline"><a class="animate-target text-dark-emphasis text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Babel Studio</a></span>
@@ -320,7 +320,7 @@
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
             <div class="ratio position-relative z-2" style="--cz-aspect-ratio: calc(1030 / 1032 * 100%)">
-              <img src="assets/img/account-cover.png" alt="Girl">
+              <img src="assets/img/bean.png" alt="Girl">
             </div>
           </div>
         </div>

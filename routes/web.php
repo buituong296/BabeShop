@@ -70,7 +70,7 @@ Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->n
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\User\UserVoucherController;
-
+use App\Http\Controllers\User\WallofTextController;
 
 Route::middleware(['auth'])->namespace('User')->group(function () {
 
@@ -159,3 +159,9 @@ Route::get('/checkout/return', [PaymentController::class, 'paymentReturn'])->nam
 Route::get('/payment/vnpay', [PaymentController::class, 'showVNPayForm'])->name('payment.vnpay');
 
 });
+
+Route::get('/support', [WallofTextController::class, 'support'])->name('support');
+Route::get('/addresses', [WallofTextController::class, 'addresses'])->name('addresses');
+Route::get('/terms', [WallofTextController::class, 'terms'])->name('terms');
+Route::get('/contact', [WallofTextController::class, 'contact'])->name('contact');
+Route::get('/about', [WallofTextController::class, 'about'])->name('about');
