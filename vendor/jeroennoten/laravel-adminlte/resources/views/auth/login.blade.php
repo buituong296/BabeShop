@@ -320,11 +320,8 @@
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
             <div class="ratio position-relative z-2" style="--cz-aspect-ratio: calc(1030 / 1032 * 100%)">
-<<<<<<< Updated upstream
               <img src="assets/img/beans.png" alt="Girl">
-=======
               <img src="assets/img/bean1.png" alt="Girl">
->>>>>>> Stashed changes
             </div>
           </div>
         </div>
