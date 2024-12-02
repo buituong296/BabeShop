@@ -14,7 +14,7 @@
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
 @section('auth_body')
- 
+
 @stop
 
 @section('auth_footer')
@@ -235,16 +235,16 @@
           <h1 class="h2 mt-auto">Tạo tài khoản mới</h1>
           <div class="nav fs-sm mb-3 mb-lg-4">
             Tôi đã có tài khoản
-          
+
             <p class="my-0">
                 <a  class="nav-link text-decoration-underline p-0 ms-2"  href="{{ $login_url }}">
                     {{ __('Đăng nhập') }}
                 </a>
             </p>
           </div>
-        
+
           <!-- Form -->
-  
+
 
             <form class="" action="{{ $register_url }}" method="post">
                 @csrf
@@ -264,7 +264,7 @@
             <div class="mb-4">
               <label for="register-password" class="form-label">Mật khẩu</label>
               <div class="password-toggle">
-               
+
                 <input type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror"
                 placeholder="{{ __('Mật khẩu có ít nhất 8 chữ số') }}">
                 <div class="invalid-tooltip bg-transparent py-0">Mật khẩu nhập chưa đủ điều kiện!</div>
@@ -278,7 +278,7 @@
                 <div class="password-toggle">
                   {{-- <input type="password" class="form-control form-control-lg" id="register-password" minlength="8" placeholder="Minimum 8 characters" required=""> --}}
                    <input type="password" name="password_confirmation"
-                       class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" 
+                       class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror"
                        placeholder="{{ __('Nhập lại mật khẩu') }}">
                   <div class="invalid-tooltip bg-transparent py-0">Mật khẩu nhập lại không trùng khớp!</div>
                   <label class="password-toggle-button fs-lg" aria-label="Show/hide password">
@@ -296,14 +296,14 @@
                 <label for="privacy" class="form-check-label">Tôi đã đồng ý với <a class="text-dark-emphasis" href="#!">Điều khoản sử dụng PRTS</a></label>
               </div>
             </div>
-            
+
             <button type="submit" class="btn btn-lg btn-primary w-100 {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }} ">
               <span class="fas fa-user-plus"></span>
               {{ __('Đăng kí tài khoản') }}
           </button>
           </form>
 
-    
+
 
           <!-- Footer -->
           <footer class="mt-auto py-2">
@@ -323,11 +323,8 @@
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
             <div class="ratio position-relative z-2" style="--cz-aspect-ratio: calc(1030 / 1032 * 100%)">
-<<<<<<< Updated upstream
-              <img src="assets/img/beans.png" alt="Girl">
-=======
+
               <img src="assets/img/bean2.png" alt="Girl">
->>>>>>> Stashed changes
             </div>
           </div>
         </div>
@@ -345,7 +342,7 @@
 
     <!-- Bootstrap + Theme scripts -->
     <script src="assets/js/theme.min.js"></script>
-  
+
 
 </body>
 <!-- Mirrored from BabelShop.createx.studio/account-signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2024 14:01:11 GMT -->

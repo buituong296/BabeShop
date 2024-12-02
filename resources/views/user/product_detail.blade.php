@@ -300,7 +300,7 @@
                                     @endforeach
 
 
-                            
+
 
                                 </div>
                             </div>
@@ -322,11 +322,11 @@
 
                                             <div class="d-flex flex-wrap gap-2">
                                                 @foreach ($sizes as $index => $size)
-                                                <input type="radio" class="btn-check" name="size_id" id="{{ $size->name }}" value="{{ $size->id }}" 
+                                                <input type="radio" class="btn-check" name="size_id" id="{{ $size->name }}" value="{{ $size->id }}"
                                                        {{ $index == 0 ? 'checked' : '' }}>
                                                 <label for="{{ $size->name }}" class="btn btn-sm btn-outline-secondary">{{ $size->name }}</label>
                                             @endforeach
-                                            
+
 
                                             </div>
 
@@ -368,7 +368,7 @@
                                                 {{ $color->name }}
                                             </label>
                                         @endforeach
-                                        
+
 
                                         </div>
 
@@ -497,16 +497,6 @@
                                     <span class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
                                     <span class="text-dark-emphasis fw-medium text-end">{{ $category->name }}</span>
                                 </li>
-                                <li class="d-flex align-items-center position-relative pe-4">
-                                    <span>Kích thước:</span>
-                                    <span class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                    <span class="text-dark-emphasis fw-medium text-end">
-                                        @foreach ($sizes as $item)
-                                            {{ $item->width }} * {{ $item->height }}
-                                        @endforeach
-                                        cm
-                                    </span>
-                                </li>
                                 <span>Mô tả:</span>
                                 <li class="d-flex align-items-center position-relative pe-4">
                                     <span>{!! $product->description !!}</span>
@@ -575,7 +565,7 @@
                                 <p class="fs-sm">{{ $comment->comment }}.</p>
                                 <div class="d-flex">
                                     @foreach($comment->album as $key => $image)
-                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%" 
+                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%"
                                          data-bs-toggle="modal" data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
                                 @endforeach
                                 </div>
@@ -945,7 +935,7 @@
             $('img[data-bs-toggle="modal"]').on('click', function() {
                 let imageUrl = $(this).data('image');
                 console.log(imageUrl); // Kiểm tra URL ảnh trong console
-    
+
                 $('#modalImage').attr('src', imageUrl);
             });
         });
