@@ -26,7 +26,7 @@ class CartController extends Controller
         ->groupBy('product_id')
         ->orderByDesc('count')
         ->take(4)
-        ->pluck('product_id'); 
+        ->pluck('product_id');
     $products_3 = Product::whereIn('id', $topProductIds)->get();
 
     // Tính tổng tiền giỏ hàng
@@ -117,7 +117,8 @@ class CartController extends Controller
         }
 
         // Tính tổng thanh toán sau khi giảm giá
-        $totalAfterDiscount = $totalAmount - $totalDiscount;
+        $totalAfterDiscount = max($totalAmount - $totalDiscount, 0); // Giới hạn không âm
+
 
         return response()->json([
             'success' => true,

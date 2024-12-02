@@ -37,14 +37,14 @@
             </li>
             <li class="d-flex justify-content-between">
                 Tổng thanh toán sau cùng:
-                <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
+                <span class="h5 mb-0">{{ number_format(max(session('total_after_discount', session('total_amount', 0)), 0)) }} VND</span>
             </li>
         </ul>
 
         <div class="border-top pt-4 mt-4">
           <div class="d-flex justify-content-between mb-3">
             <span class="fs-sm">Tổng ước tính:</span>
-            <span class="h5 mb-0">{{ number_format(session('total_after_discount', session('total_amount', 0))) }} VND</span>
+            <span class="h5 mb-0">{{ number_format(max(session('total_after_discount', session('total_amount', 0)), 0)) }} VND</span>
           </div>
         </div>
       </div>

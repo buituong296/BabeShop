@@ -8,15 +8,20 @@
         <form action="{{ route('payment.create') }}" method="post" class="bg-light p-4 rounded shadow-sm">
             @csrf
 
-            <input type="hidden" name="total_amount" value="{{ $total }}">
+            <!-- Hidden Input for Total Amount -->
+            @php
+                $totalAmount = max($total, 0); // Đảm bảo total không âm
+            @endphp
+            <input type="hidden" name="total_amount" value="{{ $totalAmount }}">
+
+            <!-- Display Total Amount -->
             <div class="form-group mb-4">
                 <label for="amount" class="font-weight-bold">Số tiền cần thanh toán:</label>
-                <input type="hidden" name="amount" value="{{ $total }}">
+                <input type="hidden" name="amount" value="{{ $totalAmount }}">
                 <div class="form-control-plaintext font-weight-bold text-success">
-                    {{ number_format($total, 0, ',', '.') }} VND
+                    {{ number_format($totalAmount, 0, ',', '.') }} VND
                 </div>
             </div>
-
 
             <!-- Payment Method Selection -->
             <h4 class="font-weight-bold mb-3">Chọn phương thức thanh toán</h4>

@@ -20,7 +20,7 @@ class UserVoucherController extends Controller
         ->groupBy('product_id')
         ->orderByDesc('count')
         ->take(4)
-        ->pluck('product_id'); 
+        ->pluck('product_id');
         $products_3 = Product::whereIn('id', $topProductIds)->get();
         $request->validate([
             'voucher_code' => 'required|string|max:10',
@@ -55,13 +55,18 @@ class UserVoucherController extends Controller
             return $item->variant->sale_price * $item->quantity;
         });
 
-        // Tính tổng giảm giá và giới hạn không vượt quá tổng giá trị đơn hàng
+        // Tính toán tổng tiền và giảm giá
         $totalDiscount = 0;
         foreach ($appliedVouchers as $percentage) {
             $totalDiscount += $totalAmount * ($percentage / 100);
         }
+
+        // Giới hạn tổng giảm giá không vượt quá tổng tiền
         $totalDiscount = min($totalDiscount, $totalAmount);
-        $totalAfterDiscount = $totalAmount - $totalDiscount;
+
+        // Tính tổng thanh toán sau giảm giá
+        $totalAfterDiscount = max($totalAmount - $totalDiscount, 0); // Không để giá trị âm
+
 
         // Cập nhật session
         session()->put('total_amount', $totalAmount);
@@ -73,7 +78,7 @@ class UserVoucherController extends Controller
         $voucher->increment('used_quantity', 1);
 
 
-       
+
         return view('user.cart', compact('cartItems', 'totalAmount', 'totalAfterDiscount', 'products_3','totalDiscount'))
             ->with('success', 'Áp dụng mã giảm giá thành công.');
     }
