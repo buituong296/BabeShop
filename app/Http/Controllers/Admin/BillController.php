@@ -8,6 +8,7 @@ use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\BillStatus;
 use App\Models\CommentUser;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Searchable;
@@ -115,12 +116,18 @@ class BillController extends Controller
             'by_user' => Auth::id(),
             'at_datetime' => now()
         ];
+        $cancel = Bill::where('id', $id)->select('bill_status')->first();
         if ($req->toStatus == '5' && $req->note == null) {
             return back()->withErrors(
 
 'Sửa thất bại do thiếu ghi chú'
             );
-        } else {
+        } else if ($cancel->bill_status == '5') {
+            return redirect()->route('bills.index')->withErrors(
+
+'Sửa thất bại do khách hàng đã hủy đơn'
+            );
+        } else{
             Bill::where('id', $id)->update($billData);
             BillHistory::create($billHistoryData);
             return redirect()->route('bills.index')->with([

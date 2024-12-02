@@ -26,9 +26,7 @@ class SizeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:2',
-            'width' => 'required|min:1',
-            'height' => 'required|min:1',
+            'name' => 'required|min:2'
         ]);
 
         Size::create($request->all());
@@ -45,9 +43,7 @@ class SizeController extends Controller
     public function update(Request $request, Size $size)
     {
         $request->validate([
-            'name' => 'required|min:2',
-            'width' => 'required|min:1',
-            'height' => 'required|min:1',
+            'name' => 'required|min:2'
         ]);
 
         $size->update($request->all());

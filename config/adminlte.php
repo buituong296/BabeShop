@@ -355,11 +355,11 @@ return [
         'url'  => 'admin/users',
         'icon' => 'fas fa-users',
     ],
-    // [
-    //     'type' => 'navbar-search',
-    //     'text' => 'Tìm kiếm',
-    //     'topnav_right' => true,
-    // ],
+    [
+        'type' => 'navbar-search',
+        'text' => 'Tìm kiếm',
+        'topnav_right' => true,
+    ],
     // [
     //     'type' => 'fullscreen-widget',
     //     'topnav_right' => true,
