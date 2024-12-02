@@ -30,8 +30,10 @@ class InfoController extends Controller
     {
         $user = Auth::user();
         $request->validate([
-            'email' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users,email,' . $user->id,
             'tel' => 'required|numeric|digits_between:10,11',
+        ], [
+            'email.unique' => 'Email đã được sử dụng.',
         ]);
         $user->update($request->all());
         return redirect()->route('user-info')->with('success', 'Địa chỉ liên lạc đã được cập nhật');

@@ -153,17 +153,17 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-lg-3 mt-3 mt-lg-0">
+                {{-- <div class="col-lg-3 mt-3 mt-lg-0">
                     <div class="d-flex align-items-center justify-content-lg-end text-nowrap">
                         <label class="form-label fw-semibold mb-0 me-2">Sắp xếp theo:</label>
                         <div style="width: 190px">
                             <select class="form-select border-0 rounded-0 px-1"
                                 data-select="{
-              &quot;removeItemButton&quot;: false,
-              &quot;classNames&quot;: {
-                &quot;containerInner&quot;: &quot;form-select border-0 rounded-0 px-1&quot;
-              }
-            }">
+                                                &quot;removeItemButton&quot;: false,
+                                                &quot;classNames&quot;: {
+                                                    &quot;containerInner&quot;: &quot;form-select border-0 rounded-0 px-1&quot;
+                                                }
+                                                }">
                                 <option value="Relevance">Độ liên quan</option>
                                 <option value="Popularity">Phổ biến</option>
                                 <option value="Price: Low to High">Giá: Từ thấp đến cao</option>
@@ -173,7 +173,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             <hr class="d-lg-none my-3">
