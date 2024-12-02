@@ -55,9 +55,10 @@
                         @endforeach
 
                         <ul class="list-unstyled">
-                            <li><strong>Tổng giảm giá:</strong> {{ number_format(session('total_discount', 0)) }} VND</li>
-                            <li><strong>Tổng tiền sau khi giảm:</strong> {{ number_format(session('total_after_discount', $total)) }} VND</li>
+                            <li><strong>Tổng giảm giá:</strong> {{ number_format(max(session('total_discount', 0), 0)) }} VND</li>
+                            <li><strong>Tổng tiền sau cùng:</strong> {{ number_format(max(session('total_after_discount', $total), 0)) }} VND</li>
                         </ul>
+
                     </div>
 
                     <!-- Action Buttons -->

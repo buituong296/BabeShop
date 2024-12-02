@@ -71,6 +71,7 @@
     </div>
 
 
+    <script src="{{ asset('assets/js/ajax.js') }}"></script>
 
     <!-- Vendor scripts -->
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
@@ -83,7 +84,6 @@
     <script src="{{ asset('assets/vendor/drift-zoom/Drift.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/choices.js/choices.min.js') }}"></script>
-
     @stack('script')
 </body>
 </html>
