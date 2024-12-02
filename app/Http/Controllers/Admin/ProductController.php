@@ -200,10 +200,9 @@ public function update(Request $request, $id)
 
     // Lấy danh sách sản phẩm đã lọc
     $products = $query->get();
-    $categories = Category::all();
 
     // Truyền cả sản phẩm và danh mục vào view
-    return view('admin.products.index', compact('products','categories'));
+    return view('admin.products.index', compact('products'));
 }
 
 }
