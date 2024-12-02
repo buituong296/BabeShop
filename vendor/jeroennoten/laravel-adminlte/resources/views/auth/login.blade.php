@@ -262,7 +262,7 @@
             @csrf
             <div class="position-relative mb-4">
               {{-- <input type="email" class="form-control form-control-lg" placeholder="Email" required=""> --}}
-              <input type="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
+              <input type="email" min="5" max="20" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
               value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
               <div class="invalid-tooltip bg-transparent py-0">Nhập email hợp lệ!</div>
             </div>
@@ -305,10 +305,10 @@
           <!-- Footer -->
           <footer class="mt-auto">
             <div class="nav mb-4">
-              <a class="nav-link text-decoration-underline p-0" href="help-topics-v1.html">Ngài cần hỗ trợ?</a>
+              <a class="nav-link text-decoration-underline p-0" href="/support">Ngài cần hỗ trợ?</a>
             </div>
             <p class="fs-xs mb-0">
-              © Bản quyền thuộc về <span class="animate-underline"><a class="animate-target text-dark-emphasis text-decoration-none" href="https://createx.studio/" target="_blank" rel="noreferrer">Babel Studio</a></span>
+              © Bản quyền thuộc về <span class="animate-underline"><a class="animate-target text-dark-emphasis text-decoration-none" href="/" target="_blank" rel="noreferrer">Babel Studio</a></span>
             </p>
           </footer>
         </div>
@@ -320,7 +320,7 @@
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
             <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
             <div class="ratio position-relative z-2" style="--cz-aspect-ratio: calc(1030 / 1032 * 100%)">
-              <img src="assets/img/bean.png" alt="Girl">
+              <img src="assets/img/beans.png" alt="Girl">
             </div>
           </div>
         </div>
