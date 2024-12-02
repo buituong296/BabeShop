@@ -52,10 +52,10 @@
                                     class="position-relative z-1 text-center text-sm-start pt-4 pt-sm-0 ps-xl-4 mt-2 mt-sm-0 order-sm-2">
                                     <h2 class="h3 mb-2">Gấu bông Plushie</h2>
                                     <p class="fs-sm text-light-emphasis mb-sm-4">Bộ 3 gấu bông Plushie Bunny</p>
-                                    <a class="btn btn-primary" href="shop-product-general-electronics.html">
-                                        Giá từ $899
-                                        <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
-                                    </a>
+                                        {{-- <a class="btn btn-primary" href="shop-product-general-electronics.html">
+                                            Giá từ $899
+                                            <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
+                                        </a> --}}
                                 </div>
                                 <div class="position-relative z-1 w-100 align-self-end order-sm-1" style="max-width: 416px">
                                     <div class="ratio rtl-flip" style="--cz-aspect-ratio: calc(320 / 416 * 100%)">
