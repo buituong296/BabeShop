@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Số tiền cần phải thu</h5>
                     <p class="card-text">
-                        {{ number_format($amountToBeCollected, 0, ',', '.') }} VND
+                        {{ number_format($pendingOrdersTotal, 0, ',', '.') }} VND
                     </p>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Số tiền thực thu</h5>
                     <p class="card-text">
-                        {{ number_format($collectedAmount, 0, ',', '.') }} VND
+                        {{ number_format($completedOrdersTotal, 0, ',', '.') }} VND
                     </p>
                 </div>
             </div>
@@ -77,11 +77,11 @@
             <div class="row">
                 <div class="col-md-3">
                     <label for="start_date">Ngày bắt đầu:</label>
-                    <input type="date" name="start_date" id="start_date" class="form-control" required>
+                    <input type="date" name="start_date" id="start_date" class="form-control" >
                 </div>
                 <div class="col-md-3">
                     <label for="end_date">Ngày kết thúc:</label>
-                    <input type="date" name="end_date" id="end_date" class="form-control" required>
+                    <input type="date" name="end_date" id="end_date" class="form-control" >
                 </div>
                 <div class="col-md-3 align-self-end">
                     <button type="submit" class="btn btn-primary">Lọc</button>
