@@ -291,8 +291,24 @@
 
 
                 <!-- Product grid -->
+                
                 <div class="col-lg-9">
                     <div class="row row-cols-2 row-cols-md-3 g-4 pb-3 mb-3">
+                        @if (empty($products) || $products->count() == 0)
+                        <section class="text-center py-1 px-2 px-sm-0 my-2 my-md-3 my-lg-4 my-xl-5 mx-auto" style="max-width: 636px">
+                            <div class="pb-4 mb-3 mx-auto" style="max-width: 524px">
+                              {{-- <svg class="text-body-emphasis" viewBox="0 0 524 200" xmlns="http://www.w3.org/2000/svg">
+                                
+                                
+                              </svg> --}}
+                              
+                              <img src="{{ asset('assets/app-icons/huh.png') }}" height="512" width="512">
+                            </div>
+                            <h3>Không tìm thấy sản phẩm trùng khớp với điều kiện</h3>
+                            <p class="pb-3">Có vẻ sản phẩm ngài muốn tìm kiếm không có ở đây?Hãy thử tìm kiếm sản phẩm khác</p>
+                            <a class="btn btn-lg btn-primary" href="/product">Quay về trang sản phẩm</a>
+                          </section>
+                        @else
                         @foreach ($products as $product)
                             <!-- Item -->
                             <form action="{{ route('cart.add') }}" method="POST">
@@ -452,10 +468,14 @@
 
                         {{ $products->links() }}
 
-
+                        @endif
 
 
                 </div>
+
+                
+                
+              
             </div>
 
 
