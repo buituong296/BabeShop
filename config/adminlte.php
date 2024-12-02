@@ -342,11 +342,11 @@ return [
         'url'  => 'admin/comments',
         'icon' => 'fas fa-fw fa-star',
     ],
-    [
-        'text' => 'Thông báo',
-        'url'  => 'admin/notifications',
-        'icon' => 'fas fa-fw fa-bell',
-    ],
+    // [
+    //     'text' => 'Thông báo',
+    //     'url'  => 'admin/notifications',
+    //     'icon' => 'fas fa-fw fa-bell',
+    // ],
     [
         'text' => 'Người dùng',
         'url'  => 'admin/users',
