@@ -20,6 +20,7 @@ class ProductController extends Controller
         $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
         $products = $this->search(Product::class, $query, ['name']); // Dùng trait
         // Lấy tất cả danh mục
+        $categories = Category::all();
 
         return view('admin.products.index', compact('products', 'query', 'categories'));
     }
@@ -200,10 +201,9 @@ public function update(Request $request, $id)
 
     // Lấy danh sách sản phẩm đã lọc
     $products = $query->get();
-    $categories = Category::all();
 
     // Truyền cả sản phẩm và danh mục vào view
-    return view('admin.products.index', compact('products','categories'));
+    return view('admin.products.index', compact('products'));
 }
 
 }
