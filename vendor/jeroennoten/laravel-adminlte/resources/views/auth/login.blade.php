@@ -223,15 +223,15 @@
           <header class="navbar px-0 pb-4 mt-n2 mt-sm-0 mb-2 mb-md-3 mb-lg-4">
             <a href="/" class="navbar-brand pt-0">
               <span class="d-none d-sm-flex flex-shrink-0 text-primary me-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-                    <img src="{{ asset('assets/app-icons/Babel.png') }}" height="32" width="32">
+                <svg xmlns="http://www.w3.org/2000/svg" width="0" height="36">
+                    <img src="{{ asset('assets/app-icons/Babel.png') }}" height="50" width="50">
                 </svg>
             </span>
               BabelShop
             </a>
           </header>
 
-          <h1 class="h2 mt-auto">Chào mừng quay lại,Doctor!</h1>
+          <h1 class="h2 mt-auto">Chào mừng quay lại, Doctor!</h1>
           <div class="nav fs-sm mb-4">
             Ngài chưa có tài khoản?
             {{-- <a  href="account-signup.html">Create an account</a> --}}
@@ -283,14 +283,14 @@
                 <label for="remember-30" class="form-check-label">Nhớ phiên đăng nhập này</label>
               </div>
               <div class="nav">
-                
+
                 @if($password_reset_url)
                 <p class="my-0">
                     <a class="nav-link text-decoration-underline p-0 ms-2" href="{{ $password_reset_url }}">
                         {{ __('Quên mật khẩu') }}
                     </a>
                 </p>
-               
+
                 @endif
               </div>
             </div>
@@ -338,7 +338,7 @@
 
     <!-- Bootstrap + Theme scripts -->
     <script src="assets/js/theme.min.js"></script>
-  
+
 
 </body>
 <!-- Mirrored from cartzilla.createx.studio/account-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2024 13:59:25 GMT -->

@@ -8,7 +8,80 @@
         <!-- Hero slider -->
         <section class="container pt-4">
             <div class="row">
-                <div class="col-lg-9 offset-lg-3">
+
+                <!-- Categories mega menu -->
+                <div class="col-lg-3">
+                    <div class="navbar-nav">
+                        <div class="dropdown w-100">
+
+                            <!-- Buttton visible on screens > 991px wide (lg breakpoint) -->
+                            <div class="cursor-pointer d-none d-lg-block" data-bs-theme="dark">
+                                <button type="button" class="menuu btn btn-lg btn-secondary w-100 rounded-bottom-0 justify-content-start pe-none">
+                                    <i class="ci-grid fs-lg"></i>
+                                    <span class="ms-2 me-auto">Thể loại sản phẩm</span>
+                                </button>
+                            </div>
+
+                            <!-- Mega menu -->
+                            @isset($categories)
+                            <ul class="dropdown-menu dropdown-menu-static show w-100 rounded-top-0 rounded-bottom-4 py-1 p-lg-1" style="--cz-dropdown-spacer: 0; --cz-dropdown-item-padding-y: .625rem; --cz-dropdown-item-spacer: 0">
+                                @foreach($categories as $category)
+                                <li class="dropend position-static">
+                                    <div class="position-relative rounded pt-2 pb-1 px-lg-2">
+                                        <!-- Tạo link động với các tham số -->
+                                        <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex"
+                                        href="{{ route('product', [
+                                                'category' => [$category->id],
+                                                'min' => $category->price_min ?? 1000,
+                                                'max' => $category->price_max ?? 10000000
+                                            ]) }}">
+                                            <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
+                                            <span class="text-truncate">{{ $category->name }}</span>
+                                            <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- Dropdown menu for products -->
+                                    <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
+                                        <div class="d-flex flex-column flex-lg-row h-100 gap-4">
+                                            <div style="min-width: 194px">
+                                                <div class="d-flex w-100">
+                                                    <!-- Link tiêu đề danh mục -->
+                                                    <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate"
+                                                    href="{{ route('product', [
+                                                            'category' => [$category->id],
+                                                            'min' => $category->price_min ?? 1000,
+                                                            'max' => $category->price_max ?? 10000000
+                                                        ]) }}">
+                                                        {{ $category->name }}
+                                                    </a>
+                                                </div>
+                                                <ul class="nav flex-column gap-2 mt-n2">
+                                                    @foreach($category->products as $product)
+                                                    <li class="d-flex w-100 pt-1">
+                                                        <!-- Link cho sản phẩm -->
+                                                        <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0"
+                                                        href="{{ route('productdetail', ['id' => $product->id]) }}">
+                                                            {{ $product->name }}
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endforeach
+                            </ul>
+                        @endisset
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
                     <div class="position-relative">
                         <span class="position-absolute top-0 start-0 w-100 h-100 rounded-5 d-none-dark rtl-flip"
                             style="background-image: url('assets/img/home/electronics/hero-slider/bg4.png') "></span>
