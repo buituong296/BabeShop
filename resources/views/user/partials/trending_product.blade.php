@@ -72,7 +72,7 @@
                           <i class="ci-star-filled text-warning"></i>
                           <i class="ci-star text-body-tertiary opacity-75"></i>
                       </div>
-                      <span class="text-body-tertiary fs-xs">(123)</span>
+                      <span class="text-body-tertiary fs-xs">{{$product->view}} lượt xem</span>
                   </div>
                   <h3 class="pb-1 mb-2">
                       <a class="d-block fs-sm fw-medium text-truncate"
@@ -91,7 +91,7 @@
                       </button> --}}
                   </div>
               </div>
-              <div
+              {{-- <div
                   class="product-card-details position-absolute top-100 start-0 w-100 bg-body rounded-bottom shadow mt-n2 p-3 pt-1">
                   <span class="position-absolute top-0 start-0 w-100 bg-body mt-n2 py-2"></span>
                   <ul class="list-unstyled d-flex flex-column gap-2 m-0">
@@ -116,7 +116,7 @@
                           <span class="text-dark-emphasis fs-xs fw-medium text-end">4 camera tích hợp</span>
                       </li>
                   </ul>
-              </div>
+              </div> --}}
           </div>
       </div>
         @endforeach

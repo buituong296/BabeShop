@@ -394,7 +394,7 @@
                                         </div>
                                     </div>
 
-                                    <div
+                                    {{-- <div
                                         class="product-card-details position-absolute top-100 start-0 w-100 bg-body rounded-bottom shadow mt-n2 p-3 pt-1">
                                         <span class="position-absolute top-0 start-0 w-100 bg-body mt-n2 py-2"></span>
                                         <ul class="list-unstyled d-flex flex-column gap-2 m-0">
@@ -402,16 +402,20 @@
                                                 <span class="fs-xs">Display:</span>
                                                 <span
                                                     class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                                {{-- <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->display }}</span> --}}
+
+                                                <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->display }}</span>
+
                                             </li>
                                             <li class="d-flex align-items-center">
                                                 <span class="fs-xs">Graphics:</span>
                                                 <span
                                                     class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                                {{-- <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->graphics }}</span> --}}
+
+                                                <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->graphics }}</span>
+
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>

@@ -91,7 +91,7 @@ class VoucherController extends Controller
     $query = Voucher::query();
 
     // Lọc theo phần trăm giảm giá
-    if ($request->has('discount_from') && $request->has('discount_to')) {
+    if ($request->filled('discount_from') && $request->filled('discount_to')) {
         $query->whereBetween('percentage', [
             $request->input('discount_from'),
             $request->input('discount_to')
@@ -99,7 +99,7 @@ class VoucherController extends Controller
     }
 
     // Lọc theo ngày bắt đầu và ngày kết thúc
-    if ($request->has('start_date') && $request->has('end_date')) {
+    if ($request->filled('start_date') && $request->filled('end_date')) {
         $query->whereBetween('start', [
             $request->input('start_date'),
             $request->input('end_date')

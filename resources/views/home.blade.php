@@ -108,7 +108,7 @@
 
 
         <!-- Features -->
-            
+
 
 
 
@@ -151,7 +151,7 @@
                                 <div class="d-flex align-items-center gap-2 mb-2">
                                     <div class="d-flex gap-1 fs-xs">
 
-                                            @php
+                                        @php
                                             $fullStars = floor($product->rating);
                                             $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
                                             $emptyStars = 5 - $product->rating - $halfStar;
@@ -166,7 +166,7 @@
                                             <i class="ci-star text-body-tertiary opacity-75"></i>
                                         @endfor
                                     </div>
-                                    <span class="text-body-tertiary fs-xs">45</span>
+                                    <span class="text-body-tertiary fs-xs">({{ $product->view }})</span>
                                 </div>
                                 <h4 class="mb-2">
                                     <a class="stretched-link d-block fs-sm fw-medium text-truncate"
@@ -196,21 +196,21 @@
                                     <div class="d-flex gap-1 fs-xs">
 
                                         @php
-                                        $fullStars = floor($product->rating);
-                                        $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
-                                        $emptyStars = 5 - $product->rating - $halfStar;
-                                    @endphp
-                                    @for ($i = 0; $i < $fullStars; $i++)
-                                        <i class="ci-star-filled text-warning"></i>
-                                    @endfor
-                                    @if ($halfStar)
-                                        <i class="ci-star-half text-warning"></i>
-                                    @endif
-                                    @for ($i = 0; $i < $emptyStars; $i++)
-                                        <i class="ci-star text-body-tertiary opacity-75"></i>
-                                    @endfor
-                                </div>
-                                    <span class="text-body-tertiary fs-xs">45</span>
+                                            $fullStars = floor($product->rating);
+                                            $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                            $emptyStars = 5 - $product->rating - $halfStar;
+                                        @endphp
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="ci-star-filled text-warning"></i>
+                                        @endfor
+                                        @if ($halfStar)
+                                            <i class="ci-star-half text-warning"></i>
+                                        @endif
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                                        @endfor
+                                    </div>
+                                    <span class="text-body-tertiary fs-xs">({{ $product->view }})</span>
                                 </div>
                                 <h4 class="mb-2">
                                     <a class="stretched-link d-block fs-sm fw-medium text-truncate"
@@ -233,7 +233,7 @@
 
 
         @include('user.partials.trending_product')
-        
+
 
         <!-- Sale Banner (CTA) -->
         <section class="container pt-5 mt-sm-2 mt-md-3 mt-lg-4">
@@ -321,7 +321,7 @@
                     </div>
                 </div>
                 <div class="nav ms-3">
-                    <a class="nav-link animate-underline px-0 py-2" href="{{route('product')}}">
+                    <a class="nav-link animate-underline px-0 py-2" href="{{ route('product') }}">
                         <span class="animate-target text-nowrap">Xem tất cả</span>
                         <i class="ci-chevron-right fs-base ms-1"></i>
                     </a>
@@ -331,19 +331,20 @@
             <!-- Băng chuyền sản phẩm -->
             <div class="position-relative mx-md-1">
                 <!-- Nút trượt trước/sau hiển thị trên màn hình > 500px -->
-                <button type="button"
+
+                {{-- <button type="button"
                     class="offers-prev btn btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
                     aria-label="Trước">
-                    <i class="ci-chevron-left fs-lg animate-target"></i>
+                    <i class="ci-chevron-left fs-lg animate-target" id="slider1-prev"></i>
                 </button>
                 <button type="button"
                     class="offers-next btn btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
                     aria-label="Sau">
-                    <i class="ci-chevron-right fs-lg animate-target"></i>
-                </button>
+                    <i class="ci-chevron-right fs-lg animate-target" id="slider1-next"></i>
+                </button> --}}
 
                 <!-- Băng chuyền -->
-                <div class="swiper py-4 px-sm-3"
+                <div class="swiper py-4 px-sm-3" id="slider1"
                     data-swiper='{
             "slidesPerView": 2,
             "spaceBetween": 24,
@@ -394,7 +395,7 @@
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                                         <div class="d-flex align-items-center gap-2 mb-2">
                                             <div class="d-flex gap-1 fs-xs">
-                                                    @php
+                                                @php
                                                     $fullStars = floor($product->rating);
                                                     $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
                                                     $emptyStars = 5 - $product->rating - $halfStar;
@@ -407,13 +408,14 @@
                                                 @endif
                                                 @for ($i = 0; $i < $emptyStars; $i++)
                                                     <i class="ci-star text-body-tertiary opacity-75"></i>
-                                                @endfor         
+                                                @endfor
                                             </div>
-                                            <span class="text-body-tertiary fs-sm">46 đánh giá</span>
+                                            <span class="text-body-tertiary fs-sm">{{ $product->view }} lượt xem</span>
                                         </div>
                                         <h3 class="product-title fs-sm">
-                                            <a class="text-body-emphasis text-truncate"
-                                                href="{{ route('productdetail', $product->id) }}">{{ $product->name }}
+                                            <a class="stretched-link d-block fs-sm fw-medium text-truncate"
+                                                href="{{ route('productdetail', $product->id) }}">
+                                                <span class="animate-target">{{ $product->name }}</span>
                                             </a>
                                         </h3>
                                         <div class="d-flex align-items-center flex-wrap gap-2">
@@ -431,9 +433,126 @@
 
                     </div>
                 </div>
+
+            </div>
+        </section>
+        <!-- Ưu đãi đặc biệt (Băng chuyền) -->
+        <section class="container pt-5 mt-2 mt-sm-3 mt-lg-4">
+            <!-- Tiêu đề + Đếm ngược -->
+            <div class="d-flex align-items-start align-items-md-center justify-content-between border-bottom pb-3 pb-md-4">
+                <div class="d-md-flex align-items-center">
+                    <h2 class="h3 pe-3 me-3 mb-md-0">Sản phẩm hot</h2>
+                </div>
+                <div class="nav ms-3">
+                    <a class="nav-link animate-underline px-0 py-2" href="{{ route('product') }}">
+                        <span class="animate-target text-nowrap">Xem tất cả</span>
+                        <i class="ci-chevron-right fs-base ms-1"></i>
+                    </a>
+                </div>
             </div>
 
-            <br>
+            <!-- Băng chuyền sản phẩm -->
+            <div class="position-relative mx-md-1">
+                <!-- Nút trượt trước/sau hiển thị trên màn hình > 500px -->
+                {{-- <button type="button" id="slider2-prev"
+                        class="offers-prev btn btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-start position-absolute top-50 start-0 z-2 translate-middle-y ms-n1 d-none d-sm-inline-flex"
+                        aria-label="Trước">
+                        <i class="ci-chevron-left fs-lg animate-target"></i>
+                    </button>
+                    <button type="button" id="slider2-next"
+                        class="offers-next btn btn-icon btn-outline-secondary bg-body rounded-circle animate-slide-end position-absolute top-50 end-0 z-2 translate-middle-y me-n1 d-none d-sm-inline-flex"
+                        aria-label="Sau">
+                        <i class="ci-chevron-right fs-lg animate-target"></i>
+                    </button> --}}
+
+                <!-- Băng chuyền -->
+                <div class="swiper py-4 px-sm-3" id="slider2"
+                    data-swiper='{
+            "slidesPerView": 2,
+            "spaceBetween": 24,
+            "loop": true,
+            "navigation": {
+              "prevEl": ".offers-prev",
+              "nextEl": ".offers-next"
+            },
+            "breakpoints": {
+              "768": {
+                "slidesPerView": 3
+              },
+              "992": {
+                "slidesPerView": 4
+              }
+            }
+          }'>
+                    <div class="swiper-wrapper">
+
+                        <!-- Sản phẩm -->
+                        @foreach ($products_4 as $product)
+                            <div class="swiper-slide">
+                                <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
+                                    <div class="position-relative">
+                                        <div
+                                            class="position-absolute top-0 end-0 z-2 hover-effect-target opacity-0 mt-3 me-3">
+                                            <div class="d-flex flex-column gap-2">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-pulse d-none d-lg-inline-flex"
+                                                    aria-label="Thêm vào danh sách yêu thích">
+                                                    <i class="ci-heart fs-base animate-target"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="btn btn-icon btn-secondary animate-rotate d-none d-lg-inline-flex"
+                                                    aria-label="So sánh">
+                                                    <i class="ci-refresh-cw fs-base animate-target"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <a class="d-block rounded-top overflow-hidden p-3 p-sm-4"
+                                            href="{{ route('productdetail', $product->id) }}">
+                                            <div class="ratio" style="--cz-aspect-ratio: calc(240 / 258 * 100%)">
+                                                <img src="{{ asset('storage/' . $product->image) }}"
+                                                    alt="Tai nghe không dây">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <div class="d-flex gap-1 fs-xs">
+                                                @php
+                                                    $fullStars = floor($product->rating);
+                                                    $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
+                                                    $emptyStars = 5 - $product->rating - $halfStar;
+                                                @endphp
+                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                    <i class="ci-star-filled text-warning"></i>
+                                                @endfor
+                                                @if ($halfStar)
+                                                    <i class="ci-star-half text-warning"></i>
+                                                @endif
+                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                    <i class="ci-star text-body-tertiary opacity-75"></i>
+                                                @endfor
+                                            </div>
+                                            <span class="text-body-tertiary fs-sm">{{ $product->view }} lượt xem</span>
+                                        </div>
+                                        <h3 class="product-title fs-sm">
+                                            <a class="stretched-link d-block fs-sm fw-medium text-truncate"
+                                                href="{{ route('productdetail', $product->id) }}">
+                                                <span class="animate-target">{{ $product->name }}</span>
+                                            </a>
+                                        </h3>
+                                        <div class="d-flex align-items-center flex-wrap gap-2">
+                                            <span class="h6 text-accent mb-0">{{ $product->price }} ₫</span>
+                                            {{-- <span class="text-body-tertiary text-decoration-line-through fs-sm me-2">2.500.000
+                                            ₫</span> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <br>
         </section>
 
 

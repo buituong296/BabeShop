@@ -13,6 +13,15 @@
     </div>
 @endif
 <div class="container mt-4 pb-4">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <h4>Lọc đơn hàng</h4>
     <form action="{{ route('bills.filter') }}" method="get" class="row g-3">
 
@@ -44,8 +53,8 @@
                 <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>Đã xác nhận</option>
                 <option value="3" {{ request('status') == 3 ? 'selected' : '' }}>Đang giao hàng</option>
                 <option value="4" {{ request('status') == 4 ? 'selected' : '' }}>Giao hàng thành công</option>
-                <option value="4" {{ request('status') == 5 ? 'selected' : '' }}>Đã Hủy</option>
-                <option value="4" {{ request('status') == 7 ? 'selected' : '' }}>Hoàn thành</option>
+                <option value="5" {{ request('status') == 5 ? 'selected' : '' }}>Đã Hủy</option>
+                <option value="7" {{ request('status') == 7 ? 'selected' : '' }}>Hoàn thành</option>
             </select>
         </div>
 
@@ -64,8 +73,8 @@
                         <th>ID</th>
                         <th>Mã đơn hàng</th>
                         <th>Tên người nhận</th>
+                        <th>Ngày đặt hàng</th>
                         <th>Trạng thái đơn hàng</th>
-                        <th>Ngày chỉnh sửa</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -75,18 +84,20 @@
                             <td>{{ $bill->id }}</td>
                             <td>{{ $bill->bill_code }}</td>
                             <td>{{ $bill->user_name}}</td>
-                            <td>{{ $bill->updated_at}}</td>
+                            <td>{{ $bill->created_at}}</td>
                             <td>{{ $bill->billStatus->name}}</td>
                             <td>
                                 <a href="{{ route('bills.show', $bill->id) }}" class="btn btn-info btn-sm">Xem</a>
                                 @if ($bill->bill_status != '5' && $bill->bill_status != '7')
                                 <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-warning btn-sm">Sửa</a>
                                 @endif
+                                @if ($bill->bill_status == '5' && $bill->bill_status == '7')
                                 <form action="{{ route('bills.destroy', $bill->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này?');">Xóa</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

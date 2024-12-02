@@ -8,6 +8,7 @@ use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\BillStatus;
 use App\Models\CommentUser;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Searchable;
@@ -35,7 +36,7 @@ class BillController extends Controller
             1 => [3, 4, 6, 7, 8],
             2 => [1, 4, 5, 6, 7, 8],
             3 => [1, 2, 6, 7, 8],
-            4 => [1, 2, 3, 5, 8],
+            4 => [1, 2, 3, 5, 6, 8],
             5 => [1, 2, 3, 4, 6, 7, 8],
             6 => [1, 2, 3, 4, 5, 8],
             7 => [1, 2, 3, 4, 5, 6, 8],
@@ -64,7 +65,7 @@ class BillController extends Controller
                         1 => [3, 4, 6, 7, 8],
                         2 => [1, 4, 5, 6, 7, 8],
                         3 => [1, 2, 6, 7, 8],
-                        4 => [1, 2, 3, 5, 8],
+                        4 => [1, 2, 3, 5, 6, 8],
                         5 => [1, 2, 3, 4, 6, 7, 8],
                         6 => [1, 2, 3, 4, 5, 8],
                         7 => [1, 2, 3, 4, 5, 6, 8],
@@ -115,12 +116,18 @@ class BillController extends Controller
             'by_user' => Auth::id(),
             'at_datetime' => now()
         ];
+        $cancel = Bill::where('id', $id)->select('bill_status')->first();
         if ($req->toStatus == '5' && $req->note == null) {
             return back()->withErrors(
 
 'Sửa thất bại do thiếu ghi chú'
             );
-        } else {
+        } else if ($cancel->bill_status == '5') {
+            return redirect()->route('bills.index')->withErrors(
+
+'Sửa thất bại do khách hàng đã hủy đơn'
+            );
+        } else{
             Bill::where('id', $id)->update($billData);
             BillHistory::create($billHistoryData);
             return redirect()->route('bills.index')->with([
@@ -155,27 +162,34 @@ class BillController extends Controller
     }
     public function filterBills(Request $request)
     {
-        $query = Bill::query();  // Tạo query builder cho model Bill
-
+        $query = Bill::query(); // Tạo query builder cho model Bill
+    
         // Lọc theo giá
-        if ($request->has('price_from') && $request->has('price_to')) {
+        if ($request->filled('price_from') && $request->filled('price_to')) {
             $query->whereBetween('total', [$request->input('price_from'), $request->input('price_to')]);
+        } elseif ($request->filled('price_from')) {
+            $query->where('total', '>=', $request->input('price_from'));
+        } elseif ($request->filled('price_to')) {
+            $query->where('total', '<=', $request->input('price_to'));
         }
-
+    
         // Lọc theo trạng thái
-        if ($request->has('status') && in_array($request->input('status'), [1, 2, 3, 4])) {
+        if ($request->filled('status') && in_array($request->input('status'), [1, 2, 3, 4, 5, 7])) {
             $query->where('bill_status', $request->input('status'));
         }
-        if ($request->has('start_date') && in_array($request->input('end_date'), [1, 2, 3, 4])) {
-            $query->whereBetween('updated_at', [
-                $request->input('start_date'),
-                $request->input('end_date')
-            ]);
+    
+        // Lọc theo ngày
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('updated_at', [$request->input('start_date'), $request->input('end_date')]);
+        } elseif ($request->filled('start_date')) {
+            $query->where('updated_at', '>=', $request->input('start_date'));
+        } elseif ($request->filled('end_date')) {
+            $query->where('updated_at', '<=', $request->input('end_date'));
         }
-
+    
         // Lấy các đơn hàng đã lọc
         $bills = $query->get();
-
+    
         return view('admin.bills.index', compact('bills'));
     }
 

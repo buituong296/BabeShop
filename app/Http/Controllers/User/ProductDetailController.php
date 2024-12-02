@@ -28,6 +28,9 @@ class ProductDetailController extends Controller
         $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
         $comments = Comment::where('product_id', $id)->get();
         $commentTotal = $comments->count();
+        $product->view += 1;
+        $product->save();
+
 
         return view('user.product_detail')->with([
             'product'   => $product,
