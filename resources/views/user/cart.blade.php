@@ -39,7 +39,7 @@
                                     </div>
                                 </th>
                             </tr>
-                            
+
                         </thead>
                         <tbody class="align-middle">
                             @foreach ($cartItems as $item)
@@ -56,22 +56,18 @@
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-xl-table-cell">
                                         {{ number_format($item->variant->sale_price) }} VND
-                                    <td class="d-none d-md-table-cell">
-                                        <div class="input-group">
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                onclick="updateQuantity('{{ $item->id }}', -1)">
-                                                <span class="icon-minus">-</span>
-                                            </button>
-                                            <input type="tel" name="quantity" id="quantity-{{ $item->id }}"
-                                            value="{{ $item->quantity }}" min="1" class="form-control"
-                                            style="width: 50px;" onchange="updateQuantity('{{ $item->id }}')">
-                                     
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                onclick="updateQuantity('{{ $item->id }}', 1)">
-                                                <span class="icon-plus">+</span>
-                                            </button>
-                                        </div>
-                                    </td>
+                                        <td class="d-none d-md-table-cell">
+                                            <div class="input-group align-items-center">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', -1)">
+                                                    <span class="icon-minus">-</span>
+                                                </button>
+                                                <input type="tel" name="quantity" id="quantity-{{ $item->id }}" value="{{ $item->quantity }}" min="1"
+                                                    class="form-control text-center" style="max-width: 60px;" onchange="updateQuantity('{{ $item->id }}')">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', 1)">
+                                                    <span class="icon-plus">+</span>
+                                                </button>
+                                            </div>
+                                        </td>
                                     </td>
                                     <td class="text-body fs-sm fw-normal d-none d-md-table-cell">
                                         <span id="total-price-{{ $item->id }}">
@@ -104,7 +100,7 @@
                     </a>
                 </div>
             </div>
-           
+
 
             <!-- Order summary (sticky sidebar) -->
             @if (empty($cartItems) || $cartItems->count() == 0)
@@ -196,13 +192,13 @@
                     </div>
                 </aside>
             @endif
-           
+
             @include('user.partials.trending_product')
         </div>
 
 
 
-        
+
     </section>
 
     <script>

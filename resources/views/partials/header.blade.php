@@ -221,8 +221,8 @@
       <a class="btn btn-lg btn-primary rounded-pill shadow px-5 py-3 w-100" href="{{ route('cart') }}">
         <i class="bi bi-cart"></i> Xem giỏ hàng
     </a>
-    
-    
+
+
       {{-- <a class="btn btn-lg btn-primary w-100" href=" {{route('checkout')}}">Thanh toán</a> --}}
     </div>
   </div>
@@ -399,61 +399,19 @@
             <div class="row">
 
               <!-- Categories mega menu -->
-              <div class="col-lg-3">
-                <div class="navbar-nav">
-                  <div class="dropdown w-100">
+                <div class="col-lg-3">
+                    <div class="navbar-nav">
+                        <div class="dropdown w-100">
 
-                    <!-- Buttton visible on screens > 991px wide (lg breakpoint) -->
-                    <div class="cursor-pointer d-none d-lg-block" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-theme="dark">
-                      <button type="button" class="btn btn-lg btn-secondary dropdown-toggle w-100 rounded-bottom-0 justify-content-start pe-none">
-                        <i class="ci-grid fs-lg"></i>
-                        <span class="ms-2 me-auto">Thể loại sản phẩm</span>
-                      </button>
+                            <!-- Buttton visible on screens > 991px wide (lg breakpoint) -->
+                            <div class="cursor-pointer d-none d-lg-block">
+                                <a type="button" class="">
+                                    <span class="ms-2 me-auto"></span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Mega menu -->
-                    @isset($categories)
-                    <ul class="dropdown-menu w-100 rounded-top-0 rounded-bottom-4 py-1 p-lg-1" style="--cz-dropdown-spacer: 0; --cz-dropdown-item-padding-y: .625rem; --cz-dropdown-item-spacer: 0">
-                        @foreach($categories as $category)
-                            <li class="dropend position-static">
-                                <div class="position-relative rounded pt-2 pb-1 px-lg-2" data-bs-toggle="dropdown" data-bs-trigger="hover">
-                                    <a class="dropdown-item fw-medium stretched-link d-none d-lg-flex" href="#">
-                                        <i class="ci-computer fs-xl opacity-60 pe-1 me-2"></i>
-                                        <span class="text-truncate">{{ $category->name }}</span>
-                                        <i class="ci-chevron-right fs-base ms-auto me-n1"></i>
-                                    </a>
-                                </div>
-
-                                    <div class="dropdown-menu rounded-4 p-4" style="top: 1rem; height: calc(100% - .1875rem); --cz-dropdown-spacer: .3125rem; animation: none;">
-                                        <div class="d-flex flex-column flex-lg-row h-100 gap-4">
-                                            <div style="min-width: 194px">
-                                                <div class="d-flex w-100">
-                                                    <a class="animate-underline animate-target d-inline h6 text-dark-emphasis text-decoration-none text-truncate" href="#">
-                                                        {{ $category->name }}
-                                                    </a>
-                                                </div>
-                                                <ul class="nav flex-column gap-2 mt-n2">
-                                                    @foreach($category->products as $product)
-                                                        <li class="d-flex w-100 pt-1">
-                                                            <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="{{ route('productdetail', ['id' => $product->id]) }}">
-                                                                {{ $product->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                            </li>
-                        @endforeach
-                    </ul>
-                    @endisset
-
-
-                  </div>
                 </div>
-              </div>
 
               <!-- Navbar nav -->
               <div class="col-lg-9 d-lg-flex pt-3 pt-lg-0 ps-lg-0">
@@ -462,23 +420,30 @@
                     <a class="nav-link" href="{{ route('home') }}" role="button">Trang chủ</a>
                   </li>
                   <li class="nav-item dropdown position-static me-lg-n1 me-xl-0">
-                    <a class="nav-link dropdown-toggle" href="{{ route('product') }}" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Mua sắm</a>
+                    <a class="nav-link dropdown-toggle" href="{{ route('product') }}" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Sản phẩm</a>
                     <div class="dropdown-menu rounded-4 p-4">
-                      <div class="d-flex flex-column flex-lg-row gap-4">
-                        <div style="min-width: 190px">
-                          <div class="h6 mb-2">Sản phẩm</div>
-                          <ul class="nav flex-column gap-2 mt-0">
-                            <li class="d-flex w-100 pt-1">
-                              <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0" href="{{ route('product') }}">Đoạn này để theo danh mục</a>
-                            </li>
-
-                          </ul>
-
-
+                        <div class="d-flex flex-column flex-lg-row gap-4">
+                            <div style="min-width: 190px">
+                                <ul class="nav flex-column gap-2 mt-0">
+                                    @isset($categories) <!-- Kiểm tra nếu có danh mục -->
+                                        @foreach($categories as $category)
+                                            <li class="d-flex w-100 pt-1">
+                                                <!-- Link danh mục -->
+                                                <a class="nav-link animate-underline animate-target d-inline fw-normal text-truncate p-0"
+                                                   href="{{ route('product', ['category' => [$category->id]]) }}">
+                                                    {{ $category->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <!-- Hiển thị khi không có danh mục -->
+                                        <li class="d-flex w-100 pt-1">
+                                            <span class="text-muted">Không có danh mục nào</span>
+                                        </li>
+                                    @endisset
+                                </ul>
+                            </div>
                         </div>
-
-
-                      </div>
                     </div>
                   </li>
                   <li class="nav-item dropdown me-lg-n1 me-xl-0 ">
@@ -490,7 +455,7 @@
                         @endif
                         <!-- Authentication Links -->
                         @guest
-                          
+
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -523,25 +488,25 @@
                     </li>
                     <li class="nav-item dropdown me-lg-n1 me-xl-0 ">
                       <ul class="navbar-nav position-relative m-0">
-                        
+
                           <!-- Authentication Links -->
-                      
+
                               <li class="nav-item dropdown">
                                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                       Trang
                                   </a>
-  
+
                                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                       <a class="dropdown-item" href="{{ route('terms') }}">Điều khoản sử dụng</a>
                                       <a class="dropdown-item" href="{{ route('support') }}">Hỗ trợ khách hàng</a>
-                             
+
                                       <a class="dropdown-item" href="{{ route('contact') }}">Liên lạc</a>
                                       {{-- <a class="dropdown-item" href="{{ route('about') }}">Về chúng tôi</a> --}}
                                   </div>
                               </li>
-                   
+
                       </ul>
-  
+
                       </li>
                 </ul>
                 <hr class="d-lg-none my-3">
