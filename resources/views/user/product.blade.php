@@ -153,17 +153,17 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-lg-3 mt-3 mt-lg-0">
+                {{-- <div class="col-lg-3 mt-3 mt-lg-0">
                     <div class="d-flex align-items-center justify-content-lg-end text-nowrap">
                         <label class="form-label fw-semibold mb-0 me-2">Sắp xếp theo:</label>
                         <div style="width: 190px">
                             <select class="form-select border-0 rounded-0 px-1"
                                 data-select="{
-              &quot;removeItemButton&quot;: false,
-              &quot;classNames&quot;: {
-                &quot;containerInner&quot;: &quot;form-select border-0 rounded-0 px-1&quot;
-              }
-            }">
+                                                &quot;removeItemButton&quot;: false,
+                                                &quot;classNames&quot;: {
+                                                    &quot;containerInner&quot;: &quot;form-select border-0 rounded-0 px-1&quot;
+                                                }
+                                                }">
                                 <option value="Relevance">Độ liên quan</option>
                                 <option value="Popularity">Phổ biến</option>
                                 <option value="Price: Low to High">Giá: Từ thấp đến cao</option>
@@ -173,7 +173,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             <hr class="d-lg-none my-3">
@@ -394,7 +394,7 @@
                                         </div>
                                     </div>
 
-                                    <div
+                                    {{-- <div
                                         class="product-card-details position-absolute top-100 start-0 w-100 bg-body rounded-bottom shadow mt-n2 p-3 pt-1">
                                         <span class="position-absolute top-0 start-0 w-100 bg-body mt-n2 py-2"></span>
                                         <ul class="list-unstyled d-flex flex-column gap-2 m-0">
@@ -402,16 +402,20 @@
                                                 <span class="fs-xs">Display:</span>
                                                 <span
                                                     class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                                {{-- <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->display }}</span> --}}
+
+                                                <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->display }}</span>
+
                                             </li>
                                             <li class="d-flex align-items-center">
                                                 <span class="fs-xs">Graphics:</span>
                                                 <span
                                                     class="d-block flex-grow-1 border-bottom border-dashed px-1 mt-2 mx-2"></span>
-                                                {{-- <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->graphics }}</span> --}}
+
+                                                <span class="text-dark-emphasis fs-xs fw-medium text-end">{{ $product->graphics }}</span>
+
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
