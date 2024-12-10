@@ -524,6 +524,8 @@
 
                             <!-- Review -->
                             @foreach ($comments as $comment)
+                            @if ($comment->status != "1")
+
                                 <div class="border-bottom py-3 mb-3">
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="text-nowrap me-3">
@@ -569,6 +571,8 @@
                                          data-bs-toggle="modal" data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
                                 @endforeach
                                 </div>
+                                                                
+                            @endif
                         @endforeach
                     </div>
                     </div>

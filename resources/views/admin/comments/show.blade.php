@@ -71,11 +71,11 @@
 
                     </div>
                 </div>
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label class="form-label" for="review-text">Biến thể<span class="text-danger">*</span></label>
                     <input class="form-control" name="variant_id"
                         value="{{ $variant->color->name }}, {{ $variant->size->name }}" disabled>
-                </div>
+                </div> --}}
                 <div class="mb-3">
                     <label class="form-label" for="review-text">Bình luận <span class="text-danger">*</span></label>
                     <textarea class="form-control" rows="4" id="review-text" required="" name="comment" disabled>{{ $comment->comment }}</textarea>
