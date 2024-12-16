@@ -67,6 +67,33 @@ class AdminStatisticsController extends Controller
         'labels' => ['Cần thu', 'Thực thu'],
         'values' => [$pendingOrdersTotal, $completedOrdersTotal],
     ];
+    $revenueByCategory = DB::table('bill_items')
+        ->join('products', 'bill_items.product_id', '=', 'products.id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select(
+            'categories.name as category_name',
+            DB::raw('SUM(bill_items.variant_sale_price * bill_items.quantity) as total_revenue')
+        )
+        ->groupBy('categories.name')
+        ->orderByDesc('total_revenue')
+        ->get();
+
+    $topSellingProducts = DB::table('bill_items')
+        ->select('product_id', 'product_name', 'product_image', DB::raw('SUM(quantity) as total_quantity'))
+        ->groupBy('product_id', 'product_name', 'product_image')
+        ->orderByDesc('total_quantity')
+        ->limit(5)
+        ->get();
+
+    // Truy vấn để lấy top 5 người dùng có số tiền chi tiêu cao nhất
+    $topSpendingUsers = DB::table('bills')
+        ->join('bill_items', 'bills.id', '=', 'bill_items.bill_id')
+        ->join('users', 'bills.user_id', '=', 'users.id')
+        ->select('users.id', 'users.name', 'users.image', DB::raw('SUM(bill_items.variant_sale_price * bill_items.quantity) as total_spent'))
+        ->groupBy('users.id', 'users.name', 'users.image')
+        ->orderByDesc('total_spent')
+        ->limit(5)
+        ->get();
 
     return view('admin.statistics.index', compact(
         'totalOrders',
@@ -81,7 +108,10 @@ class AdminStatisticsController extends Controller
         'pieChartData',
         'chartData',
         'completedOrdersTotal',
-        'pendingOrdersTotal'
+        'pendingOrdersTotal',
+        'revenueByCategory',
+        'topSellingProducts',
+        'topSpendingUsers'
     ));
 }
 
@@ -145,6 +175,32 @@ public function revenue(Request $request)
         'labels' => $salesByCategory->pluck('name')->toArray(),
         'data' => $salesByCategory->pluck('total_sold')->toArray()
     ];
+    $revenueByCategory = DB::table('bill_items')
+        ->join('products', 'bill_items.product_id', '=', 'products.id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select(
+            'categories.name as category_name',
+            DB::raw('SUM(bill_items.variant_sale_price * bill_items.quantity) as total_revenue')
+        )
+        ->groupBy('categories.name')
+        ->orderByDesc('total_revenue')
+        ->get();
+    $topSellingProducts = DB::table('bill_items')
+        ->select('product_id', 'product_name', 'product_image', DB::raw('SUM(quantity) as total_quantity'))
+        ->groupBy('product_id', 'product_name', 'product_image')
+        ->orderByDesc('total_quantity')
+        ->limit(5)
+        ->get();
+
+    // Truy vấn để lấy top 5 người dùng có số tiền chi tiêu cao nhất
+    $topSpendingUsers = DB::table('bills')
+        ->join('bill_items', 'bills.id', '=', 'bill_items.bill_id')
+        ->join('users', 'bills.user_id', '=', 'users.id')
+        ->select('users.id', 'users.name', 'users.image', DB::raw('SUM(bill_items.variant_sale_price * bill_items.quantity) as total_spent'))
+        ->groupBy('users.id', 'users.name', 'users.image')
+        ->orderByDesc('total_spent')
+        ->limit(5)
+        ->get();
 
     return view('admin.statistics.index', compact(
         'revenueData',
@@ -157,6 +213,9 @@ public function revenue(Request $request)
         'pendingOrdersTotal',
         'completedOrdersTotal',
         'pieChartData',
+        'revenueByCategory',
+        'topSellingProducts',
+        'topSpendingUsers'
     ));
 }
 
