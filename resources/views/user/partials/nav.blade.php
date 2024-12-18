@@ -27,14 +27,14 @@
           <i class="ci-shopping-bag fs-base opacity-75 me-2"></i>
           Đơn hàng
         </a>
-        <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-wishlist.html">
+        {{-- <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-wishlist.html">
           <i class="ci-heart fs-base opacity-75 me-2"></i>
           Danh sách yêu thích
         </a>
         <a class="list-group-item list-group-item-action d-flex align-items-center" href="account-payment.html">
           <i class="ci-credit-card fs-base opacity-75 me-2"></i>
           Phương thức thanh toán
-        </a>
+        </a> --}}
         <a class="list-group-item list-group-item-action d-flex align-items-center" href="{{route('comment')}}">
           <i class="ci-star fs-base opacity-75 me-2"></i>
           Đánh giá của tôi
@@ -57,11 +57,11 @@
       </nav>
       <h6 class="pt-4 ps-2 ms-1">Dịch vụ khách hàng</h6>
       <nav class="list-group list-group-borderless">
-        <a class="list-group-item list-group-item-action d-flex align-items-center" href="help-topics-v1.html">
+        <a class="list-group-item list-group-item-action d-flex align-items-center" href="/support">
           <i class="ci-help-circle fs-base opacity-75 me-2"></i>
           Trung tâm trợ giúp
         </a>
-        <a class="list-group-item list-group-item-action d-flex align-items-center" href="terms-and-conditions.html">
+        <a class="list-group-item list-group-item-action d-flex align-items-center" href="/terms">
           <i class="ci-info fs-base opacity-75 me-2"></i>
           Điều khoản và điều kiện
         </a>
