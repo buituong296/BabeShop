@@ -43,33 +43,33 @@
                 <div class="mb-3">
                     <div class="d-flex gap-1 fs-sm me-2 me-sm-3">
                         @if ($comment->rating >= '0')
-                            <i class="ci-star-filled text-warning"></i>
+                        <i class="ci-star-filled text-warning"></i>
                         @else
-                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                        <i class="ci-star text-body-tertiary opacity-75"></i>
                         @endif
                         @if ($comment->rating >= '2')
-                            <i class="ci-star-filled text-warning"></i>
+                        <i class="ci-star-filled text-warning"></i>
                         @else
-                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                        <i class="ci-star text-body-tertiary opacity-75"></i>
                         @endif
                         @if ($comment->rating >= '3')
-                            <i class="ci-star-filled text-warning"></i>
+                        <i class="ci-star-filled text-warning"></i>
                         @else
-                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                        <i class="ci-star text-body-tertiary opacity-75"></i>
                         @endif
                         @if ($comment->rating >= '4')
-                            <i class="ci-star-filled text-warning"></i>
+                        <i class="ci-star-filled text-warning"></i>
                         @else
-                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                        <i class="ci-star text-body-tertiary opacity-75"></i>
                         @endif
                         @if ($comment->rating >= '5')
-                            <i class="ci-star-filled text-warning"></i>
+                        <i class="ci-star-filled text-warning"></i>
                         @else
-                            <i class="ci-star text-body-tertiary opacity-75"></i>
+                        <i class="ci-star text-body-tertiary opacity-75"></i>
                         @endif
 
 
-                    </div>
+                      </div>
                 </div>
                 {{-- <div class="mb-3">
                     <label class="form-label" for="review-text">Biến thể<span class="text-danger">*</span></label>
@@ -85,7 +85,8 @@
                     <div class="d-flex">
                         @foreach ($comment->album as $key => $image)
                             <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album"
-                                class="mx-1 rounded-3 img-thumbnail" width="25%" data-bs-toggle="modal"
+                                class="mx-1 rounded-3 img-thumbnail" style="width: 15%" 
+                                data-bs-toggle="modal"
                                 data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
                         @endforeach
                     </div>

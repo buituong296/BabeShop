@@ -132,6 +132,7 @@
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Ảnh sản phẩm</label>
                                 <input class="form-control" type="file" id="formFile" name="album[]" multiple>
+                                <small class="form-text">Tối đa 5 ảnh</small>
                             </div>
                             <div class="modal-footer flex-nowrap gap-3 border-0 px-4">
                                 <a href="{{route('comment')}}" class="btn btn-secondary w-100 m-0">Quay lại</a>

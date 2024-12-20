@@ -8,6 +8,8 @@ use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\CommentUser;
 use App\Models\Notification;
+use App\Models\Product;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,10 +59,19 @@ class BillController extends Controller
                 'user_id' => $bill->user_id,
                 'is_read' => false, // Default to unread
             ]);
+            $billItem = BillItem::where('bill_id', $id)->get();
+            foreach ($billItem as $item) {
+                $product = Product::where('id', $item->product_id);
+                $product->increment('quantity', $item->quantity);
+
+                $variant = Variant::where('id', $item->variant_id);
+                $variant->increment('stock', $item->quantity);
+            }
+            ;
             return redirect()->route('bill-detail', ['id' => $id])->with([
                 'message' => 'Hủy đơn hàng thành công'
             ]);
-        } else if($oldStatus != '1') {
+        } else if ($oldStatus != '1') {
             return redirect()->route('bill-detail', ['id' => $id])->withErrors(['bill_status' => 'Hủy đơn hàng không thành công do đơn hàng đã xử lí'])->withInput();
         }
     }
