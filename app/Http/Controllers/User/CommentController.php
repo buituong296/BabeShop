@@ -33,9 +33,11 @@ class CommentController extends Controller
         $req->validate([
             'rating' => 'required',
             'comment' => 'required| max:300',
+            'album' => 'max:5'
         ], [
             'rating.required' => 'Vui lòng chịn đánh giá.',
-            'comment.max' => 'bình luận không được vượt quá 300 ký tự.'
+            'comment.max' => 'Bình luận không được vượt quá 300 ký tự.',
+            'album.max' => 'Không được phép gửi quá 5 ảnh'
         ]);
     
         $comment = Comment::create([

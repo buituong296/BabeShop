@@ -97,7 +97,7 @@
                                 <label for="formFile" class="form-label">Ảnh sản phẩm</label>
                                 <div class="d-flex">
                                     @foreach($comment->album as $key => $image)
-                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="25%" 
+                                    <img src="{{ asset('storage/albums/' . $image->image) }}" alt="Ảnh album" class="mx-1 rounded-3 img-thumbnail" width="15%" 
                                          data-bs-toggle="modal" data-bs-target="#imageModal" data-image="{{ asset('storage/albums/' . $image->image) }}">
                                 @endforeach
                                 </div>
@@ -111,10 +111,6 @@
                     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="imageModalLabel">Xem ảnh</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
                                 <div class="modal-body">
                                     <img id="modalImage" src="" class="d-block w-100" alt="Ảnh lớn">
                                 </div>
