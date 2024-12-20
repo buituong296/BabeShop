@@ -147,23 +147,34 @@ class BillController extends Controller
         ]);
     }
     public function show($id)
-    {
-        $bill = Bill::where('id', $id)->first();
-        $billProducts = BillItem::where('bill_id', $bill->id)->get();
-        $billHistories = BillHistory::where('bill_id', $bill->id)->get();
-        $total = 0;
-        return view('admin.bills.show')->with([
-            'bill' => $bill,
-            'billProducts' => $billProducts,
-            'billHistories' => $billHistories,
-            'total' => $total
-        ]);
-        ;
-    }
+{
+    // Lấy thông tin hóa đơn
+    $bill = Bill::where('id', $id)->first();
+
+    // Lấy các sản phẩm trong hóa đơn và include cả những biến thể đã bị soft delete
+    $billProducts = BillItem::where('bill_id', $bill->id)
+        ->with(['variants' => function ($query) {
+            $query->withTrashed(); // Bao gồm cả các biến thể đã bị soft delete
+        }])
+        ->get();
+
+    // Lấy lịch sử của hóa đơn
+    $billHistories = BillHistory::where('bill_id', $bill->id)->get();
+
+    $total = 0;
+
+    return view('admin.bills.show')->with([
+        'bill' => $bill,
+        'billProducts' => $billProducts,
+        'billHistories' => $billHistories,
+        'total' => $total
+    ]);
+}
+
     public function filterBills(Request $request)
     {
         $query = Bill::query(); // Tạo query builder cho model Bill
-    
+
         // Lọc theo giá
         if ($request->filled('price_from') && $request->filled('price_to')) {
             $query->whereBetween('total', [$request->input('price_from'), $request->input('price_to')]);
@@ -172,12 +183,12 @@ class BillController extends Controller
         } elseif ($request->filled('price_to')) {
             $query->where('total', '<=', $request->input('price_to'));
         }
-    
+
         // Lọc theo trạng thái
         if ($request->filled('status') && in_array($request->input('status'), [1, 2, 3, 4, 5, 7])) {
             $query->where('bill_status', $request->input('status'));
         }
-    
+
         // Lọc theo ngày
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $query->whereBetween('updated_at', [$request->input('start_date'), $request->input('end_date')]);
@@ -186,10 +197,10 @@ class BillController extends Controller
         } elseif ($request->filled('end_date')) {
             $query->where('updated_at', '<=', $request->input('end_date'));
         }
-    
+
         // Lấy các đơn hàng đã lọc
         $bills = $query->get();
-    
+
         return view('admin.bills.index', compact('bills'));
     }
 

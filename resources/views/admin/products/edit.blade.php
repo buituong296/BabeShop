@@ -2,9 +2,14 @@
 
 @section('content')
 
-@if($errors->has('variants'))
+@if ($errors->has('variants'))
     <div class="alert alert-danger">
         {{ $errors->first('variants') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
     </div>
 @endif
 

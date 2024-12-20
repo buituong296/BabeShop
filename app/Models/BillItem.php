@@ -28,4 +28,5 @@ class BillItem extends Model
     {
         return $this->belongsTo(Variant::class,'variant_id');
     }
+
 }
