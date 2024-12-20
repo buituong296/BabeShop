@@ -76,7 +76,7 @@
                                     <p class="fs-sm text-light-emphasis mb-1">Phiên bản giới hạn</p>
                                     <h2 class="h3 mb-4">Plushie Ceobe</h2>
                                 </div>
-                                <a class="position-relative z-1 d-block w-100" href="shop-product-general-electronics.html">
+                                <a class="position-relative z-1 d-block w-100" href="product-detail/39">
                                     <div class="ratio" style="--cz-aspect-ratio: calc(159 / 525 * 100%)">
                                         <img src="assets/img/shop/electronics/banners/ceobe.png" width="525"
                                             alt="iPad">
@@ -305,7 +305,7 @@
                               <img src="{{ asset('assets/app-icons/huh.png') }}" height="512" width="512">
                             </div>
                             <h3>Không tìm thấy sản phẩm trùng khớp với điều kiện</h3>
-                            <p class="pb-3">Có vẻ sản phẩm ngài muốn tìm kiếm không có ở đây?Hãy thử tìm kiếm sản phẩm khác</p>
+                            <p class="pb-3">Có vẻ sản phẩm ngài muốn tìm kiếm không có ở đây? Hãy thử tìm kiếm sản phẩm khác</p>
                             <a class="btn btn-lg btn-primary" href="/product">Quay về trang sản phẩm</a>
                           </section>
                         @else

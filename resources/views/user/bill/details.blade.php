@@ -113,6 +113,7 @@
                                     <!-- Assuming 'code' is the column for the bill code -->
                                     <strong>Tên người mua:</strong> {{ $bill->user_name }} <br>
                                     <!-- Assuming 'name' is the column for the user name -->
+                                    <strong>Địa chỉ:</strong> {{ $bill->user_address }} <br>
                                     <strong>Trạng thái đơn hàng:</strong>
                                     @if ($bill->bill_status == 0)
                                         Chưa thanh toán
@@ -163,8 +164,10 @@
                                         <tbody>
                                             @foreach ($bill->billitems as $billitem)
                                                 <tr>
-                                                    <td><h6>{{ $billitem->product_name }}</h6>                                         
-                                                        <p>Màu sắc: {{ $billitem->variants->color->name }}, Kích thước: {{ $billitem->variants->size->name }}</p>
+                                                    <td>
+                                                        <h6>{{ $billitem->product_name }}</h6>
+                                                        <p>Màu sắc: {{ $billitem->variants->color->name }}, Kích thước:
+                                                            {{ $billitem->variants->size->name }}</p>
                                                     </td>
                                                     {{-- <td>{{ $billitem->product_name }}</td>
                                                     <td>
@@ -188,15 +191,23 @@
                                         </tbody>
                                     </table>
 
-                                    <h5>Tổng thanh toán:</h5>
-                                    <p>
-                                        {{ number_format(
-                                            $bill->billitems->sum(function ($billitem) {
-                                                return $billitem->variant_sale_price * $billitem->quantity;
-                                            }),
-                                        ) }}
-                                        VND
-                                    </p>
+                                    <p><strong>Tổng:
+                                            {{ number_format(
+                                                $bill->billitems->sum(function ($billitem) {
+                                                    return $billtotal = $billitem->variant_sale_price * $billitem->quantity;
+                                                }),
+                                            ) }}
+                                            VND
+                                        </strong></p>
+                                    <p><strong>Mã giảm giá (vouvcher):
+                                            -{{ number_format(
+                                                $bill->billitems->sum(function ($billitem) {
+                                                    return $billtotal = $billitem->variant_sale_price * $billitem->quantity;
+                                                }) - $bill->total,
+                                            ) }}
+                                            VND</strong></p>
+                                    <h5>Tổng thanh toán: </h5>
+                                    <p>{{ number_format($bill->total, 0, ',', '.') }} VND</p>
 
                                 </div>
                             </div>

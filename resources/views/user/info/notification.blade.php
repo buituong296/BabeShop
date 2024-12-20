@@ -47,15 +47,17 @@
           <div class="border-bottom py-4">
             <div class="nav flex-nowrap align-items-center justify-content-between pb-1 mb-3">
               <div class="d-flex align-items-center gap-3 me-4">
-                <h2 class="h6 mb-0">{{ $item->type }}</h2>
+                <h2 class="h6 mb-0">{{ $item->type }} </h2>
               </div>
-              <a class="nav-link hiding-collapse-toggle text-decoration-underline p-0 collapsed" 
-                href="#primaryAddressEdit{{ $item->id }}" 
+              <p class="nav-link hiding-collapse-toggle p-0 collapsed" 
+              {{-- <p class="nav-link hiding-collapse-toggle text-decoration-underline p-0 collapsed"  --}}
+                {{-- href="#primaryAddressEdit{{ $item->id }}" 
                 data-bs-toggle="collapse" 
                 aria-expanded="false" 
-                aria-controls="primaryAddressEdit{{ $item->id }}">
-                Đã xem
-              </a>
+                aria-controls="primaryAddressEdit{{ $item->id }}" --}}
+                >
+                {{$item->created_at}}
+            </p>
             </div>
             <div class="collapse primary-address show" id="primaryAddressPreview">
               <ul class="list-unstyled fs-sm m-0">

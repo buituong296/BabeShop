@@ -47,8 +47,9 @@ class HomeController extends Controller
             ->pluck('product_id'); 
         $products_3 = Product::whereIn('id', $topProductIds)->get();
         $products_4 = Product::orderBy('view', 'desc')->get();
+        $products_5 = Product::latest('id')->get();
       
-        return view('home', compact( 'categories', 'products', 'products_2', 'page','products_3','products_4'));
+        return view('home', compact( 'categories', 'products', 'products_2', 'page','products_3','products_4','products_5'));
     }
 
     public function search(Request $request)

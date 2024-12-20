@@ -130,6 +130,8 @@
                 <div class="text-right">
                     {{-- <p>Mã giảm giá (Voucher): </p> --}}
                     <p><strong>Tổng: {{ number_format($total, 0, ',', '.') }} VND</strong></p>
+                    <p><strong>Mã giảm giá (vouvcher): -{{ number_format($total-$bill->total, 0, ',', '.') }} VND</strong></p>
+                    <p><strong>Tổng thu: {{ number_format($bill->total, 0, ',', '.') }} VND</strong></p>
                 </div>
             </div>
         </div>

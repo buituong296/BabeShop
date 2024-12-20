@@ -21,7 +21,7 @@
                         <form action="{{ route('sizes.destroy', $size->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa kích thước này?');">Xóa</button>
                         </form>
                     </td>
                 </tr>

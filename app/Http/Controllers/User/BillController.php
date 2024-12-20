@@ -7,6 +7,7 @@ use App\Models\Bill;
 use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\CommentUser;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,14 @@ class BillController extends Controller
             ];
             Bill::where('id', $id)->update($billData);
             BillHistory::create($billHistoryData);
+
+            $bill = Bill::where('id', $id)->first();
+            Notification::create([
+                'type' => "Đơn hàng {$bill->bill_code}",
+                'message' => "Đơn hàng {$bill->bill_code} của bạn đã được hủy thành công",
+                'user_id' => $bill->user_id,
+                'is_read' => false, // Default to unread
+            ]);
             return redirect()->route('bill-detail', ['id' => $id])->with([
                 'message' => 'Hủy đơn hàng thành công'
             ]);
@@ -86,7 +95,13 @@ class BillController extends Controller
         ;
         Bill::where('id', $id)->update($billData);
         BillHistory::create($billHistoryData);
-
+        $bill = Bill::where('id', $id)->first();
+        Notification::create([
+            'type' => "Đơn hàng {$bill->bill_code}",
+            'message' => "Đơn hàng {$bill->bill_code} của bạn đã hoàn thành. Cảm ơn bạn đã mua sắm tại BabelShop.",
+            'user_id' => $bill->user_id,
+            'is_read' => false, // Default to unread
+        ]);
         return redirect()->route('bill-detail', ['id' => $id])->with([
             'message' => 'Xác nhận đơn hàng thành công'
         ]);
