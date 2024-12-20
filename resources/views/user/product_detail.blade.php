@@ -20,113 +20,6 @@
     <main class="content-wrapper">
         <div class="container mt-5">
 
-            <!-- Review form modal -->
-            <div class="modal fade" id="reviewForm" data-bs-backdrop="static" tabindex="-1" aria-labelledby="reviewFormLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <form class="modal-content needs-validation" novalidate="">
-                        <div class="modal-header border-0">
-                            <h5 class="modal-title" id="reviewFormLabel">Bình luận</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body pb-3 pt-0">
-                            <div class="mb-3">
-                                <label for="review-name" class="form-label">Tên <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="review-name" required="">
-                                <div class="invalid-feedback">Please enter your name!</div>
-                                <small class="form-text">Will be displayed on the comment.</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="review-email" class="form-label">Email <span
-                                        class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="review-email" required="">
-                                <div class="invalid-feedback">Please provide a valid email address!</div>
-                                <small class="form-text">Authentication only - we won't spam you.</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Đánh giá <span class="text-danger">*</span></label>
-                                <select class="form-select"
-                                    data-select="{
-                            &quot;placeholderValue&quot;: &quot;Choose rating&quot;,
-                            &quot;choices&quot;: [
-                              {
-                                &quot;value&quot;: &quot;&quot;,
-                                &quot;label&quot;: &quot;Choose rating&quot;,
-                                &quot;placeholder&quot;: true
-                              },
-                              {
-                                &quot;value&quot;: &quot;1&quot;,
-                                &quot;label&quot;: &quot;<span class=\&quot;visually-hidden\&quot;>1 star</span>&quot;,
-                                &quot;customProperties&quot;: {
-                                  &quot;icon&quot;: &quot;<span class=\&quot;d-flex gap-1 py-1\&quot;><i class=\&quot;ci-star-filled text-warning\&quot;></i></span>&quot;,
-                                  &quot;selected&quot;: &quot;1 star&quot;
-                                }
-                              },
-                              {
-                                &quot;value&quot;: &quot;2&quot;,
-                                &quot;label&quot;: &quot;<span class=\&quot;visually-hidden\&quot;>2 stars</span>&quot;,
-                                &quot;customProperties&quot;: {
-                                  &quot;icon&quot;: &quot;<span class=\&quot;d-flex gap-1 py-1\&quot;><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i></span>&quot;,
-                                  &quot;selected&quot;: &quot;2 stars&quot;
-                                }
-                              },
-                              {
-                                &quot;value&quot;: &quot;3&quot;,
-                                &quot;label&quot;: &quot;<span class=\&quot;visually-hidden\&quot;>3 stars</span>&quot;,
-                                &quot;customProperties&quot;: {
-                                  &quot;icon&quot;: &quot;<span class=\&quot;d-flex gap-1 py-1\&quot;><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i></span>&quot;,
-                                  &quot;selected&quot;: &quot;3 stars&quot;
-                                }
-                              },
-                              {
-                                &quot;value&quot;: &quot;4&quot;,
-                                &quot;label&quot;: &quot;<span class=\&quot;visually-hidden\&quot;>4 stars</span>&quot;,
-                                &quot;customProperties&quot;: {
-                                  &quot;icon&quot;: &quot;<span class=\&quot;d-flex gap-1 py-1\&quot;><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i></span>&quot;,
-                                  &quot;selected&quot;: &quot;4 stars&quot;
-                                }
-                              },
-                              {
-                                &quot;value&quot;: &quot;5&quot;,
-                                &quot;label&quot;: &quot;<span class=\&quot;visually-hidden\&quot;>5 stars</span>&quot;,
-                                &quot;customProperties&quot;: {
-                                  &quot;icon&quot;: &quot;<span class=\&quot;d-flex gap-1 py-1\&quot;><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i><i class=\&quot;ci-star-filled text-warning\&quot;></i></span>&quot;,
-                                  &quot;selected&quot;: &quot;5 stars&quot;
-                                }
-                              }
-                            ]
-                          }"
-                                    data-select-template="true" required=""></select>
-                                <div class="invalid-feedback">Please choose your rating!</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="review-text">Bình luận <span
-                                        class="text-danger">*</span></label>
-                                <textarea class="form-control" rows="4" id="review-text" required=""></textarea>
-                                <div class="invalid-feedback">Please write a review!</div>
-                                <small class="form-text">Your review must be at least 50 characters.</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Ưu điểm</label>
-                                <input type="text" class="form-select"
-                                    data-select="{&quot;placeholderValue&quot;: &quot;Type and hit \&quot;Enter\&quot;&quot;}">
-                            </div>
-                            <div>
-                                <label class="form-label">Nhược điểm</label>
-                                <input type="text" class="form-select"
-                                    data-select="{&quot;placeholderValue&quot;: &quot;Type and hit \&quot;Enter\&quot;&quot;}">
-                            </div>
-                        </div>
-                        <div class="modal-footer flex-nowrap gap-3 border-0 px-4">
-                            <button type="reset" class="btn btn-secondary w-100 m-0"
-                                data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary w-100 m-0">Submit review</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
 
 
             <!-- Page content -->
@@ -336,30 +229,6 @@
                                     <div class="pb-3 mb-2 mb-lg-3">
                                         <label class="form-label fw-semibold pb-1 mb-2">Màu sắc:</label>
 
-                                        {{-- <div class="d-flex flex-wrap gap-2" data-binded-label="#colorOption">
-                                        <input type="radio" class="btn-check" name="color-options" id="color-1"
-                                            checked="">
-                                        <label for="color-1" class="btn btn-color fs-xl" data-label="Gray blue"
-                                            style="color: #5a7aa1">
-                                            <span class="visually-hidden">Gray blue</span>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="color-options" id="color-2">
-                                        <label for="color-2" class="btn btn-color fs-xl" data-label="Pink"
-                                            style="color: #ee7976">
-                                            <span class="visually-hidden">Pink</span>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="color-options" id="color-3">
-                                        <label for="color-3" class="btn btn-color fs-xl" data-label="Light blue"
-                                            style="color: #9acbf1">
-                                            <span class="visually-hidden">Light blue</span>
-                                        </label>
-                                        <input type="radio" class="btn-check" name="color-options" id="color-4">
-                                        <label for="color-4" class="btn btn-color fs-xl" data-label="Green"
-                                            style="color: #8cd1ab">
-                                            <span class="visually-hidden">Green</span>
-                                        </label>
-                                    </div> --}}
-
                                         <div class="d-flex flex-wrap gap-2" data-binded-label="#colorOption">
                                             @foreach ($colors as $index => $color)
                                             <input type="radio" class="btn-check" name="color_id" id="{{ $color->name }}" value="{{ $color->id }}"
@@ -421,7 +290,7 @@
                                     </form>
 
                                     <!-- Features -->
-                                    <div class="d-flex flex-wrap gap-3 gap-xl-4 pb-4 pb-lg-5 mb-2 mb-lg-0 mb-xl-2">
+                                    {{-- <div class="d-flex flex-wrap gap-3 gap-xl-4 pb-4 pb-lg-5 mb-2 mb-lg-0 mb-xl-2">
                                         <div class="d-flex align-items-center fs-sm">
                                             <svg class="text-warning me-2" xmlns="http://www.w3.org/2000/svg"
                                                 width="16" height="16" fill="currentColor">
@@ -466,7 +335,7 @@
                                             </svg>
                                             <div class="text-body-emphasis text-nowrap">Pay by installments</div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
@@ -672,7 +541,7 @@
                                         </a>
                                     </div>
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
-                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                        <div class="d-flex gap-1 fs-xs pb-2">
                                             @php
                                             $fullStars = floor($item->rating);
                                             $halfStar = $item->rating - $fullStars >= 0.5 ? 1 : 0;
@@ -824,7 +693,7 @@
                                         </a>
                                     </div>
                                     <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
-                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                        <div class="d-flex gap-1 fs-xs pb-2">
                                             @php
                                             $fullStars = floor($item->rating);
                                             $halfStar = $item->rating - $fullStars >= 0.5 ? 1 : 0;

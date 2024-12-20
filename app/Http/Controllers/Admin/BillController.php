@@ -8,6 +8,7 @@ use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\BillStatus;
 use App\Models\CommentUser;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,22 +60,6 @@ class BillController extends Controller
             'toStatus' => [
                 'required',
                 'different:fromStatus',
-                function ($attribute, $value, $fail) use ($req) {
-                    $fromStatus = $req->input('fromStatus');
-                    $invalidStatus = [
-                        1 => [3, 4, 6, 7, 8],
-                        2 => [1, 4, 5, 6, 7, 8],
-                        3 => [1, 2, 6, 7, 8],
-                        4 => [1, 2, 3, 5, 6, 8],
-                        5 => [1, 2, 3, 4, 6, 7, 8],
-                        6 => [1, 2, 3, 4, 5, 8],
-                        7 => [1, 2, 3, 4, 5, 6, 8],
-                        8 => [1, 2, 3, 4, 5, 6, 7, 8]
-                    ];
-                    if (isset($invalidStatus[$fromStatus]) && in_array($value, $invalidStatus[$fromStatus])) {
-                        $fail('Thay đổi không hợp lệ.');
-                    }
-                },
             ],
             'note' => 'max:50'
         ], [
@@ -128,6 +113,15 @@ class BillController extends Controller
 'Sửa thất bại do khách hàng đã hủy đơn'
             );
         } else{
+            $bill = Bill::where('id', $id)->first();
+            $notifstatus = BillStatus::where('id', $req->toStatus)->first();
+            Notification::create([
+                'type' => "Đơn hàng {$bill->bill_code}",
+                'message' => "Đơn hàng {$bill->bill_code} của bạn đang ở trong trạng thái {$notifstatus->name}",
+                'user_id' => $bill->user_id,
+                'is_read' => false, // Default to unread
+            ]);
+
             Bill::where('id', $id)->update($billData);
             BillHistory::create($billHistoryData);
             return redirect()->route('bills.index')->with([

@@ -91,13 +91,13 @@
                                 @if ($bill->bill_status != '5' && $bill->bill_status != '7')
                                 <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-warning btn-sm">Sửa</a>
                                 @endif
-                                @if ($bill->bill_status == '5' || $bill->bill_status == '7')
+                                {{-- @if ($bill->bill_status == '5' || $bill->bill_status == '7')
                                 <form action="{{ route('bills.destroy', $bill->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này?');">Xóa</button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
                     @endforeach

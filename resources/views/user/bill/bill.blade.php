@@ -110,11 +110,11 @@
                   <td class="fw-medium py-3 d-none d-md-table-cell">
                     <span class="d-flex align-items-center">
                       @if($bill->bill_status == 0)
-                      Chưa thanh toán 
+                      Chờ thanh toán
                   @elseif($bill->bill_status == 1)
-                  Đã xác nhận
+                  Chờ xác nhận
                   @elseif($bill->bill_status == 2)
-                    Đang xử lí
+                    Đã xác nhận
                   @elseif($bill->bill_status == 3)
                     Đang giao hàng
                   @elseif($bill->bill_status == 4)

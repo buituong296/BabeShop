@@ -223,7 +223,6 @@
                             <div class="w-100 min-w-0 ps-2 ps-sm-3">
                                 <div class="d-flex align-items-center gap-2 mb-2">
                                     <div class="d-flex gap-1 fs-xs">
-
                                         @php
                                             $fullStars = floor($product->rating);
                                             $halfStar = $product->rating - $fullStars >= 0.5 ? 1 : 0;
@@ -370,28 +369,12 @@
             <div class="d-none d-lg-block" style="padding-bottom: 3%"></div>
         </section>
 
-        <!-- Ưu đãi đặc biệt (Băng chuyền) -->
+        <!-- Sản phẩm mới (Băng chuyền) -->
         <section class="container pt-5 mt-2 mt-sm-3 mt-lg-4">
             <!-- Tiêu đề + Đếm ngược -->
             <div class="d-flex align-items-start align-items-md-center justify-content-between border-bottom pb-3 pb-md-4">
                 <div class="d-md-flex align-items-center">
-                    <h2 class="h3 pe-3 me-3 mb-md-0">Ưu đãi đặc biệt cho bạn</h2>
-                    <div class="d-flex align-items-center" data-countdown-date="demoDate">
-                        <div class="btn btn-primary pe-none px-2">
-                            <span data-days=""></span>
-                            <span>ngày</span>
-                        </div>
-                        <div class="animate-blinking text-body-tertiary fs-lg fw-medium mx-2">:</div>
-                        <div class="btn btn-primary pe-none px-2">
-                            <span data-hours=""></span>
-                            <span>giờ</span>
-                        </div>
-                        <div class="animate-blinking text-body-tertiary fs-lg fw-medium mx-2">:</div>
-                        <div class="btn btn-primary pe-none px-2">
-                            <span data-minutes=""></span>
-                            <span>phút</span>
-                        </div>
-                    </div>
+                    <h2 class="h3 pe-3 me-3 mb-md-0">Sản phẩm mới</h2>
                 </div>
                 <div class="nav ms-3">
                     <a class="nav-link animate-underline px-0 py-2" href="{{ route('product') }}">
@@ -438,7 +421,7 @@
                     <div class="swiper-wrapper">
 
                         <!-- Sản phẩm -->
-                        @foreach ($products_3 as $product)
+                        @foreach ($products_5 as $product)
                             <div class="swiper-slide">
                                 <div class="product-card animate-underline hover-effect-opacity bg-body rounded">
                                     <div class="position-relative">
@@ -492,7 +475,7 @@
                                             </a>
                                         </h3>
                                         <div class="d-flex align-items-center flex-wrap gap-2">
-                                            <span class="h6 text-accent mb-0">{{ $product->price }} ₫</span>
+                                            <span class="h6 text-accent mb-0">{{ number_format($product->price, 0, ',', '.') }} ₫</span>
                                             {{-- <span class="text-body-tertiary text-decoration-line-through fs-sm me-2">2.500.000
                                             ₫</span> --}}
                                         </div>
@@ -614,7 +597,7 @@
                                             </a>
                                         </h3>
                                         <div class="d-flex align-items-center flex-wrap gap-2">
-                                            <span class="h6 text-accent mb-0">{{ $product->price }} ₫</span>
+                                            <span class="h6 text-accent mb-0">{{ number_format($product->price, 0, ',', '.') }} ₫</span>
                                             {{-- <span class="text-body-tertiary text-decoration-line-through fs-sm me-2">2.500.000
                                             ₫</span> --}}
                                         </div>

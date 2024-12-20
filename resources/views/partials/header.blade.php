@@ -173,12 +173,12 @@
     <!-- Item -->
     @foreach ($cartItems as $item)
     <div class="d-flex align-items-center">
-      <a class="flex-shrink-0" href="shop-product-general-electronics.html">
+      <a class="flex-shrink-0" href="">
         <img src="{{ asset('storage/' . $item->variant->product->image) }}" width="110" alt="iPhone 14">
       </a>
       <div class="w-100 min-w-0 ps-2 ps-sm-3">
         <h5 class="d-flex animate-underline mb-2">
-          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="shop-product-general-electronics.html">{{ $item->variant->product->name }}</a>
+          <a class="d-block fs-sm fw-medium text-truncate animate-target" href="">{{ $item->variant->product->name }}</a>
         </h5>
         <div class="h6 pb-1 mb-2">{{ number_format($item->variant->sale_price) }}VND</div>
         <div class="d-flex align-items-center justify-content-between">
@@ -296,7 +296,7 @@
 
 
           <!-- Sale link visible on screens > 1200px wide (xl breakpoint) -->
-          <a class="d-none d-xl-flex align-items-center text-decoration-none animate-shake navbar-stuck-hide me-3 me-xl-4 me-xxl-5" href="shop-catalog-electronics.html">
+          {{-- <a class="d-none d-xl-flex align-items-center text-decoration-none animate-shake navbar-stuck-hide me-3 me-xl-4 me-xxl-5" href="shop-catalog-electronics.html">
             <div class="btn btn-icon btn-lg fs-lg text-primary bg-body-secondary bg-opacity-75 pe-none rounded-circle">
               <i class="ci-percent animate-target"></i>
             </div>
@@ -304,7 +304,7 @@
               <div class="fs-xs text-body">Chỉ trong tháng này</div>
               <div class="fw-medium text-white">Đại hạ giá 20%</div>
             </div>
-          </a>
+          </a> --}}
 
           <!-- Button group -->
           <div class="d-flex align-items-center">
@@ -467,7 +467,7 @@
                                     <a class="dropdown-item" href="{{ route('user-info') }}">Thông tin cá nhân</a>
                                     <a class="dropdown-item" href="{{ route('address') }}">Địa chỉ</a>
                                     @if(Auth::check() && Auth::user()->role_id == 1)
-                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard (tạm thời)</a>
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

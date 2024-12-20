@@ -33,7 +33,7 @@
                                 <th scope="col" class="text-body" style="width: 20%;"><span class="text-body">Tổng</span></th>
                                 <th scope="col" class="py-0 px-0" style="width: 5%;">
                                     <div class="nav justify-content-end">
-                                        <button type="button" class="nav-link d-inline-block text-decoration text-nowrap py-3 px-0">
+                                        <button type="button" class="nav-link d-inline-block text-decoration text-nowrap py-3 px-0" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?');">
                                             Xóa &nbsp;
                                         </button>
                                     </div>
@@ -81,7 +81,7 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn-close fs-sm" data-bs-toggle="tooltip"
                                                 data-bs-custom-class="tooltip-sm" data-bs-title="Xóa"
-                                                aria-label="Xóa khỏi giỏ hàng"></button>
+                                                aria-label="Xóa khỏi giỏ hàng" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');"></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -135,7 +135,7 @@
                                                         <input type="hidden" name="voucher_code"
                                                             value="{{ $code }}">
                                                         <button type="submit" class="btn btn-link p-0 ms-2"
-                                                            style="color: #ff0000;">
+                                                            style="color: #ff0000;" onclick="return confirm('Bạn có chắc chắn muốn xóa mã giảm giá không?');">
                                                             <i class="ci-close-circle"></i> <!-- hoặc × -->
                                                         </button>
                                                     </form>

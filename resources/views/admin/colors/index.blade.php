@@ -25,7 +25,7 @@
                         <form action="{{ route('colors.destroy', $color->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa màu sắc này?');">Xóa</button>
                         </form>
                     </td>
                 </tr>
