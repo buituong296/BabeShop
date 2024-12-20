@@ -58,6 +58,23 @@ class ProductController extends Controller
         'variants.*.sale_price' => 'required|numeric',
         'variants.*.import_price' => 'required|numeric',
     ]);
+    // Tính tổng số lượng các biến thể
+    $totalVariantStock = collect($request['variants'])->sum('stock');
+    $productQuantity = $request->input('quantity'); // Số lượng sản phẩm gửi lên
+
+
+    // Validate: Tổng số lượng biến thể không vượt quá số lượng sản phẩm
+    if ($totalVariantStock > $request['quantity']) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['variants' => 'Tổng số lượng của các biến thể không được vượt quá số lượng sản phẩm.']);
+    }
+    // Kiểm tra số lượng sản phẩm không được vượt quá tổng biến thể
+    if ($productQuantity > $totalVariantStock) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Số lượng sản phẩm không được lớn hơn tổng số lượng của các biến thể.');
+    }
 
     $imagePath = $request->file('image')->store('products', 'public');
     // Kiểm tra xem biến thể có bị trùng không
@@ -123,6 +140,24 @@ public function update(Request $request, $id)
         'variants.*.sale_price' => 'required|numeric',
         'variants.*.import_price' => 'required|numeric',
     ]);
+
+    // Tính tổng số lượng biến thể
+    $totalVariantStock = collect($request['variants'])->sum('stock');
+    $productQuantity = $request->input('quantity'); // Số lượng sản phẩm gửi lên
+
+
+    // Validate: Tổng số lượng biến thể không được vượt quá số lượng sản phẩm
+    if ($totalVariantStock > $request['quantity']) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['variants' => 'Tổng số lượng của các biến thể không được vượt quá số lượng sản phẩm.']);
+    }
+    // Kiểm tra số lượng sản phẩm không được vượt quá tổng biến thể
+    if ($productQuantity > $totalVariantStock) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Số lượng sản phẩm không được lớn hơn tổng số lượng của các biến thể.');
+    }
 
     $product = Product::findOrFail($id);
 

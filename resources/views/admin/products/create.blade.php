@@ -1,11 +1,17 @@
 @extends('adminlte::page')
 
 @section('content')
-@if($errors->has('variants'))
+@if ($errors->has('variants'))
     <div class="alert alert-danger">
         {{ $errors->first('variants') }}
     </div>
 @endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="container pt-5 pb-5">
     <h1 class="fw-bold">Tạo Sản Phẩm Mới</h1>
     <div class="row p-3 bg-white rounded-3 shadow">

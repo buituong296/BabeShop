@@ -12,6 +12,7 @@ use App\Models\Bill;
 use App\Models\BillHistory;
 use App\Models\BillItem;
 use App\Models\User;
+use App\Models\Variant;
 
 class CheckOutController extends Controller
 {
@@ -120,14 +121,13 @@ public function storeBill()
     });
     $userAddressArray = [
         'address'=>$customerInfo['address'],
-            'commune'=>$customerInfo['commune'],
-            'district'=>$customerInfo['district'],
-            'city'=>$customerInfo['city'],
+        'commune'=>$customerInfo['commune'],
+        'district'=>$customerInfo['district'],
+        'city'=>$customerInfo['city'],
     ];
     $userAddressString = implode(', ', $userAddressArray);
     $totalDiscount = session()->get('total_discount');
     $totalAll= $total - $totalDiscount;
-
 
     // Tạo hóa đơn mới
     $bill = Bill::create([
@@ -155,6 +155,14 @@ public function storeBill()
             'product_name' => $item->variant->product->name,
             'product_image' => $item->variant->product->image,
         ]);
+
+        // Trừ số lượng sản phẩm trong bảng products
+        $product = Product::findOrFail($item->variant->product_id);
+        $product->decrement('quantity', $item->quantity);
+
+        // Trừ stock của biến thể trong bảng variants
+        $variant = Variant::findOrFail($item->variant_id);
+        $variant->decrement('stock', $item->quantity);
     }
 
     // Lưu lịch sử hóa đơn
@@ -176,6 +184,7 @@ public function storeBill()
     // Redirect hoặc thông báo thành công
     return redirect()->route('home')->with('success', 'Thành công!');
 }
+
 
 
 
