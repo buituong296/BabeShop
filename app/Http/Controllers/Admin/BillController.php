@@ -10,6 +10,7 @@ use App\Models\BillStatus;
 use App\Models\CommentUser;
 use App\Models\Notification;
 use App\Models\Product;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Searchable;
@@ -105,14 +106,14 @@ class BillController extends Controller
         if ($req->toStatus == '5' && $req->note == null) {
             return back()->withErrors(
 
-'Sửa thất bại do thiếu ghi chú'
+                'Sửa thất bại do thiếu ghi chú'
             );
         } else if ($cancel->bill_status == '5') {
             return redirect()->route('bills.index')->withErrors(
 
-'Sửa thất bại do khách hàng đã hủy đơn'
+                'Sửa thất bại do khách hàng đã hủy đơn'
             );
-        } else{
+        } else {
             $bill = Bill::where('id', $id)->first();
             $notifstatus = BillStatus::where('id', $req->toStatus)->first();
             Notification::create([
@@ -121,7 +122,19 @@ class BillController extends Controller
                 'user_id' => $bill->user_id,
                 'is_read' => false, // Default to unread
             ]);
+            
+            if ($req->toStatus == '5') {
+                $billItem = BillItem::where('bill_id', $id)->get();
+                foreach ($billItem as $item) {
+                    $product = Product::where('id', $item->product_id);
+                    $product->increment('quantity', $item->quantity);
 
+                    $variant = Variant::where('id', $item->variant_id);
+                    $variant->increment('stock', $item->quantity);
+                }
+                ;
+            }
+            ;
             Bill::where('id', $id)->update($billData);
             BillHistory::create($billHistoryData);
             return redirect()->route('bills.index')->with([
@@ -141,29 +154,31 @@ class BillController extends Controller
         ]);
     }
     public function show($id)
-{
-    // Lấy thông tin hóa đơn
-    $bill = Bill::where('id', $id)->first();
+    {
+        // Lấy thông tin hóa đơn
+        $bill = Bill::where('id', $id)->first();
 
-    // Lấy các sản phẩm trong hóa đơn và include cả những biến thể đã bị soft delete
-    $billProducts = BillItem::where('bill_id', $bill->id)
-        ->with(['variants' => function ($query) {
-            $query->withTrashed(); // Bao gồm cả các biến thể đã bị soft delete
-        }])
-        ->get();
+        // Lấy các sản phẩm trong hóa đơn và include cả những biến thể đã bị soft delete
+        $billProducts = BillItem::where('bill_id', $bill->id)
+            ->with([
+                'variants' => function ($query) {
+                    $query->withTrashed(); // Bao gồm cả các biến thể đã bị soft delete
+                }
+            ])
+            ->get();
 
-    // Lấy lịch sử của hóa đơn
-    $billHistories = BillHistory::where('bill_id', $bill->id)->get();
+        // Lấy lịch sử của hóa đơn
+        $billHistories = BillHistory::where('bill_id', $bill->id)->get();
 
-    $total = 0;
+        $total = 0;
 
-    return view('admin.bills.show')->with([
-        'bill' => $bill,
-        'billProducts' => $billProducts,
-        'billHistories' => $billHistories,
-        'total' => $total
-    ]);
-}
+        return view('admin.bills.show')->with([
+            'bill' => $bill,
+            'billProducts' => $billProducts,
+            'billHistories' => $billHistories,
+            'total' => $total
+        ]);
+    }
 
     public function filterBills(Request $request)
     {
