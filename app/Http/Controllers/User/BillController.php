@@ -59,6 +59,7 @@ class BillController extends Controller
                 'user_id' => $bill->user_id,
                 'is_read' => false, // Default to unread
             ]);
+            
             $billItem = BillItem::where('bill_id', $id)->get();
             foreach ($billItem as $item) {
                 $product = Product::where('id', $item->product_id);
