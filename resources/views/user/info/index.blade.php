@@ -33,10 +33,10 @@
       <!-- Orders content -->
       <div class="col-lg-9">
         <div class="ps-lg-3 ps-xl-0">
-    
+
             <!-- Tiêu đề trang -->
             <h1 class="h2 mb-1 mb-sm-2">Thông tin cá nhân</h1>
-    
+
             <!-- Thông tin cơ bản -->
             <div class="border-bottom py-4">
                 <div class="nav flex-nowrap align-items-center justify-content-between pb-1 mb-3">
@@ -46,8 +46,8 @@
                 <div class="collapse basic-info show" id="basicInfoPreview">
                     <ul class="list-unstyled fs-sm m-0">
                         <li>{{ Auth::user()->name }}</li>
-           
-                       
+
+
                     </ul>
                 </div>
                 <div class="collapse basic-info" id="basicInfoEdit">
@@ -60,7 +60,7 @@
                                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required="">
                                 <div class="invalid-feedback">Vui lòng nhập tên của bạn!</div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-12">
                             <div class="d-flex gap-3 pt-2 pt-sm-0">
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
@@ -70,7 +70,7 @@
                     </form>
                 </div>
             </div>
-    
+
             <!-- Liên hệ -->
             <div class="border-bottom py-4">
                 <div class="nav flex-nowrap align-items-center justify-content-between pb-1 mb-3">
@@ -118,7 +118,7 @@
                     </form>
                 </div>
             </div>
-    
+
             <!-- Mật khẩu -->
             <div class="border-bottom py-4">
                 <div class="nav flex-nowrap align-items-center justify-content-between pb-1 mb-3">
@@ -133,7 +133,7 @@
                     </ul>
                 </div>
                 <div class="collapse password-change" id="passChangeEdit">
-                    
+
                     <form class="row g-3 g-sm-4 needs-validation" novalidate="" action="{{  route('user-info.updatePassword') }}" method="POST">
                         @csrf
                         <div class="mb-3">
@@ -148,7 +148,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                    
+
                         <div class="mb-3">
                             <label for="new_password" class="form-label">Mật khẩu mới</label>
                             <div class="password-toggle">
@@ -161,7 +161,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                    
+
                         <div class="mb-3">
                             <label for="new_password_confirmation" class="form-label">Nhập lại mật khẩu mới</label>
 
@@ -175,7 +175,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                    
+
                         <div class="col-12">
                             <div class="d-flex gap-3 pt-2 pt-sm-0">
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
@@ -183,20 +183,19 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
-    
+
             <!-- Xóa tài khoản -->
             <div class="pt-3 mt-2 mt-sm-3">
                 <h2 class="h6">Xóa tài khoản</h2>
                 <p class="fs-sm">
                     Khi bạn xóa tài khoản, hồ sơ công khai của bạn sẽ bị vô hiệu hóa ngay lập tức. 
-                    Nếu bạn thay đổi ý định trước khi 14 ngày trôi qua, hãy đăng nhập bằng email và mật khẩu của bạn, 
-                    và chúng tôi sẽ gửi cho bạn một liên kết để kích hoạt lại tài khoản của bạn.
+                    Bạn có thể liên hệ admin để khôi phục tài khoản
                 </p>
                 <a class="text-danger fs-sm fw-medium" href="#!" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Xóa tài khoản</a>
-                
+
                 <!-- Delete Account Modal -->
                 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -217,20 +216,20 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <form id="delete-account-form" action="{{ route('user-info.delete') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-                
-                
+
+
 
             </div>
         </div>
     </div>
-    
+
     </div>
   </div>
-   
 
-  
+
+
 @endsection

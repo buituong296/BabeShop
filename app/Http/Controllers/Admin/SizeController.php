@@ -15,7 +15,7 @@ class SizeController extends Controller
         $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
         $sizes = $this->search(Size::class, $query, ['name']); // Dùng trait
 
-        return view('admin.sizes.index', compact('sizes','query'));
+        return view('admin.sizes.index', compact('sizes', 'query'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class SizeController extends Controller
         Size::create($request->all());
 
         return redirect()->route('sizes.index')
-                         ->with('success', 'Size created successfully.');
+            ->with('success', 'Size created successfully.');
     }
 
     public function edit(Size $size)
@@ -40,23 +40,34 @@ class SizeController extends Controller
         return view('admin.sizes.edit', compact('size'));
     }
 
-    public function update(Request $request, Size $size)
+    public function update(Request $request, $id)
     {
+        // Validate dữ liệu đầu vào
         $request->validate([
-            'name' => 'required|min:2'
+            'name' => 'required|min:1|max:255',
         ]);
 
-        $size->update($request->all());
+        // Lấy bản ghi cần xóa
+        $size = Size::findOrFail($id);
+
+        // Xóa bản ghi cũ
+        $size->delete();
+
+        // Thêm bản ghi mới với dữ liệu đã cập nhật
+        Size::create([
+            'name' => $request->input('name'),
+        ]);
 
         return redirect()->route('sizes.index')
-                         ->with('success', 'Size updated successfully.');
+            ->with('success', 'Cập nhật kích cỡ thành công!');
     }
+
 
     public function destroy(Size $size)
     {
         $size->delete();
 
         return redirect()->route('sizes.index')
-                         ->with('success', 'Size deleted successfully.');
+            ->with('success', 'Size deleted successfully.');
     }
 }
