@@ -35,12 +35,17 @@
                     @endif
                 </td>
                 <td>
-                    <form action="{{ route('admin.users.lock', $user->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-warning">
-                            @if($user->is_locked) Mở khóa @else Khóa @endif
-                        </button>
-                    </form>
+                    <!-- Ẩn nút nếu là Admin -->
+                    @if($user->role_id != 1)
+                        <form action="{{ route('admin.users.lock', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-warning">
+                                @if($user->is_locked) Mở khóa @else Khóa @endif
+                            </button>
+                        </form>
+                    @else
+                        <span class="badge badge-secondary">Không thể khóa</span>
+                    @endif
                 </td>
             </tr>
             @endforeach
