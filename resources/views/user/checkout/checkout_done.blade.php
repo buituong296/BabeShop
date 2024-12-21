@@ -66,7 +66,7 @@
                         <button onclick="window.print()" class="btn btn-secondary me-2">In hóa đơn</button>
                         <form action="{{ route('checkout.save') }}" method="POST" class="d-inline-block">
                             @csrf
-                            <button type="submit" class="btn btn-primary">Tiếp Tục</button>
+                            <button type="submit" class="btn btn-primary">Tiếp Tục Mua Hàng</button>
                         </form>
 
                     </div>

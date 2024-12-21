@@ -21,14 +21,19 @@ class ProductController extends Controller
         $products = $this->search(Product::class, $query, ['name']); // Dùng trait
         // Lấy tất cả danh mục
         $categories = Category::all();
-        return view('admin.products.index', compact('products', 'query', 'categories'));
+        return view('admin.products.index', compact('products', 'query','categories'));
     }
 
     public function show($id)
 {
-    $product = Product::with(['category', 'variants.color', 'variants.size'])->findOrFail($id);
+    // Lấy sản phẩm bao gồm cả soft delete
+    $product = Product::withTrashed()
+        ->with(['category', 'variants.color', 'variants.size'])
+        ->findOrFail($id);
+
     return view('admin.products.show', compact('product'));
 }
+
 
 
     public function create()
@@ -235,9 +240,11 @@ public function update(Request $request, $id)
 
     // Lấy danh sách sản phẩm đã lọc
     $products = $query->get();
+    $categories = Category::all();
+
 
     // Truyền cả sản phẩm và danh mục vào view
-    return view('admin.products.index', compact('products'));
+    return view('admin.products.index', compact('products', 'categories'));
 }
 
 }

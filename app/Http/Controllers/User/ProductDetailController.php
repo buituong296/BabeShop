@@ -16,36 +16,62 @@ use Illuminate\Http\Request;
 class ProductDetailController extends Controller
 {
     public function productdetail($id)
-    {
-        $product = Product::where('id', $id)->first();
-        $category = Category::where('id', $product->category_id)->first();
-        $colors = Variant::join('colors', 'colors.id', '=', 'variants.color_id')->where('product_id', $id)->select('colors.*')->distinct('colors.id')->get();
-        $sizes = Variant::join('sizes', 'sizes.id', '=', 'variants.size_id')->where('product_id', $id)->select('sizes.*')->distinct('sizes.id')->get();
-        $productCategory = Product::where('category_id', $category->id)->where('id', '!=', $id)->get();
-        $productCategoryTotal = $productCategory->count();
-        $productNewest = Product::where('id', '!=', $id)->latest('id')->paginate(6);
-        $productNewestTotal = $productNewest->count();
-        $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
-        $comments = Comment::where('product_id', $id)->get();
-        $commentTotal = $comments->count();
-        $product->view += 1;
-        $product->save();
+{
+    $product = Product::withTrashed()->where('id', $id)->firstOrFail();
 
+    $category = Category::withTrashed()->where('id', $product->category_id)->first();
 
-        return view('user.product_detail')->with([
-            'product'   => $product,
-            'category' => $category,
-            'colors' => $colors,
-            'sizes' => $sizes,
-            'productCategory' => $productCategory,
-            'productCategoryTotal' => $productCategoryTotal,
-            'productNewest' => $productNewest,
-            'productNewestTotal' => $productNewestTotal,
-            'productAlbum' => $productAlbum,
-            'comments' => $comments,
-            'commentTotal' => $commentTotal
-        ]);
+    $colors = Variant::join('colors', 'colors.id', '=', 'variants.color_id')
+        ->where('product_id', $id)
+        ->select('colors.*')
+        ->distinct('colors.id')
+        ->withTrashed() // Bao gồm cả màu đã bị xóa mềm
+        ->get();
+
+    $sizes = Variant::join('sizes', 'sizes.id', '=', 'variants.size_id')
+        ->where('product_id', $id)
+        ->select('sizes.*')
+        ->distinct('sizes.id')
+        ->withTrashed() // Bao gồm cả kích thước đã bị xóa mềm
+        ->get();
+
+    $productCategory = collect(); // Tạo một collection trống
+    if ($product->category) {
+        $productCategory = Product::withTrashed()
+            ->where('category_id', $product->category->id)
+            ->where('id', '!=', $id)
+            ->get();
     }
+
+    $productCategoryTotal = $productCategory->count();
+    $productNewest = Product::withTrashed()
+        ->where('id', '!=', $id)
+        ->latest('id')
+        ->paginate(6);
+
+    $productNewestTotal = $productNewest->count();
+    $productAlbum = ProductAlbum::where('product_id', '=', $id)->get();
+    $comments = Comment::where('product_id', $id)->get();
+    $commentTotal = $comments->count();
+
+    $product->view += 1;
+    $product->save();
+
+    return view('user.product_detail')->with([
+        'product' => $product,
+        'category' => $category,
+        'colors' => $colors,
+        'sizes' => $sizes,
+        'productCategory' => $productCategory,
+        'productCategoryTotal' => $productCategoryTotal,
+        'productNewest' => $productNewest,
+        'productNewestTotal' => $productNewestTotal,
+        'productAlbum' => $productAlbum,
+        'comments' => $comments,
+        'commentTotal' => $commentTotal
+    ]);
+}
+
     public function getVariantQuantity(Request $request)
     {
         $productId = $request->input('product_id');
@@ -54,15 +80,15 @@ class ProductDetailController extends Controller
 
         // Tìm biến thể dựa trên product_id, color_id và size_id
         $variant = Variant::where('product_id', $productId)
-                          ->where('color_id', $colorId)
-                          ->where('size_id', $sizeId)
-                          ->first();
+            ->where('color_id', $colorId)
+            ->where('size_id', $sizeId)
+            ->first();
 
         // Nếu biến thể tồn tại, trả về số lượng, nếu không thì số lượng là 0
         $quantity = $variant ? $variant->stock : 0;
         $price = $variant ? $variant->sale_price : 0;
 
-        return response()->json(['quantity' => $quantity,'price' => $price]);
+        return response()->json(['quantity' => $quantity, 'price' => $price]);
     }
 
     public function addToCart(Request $request)
@@ -84,7 +110,7 @@ class ProductDetailController extends Controller
 
 
         if ($variant == null) {
-            
+
             return redirect()->back()->with('error', 'Sản phẩm đã hết hàng hoặc không tồn tại');
         } else {
 

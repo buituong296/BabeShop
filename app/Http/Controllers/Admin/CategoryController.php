@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
         $categories = $this->search(Category::class, $query, ['name']); // Dùng trait
-        return view('admin.categories.index', compact('categories',"query"));
+        return view('admin.categories.index', compact('categories', "query"));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class CategoryController extends Controller
         Category::create($request->all());
 
         return redirect()->route('categories.index')
-                         ->with('success', 'Category created successfully.');
+            ->with('success', 'Category created successfully.');
     }
 
     public function edit(Category $category)
@@ -39,16 +39,26 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
+        // Validate dữ liệu đầu vào
         $request->validate([
-            'name' => 'required|min:2',
+            'name' => 'required|min:2|max:255',
         ]);
 
-        $category->update($request->all());
+        // Lấy bản ghi cần xóa
+        $category = Category::findOrFail($id);
+
+        // Xóa bản ghi cũ
+        $category->delete();
+
+        // Thêm bản ghi mới với dữ liệu đã cập nhật
+        Category::create([
+            'name' => $request->input('name'),
+        ]);
 
         return redirect()->route('categories.index')
-                         ->with('success', 'Category updated successfully.');
+            ->with('success', 'Cập nhật danh mục thành công!');
     }
 
     public function destroy(Category $category)
@@ -56,6 +66,6 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories.index')
-                         ->with('success', 'Category deleted successfully.');
+            ->with('success', 'Category deleted successfully.');
     }
 }

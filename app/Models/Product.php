@@ -18,9 +18,10 @@ class Product extends Model
         return $this->hasMany(Variant::class);
     }
     public function category()
-    {
-        return $this->belongsTo(Category::class); // Mối quan hệ với model Category
-    }
+{
+    return $this->belongsTo(Category::class)->withTrashed();
+}
+
     public function album()
     {
         return $this->hasMany(ProductAlbum::class);

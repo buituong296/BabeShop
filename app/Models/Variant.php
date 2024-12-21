@@ -18,14 +18,15 @@ class Variant extends Model
         return $this->belongsTo(Product::class);
     }
     public function color()
-    {
-        return $this->belongsTo(Color::class); // Mối quan hệ với model Color
-    }
+{
+    return $this->belongsTo(Color::class)->withTrashed();
+}
 
-    public function size()
-    {
-        return $this->belongsTo(Size::class); // Mối quan hệ với model Size
-    }
+public function size()
+{
+    return $this->belongsTo(Size::class)->withTrashed();
+}
+
     public function category()
     {
         return $this->belongsTo(Category::class); // Mối quan hệ với model Category
